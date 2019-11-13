@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Database", "TypTop.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Game", "TypTop.Game\TypTop.Game.csproj", "{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Game.Test", "TypTop.Game.Test\TypTop.Game.Test.csproj", "{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
