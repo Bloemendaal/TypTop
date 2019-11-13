@@ -10,11 +10,9 @@
     Title="TypTop.Game" 
     WindowStartupLocation="CenterScreen"
     Width="800"
-    Height="480">
-    <Window.DataContext>
-        <local:MainWindowViewModel />
-    </Window.DataContext>
-
+    Height="480"
+    TextInput="MainWindow_OnTextInput"
+    >
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
@@ -41,7 +39,6 @@
                 <MenuItem Header="_About TypTop.Game" />
             </MenuItem>
         </Menu>
-
         <monoGameControls:MonoGameContentControl />
     </DockPanel>
 </Window>
