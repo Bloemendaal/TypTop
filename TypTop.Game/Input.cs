@@ -6,24 +6,8 @@ using System.Threading.Tasks;
 
 namespace TypTop.Game
 {
-    class Input
+    abstract class Input
     {
-        //
-        // Summary:
-        //     Possible inputmethods in which words are matched with the given input.
-        // Parameters:
-        //     list:
-        //       Searches for multiple words at the same time.
-        //     Queue:
-        //       Only searches for the current dequeued word.
-        //     Stack:
-        //       Only searches for the current popped word.
-        //     Word:
-        //       Only searches for one specific word.
-        public enum InputMethod { list, queue, stack, word }
-        public InputMethod CurrentInputMethod { get; private set; }
-
-
         //
         // Summary:
         //     What does the program do when the users inputs a wrong key
@@ -35,14 +19,7 @@ namespace TypTop.Game
         //     none:
         //       Ignores the mistake and keeps the current typing progress of the word.
         public enum KeyWrong { reset, remove, none }
-        public KeyWrong OnKeyWrong {
-            get => _onKeyWrong;
-            set
-            {
-
-            } 
-        }
-        private KeyWrong _onKeyWrong;
+        public KeyWrong OnKeyWrong;
 
 
         //
@@ -85,51 +62,6 @@ namespace TypTop.Game
         // Summary:
         //     Remove the current word when the spacebar is pressed. Only works when IgnoreSpace is false. Note that when a list is used, all words will be removed when none of the words match.
         public bool RemoveOnSpace = false;
-
-
-        //
-        // Summary:
-        //     When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
-        public bool FocusOnHighIndex = false;
-
-
-        //
-        // Summary:
-        //     Storage of possible words
-        private List<Word> _list;
-        private Queue<Word> _queue;
-        private Stack<Word> _stack;
-        private Word _word;
-
-        
-
-
-
-        public Input(List<Word> list) => SetWords(list);
-        public Input(Queue<Word> queue) => SetWords(queue);
-        public Input(Stack<Word> stack) => SetWords(stack);
-        public Input(Word word) => SetWords(word);
-
-        public void SetWords(List<Word> list)
-        {
-            _list = list;
-            CurrentInputMethod = InputMethod.list;
-        }
-        public void SetWords(Queue<Word> queue)
-        {
-            _queue = queue;
-            CurrentInputMethod = InputMethod.queue;
-        }
-        public void SetWords(Stack<Word> stack)
-        {
-            _stack = stack;
-            CurrentInputMethod = InputMethod.stack;
-        }
-        public void SetWords(Word word)
-        {
-            _word = word;
-            CurrentInputMethod = InputMethod.word;
-        }
 
 
         //
