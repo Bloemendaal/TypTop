@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29505.145
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***"
+EndProject
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Game", "TypTop.Game\TypTop.Game.csproj", "***REMOVED***3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5***REMOVED***"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = ***REMOVED***A0A39D8C-9D9A-4838-8195-8AD76380FB26***REMOVED***
+	EndGlobalSection
+EndGlobal
