@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace TypTop.Game
 {
@@ -7,6 +8,12 @@ namespace TypTop.Game
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel(this);
+        }
+
+        private void MainWindow_OnTextInput(object sender, TextCompositionEventArgs e)
+        {
+            
         }
     }
 }
