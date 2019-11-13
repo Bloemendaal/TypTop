@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29505.145
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "{B4951B83-021E-49BF-8129-B883E6EAD7DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Game", "TypTop.Game\TypTop.Game.csproj", "{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Gui", "TypTop.Gui\TypTop.Gui.csproj", "{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Game.Test", "TypTop.Game.Test\TypTop.Game.Test.csproj", "{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Logic", "TypTop.Logic\TypTop.Logic.csproj", "{55172CE7-CBF5-47B9-90CC-217EF307FF1E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "{28F590C5-6700-44EB-A452-ECEBA5A100F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{B4951B83-021E-49BF-8129-B883E6EAD7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4951B83-021E-49BF-8129-B883E6EAD7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4951B83-021E-49BF-8129-B883E6EAD7DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3B3E08F6-A8F0-4F60-B73C-C8DDBEDCA7E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D316AE42-2F83-4AF6-9EB4-C5C4E9EC9E4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55172CE7-CBF5-47B9-90CC-217EF307FF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55172CE7-CBF5-47B9-90CC-217EF307FF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55172CE7-CBF5-47B9-90CC-217EF307FF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55172CE7-CBF5-47B9-90CC-217EF307FF1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
