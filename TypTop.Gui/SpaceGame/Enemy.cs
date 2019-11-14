@@ -4,7 +4,7 @@ using System.Linq;
 ***REMOVED***
 using System.Threading.Tasks;
 
-namespace TypTop.Logic.SpaceGame
+namespace TypTop.Gui.SpaceGame
 ***REMOVED***
     public class Enemy
     ***REMOVED***

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace TypTop.Logic.SpaceGame
+namespace TypTop.Gui.SpaceGame
 ***REMOVED***
     public class SpaceGame
     ***REMOVED***
