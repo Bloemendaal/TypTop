@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TypTop.VisualKeyboard;
 
 namespace TypTop.Gui
 ***REMOVED***
@@ -23,6 +24,21 @@ namespace TypTop.Gui
         public MainWindow()
         ***REMOVED***
             InitializeComponent();
+    ***REMOVED***
+
+        private void LayoutRadio_OnChecked(object sender, RoutedEventArgs e)
+        ***REMOVED***
+            if(!IsInitialized)
+                return;
+            
+            if (sender == QwertRadioButton)
+            ***REMOVED***
+                VisualKeyboard.Layout = KeyboardLayout.Qwerty;
+        ***REMOVED***
+            else if (sender == AzertyRadioButton)
+            ***REMOVED***
+                VisualKeyboard.Layout = KeyboardLayout.Azerty;
+        ***REMOVED***
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
