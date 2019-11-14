@@ -82,19 +82,17 @@ namespace TypTop.Gui.SpaceGame
         ***REMOVED***
             WordChars = chars;
             var filteredList = new List<Word>();
-            foreach (char c in chars)
+            foreach (var word in chars
+                .SelectMany(c => WordsToServe
+                .Where(word => word.Letters
+                    .Contains(c))
+                .Where(word => !filteredList
+                    .Contains(word))))
             ***REMOVED***
-                foreach (Word word in WordsToServe)
-                ***REMOVED***
-                    if (word.Letters.Contains(c))
-                    ***REMOVED***
-                        if (!filteredList.Contains(word))
-                        ***REMOVED***
-                            filteredList.Add(word);
-                    ***REMOVED***
-                ***REMOVED***
-            ***REMOVED***
+                filteredList.Add(word);
         ***REMOVED***
+
+            WordsToServe = filteredList;
     ***REMOVED***
 
         public void LimitByCharacter()
