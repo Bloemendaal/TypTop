@@ -21,16 +21,48 @@ namespace TypTop.Gui
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly KeyStyle _highlightKeyStyle;
+
         public MainWindow()
         {
+            KeyStyle.Default = new KeyStyle()
+            {
+                BaseBrush = Brushes.Purple,
+                SymbolBrush = Brushes.White,
+                FaceBrush = Brushes.Violet
+            };
+
+            _highlightKeyStyle = new KeyStyle()
+            {
+                BaseBrush = KeyStyle.Default.BaseBrush,
+                SymbolBrush = Brushes.White,
+                FaceBrush = Brushes.LightGreen
+            };
+
             InitializeComponent();
+            KeyUp += OnKeyUp;
         }
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                VisualKeyboard.SetKeyStyle(e.Key, _highlightKeyStyle);
+            }
+            catch
+            {
+                //Ignore
+            }
+        }
+
 
         private void LayoutRadio_OnChecked(object sender, RoutedEventArgs e)
         {
             if(!IsInitialized)
                 return;
-            
+
+            VisualKeyboard.InvalidateKeyStyle();
+
             if (sender == QwertRadioButton)
             {
                 VisualKeyboard.Layout = KeyboardLayout.Qwerty;
@@ -39,6 +71,11 @@ namespace TypTop.Gui
             {
                 VisualKeyboard.Layout = KeyboardLayout.Azerty;
             }
+        }
+
+        private void ResetButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            VisualKeyboard.InvalidateKeyStyle();
         }
     }
 }
