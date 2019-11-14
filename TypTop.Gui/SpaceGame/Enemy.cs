@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TypTop.Logic.SpaceGame
+namespace TypTop.Gui.SpaceGame
 {
     public class Enemy
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    class Word
+    public class Word
     {
         //
         // Summary:

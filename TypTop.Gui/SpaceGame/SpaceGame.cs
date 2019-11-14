@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Threading;
 
-namespace TypTop.Logic.SpaceGame
+namespace TypTop.Gui.SpaceGame
 {
     public class SpaceGame
     {

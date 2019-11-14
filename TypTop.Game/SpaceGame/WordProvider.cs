@@ -12,6 +12,7 @@ namespace TypTop.Game.SpaceGame
         // Welke letters
         // Aantal letters
         public List<string> TempWoorden { get; set; }
+        public List<Word> WordsToServe { get; set; }
 
         public WordProvider()
         {
