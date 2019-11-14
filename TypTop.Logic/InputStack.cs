@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TypTop.Game
+namespace TypTop.Logic
 {
-    class InputQueue : Input
+    class InputStack : Input
     {
-        public Queue<Word> Input;
-        public InputQueue(Queue<Word> input)
+        public Stack<Word> Input;
+        public InputStack(Stack<Word> input)
         {
             Input = input;
         }
