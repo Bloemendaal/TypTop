@@ -30,9 +30,10 @@ namespace TypTop.VisualKeyboard
         ***REMOVED***
     ***REMOVED***
 
-        public void SetKeyStyle(Key key, Color color)
+        public void SetKeyStyle(Key key, KeyStyle color)
         ***REMOVED***
-            
+            _layout.SetKeyStyle(key, color);
+            InvalidateVisual();
     ***REMOVED***
 
         static VisualKeyboard()
@@ -42,18 +43,19 @@ namespace TypTop.VisualKeyboard
 
         public VisualKeyboard()
         ***REMOVED***
-            KeyStyle keyStyle = new KeyStyle()
-            ***REMOVED***
-                BaseBrush = new SolidColorBrush(Colors.Gray),
-                FaceBrush = new SolidColorBrush(Colors.WhiteSmoke),
-                SymbolBrush = new SolidColorBrush(Colors.Black)
-        ***REMOVED***;
+          
     ***REMOVED***
 
         protected override void OnRender(DrawingContext drawingContext)
         ***REMOVED***
             Layout.Render(drawingContext);
             base.OnRender(drawingContext);
+    ***REMOVED***
+
+        public void InvalidateKeyStyle()
+        ***REMOVED***
+            _layout.InvalidateKeyStyle();
+            InvalidateVisual();
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

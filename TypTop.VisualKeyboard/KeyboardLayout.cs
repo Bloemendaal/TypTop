@@ -15,7 +15,7 @@ namespace TypTop.VisualKeyboard
         protected const int KeyWidth = 50;
         protected const int KeyHeight = 50;
 
-        protected readonly HashSet<KeyboardKey> HighlightedKeys = new HashSet<KeyboardKey>();
+        protected readonly HashSet<KeyboardKey> CustomStyledKeys = new HashSet<KeyboardKey>();
         protected readonly Dictionary<Key, KeyboardKey> Keys = new Dictionary<Key, KeyboardKey>();
 
 
@@ -41,16 +41,18 @@ namespace TypTop.VisualKeyboard
 
         public void InvalidateKeyStyle()
         ***REMOVED***
-            foreach (var changedKeyStyle in HighlightedKeys)
+            foreach (var changedKeyStyle in CustomStyledKeys)
             ***REMOVED***
                 changedKeyStyle.Style = DefaultStyle;
         ***REMOVED***
-            HighlightedKeys.Clear();
+            CustomStyledKeys.Clear();
     ***REMOVED***
 
         public void SetKeyStyle(Key key, KeyStyle keyStyle)
         ***REMOVED***
-            Keys[key].Style = keyStyle;
+            var keyboardKey = Keys[key];
+            keyboardKey.Style = keyStyle;
+            CustomStyledKeys.Add(keyboardKey);
     ***REMOVED***
 
         public void Render(DrawingContext drawingContext)
