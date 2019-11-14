@@ -51,6 +51,7 @@ namespace TypTop.Gui.SpaceGame
         // Randomizes the list
         public void Shuffle()
         ***REMOVED***
+            if (!AreWordsSet()) return;
             var randomList = new List<Word>();
             var r = new Random();
             while (WordsToServe.Count > 0)
@@ -63,23 +64,27 @@ namespace TypTop.Gui.SpaceGame
         ***REMOVED***
 
             //return the new random list
-            WordsToServe =  randomList;
+            WordsToServe = randomList;
+
     ***REMOVED***
 
         public void CountLimit(int limit)
         ***REMOVED***
+            if (!AreWordsSet()) return;
             WordCount = limit;
             WordsToServe = (List<Word>) WordsToServe?.Take(limit);
     ***REMOVED***
 
         public void LetterCountLimit(int limit)
         ***REMOVED***
+            if (!AreWordsSet()) return;
             WordLetterLimit = limit;
             WordsToServe = (List<Word>) WordsToServe?.Where(s => s.Letters.Length >= limit);
     ***REMOVED***
 
         public void UsageOfCharacter(List<char> chars)
         ***REMOVED***
+            if (!AreWordsSet()) return;
             WordChars = chars;
             var filteredList = new List<Word>();
             foreach (var word in chars
@@ -98,6 +103,12 @@ namespace TypTop.Gui.SpaceGame
         public void LimitByCharacter()
         ***REMOVED***
 
+    ***REMOVED***
+
+        public bool AreWordsSet()
+        ***REMOVED***
+            if (WordsToServe == null) throw new NullReferenceException();
+            return true;
     ***REMOVED***
 
         // return filtered words
