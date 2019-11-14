@@ -9,12 +9,16 @@ namespace TypTop.Gui.SpaceGame
 {
     public class WordProvider
     {
-        // Aantal woorden
-        // Welke letters
-        // Aantal letters
         public List<string> TempWords { get; set; }
-        public List<Word> WordsToServe { get; set; }
+        // List of words to serve with conditions
+        private List<Word> WordsToServe { get; set; }
 
+        // Amount of words to provide.
+        public int WordCount { get; private set; }
+        // Max length of word.
+        public int WordLetterLimit { get; private set; }
+        // #Optional: select only words with char in list.
+        public List<char> WordChars { get; private set; }
         public WordProvider()
         {
             TempWords = new List<string>{
@@ -43,5 +47,63 @@ namespace TypTop.Gui.SpaceGame
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
             };
         }
+
+        // Randomizes the list
+        public void Shuffle()
+        {
+            var randomList = new List<Word>();
+            var r = new Random();
+            while (WordsToServe.Count > 0)
+            {
+                var randomIndex = r.Next(0, WordsToServe.Count);
+                //add it to the new, random list
+                randomList.Add(WordsToServe[randomIndex]);
+                //remove to avoid duplicates
+                WordsToServe.RemoveAt(randomIndex);
+            }
+
+            //return the new random list
+            WordsToServe =  randomList;
+        }
+
+        public void CountLimit(int limit)
+        {
+            WordCount = limit;
+            WordsToServe = (List<Word>) WordsToServe?.Take(limit);
+        }
+
+        public void LetterCountLimit(int limit)
+        {
+            WordLetterLimit = limit;
+            WordsToServe = (List<Word>) WordsToServe?.Where(s => s.Letters.Length >= limit);
+        }
+
+        public void UsageOfCharacter(List<char> chars)
+        {
+            WordChars = chars;
+            var filteredList = new List<Word>();
+            foreach (char c in chars)
+            {
+                foreach (Word word in WordsToServe)
+                {
+                    if (word.Letters.Contains(c))
+                    {
+                        if (!filteredList.Contains(word))
+                        {
+                            filteredList.Add(word);
+                        }
+                    }
+                }
+            }
+        }
+
+        public void LimitByCharacter()
+        {
+
+        }
+
+        // return filtered words
+        public List<Word> Serve() => WordsToServe;
+        
     }
 }
