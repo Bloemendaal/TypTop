@@ -149,6 +149,14 @@ namespace TypTop.Logic
             return (IgnoreNumbers && char.IsDigit(ch)) || (IgnoreSpace && char.IsWhiteSpace(ch)) || (IgnorePunctuation && char.IsPunctuation(ch));
         }
 
+        //
+        // Summary:
+        //     Tries to convert a special character to a normal character.
+        // Returns:
+        //     If possible the converted char, otherwise it returns the given char.
+        // Parameters:
+        //     ch:
+        //       The charater to convert to normal.
         private static char ConvertSpecialChar(char ch)
         {
             char[] from = "àèìòùÀÈÌÒÙ äëïöüÄËÏÖÜ âêîôûÂÊÎÔÛ áéíóúÁÉÍÓÚðÐýÝ ãñõÃÑÕšŠžŽçÇåÅøØ".ToCharArray();
