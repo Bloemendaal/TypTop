@@ -2,6 +2,7 @@
 ***REMOVED***
 using System.Linq;
 ***REMOVED***
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TypTop.Logic;
 
@@ -18,7 +19,8 @@ namespace TypTop.Gui.SpaceGame
         // Max length of word.
         public int WordLetterLimit ***REMOVED*** get; private set; ***REMOVED***
         // #Optional: select only words with char in list.
-        public List<char> WordChars ***REMOVED*** get; private set; ***REMOVED***
+        public List<char> UsageChars ***REMOVED*** get; private set; ***REMOVED***
+        public List<char> LimitChars ***REMOVED*** get; private set; ***REMOVED***
         public WordProvider()
         ***REMOVED***
             TempWords = new List<string>***REMOVED***
@@ -53,6 +55,7 @@ namespace TypTop.Gui.SpaceGame
         ***REMOVED***
             if (!AreWordsSet()) return;
             var randomList = new List<Word>();
+
             var r = new Random();
             while (WordsToServe.Count > 0)
             ***REMOVED***
@@ -63,15 +66,14 @@ namespace TypTop.Gui.SpaceGame
                 WordsToServe.RemoveAt(randomIndex);
         ***REMOVED***
 
-            //return the new random list
             WordsToServe = randomList;
-
     ***REMOVED***
 
         public void CountLimit(int limit)
         ***REMOVED***
             if (!AreWordsSet()) return;
             WordCount = limit;
+
             WordsToServe = (List<Word>) WordsToServe?.Take(limit);
     ***REMOVED***
 
@@ -79,13 +81,15 @@ namespace TypTop.Gui.SpaceGame
         ***REMOVED***
             if (!AreWordsSet()) return;
             WordLetterLimit = limit;
+
             WordsToServe = (List<Word>) WordsToServe?.Where(s => s.Letters.Length >= limit);
     ***REMOVED***
 
         public void UsageOfCharacter(List<char> chars)
         ***REMOVED***
             if (!AreWordsSet()) return;
-            WordChars = chars;
+            UsageChars = chars;
+
             var filteredList = new List<Word>();
             foreach (var word in chars
                 .SelectMany(c => WordsToServe
@@ -96,13 +100,25 @@ namespace TypTop.Gui.SpaceGame
             ***REMOVED***
                 filteredList.Add(word);
         ***REMOVED***
-
             WordsToServe = filteredList;
     ***REMOVED***
 
-        public void LimitByCharacter()
+        public void LimitByCharacter(List<char> chars)
+        ***REMOVED***
+            if (!AreWordsSet()) return;
+            LimitChars = chars;
+
+            var filteredList = new List<Word>();
+
+            foreach (Word w in WordsToServe)
+            ***REMOVED***
+                if (Regex.IsMatch(w.Letters, $@"^[***REMOVED***chars.ToArray()***REMOVED***]+$"))
+                ***REMOVED***
+                    filteredList.Add(w);
+            ***REMOVED***
         ***REMOVED***
 
+            WordsToServe = filteredList;
     ***REMOVED***
 
         public bool AreWordsSet()
