@@ -36,8 +36,8 @@ namespace TypTop.Logic
 
         //
         // Summary:
-        //     Ignores interpunction when true, does not count them as mistake when entered. Removes all interpunction from words if they contain any.
-        public bool IgnoreInterpunction = false;
+        //     Ignores punctuation when true, does not count them as mistake when entered. Removes all interpunction from words if they contain any.
+        public bool IgnorePunctuation = false;
 
 
         //
@@ -48,8 +48,8 @@ namespace TypTop.Logic
 
         //
         // Summary:
-        //     Ignores punctuation marks when true, converts all characters with punctuation to standard characters.
-        public bool IgnorePunctuation = true;
+        //     Ignores special characters marks when true, converts all special characters if possible to standard characters.
+        public bool IgnoreSpecialChar = true;
 
 
         //
@@ -71,7 +71,7 @@ namespace TypTop.Logic
         //     mainWindow:
         //       MainWindow that fires the KeyUp event.
         public void Subscribe(MainWindow mainWindow) => mainWindow.TextInput += TextInput;
-        public void Unsubscribe(MainWindow mainWindow) => mainWindow.TextInput -= TextInput;
+        public void Unsubscribe(TypTop.Gui.MainWindow mainWindow) => mainWindow.TextInput -= TextInput;
 
 
         public void TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -81,6 +81,88 @@ namespace TypTop.Logic
         public void TextInput(char e)
         {
 
+        }
+
+
+        //
+        // Summary:
+        //     Checks the given word for the given letter.
+        // Returns:
+        //     If the letter matches the current typing index of the word.
+        // Parameters:
+        //     letter:
+        //       The letter that was inputted by the user.
+        //     word:
+        //       The word needs to be checked.
+        public bool CheckWord(char letter, Word word)
+        {
+            if (CheckIgnoredChars(letter))
+            {
+                return true;
+            }
+
+            int index = word.Index;
+            char wordCharAtIndex = word.Letters[index];
+
+            bool wrongChar = true;
+            while (wrongChar && word.ValidIndex(index))
+            {
+                wordCharAtIndex = word.Letters[index];
+
+                if (CheckIgnoredChars(wordCharAtIndex))
+                {
+                    index++;
+                    continue;
+                }
+
+                wrongChar = false;
+            }
+
+            if (index >= word.Letters.Length)
+            {
+                word.Correct = true;
+                return true;
+            }
+
+            if (char.IsLetter(letter))
+            {
+                if (IgnoreSpecialChar)
+                {
+                    letter = ConvertSpecialChar(letter);
+                    wordCharAtIndex = ConvertSpecialChar(wordCharAtIndex);
+                }
+
+                return (CaseSensitive && letter == wordCharAtIndex) || (!CaseSensitive && char.ToLower(letter) == char.ToLower(wordCharAtIndex));
+            }
+
+            return letter == wordCharAtIndex;
+        }
+
+
+        //
+        // Summary:
+        //     Checks if the given char should be ignored according to the given settings.
+        // Returns:
+        //     If the char should be ignored.
+        private bool CheckIgnoredChars(char ch)
+        {
+            return (IgnoreNumbers && char.IsDigit(ch)) || (IgnoreSpace && char.IsWhiteSpace(ch)) || (IgnorePunctuation && char.IsPunctuation(ch));
+        }
+
+        private static char ConvertSpecialChar(char ch)
+        {
+            char[] from = "àèìòùÀÈÌÒÙ äëïöüÄËÏÖÜ âêîôûÂÊÎÔÛ áéíóúÁÉÍÓÚðÐýÝ ãñõÃÑÕšŠžŽçÇåÅøØ".ToCharArray();
+            char[] to   = "aeiouAEIOU aeiouAEIOU aeiouAEIOU aeiouAEIOUdDyY anoANOsSzZcCaAoO".ToCharArray();
+
+            for (int i = 0; i < from.Length; i++)
+            {
+                if (ch == from[i])
+                {
+                    return to[i];
+                }
+            }
+
+            return ch;
         }
     }
 }
