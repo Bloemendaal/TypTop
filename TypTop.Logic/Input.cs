@@ -10,15 +10,29 @@ namespace TypTop.Logic
     {
         //
         // Summary:
-        //     What does the program do when the users inputs a wrong key
+        //     The previously inputted letter with the TextInput function.
+        public char PreviousChar { get; private set; }
+
+
+        //
+        // Summary:
+        //     Fires when words have been updated
+        public abstract event EventHandler<WordUpdateArgs> WordUpdate;
+
+
+        //
+        // Summary:
+        //     What does the program do when the users inputs a wrong key.
         // Parameters:
         //     reset:
         //       Default. Resets the current typing progress of the word.
         //     remove:
         //       Remove the current word, note that a list only removes a word when the key is wrong after typing has started.
+        //     add:
+        //       Adds the wrong character to the stack. User needs to backspace it to remove the wrong letter.
         //     none:
         //       Ignores the mistake and keeps the current typing progress of the word.
-        public enum KeyWrong { reset, remove, none }
+        public enum KeyWrong { reset, remove, add, none }
         public KeyWrong OnKeyWrong;
 
 
@@ -66,23 +80,40 @@ namespace TypTop.Logic
 
         //
         // Summary:
-        //     Subscribe or unsubscribe to the KeyUp event
+        //     Updates all the requested words with the given char.
         // Parameters:
-        //     mainWindow:
-        //       MainWindow that fires the KeyUp event.
-        public void Subscribe(MainWindow mainWindow) => mainWindow.TextInput += TextInput;
-        public void Unsubscribe(TypTop.Gui.MainWindow mainWindow) => mainWindow.TextInput -= TextInput;
-
-
-        public void TextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        //     letter:
+        //        The letter that has been entered by the users of needs to be checked.
+        //     letters:
+        //        The characters that have been entered converted to char array and tested in that specific order.
+        public virtual void TextInput(char letter)
         {
-
+            PreviousChar = letter;
         }
-        public void TextInput(char e)
+        public void TextInput(string letters)
         {
-
+            if (letters.Equals("\b"))
+            {
+                if (AllowBackspace)
+                {
+                    Backspace();
+                }
+            }
+            else
+            {
+                foreach (char ch in letters.ToCharArray())
+                {
+                    TextInput(ch);
+                }
+            }
         }
 
+
+        //
+        // Summary:
+        //     Abstract methods when backspace is pressed
+        public abstract void Backspace();
+       
 
         //
         // Summary:
@@ -94,14 +125,19 @@ namespace TypTop.Logic
         //       The letter that was inputted by the user.
         //     word:
         //       The word needs to be checked.
-        public bool CheckWord(char letter, Word word)
+        public bool CheckWord(char letter, Word word, int? input = null)
         {
             if (CheckIgnoredChars(letter))
             {
                 return true;
             }
 
-            int index = word.Index;
+            if (word == null)
+            {
+                return false;
+            }
+
+            int index = input == null ? word.Index : (int)input;
             char wordCharAtIndex = word.Letters[index];
 
             bool wrongChar = true;
@@ -120,9 +156,16 @@ namespace TypTop.Logic
 
             if (index >= word.Letters.Length)
             {
-                word.Correct = true;
+                if (input == null)
+                {
+                    word.Correct = true;
+                }
+
+                word.Finished = true;
                 return true;
             }
+
+            bool result = letter == wordCharAtIndex;
 
             if (char.IsLetter(letter))
             {
@@ -132,10 +175,20 @@ namespace TypTop.Logic
                     wordCharAtIndex = ConvertSpecialChar(wordCharAtIndex);
                 }
 
-                return (CaseSensitive && letter == wordCharAtIndex) || (!CaseSensitive && char.ToLower(letter) == char.ToLower(wordCharAtIndex));
+                result = (CaseSensitive && letter == wordCharAtIndex) || (!CaseSensitive && char.ToLower(letter) == char.ToLower(wordCharAtIndex));
             }
 
-            return letter == wordCharAtIndex;
+            if (input == null)
+            {
+                word.Index = index;
+            }
+
+            if (result && index == word.Letters.Length - 1)
+            {
+                word.Finished = true;
+            }
+
+            return result;
         }
 
 
@@ -148,6 +201,7 @@ namespace TypTop.Logic
         {
             return (IgnoreNumbers && char.IsDigit(ch)) || (IgnoreSpace && char.IsWhiteSpace(ch)) || (IgnorePunctuation && char.IsPunctuation(ch));
         }
+
 
         //
         // Summary:

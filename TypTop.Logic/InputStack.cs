@@ -14,5 +14,18 @@ namespace TypTop.Logic
             Input = input;
         }
 
+
+        public override void TextInput(char letter)
+        {
+            WordUpdate?.Invoke(this, new WordUpdateArgs()
+            {
+                Words = new List<Word>(),
+                PreviousChar = PreviousChar,
+                CurrentChar = letter
+            });
+
+            base.TextInput(letter);
+        }
+        public override event EventHandler<WordUpdateArgs> WordUpdate;
     }
 }

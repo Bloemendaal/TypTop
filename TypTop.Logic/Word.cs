@@ -38,17 +38,30 @@ namespace TypTop.Logic
 
         //
         // Summary:
-        //     Gives if the word was correctly typed.
+        //     Gives the input given by the user for this word.
+        public Stack<char> Input { get; set; }
+
+
+        //
+        // Summary:
+        //     Gives if the word was correctly typed until the current index.
         // Returns:
         //     If the word was typed correctly unless the typing has not yet started.
         public bool? Correct = null;
+
+
+        //
+        // Summary:
+        //     Gives if the word was completely correctly typed.
+        // Returns:
+        //     If the word was correctly typed.
+        public bool Finished = false;
 
 
         public Word(string letters)
         {
             Letters = letters;
         }
-
 
 
         //
@@ -59,6 +72,16 @@ namespace TypTop.Logic
         public bool ValidIndex(int index)
         {
             return index >= 0 && index < Letters.Length;
+        }
+
+
+        //
+        // Summary:
+        //     Removes the last character from the Input and lowers the input by one
+        public void Backspace()
+        {
+            Input.Pop();
+            Index--;
         }
 
 
