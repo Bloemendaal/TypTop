@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TypTop.Logic;
 
@@ -18,7 +19,8 @@ namespace TypTop.Gui.SpaceGame
         // Max length of word.
         public int WordLetterLimit { get; private set; }
         // #Optional: select only words with char in list.
-        public List<char> WordChars { get; private set; }
+        public List<char> UsageChars { get; private set; }
+        public List<char> LimitChars { get; private set; }
         public WordProvider()
         {
             TempWords = new List<string>{
@@ -53,6 +55,7 @@ namespace TypTop.Gui.SpaceGame
         {
             if (!AreWordsSet()) return;
             var randomList = new List<Word>();
+
             var r = new Random();
             while (WordsToServe.Count > 0)
             {
@@ -63,15 +66,14 @@ namespace TypTop.Gui.SpaceGame
                 WordsToServe.RemoveAt(randomIndex);
             }
 
-            //return the new random list
             WordsToServe = randomList;
-
         }
 
         public void CountLimit(int limit)
         {
             if (!AreWordsSet()) return;
             WordCount = limit;
+
             WordsToServe = (List<Word>) WordsToServe?.Take(limit);
         }
 
@@ -79,13 +81,15 @@ namespace TypTop.Gui.SpaceGame
         {
             if (!AreWordsSet()) return;
             WordLetterLimit = limit;
+
             WordsToServe = (List<Word>) WordsToServe?.Where(s => s.Letters.Length >= limit);
         }
 
         public void UsageOfCharacter(List<char> chars)
         {
             if (!AreWordsSet()) return;
-            WordChars = chars;
+            UsageChars = chars;
+
             var filteredList = new List<Word>();
             foreach (var word in chars
                 .SelectMany(c => WordsToServe
@@ -96,13 +100,25 @@ namespace TypTop.Gui.SpaceGame
             {
                 filteredList.Add(word);
             }
-
             WordsToServe = filteredList;
         }
 
-        public void LimitByCharacter()
+        public void LimitByCharacter(List<char> chars)
         {
+            if (!AreWordsSet()) return;
+            LimitChars = chars;
 
+            var filteredList = new List<Word>();
+
+            foreach (Word w in WordsToServe)
+            {
+                if (Regex.IsMatch(w.Letters, $@"^[{chars.ToArray()}]+$"))
+                {
+                    filteredList.Add(w);
+                }
+            }
+
+            WordsToServe = filteredList;
         }
 
         public bool AreWordsSet()
