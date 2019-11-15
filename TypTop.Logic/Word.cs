@@ -88,8 +88,12 @@ namespace TypTop.Logic
         public override string ToString() => Letters;
         public override bool Equals(object obj)
         ***REMOVED***
-            Word tempWord = (Word) obj;
-            return tempWord != null && Letters == tempWord.Letters;
+            if (obj is Word word)
+            ***REMOVED***
+                return word.Letters != null && Letters != null && word.Letters.Equals(Letters);
+        ***REMOVED***
+
+            return false;
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
