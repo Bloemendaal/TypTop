@@ -11,40 +11,40 @@ namespace TypTop.VisualKeyboard
 
             const int spacedKeyWidth = KeyWidth + KeySpacing;
 
-            AddNormalKey(Key.A, x, y);
-            AddNormalKey(Key.Z, x += spacedKeyWidth, y);
-            AddNormalKey(Key.E, x += spacedKeyWidth, y);
-            AddNormalKey(Key.R, x += spacedKeyWidth, y);
-            AddNormalKey(Key.T, x += spacedKeyWidth, y);
-            AddNormalKey(Key.Y, x += spacedKeyWidth, y);
-            AddNormalKey(Key.U, x += spacedKeyWidth, y);
-            AddNormalKey(Key.I, x += spacedKeyWidth, y);
-            AddNormalKey(Key.O, x += spacedKeyWidth, y);
-            AddNormalKey(Key.P, x += spacedKeyWidth, y);
+            AddKey(Key.A, x, y);
+            AddKey(Key.Z, x += spacedKeyWidth, y);
+            AddKey(Key.E, x += spacedKeyWidth, y);
+            AddKey(Key.R, x += spacedKeyWidth, y);
+            AddKey(Key.T, x += spacedKeyWidth, y);
+            AddKey(Key.Y, x += spacedKeyWidth, y);
+            AddKey(Key.U, x += spacedKeyWidth, y);
+            AddKey(Key.I, x += spacedKeyWidth, y);
+            AddKey(Key.O, x += spacedKeyWidth, y);
+            AddKey(Key.P, x += spacedKeyWidth, y);
 
             y += spacedKeyWidth;
             x = 10;
 
-            AddNormalKey(Key.Q, x, y);
-            AddNormalKey(Key.S, x += spacedKeyWidth, y);
-            AddNormalKey(Key.D, x += spacedKeyWidth, y);
-            AddNormalKey(Key.F, x += spacedKeyWidth, y);
-            AddNormalKey(Key.G, x += spacedKeyWidth, y);
-            AddNormalKey(Key.H, x += spacedKeyWidth, y);
-            AddNormalKey(Key.J, x += spacedKeyWidth, y);
-            AddNormalKey(Key.K, x += spacedKeyWidth, y);
-            AddNormalKey(Key.L, x += spacedKeyWidth, y);
-            AddNormalKey(Key.M, x += spacedKeyWidth, y);
+            AddKey(Key.Q, x, y);
+            AddKey(Key.S, x += spacedKeyWidth, y);
+            AddKey(Key.D, x += spacedKeyWidth, y);
+            AddKey(Key.F, x += spacedKeyWidth, y);
+            AddKey(Key.G, x += spacedKeyWidth, y);
+            AddKey(Key.H, x += spacedKeyWidth, y);
+            AddKey(Key.J, x += spacedKeyWidth, y);
+            AddKey(Key.K, x += spacedKeyWidth, y);
+            AddKey(Key.L, x += spacedKeyWidth, y);
+            AddKey(Key.M, x += spacedKeyWidth, y);
 
             y += spacedKeyWidth;
             x = 30;
 
-            AddNormalKey(Key.W, x, y);
-            AddNormalKey(Key.X, x += spacedKeyWidth, y);
-            AddNormalKey(Key.C, x += spacedKeyWidth, y);
-            AddNormalKey(Key.V, x += spacedKeyWidth, y);
-            AddNormalKey(Key.B, x += spacedKeyWidth, y);
-            AddNormalKey(Key.N, x += spacedKeyWidth, y);
+            AddKey(Key.W, x, y);
+            AddKey(Key.X, x += spacedKeyWidth, y);
+            AddKey(Key.C, x += spacedKeyWidth, y);
+            AddKey(Key.V, x += spacedKeyWidth, y);
+            AddKey(Key.B, x += spacedKeyWidth, y);
+            AddKey(Key.N, x += spacedKeyWidth, y);
         }
     }
 }
