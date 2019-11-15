@@ -26,6 +26,12 @@ namespace TypTop.Logic
 
             base.TextInput(letter);
     ***REMOVED***
+
+        public override void Backspace()
+        ***REMOVED***
+            throw new NotImplementedException();
+    ***REMOVED***
+
         public override event EventHandler<WordUpdateArgs> WordUpdate;
 ***REMOVED***
 ***REMOVED***
