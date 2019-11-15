@@ -9,7 +9,9 @@ Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "Typ
 EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Logic", "TypTop.Logic\TypTop.Logic.csproj", "***REMOVED***55172CE7-CBF5-47B9-90CC-217EF307FF1E***REMOVED***"
 EndProject
-Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***"
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***"
+EndProject
+Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
 		***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

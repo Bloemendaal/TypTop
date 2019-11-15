@@ -30,7 +30,7 @@ namespace TypTop.Gui
         ***REMOVED***
             if(!IsInitialized)
                 return;
-            
+
             if (sender == QwertRadioButton)
             ***REMOVED***
                 VisualKeyboard.Layout = KeyboardLayout.Qwerty;

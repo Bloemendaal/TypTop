@@ -106,7 +106,7 @@ namespace TypTop.Logic
                     input.Correct = correct;
             ***REMOVED***
         ***REMOVED***
-            
+
     ***REMOVED***
         public override event EventHandler<WordUpdateArgs> WordUpdate;
 ***REMOVED***
