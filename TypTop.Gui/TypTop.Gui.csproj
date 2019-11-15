@@ -7,7 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\LoginBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\LoginBackground.png" />
   </ItemGroup>
 
 </Project>
