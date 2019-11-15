@@ -34,6 +34,9 @@ namespace TypTop.Gui.SpaceGame
         {
             InitializeComponent();
 
+            // subscribe to event
+            Game.Timer.Tick += new EventHandler(Timer_Tick);
+
             // show player
             SpaceGameCanvas.Children.Add(PlayerRect);
             Canvas.SetLeft(PlayerRect, 375);
