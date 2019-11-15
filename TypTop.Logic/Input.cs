@@ -33,7 +33,7 @@ namespace TypTop.Logic
         //     none:
         //       Ignores the mistake and keeps the current typing progress of the word.
         public enum KeyWrong ***REMOVED*** reset, remove, add, none ***REMOVED***
-        public KeyWrong OnKeyWrong;
+        public KeyWrong OnKeyWrong = KeyWrong.reset;
 
 
         //
