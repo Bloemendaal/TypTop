@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Gui", "TypTop.Gui\Ty
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Logic", "TypTop.Logic\TypTop.Logic.csproj", "{55172CE7-CBF5-47B9-90CC-217EF307FF1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "{28F590C5-6700-44EB-A452-ECEBA5A100F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "{28F590C5-6700-44EB-A452-ECEBA5A100F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "{4CC4919F-5F2D-4694-972B-8758C06587D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

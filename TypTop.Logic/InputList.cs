@@ -106,7 +106,7 @@ namespace TypTop.Logic
                     input.Correct = correct;
                 }
             }
-            
+
         }
         public override event EventHandler<WordUpdateArgs> WordUpdate;
     }

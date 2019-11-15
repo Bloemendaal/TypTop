@@ -32,7 +32,7 @@ namespace TypTop.VisualKeyboard
 
         public void SetKeyStyle(Key key, Color color)
         {
-            
+
         }
 
         static VisualKeyboard()
