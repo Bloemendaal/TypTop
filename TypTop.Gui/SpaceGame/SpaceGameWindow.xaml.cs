@@ -17,7 +17,7 @@ namespace TypTop.Gui.SpaceGame
     /// </summary>
     public partial class SpaceGameWindow : Window
     ***REMOVED***
-        SpaceGame game = new SpaceGame(); // create spaceame object
+        SpaceGame Game = new SpaceGame(); // create spacegame object
 
         // the following rectangle represents the player
         Rectangle PlayerRect = new Rectangle
@@ -56,7 +56,7 @@ namespace TypTop.Gui.SpaceGame
             // this prevents an eventual abundance of unused objects which might slow down the device on which the program is runned
             // each rectangle represents an enemy in the game, the enemy object's X and Y attributes form the rectangle's centre
             int enemyCount = 0;
-            foreach (Enemy enemy in game.EnemyQueue)
+            foreach (Enemy enemy in Game.EnemyQueue)
             ***REMOVED***
                 enemyCount++;
                 if ((enemyCount) > EnemyRectList.Count)
@@ -68,12 +68,12 @@ namespace TypTop.Gui.SpaceGame
                         Height = 50,
                         Fill = Brushes.Green
                 ***REMOVED***);
-            ***REMOVED***
 
-                // show enemy rectangle on screen on right position
-                SpaceGameCanvas.Children.Add(EnemyRectList[enemyCount-1]);
-                Canvas.SetLeft(EnemyRectList[enemyCount-1], enemy.X-25);
-                Canvas.SetTop(EnemyRectList[enemyCount-1], enemy.Y-25);
+                    // show enemy rectangle on screen on right position
+                    SpaceGameCanvas.Children.Add(EnemyRectList[enemyCount - 1]);
+                    Canvas.SetLeft(EnemyRectList[enemyCount - 1], enemy.X - 25);
+                    Canvas.SetTop(EnemyRectList[enemyCount - 1], enemy.Y - 25);
+            ***REMOVED***
         ***REMOVED***
     ***REMOVED***
 ***REMOVED***
