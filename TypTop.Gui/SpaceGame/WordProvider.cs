@@ -21,6 +21,7 @@ namespace TypTop.Gui.SpaceGame
         // #Optional: select only words with char in list.
         public List<char> UsageChars { get; private set; }
         public List<char> LimitChars { get; private set; }
+        
         public WordProvider()
         {
             TempWords = new List<string>{
@@ -48,6 +49,14 @@ namespace TypTop.Gui.SpaceGame
                 "waar", "waarom", "waarschijnlijk", "wachten", "wakker", "wanneer", "want", "wapen", "warm", "wassen", "wat", "water", "we", "week", "weer", "weg", "welke", "welkom", "wens", "wereld", "werelddeel", "werk", "west", "wetenschap", "wie", "wiel", "wij", "wijn", "wijs", "wild", "willen", "wind", "winkel", "winnen", "winter", "wissen", "wit", "wolf", "wolk", "wonder", "woord", "woud", "wreed",
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
             };
+            UsageChars = new List<char>();
+            LimitChars = new List<char>();
+            WordsToServe = new List<Word>();
+
+            foreach (var s in TempWords)
+            {
+                WordsToServe.Add(new Word(s));
+            }
         }
 
         // Randomizes the list
@@ -108,15 +117,8 @@ namespace TypTop.Gui.SpaceGame
             if (!AreWordsSet()) return;
             LimitChars = chars;
 
-            var filteredList = new List<Word>();
-
-            foreach (Word w in WordsToServe)
-            {
-                if (Regex.IsMatch(w.Letters, $@"^[{chars.ToArray()}]+$"))
-                {
-                    filteredList.Add(w);
-                }
-            }
+            var charString = chars.Aggregate("", (current, c) => current + c);
+            var filteredList = WordsToServe.Where(w => Regex.IsMatch(w.Letters, $@"^[{charString}]+$")).ToList();
 
             WordsToServe = filteredList;
         }
