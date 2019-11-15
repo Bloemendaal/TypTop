@@ -20,7 +20,7 @@ namespace TypTop.Gui.SpaceGame
             EnemyList = new List<Enemy>();
             EnemyQueue = new Queue<Enemy>();
 
-            LineHeight = 600;
+            LineHeight = 400;
 
             //  DispatcherTimer setup, ~59 intervals per second, 1000 / 60 = 16.6667... miliseconds
             Timer = new DispatcherTimer();
