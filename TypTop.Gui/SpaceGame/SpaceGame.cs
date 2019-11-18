@@ -7,12 +7,11 @@ using System.Windows.Threading;
 
 namespace TypTop.Gui.SpaceGame
 ***REMOVED***
-    public class SpaceGame
+    public class SpaceGame : Game
     ***REMOVED***
         public Player Player ***REMOVED*** get; set; ***REMOVED***  // player
         public List<Enemy> EnemyList ***REMOVED*** get; set; ***REMOVED***  // list of all enemies
         public Queue<Enemy> EnemyQueue ***REMOVED*** get; set; ***REMOVED***    // queue of visible enemies
-        public DispatcherTimer Timer ***REMOVED*** get; private set; ***REMOVED***  // timer
         public int LineHeight ***REMOVED*** get; private set; ***REMOVED*** // line when enemy hits player
         public SpaceGame()
         ***REMOVED***
@@ -23,7 +22,6 @@ namespace TypTop.Gui.SpaceGame
             LineHeight = 400;
 
             //  DispatcherTimer setup, ~59 intervals per second, 1000 / 60 = 16.6667... miliseconds
-            Timer = new DispatcherTimer();
             Timer.Tick += new EventHandler(Timer_Tick);
             Timer.Interval = new TimeSpan(0, 0, 0, 0, 17);
             Timer.Start();
