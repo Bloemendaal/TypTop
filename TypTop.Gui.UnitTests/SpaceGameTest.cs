@@ -153,7 +153,7 @@ namespace TypTop.Gui.SpaceGame
 
         [TestMethod]
         [TestCase(100, 1, 1, 1, "word", 2800)]
-        [TestCase(100, 2, 1, 10, "word", 5320)]
+        [TestCase(100, 2, 1, 10, "word", 5640)]
         [TestCase(100, 1, 2, 1, "word", 4800)]
         public void Shoot_Enemies_ReturnScore(int steps, int amount, int speed, int interval, string word, int result)
         {
