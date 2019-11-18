@@ -27,12 +27,10 @@ namespace TypTop.Gui
         ***REMOVED***
             KeyStyle.Default = new KeyStyle()
             ***REMOVED***
-                BaseBrush = Brushes.Purple,
-                SymbolBrush = Brushes.White,
-                FaceBrush = Brushes.Violet
+                FaceBrush = Brushes.Orange
         ***REMOVED***;
 
-            _highlightKeyStyle = new KeyStyle()
+            _highlightKeyStyle = new KeyStyle
             ***REMOVED***
                 BaseBrush = KeyStyle.Default.BaseBrush,
                 SymbolBrush = Brushes.White,

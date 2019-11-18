@@ -1,14 +1,21 @@
-﻿using System.Globalization;
+﻿using System.Drawing.Printing;
+using System.Globalization;
+using System.Numerics;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace TypTop.VisualKeyboard
 ***REMOVED***
     public class TextPrintDrawer : IKeyPrintDrawer
     ***REMOVED***
+        public HorizontalAlignment HorizontalAlignment ***REMOVED*** get; set; ***REMOVED*** = HorizontalAlignment.Left;
+        public VerticalAlignment VerticalAlignment ***REMOVED*** get; set; ***REMOVED***
+        public Vector2 Offset ***REMOVED*** get; set; ***REMOVED***
+
         private KeyStyle _style;
         public string Text ***REMOVED*** get; ***REMOVED***
-
+        
         public KeyStyle Style
         ***REMOVED***
             get => _style;
@@ -35,16 +42,51 @@ namespace TypTop.VisualKeyboard
                 Text,
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
-                new Typeface("Myriad"),
-                22,
+                new Typeface(Style.Font),
+                Style.FontSize,
                 Style.SymbolBrush);
     ***REMOVED***
 
-        public void Draw(Rect key, DrawingContext drawingContext)
+        public virtual void Draw(Rect key, DrawingContext drawingContext)
         ***REMOVED***
-            var point = new Point(key.X, key.Y);
-            var textLocation = new Point(point.X, point.Y);
-            drawingContext.DrawText(FormattedText, textLocation);
+            var textRectangle = new Rect
+            ***REMOVED***
+                Width = FormattedText.WidthIncludingTrailingWhitespace, 
+                Height = FormattedText.Height
+        ***REMOVED***;
+
+            switch (HorizontalAlignment)
+            ***REMOVED***
+                case HorizontalAlignment.Center:
+                case HorizontalAlignment.Stretch:
+                    textRectangle.X = key.X + key.Width / 2 - textRectangle.Width / 2;
+                    break;
+                case HorizontalAlignment.Left:
+                    textRectangle.X = key.X;
+                    break;
+                case HorizontalAlignment.Right:
+                    textRectangle.X = key.X + key.Width - textRectangle.Width;
+                    break;
+        ***REMOVED***
+
+            switch (VerticalAlignment)
+            ***REMOVED***
+                case VerticalAlignment.Center:
+                case VerticalAlignment.Stretch:
+                    textRectangle.Y = key.Y + key.Height / 2 - textRectangle.Height / 2;
+                    break;
+                case VerticalAlignment.Top:
+                    textRectangle.Y = key.Y;
+                    break;
+                case VerticalAlignment.Bottom:
+                    textRectangle.Y = key.Y + key.Height - textRectangle.Height;
+                    break;
+        ***REMOVED***
+
+            textRectangle.X += Offset.X;
+            textRectangle.Y += Offset.Y;
+
+            drawingContext.DrawText(FormattedText, textRectangle.Location);
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

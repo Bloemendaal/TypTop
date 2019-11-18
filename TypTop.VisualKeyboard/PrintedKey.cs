@@ -8,7 +8,7 @@ namespace TypTop.VisualKeyboard
     ***REMOVED***
         private readonly IKeyPrintDrawer[] _keyPrints;
 
-        public PrintedKey(Key key, Rect rect, KeyStyle style, params IKeyPrintDrawer[] keyPrints) : base(key,rect,style)
+        public PrintedKey(Key key, Size size, KeyStyle style, params IKeyPrintDrawer[] keyPrints) : base(key, size,style)
         ***REMOVED***
             _keyPrints = keyPrints;
             Style = style;

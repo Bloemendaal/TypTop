@@ -6,20 +6,12 @@ using System.Windows.Media;
 
 namespace TypTop.VisualKeyboard
 ***REMOVED***
-    public class KeyStyleChangedEventArgs
-    ***REMOVED***
-        public KeyStyle KeyStyle ***REMOVED*** get; ***REMOVED***
-
-        public KeyStyleChangedEventArgs(KeyStyle keyStyle)
-        ***REMOVED***
-            KeyStyle = keyStyle;
-    ***REMOVED***
-***REMOVED***
-
     public abstract class KeyboardKey
     ***REMOVED***
         private KeyStyle _style;
-        protected Rect Rectangle ***REMOVED*** get; ***REMOVED***
+        public Point Point ***REMOVED*** get; set; ***REMOVED***
+        public Size Size ***REMOVED*** get; set; ***REMOVED***
+        protected Rect Rectangle => new Rect(Point, Size);
 
         public KeyStyle Style
         ***REMOVED***
@@ -38,10 +30,10 @@ namespace TypTop.VisualKeyboard
 
         public event EventHandler<KeyStyleChangedEventArgs> StyleChanged;
 
-        protected KeyboardKey(Key key,Rect rectangle,KeyStyle style)
+        protected KeyboardKey(Key key,Size size,KeyStyle style)
         ***REMOVED***
             Key = key;
-            Rectangle = rectangle;
+            Size = size;
             Style = style;
     ***REMOVED***
 
@@ -54,7 +46,7 @@ namespace TypTop.VisualKeyboard
 
         public virtual void DrawKeyBase(DrawingContext drawingContext)
         ***REMOVED***
-            Rect baseRectangle = Rectangle;
+            Rect baseRectangle = new Rect(Point, Size);
             baseRectangle.Height -= 5;
             baseRectangle.Y += 5;
 

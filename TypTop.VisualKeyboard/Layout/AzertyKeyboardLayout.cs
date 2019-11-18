@@ -4,47 +4,40 @@ namespace TypTop.VisualKeyboard
 ***REMOVED***
     public class AzertyKeyboardLayout : KeyboardLayout
     ***REMOVED***
-        public AzertyKeyboardLayout()
+        public AzertyKeyboardLayout() :base(new KeyFactory())
         ***REMOVED***
-            int x = 0;
-            int y = 0;
+            AddKey(Key.A);
+            AddKey(Key.Z);
+            AddKey(Key.E);
+            AddKey(Key.R);
+            AddKey(Key.T);
+            AddKey(Key.Y);
+            AddKey(Key.U);
+            AddKey(Key.I);
+            AddKey(Key.O);
+            AddKey(Key.P);
 
-            const int spacedKeyWidth = KeyWidth + KeySpacing;
+            NextRow();
 
-            AddKey(Key.A, x, y);
-            AddKey(Key.Z, x += spacedKeyWidth, y);
-            AddKey(Key.E, x += spacedKeyWidth, y);
-            AddKey(Key.R, x += spacedKeyWidth, y);
-            AddKey(Key.T, x += spacedKeyWidth, y);
-            AddKey(Key.Y, x += spacedKeyWidth, y);
-            AddKey(Key.U, x += spacedKeyWidth, y);
-            AddKey(Key.I, x += spacedKeyWidth, y);
-            AddKey(Key.O, x += spacedKeyWidth, y);
-            AddKey(Key.P, x += spacedKeyWidth, y);
+            AddKey(Key.Q);
+            AddKey(Key.S);
+            AddKey(Key.D);
+            AddKey(Key.F);
+            AddKey(Key.G);
+            AddKey(Key.H);
+            AddKey(Key.J);
+            AddKey(Key.K);
+            AddKey(Key.L);
+            AddKey(Key.M);
 
-            y += spacedKeyWidth;
-            x = 10;
+            NextRow();
 
-            AddKey(Key.Q, x, y);
-            AddKey(Key.S, x += spacedKeyWidth, y);
-            AddKey(Key.D, x += spacedKeyWidth, y);
-            AddKey(Key.F, x += spacedKeyWidth, y);
-            AddKey(Key.G, x += spacedKeyWidth, y);
-            AddKey(Key.H, x += spacedKeyWidth, y);
-            AddKey(Key.J, x += spacedKeyWidth, y);
-            AddKey(Key.K, x += spacedKeyWidth, y);
-            AddKey(Key.L, x += spacedKeyWidth, y);
-            AddKey(Key.M, x += spacedKeyWidth, y);
-
-            y += spacedKeyWidth;
-            x = 30;
-
-            AddKey(Key.W, x, y);
-            AddKey(Key.X, x += spacedKeyWidth, y);
-            AddKey(Key.C, x += spacedKeyWidth, y);
-            AddKey(Key.V, x += spacedKeyWidth, y);
-            AddKey(Key.B, x += spacedKeyWidth, y);
-            AddKey(Key.N, x += spacedKeyWidth, y);
+            AddKey(Key.W);
+            AddKey(Key.X);
+            AddKey(Key.C);
+            AddKey(Key.V);
+            AddKey(Key.B);
+            AddKey(Key.N);
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

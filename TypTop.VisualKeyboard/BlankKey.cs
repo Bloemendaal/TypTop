@@ -6,7 +6,7 @@ namespace TypTop.VisualKeyboard
 ***REMOVED***
     public class BlankKey : KeyboardKey
     ***REMOVED***
-        public BlankKey(Key key, Rect rectangle, KeyStyle style) : base(key, rectangle,style)
+        public BlankKey(Key key, Size size, KeyStyle style) : base(key, size,style)
         ***REMOVED***
     ***REMOVED***
 

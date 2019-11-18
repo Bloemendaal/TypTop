@@ -1,53 +1,99 @@
-﻿using System.Windows.Input;
+﻿using System.Drawing;
+using System.Linq.Expressions;
+using System.Windows.Input;
 
 namespace TypTop.VisualKeyboard
 ***REMOVED***
     public class QwertyKeyboardLayout : KeyboardLayout
     ***REMOVED***
-        public QwertyKeyboardLayout()
+        public QwertyKeyboardLayout() : base(new KeyFactory())
         ***REMOVED***
-            int x = 0;
-            int y = 0;
+            AddKey(Key.OemTilde);
 
-            const int spacedKeyWidth = KeyWidth + KeySpacing;
-            const int spacedKeyHeight = KeyHeight + KeySpacing;
+            AddKey(Key.D0);
+            AddKey(Key.D1);
+            AddKey(Key.D2);
+            AddKey(Key.D3);
+            AddKey(Key.D4);
+            AddKey(Key.D5);
+            AddKey(Key.D6);
+            AddKey(Key.D7);
+            AddKey(Key.D8);
+            AddKey(Key.D9);
 
-            AddKey(Key.Q, x,y);
-            AddKey(Key.W, x+=spacedKeyWidth,y);
-            AddKey(Key.E, x+=spacedKeyWidth,y);
-            AddKey(Key.R, x+=spacedKeyWidth,y);
-            AddKey(Key.T, x+=spacedKeyWidth,y);
-            AddKey(Key.Y, x+=spacedKeyWidth,y);
-            AddKey(Key.U, x+=spacedKeyWidth,y);
-            AddKey(Key.I, x+=spacedKeyWidth,y);
-            AddKey(Key.O, x+=spacedKeyWidth,y);
-            AddKey(Key.P, x+=spacedKeyWidth,y);
+            AddKey(Key.OemMinus);
+            AddKey(Key.OemPlus);
 
-            y += spacedKeyHeight;
-            x = 10;
+            AddKey(Key.Back);
 
-            AddKey(Key.A, x, y);
-            AddKey(Key.S, x += spacedKeyWidth, y);
-            AddKey(Key.D, x += spacedKeyWidth, y);
-            AddKey(Key.F, x += spacedKeyWidth, y);
-            AddKey(Key.G, x += spacedKeyWidth, y);
-            AddKey(Key.H, x += spacedKeyWidth, y);
-            AddKey(Key.J, x += spacedKeyWidth, y);
-            AddKey(Key.K, x += spacedKeyWidth, y);
-            AddKey(Key.L, x += spacedKeyWidth, y);
 
-            y += spacedKeyHeight;
-            x = 30;
+            NextRow();
 
-            AddKey(Key.Z, x, y);
-            AddKey(Key.X, x += spacedKeyWidth, y);
-            AddKey(Key.C, x += spacedKeyWidth, y);
-            AddKey(Key.V, x += spacedKeyWidth, y);
-            AddKey(Key.B, x += spacedKeyWidth, y);
-            AddKey(Key.N, x += spacedKeyWidth, y);
-            AddKey(Key.M, x += spacedKeyWidth, y);
+            AddKey(Key.Tab);
 
-            AddKey(Key.Space, spacedKeyWidth * 3,y + spacedKeyHeight);
+            AddKey(Key.Q);
+            AddKey(Key.W);
+            AddKey(Key.E);
+            AddKey(Key.R);
+            AddKey(Key.T);
+            AddKey(Key.Y);
+            AddKey(Key.U);
+            AddKey(Key.I);
+            AddKey(Key.O);
+            AddKey(Key.P);
+
+            AddKey(Key.OemOpenBrackets);
+            AddKey(Key.OemCloseBrackets);
+            AddKey(Key.OemPipe);
+
+            NextRow();
+
+            AddKey(Key.CapsLock);
+
+            AddKey(Key.A);
+            AddKey(Key.S);
+            AddKey(Key.D);
+            AddKey(Key.F);
+            AddKey(Key.G);
+            AddKey(Key.H);
+            AddKey(Key.J);
+            AddKey(Key.K);
+            AddKey(Key.L);
+
+            AddKey(Key.OemSemicolon);
+            AddKey(Key.OemQuotes);
+            AddKey(Key.Enter);
+
+            NextRow();
+
+            AddKey(Key.LeftShift);
+
+            AddKey(Key.Z);
+            AddKey(Key.X);
+            AddKey(Key.C);
+            AddKey(Key.V);
+            AddKey(Key.B);
+            AddKey(Key.N);
+            AddKey(Key.M);
+
+            AddKey(Key.OemComma);
+            AddKey(Key.OemPeriod);
+            AddKey(Key.OemQuestion);
+
+            AddKey(Key.RightShift);
+
+            //NextRow();
+
+            //AddKey(Key.LeftCtrl);
+            //AddKey(Key.LWin);
+            //AddKey(Key.LeftAlt);
+
+            //AddKey(Key.Space);
+
+            //AddKey(Key.RightAlt);
+            //AddKey(Key.RightCtrl);
+            //AddKey(Key.RWin);
+
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
