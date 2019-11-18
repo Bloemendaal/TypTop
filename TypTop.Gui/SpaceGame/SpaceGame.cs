@@ -33,17 +33,10 @@ namespace TypTop.Gui.SpaceGame
         private void Timer_Tick(object sender, EventArgs e) 
         {
             // player loses one life and enemy leaves queue when enemy hits player
-            if (EnemyQueue.Peek().Y <= LineHeight) 
-            {
-                Player.LoseLife();
-                EnemyQueue.Dequeue();   
-            }
+            EnemyHitPlayer();
 
             // move each enemy on screen
-            foreach (Enemy enemy in EnemyQueue)
-            {
-                enemy.Move();   
-            }
+            MoveEnemies();
         }
 
         public void Shoot()
@@ -53,6 +46,29 @@ namespace TypTop.Gui.SpaceGame
 
             // enemy gets killed, points are added up to score (multiplied by score magnifyer), enemy leaves queue
             Player.GainScore(EnemyQueue.Dequeue().Score * i);
+        }
+
+        public void EnemyHitPlayer()
+        {
+            // check if contains objects
+            if (EnemyQueue.Count > 0)
+            {
+                // player loses one life and enemy leaves queue when enemy hits player
+                if (EnemyQueue.Peek().Y >= LineHeight)
+                {
+                    Player.LoseLife();
+                    EnemyQueue.Dequeue();
+                }
+            }
+        }
+
+        public void MoveEnemies()
+        {
+            // move each enemy on screen
+            foreach (Enemy enemy in EnemyQueue)
+            {
+                enemy.Move();
+            }
         }
     }
 }
