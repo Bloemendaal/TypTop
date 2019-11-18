@@ -1,23 +1,23 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NUnit.Framework;
-using TypTop.Gui.SpaceGame;
+using System.Text;
 using TypTop.Logic;
-using Assert = NUnit.Framework.Assert;
 
-namespace TypTop.Gui.UnitTests
+namespace TypTop.Gui.SpaceGame
 {
-    [TestClass]
-    public class UnitTest1
+    public class Level
     {
-        private WordProvider _wp;
-        private List<string> testWords = new List<string>(){
+        public List<Enemy> EnemyList { get; private set; }
+        public int AmountOfEnemies { get; private set; }
+        public int PlayerLives { get; set; }
+        
+        private WordProvider _wordProvider;
+        private List<string> _testWords = new List<string>(){
                 "aan", "aanbod", "aanraken", "aanval", "aap", "aardappel", "aarde", "aardig", "acht", "achter", "actief", "activiteit", "ademen", "af", "afgelopen", "afhangen", "afmaken", "afname", "afspraak", "afval", "al", "algemeen", "alleen", "alles", "als", "alsjeblieft", "altijd", "ander", "andere", "anders", "angst", "antwoord", "antwoorden", "appel", "arm", "auto", "avond", "avondeten",
                 "baan", "baby", "bad", "bal", "bang", "bank", "basis", "bed", "bedekken", "bedreiging", "bedreven", "been", "beer", "beest", "beetje", "begin", "begrijpen", "begrip", "behalve", "beide", "beker", "bel", "belangrijk", "bellen", "belofte", "beneden", "benzine", "berg", "beroemd", "beroep", "bescherm", "beslissen", "best", "betalen", "beter", "bevatten", "bewegen", "bewolkt", "bezoek", "bibliotheek", "bieden", "bij", "bijna", "bijten", "bijvoorbeeld", "bijzonder", "binnen", "binnenkort", "blad", "blauw", "blazen", "blij", "blijven", "bloed", "bloem", "bodem", "boek", "boerderij", "boete", "boom", "boon", "boord", "boos", "bord", "borstelen", "bos", "bot", "bouwen", "boven", "branden", "brandstof", "breed", "breken", "brengen", "brief", "broer", "broek", "brood", "brug", "bruikbaar", "bruiloft", "bruin", "bui", "buiten", "bureau", "buren", "bus", "buurman", "buurvrouw",
                 "cadeau", "chocolade", "cirkel", "comfortabel", "compleet", "computer", "conditie", "controle", "cool", "correct",
                 "daar", "daarom", "dag", "dak", "dan", "dansen", "dapper", "dat", "de", "deel", "deken", "deksel", "delen", "derde", "deze", "dichtbij", "dienen", "diep", "dier", "dik", "ding", "dit", "dochter", "doen", "dom", "donker", "dood", "door", "doorzichtig", "doos", "dorp", "draad", "draaien", "dragen", "drie", "drijven", "drinken", "drogen", "dromen", "droog", "druk", "dubbel", "dun", "dus", "duur", "duwen",
-                "echt", "een", "één", "eend", "eenheid", "eenzaam", "eerste", "eeuw", "effect", "ei", "eigen", "eiland", "einde", "eis", "elektrisch", "elk", "en", "enkele", "enthousiast", "erg", "eten", "even", "examen", "extreem ",
+                "echt", "een", "Ã©Ã©n", "eend", "eenheid", "eenzaam", "eerste", "eeuw", "effect", "ei", "eigen", "eiland", "einde", "eis", "elektrisch", "elk", "en", "enkele", "enthousiast", "erg", "eten", "even", "examen", "extreem ",
                 "falen ", "familie", "feest", "feit", "fel", "fijn", "film", "fit", "fles", "foto", "fout", "fris", "fruit",
                 "gaan", "gat", "gebeuren", "gebeurtenis", "gebied", "geboorte", "geboren", "gebruik", "gebruikelijk", "gebruiken", "gedrag", "gedragen", "geel", "geen", "gehoorzamen", "geit", "geld", "geliefde", "gelijk", "geloof", "geluid", "geluk", "gemak", "gemakkelijk", "gemeen", "genieten", "genoeg", "genot", "gerecht", "gereedschap", "geschikt", "gespannen", "geur", "gevaar", "gevaarlijk", "gevangenis", "geven", "gevolg", "gewicht", "gewoon", "gezicht", "gezond", "gif", "gisteren", "glad", "glas", "glimlach", "god", "goed", "goedkoop", "goud", "graf", "grap", "grappig", "gras", "grens", "grijs", "groeien", "groen", "groente", "groep", "grof", "grond", "groot", "grootmoeder", "grootvader",
                 "haan", "haar", "haast", "hal", "halen", "half", "hallo", "hamer", "hand", "hard", "hart", "haten", "hebben", "heel", "heet", "helder", "helft", "help", "hem", "hemel", "hen", "herfst", "herinneren", "hert", "het", "heuvel", "hier", "hij", "hobby", "hoe", "hoed", "hoek", "hoeveel", "hoeveelheid", "hoewel", "hond", "honderd", "honger", "hoofd", "hoog", "hoogte", "hoop", "horen", "hotel", "houden", "huilen", "huis", "hun", "huren", "hut", "huur",
@@ -28,7 +28,7 @@ namespace TypTop.Gui.UnitTests
                 "maag", "maal", "maaltijd", "maan", "maand", "maar", "maat", "machine", "maken", "makkelijk", "mama", "man", "mand", "manier", "map", "markeren", "markt", "me", "medicijn", "meel", "meer", "meerdere", "meest", "meisje", "melk", "meneer", "mengsel", "mensen", "mes", "met", "meubel", "mevrouw", "middel", "midden", "mij", "mijn ", "miljoen", "min", "minder", "minuut", "mis", "missen", "mits", "model", "modern", "moeder", "moeilijk", "moeten", "mogelijk", "mogen", "moment", "mond", "mooi", "moord", "moorden", "morgen", "munt", "muziek",
                 "na", "naald", "naam", "naar", "naast", "nacht", "nat", "natuur", "natuurlijk", "nee", "neer", "negen", "nek", "nemen", "net", "netjes", "neus", "niet", "niets", "nieuw", "nieuws", "nobel", "noch", "nodig", "noemen", "nog", "nood", "nooit", "noord", "noot", "normaal", "nu", "nul", "nummer",
                 "object", "oceaan", "ochtend", "oefening", "of", "offer", "olie", "olifant", "om", "oma", "onder", "onderwerp", "onderzoek", "oneven", "ongeluk", "ons", "ontsnappen", "ontbijt", "ontdekken", "ontmoeten", "ontvangen", "ontwikkelen", "onze", "oog", "ooit", "ook", "oom", "oor", "oorlog", "oorzaak", "oost", "op", "opa", "opeens", "open", "openlijk", "opleiding", "opnemen", "oranje", "orde", "oud", "ouder", "over", "overal", "overeenkomen", "overleden", "overvallen",
-                "paar", "paard", "pad", "pagina", "pan", "papa", "papier", "park", "partner", "pas", "passeren", "pen", "peper", "per", "perfect", "periode", "persoon", "piano", "pijn", "pistool", "plaat", "plaatje", "plaats", "plafond", "plank", "plant", "plastic", "plat", "plattegrond", "plein", "plus", "poes", "politie", "poort", "populair", "positie", "postzegel", "potlood", "praten", "presenteren", "prijs", "prins", "prinses", "privé", "proberen", "probleem", "product", "provincie", "publiek", "punt",
+                "paar", "paard", "pad", "pagina", "pan", "papa", "papier", "park", "partner", "pas", "passeren", "pen", "peper", "per", "perfect", "periode", "persoon", "piano", "pijn", "pistool", "plaat", "plaatje", "plaats", "plafond", "plank", "plant", "plastic", "plat", "plattegrond", "plein", "plus", "poes", "politie", "poort", "populair", "positie", "postzegel", "potlood", "praten", "presenteren", "prijs", "prins", "prinses", "privÃ©", "proberen", "probleem", "product", "provincie", "publiek", "punt",
                 "raak", "raam", "radio", "raken", "rapport", "recht", "rechtdoor", "rechts", "rechtvaardig", "redden", "reeds", "regen", "reiken", "reizen", "rekenmachine", "rennen", "repareren", "rest", "restaurant", "resultaat", "richting", "rijk", "rijst", "rijzen", "ring", "rok", "rond", "rood", "rook", "rots", "roze", "rubber", "ruiken", "ruimte",
                 "samen", "sap", "schaap", "schaar", "schaduw", "scheiden", "scherp", "schetsen", "schieten", "schijnen", "schip", "school", "schoon", "schouder", "schreeuw", "schreeuwen", "schrijven", "schudden", "seconde", "sex", "signaal", "simpel", "sinds", "slaapkamer", "slapen", "slecht", "sleutel", "slim", "slot", "sluiten", "smaak", "smal", "sneeuw", "snel", "snelheid", "snijden", "soep", "sok", "soms", "soort", "sorry", "speciaal", "spel", "spelen", "sport", "spreken", "springen", "staal", "stad", "stap", "start", "station", "steen", "stelen", "stem", "stempel", "ster", "sterk", "steun", "stil", "stilte", "stoel", "stof", "stoffig", "stom", "stop", "storm", "straat", "straffen", "structuur", "student", "studie", "stuk", "succes", "suiker",
                 "taal", "taart", "tafel", "tak", "tamelijk", "tand", "tante", "tas", "taxi", "te", "team", "teen", "tegen", "teken", "tekenen", "telefoon", "televisie", "tellen", "tennis", "terug", "terugkomst", "terwijl", "test", "tevreden", "thee", "thuis", "tien", "tijd", "titel", "toekomst", "toen", "toename", "totaal", "traan", "tram", "trein", "trekken", "trouwen", "trui", "tuin", "tussen", "tweede",
@@ -37,128 +37,47 @@ namespace TypTop.Gui.UnitTests
                 "waar", "waarom", "waarschijnlijk", "wachten", "wakker", "wanneer", "want", "wapen", "warm", "wassen", "wat", "water", "we", "week", "weer", "weg", "welke", "welkom", "wens", "wereld", "werelddeel", "werk", "west", "wetenschap", "wie", "wiel", "wij", "wijn", "wijs", "wild", "willen", "wind", "winkel", "winnen", "winter", "wissen", "wit", "wolf", "wolk", "wonder", "woord", "woud", "wreed",
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
             };
-        
-        [TestMethod]
-        public void LimitByCharacter_LeftMiddleRow_ListOfWords()
+
+        public Level(int level)
         {
-            _wp = new WordProvider
-            {
-                TempWords = testWords
-            };
+            // Init wordprovider and call loading words
+            _wordProvider = new WordProvider();
+            _wordProvider.LoadTestWords(_testWords);
 
-            _wp.LoadTestWords();
+            EnemyList = new List<Enemy>();
+        }
 
-            List<Word> answer = new List<Word>()
-            {
-                new Word("af"),
-                new Word("dag")
-            };
+        public bool Initialize()
+        {
+            // filled with test data
+            // data from database, according to level
 
-            List<char> testChars = new List<char>()
+            var livesOfPlayer = 3;
+            var limitChar = new List<char>()
             {
                 'a','s','d','f','g'
             };
 
-            //Filter
-            _wp.LimitByCharacter(testChars);
-
-            Assert.AreEqual(answer, _wp.Serve());
-        }
-
-        [TestMethod]
-        public void Shuffle_ListOfStrings_AreNotEqual()
-        {
-            _wp = new WordProvider
+            var usageChar = new List<char>()
             {
-                TempWords = testWords
+                'a'
             };
-            _wp.LoadTestWords();
+
+            _wordProvider.LimitByCharacter(limitChar);
+            _wordProvider.UsageOfCharacter(usageChar);
+
+            // Setting appropriated data-values 
+
+            PlayerLives = livesOfPlayer;
+            foreach (var word in _wordProvider.Serve())
+            {
+                EnemyList.Add(new Enemy(1,word));
+            }
+
+            AmountOfEnemies = EnemyList.Count;
             
-            WordProvider wpCopy = new WordProvider
-            {
-                TempWords = testWords
-            };
-            wpCopy.LoadTestWords();
 
-            _wp.Shuffle();
-
-            Assert.AreNotEqual(wpCopy.Serve(), _wp.Serve());
-        }
-
-        [TestMethod]
-        public void WordLimit_Five_FirstFive()
-        {
-            _wp = new WordProvider
-            {
-                TempWords = testWords
-            };
-            _wp.LoadTestWords();
-            _wp.WordLimit(5);
-
-            List<Word> answer = new List<Word>()
-            {
-                new Word("aan"),
-                new Word("aanbod"),
-                new Word("aanraken"),
-                new Word("aanval"),
-                new Word("aap")
-            };
-
-            Assert.AreEqual(answer, _wp.Serve());
-        }
-
-        [TestMethod]
-        public void WordLengthLimit_One_WordsWithOneLetter()
-        {
-            _wp = new WordProvider
-            {
-                TempWords = testWords
-            };
-            _wp.LoadTestWords();
-            _wp.WordLengthLimit(1);
-
-            List<Word> answer = new List<Word>()
-            {
-                new Word("u"),
-            };
-
-            Assert.AreEqual(answer, _wp.Serve());
-        }
-
-        [TestMethod]
-        public void UsageOfCharacter_Z_MoreThenOneWord()
-        {
-            _wp = new WordProvider
-            {
-                TempWords = testWords
-            };
-            _wp.LoadTestWords();
-
-            List<char> testChars = new List<char>()
-            {
-                'z'
-            };
-
-            _wp.UsageOfCharacter(testChars);
-
-            List<Word> answer = new List<Word>()
-            {
-                new Word("zaak"),
-            };
-
-            Assert.AreNotEqual(answer, _wp.Serve());
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(NullReferenceException),
-            "Variable WordProvider.WordsToServe is empty or not set.")]
-        public void AreWordsSet_NoWords_Exception()
-        {
-            _wp = new WordProvider
-            {
-                TempWords = testWords
-            };
-            _wp.AreWordsSet();
+            return true;
         }
     }
 }

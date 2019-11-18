@@ -10,14 +10,15 @@ namespace TypTop.Gui.SpaceGame
     public class SpaceGame
     {
         public Player Player { get; set; }  // player
-        public List<Enemy> EnemyList { get; set; }  // list of all enemies
         public Queue<Enemy> EnemyQueue { get; set; }    // queue of visible enemies
         public DispatcherTimer Timer { get; private set; }  // timer
         public int LineHeight { get; private set; } // line when enemy hits player
+        public Level Level { get; private set; }
+
         public SpaceGame()
         {
-            Player = new Player();
-            EnemyList = new List<Enemy>();
+            Level = new Level(1);
+            Player = new Player(Level.PlayerLives);
             EnemyQueue = new Queue<Enemy>();
 
             LineHeight = 400;

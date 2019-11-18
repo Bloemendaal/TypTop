@@ -10,8 +10,6 @@ namespace TypTop.Gui.SpaceGame
 {
     public class WordProvider
     {
-        // List for testing
-        public List<string> TempWords { get; set; }
         // List of words to serve with conditions
         private List<Word> WordsToServe { get; set; }
 
@@ -111,13 +109,20 @@ namespace TypTop.Gui.SpaceGame
             return true;
         }
 
-        public void LoadTestWords()
+        public void LoadTestWords(List<string> tempWords)
         {
-            foreach (var s in TempWords)
+            foreach (var s in tempWords)
             {
                 WordsToServe.Add(new Word(s));
             }
         }
+
+        // Loading words from database
+        public void LoadWords()
+        {
+            
+        }
+
         // return filtered words
         public List<Word> Serve() => WordsToServe;
         
