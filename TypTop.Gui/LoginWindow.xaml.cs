@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Security.Cryptography;
 using System.Text;
+using Konscious.Security.Cryptography;
+using System.Linq;
 
 namespace TypTop.Gui
 {
@@ -11,20 +13,23 @@ namespace TypTop.Gui
     /// </summary>
     public partial class LoginWindow : Window
     {
-        Dictionary<string, string> accounts = new Dictionary<string, string>();
+        Dictionary<string, byte[]> accounts = new Dictionary<string, byte[]>();
+        Dictionary<string, byte[]> salts = new Dictionary<string, byte[]>(); //ja dit is mega ranzig maar gaat weg zodra de database er is
+
         public LoginWindow()
         {
             InitializeComponent();
+
         }
 
         ///<summary>
         /// Attempt to log in with the given username and password.
-        /// If succesfull open a MainWindow,
+        /// If successful open a MainWindow,
         /// else show an error message.
         /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (accounts.ContainsKey(UsernameBox.Text) && accounts[UsernameBox.Text] == ComputeSha256Hash(PasswordBox.Password))
+            if (accounts.ContainsKey(UsernameBox.Text) && VerifyHash(PasswordBox.Password, salts[UsernameBox.Text], accounts[UsernameBox.Text]))
             {
                 /* Set logged in account here
                  * (coming later)
@@ -52,7 +57,9 @@ namespace TypTop.Gui
                 {
                     if (!accounts.ContainsKey(dialog.UsernameTextBox.Text))
                     {
-                        accounts.Add(dialog.Username, ComputeSha256Hash(dialog.Password));
+                        byte[] salt = CreateSalt();
+                        accounts.Add(dialog.Username, HashPassword(dialog.Password, salt));
+                        salts.Add(dialog.Username, salt);
                     }
                     else
                     {
@@ -64,26 +71,51 @@ namespace TypTop.Gui
         }
 
         /// <summary>
-        /// Generates a SHA256 hash of the specified string.
+        /// Creates a salt to be used in HashPassword and VerifyHash
         /// </summary>
-        /// <param name="rawData"> A string to be hashed</param>
-        /// <returns>A string containing a SHA256 hash.</returns>
-        static string ComputeSha256Hash(string rawData)
+        /// <returns></returns>
+        private byte[] CreateSalt()
         {
-            // Create a SHA256   
-            using (SHA256 sha256Hash = SHA256.Create())
-            {
-                // ComputeHash - returns byte array  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+            var buffer = new byte[16];
+            var rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(buffer);
+            return buffer;
+        }
 
-                // Convert byte array to a string   
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    builder.Append(bytes[i].ToString("x2"));
-                }
-                return builder.ToString();
-            }
+        /// <summary>
+        /// Generate a hash using Argon2id
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <returns></returns>
+        private byte[] HashPassword(string password, byte[] salt)
+        {
+            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
+            {
+                Salt = salt,
+                DegreeOfParallelism = 4,
+                Iterations = 4,
+                MemorySize = 1024 * 100
+            };
+            
+            var r = argon2.GetBytes(1024);
+            string converted = Encoding.UTF8.GetString(r, 0, r.Length);
+            MessageBox.Show(converted);
+            argon2.Dispose();
+            return r;
+        }
+
+        /// <summary>
+        /// Verify if an entered password equals the stored password.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        private bool VerifyHash(string password, byte[] salt, byte[] hash)
+        {
+            var newHash = HashPassword(password, salt);
+            return hash.SequenceEqual(newHash);
         }
 
         /// <summary>
