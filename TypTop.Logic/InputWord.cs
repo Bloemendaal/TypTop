@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    class InputWord : Input
+    public class InputWord : Input
     {
         public Word Input;
         public InputWord(Word input)
@@ -28,6 +28,10 @@ namespace TypTop.Logic
             if (CheckWord(letter, Input))
             {
                 Input.Input.Push(letter);
+                if (Input.Correct != false)
+                {
+                    Input.Correct = true;
+                }
             }
             else
             {

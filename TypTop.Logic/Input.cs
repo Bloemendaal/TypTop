@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    abstract class Input
+    public abstract class Input
     {
         //
         // Summary:
@@ -127,8 +127,30 @@ namespace TypTop.Logic
         //       The word needs to be checked.
         public bool CheckWord(char letter, Word word, int? input = null)
         {
+            int index = input == null ? word.Index : (int)input;
+
             if (CheckIgnoredChars(letter))
             {
+                if (input == null)
+                {
+                    bool ignoring = true;
+                    while (ignoring && word.ValidIndex(index))
+                    {
+                        if (CheckIgnoredChars(word.Letters[index]))
+                        {
+                            index++;
+                        } else
+                        {
+                            ignoring = false;
+                        }
+                    }
+
+                    if (ignoring)
+                    {
+                        word.Finished = true;
+                        word.Correct = true;
+                    }
+                }
                 return true;
             }
 
@@ -137,7 +159,6 @@ namespace TypTop.Logic
                 return false;
             }
 
-            int index = input == null ? word.Index : (int)input;
             char wordCharAtIndex = word.Letters[index];
 
             bool wrongChar = true;
@@ -164,7 +185,8 @@ namespace TypTop.Logic
                 word.Finished = true;
                 return true;
             }
-
+            
+            index++;
             bool result = letter == wordCharAtIndex;
 
             if (char.IsLetter(letter))

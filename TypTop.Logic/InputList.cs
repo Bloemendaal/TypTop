@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    class InputList : Input
+    public class InputList : Input
     {
         public List<Word> Input;
         public InputList(List<Word> input)
