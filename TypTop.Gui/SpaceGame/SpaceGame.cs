@@ -44,8 +44,11 @@ namespace TypTop.Gui.SpaceGame
             // set score magnifyer, depends on enemy height (the higher the number, the larger the score will be)
             int i = 800-EnemyQueue.Peek().Y;
 
-            // enemy gets killed, points are added up to score (multiplied by score magnifyer), enemy leaves queue
-            Player.GainScore(EnemyQueue.Dequeue().Score * i);
+            // enemy gets killed, points are added up to score (multiplied by score magnifyer)
+            Player.GainScore(EnemyQueue.Peek().Score * i);
+
+            //enemy leaves queue
+            EnemyQueue.Dequeue();
         }
 
         public void EnemyHitPlayer()

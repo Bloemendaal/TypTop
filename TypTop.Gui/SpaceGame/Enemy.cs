@@ -24,6 +24,12 @@ namespace TypTop.Gui.SpaceGame
         }
 
         // lets the enemy move with the designated speed each step
-        public void Move() => Y+= Speed;    
+        public void Move() => Y+= Speed;
+
+        public void ChangeWord(string word) 
+        {
+            Word = word;    // set word
+            Score = Word.Length * Speed;    // set base score
+        }
     }
 }

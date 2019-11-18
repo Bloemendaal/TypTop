@@ -90,11 +90,11 @@ namespace TypTop.Gui.SpaceGame
         }
 
         [TestMethod]
-        [TestCase(1000, 1, 1, 100, 3, 0)]
-        [TestCase(1000, 1, 2, 100, 2, 0)]
-        [TestCase(1000, 1, 3, 150, 2, 1)]
-        [TestCase(1000, 1, 5, 200, 4, 2)]
-        public void Move_Enemy_HitPlayer(int steps, int speed, int amount, int interval, int lives, int enemies)
+        [TestCase(1000, 1, 1, 100, 3)]
+        [TestCase(1000, 1, 2, 100, 2)]
+        [TestCase(1000, 1, 3, 150, 1)]
+        [TestCase(2000, 1, 4, 200, 0)]
+        public void Move_Enemy_HitPlayer(int steps, int speed, int amount, int interval, int result)
         {
             //Arrange
             SpaceGame = new SpaceGame();
@@ -117,10 +117,74 @@ namespace TypTop.Gui.SpaceGame
             }
 
             //Assert
-            if (SpaceGame.EnemyQueue.Count == enemies)
-                Assert.AreEqual(SpaceGame.Player.Score, lives);
-            else
-                Assert.Fail();
+            Assert.AreEqual(SpaceGame.Player.Lives, result);
+        }
+
+        [TestMethod]
+        [TestCase(1000, 1, 0, 100, 0)]
+        [TestCase(1000, 1, 4, 100, 0)]
+        [TestCase(100, 1, 4, 5, 4)]
+        [TestCase(550, 1, 4, 100, 2)]
+        public void Spawn_Enemies_ReturnAmount(int steps, int speed, int amount, int interval, int result)
+        {
+            //Arrange
+            SpaceGame = new SpaceGame();
+            int _steps = steps;
+
+            //Act
+            while (steps > 0)
+            {
+                SpaceGame.MoveEnemies();
+
+                if ((_steps - steps) % interval == 0)
+                    if (amount > 0)
+                    {
+                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed));
+                        amount--;
+                    }
+
+                SpaceGame.EnemyHitPlayer();
+                steps--;
+            }
+
+            //Assert
+            Assert.AreEqual(SpaceGame.EnemyQueue.Count, result);
+        }
+
+        [TestMethod]
+        [TestCase(100, 1, 1, 1, "word", 2800)]
+        [TestCase(100, 2, 1, 10, "word", 5320)]
+        [TestCase(100, 1, 2, 1, "word", 4800)]
+        public void Shoot_Enemies_ReturnScore(int steps, int amount, int speed, int interval, string word, int result)
+        {
+            //Arrange
+            SpaceGame = new SpaceGame();
+            int _steps = steps;
+
+            //Act
+            while (steps > 0)
+            {
+                if ((_steps - steps) % interval == 0)
+                    if (amount > 0)
+                    {
+                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed));
+                        amount--;
+                    }
+
+                SpaceGame.MoveEnemies();
+
+                SpaceGame.EnemyHitPlayer();
+                steps--;
+            }
+
+            while (SpaceGame.EnemyQueue.Count > 0)
+            {
+                SpaceGame.EnemyQueue.Peek().ChangeWord(word);
+                SpaceGame.Shoot();
+            }
+
+            //Assert
+            Assert.AreEqual(SpaceGame.Player.Score, result);
         }
     }
 }
