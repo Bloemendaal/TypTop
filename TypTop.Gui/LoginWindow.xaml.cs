@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Security.Cryptography;
 ***REMOVED***
+using Konscious.Security.Cryptography;
+using System.Linq;
 
 namespace TypTop.Gui
 ***REMOVED***
@@ -11,20 +13,23 @@ namespace TypTop.Gui
     /// </summary>
     public partial class LoginWindow : Window
     ***REMOVED***
-        Dictionary<string, string> accounts = new Dictionary<string, string>();
+        Dictionary<string, byte[]> accounts = new Dictionary<string, byte[]>();
+        Dictionary<string, byte[]> salts = new Dictionary<string, byte[]>(); //ja dit is mega ranzig maar gaat weg zodra de database er is
+
         public LoginWindow()
         ***REMOVED***
             InitializeComponent();
+
     ***REMOVED***
 
         ///<summary>
         /// Attempt to log in with the given username and password.
-        /// If succesfull open a MainWindow,
+        /// If successful open a MainWindow,
         /// else show an error message.
         /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         ***REMOVED***
-            if (accounts.ContainsKey(UsernameBox.Text) && accounts[UsernameBox.Text] == ComputeSha256Hash(PasswordBox.Password))
+            if (accounts.ContainsKey(UsernameBox.Text) && VerifyHash(PasswordBox.Password, salts[UsernameBox.Text], accounts[UsernameBox.Text]))
             ***REMOVED***
                 /* Set logged in account here
                  * (coming later)
@@ -52,7 +57,9 @@ namespace TypTop.Gui
                 ***REMOVED***
                     if (!accounts.ContainsKey(dialog.UsernameTextBox.Text))
                     ***REMOVED***
-                        accounts.Add(dialog.Username, ComputeSha256Hash(dialog.Password));
+                        byte[] salt = CreateSalt();
+                        accounts.Add(dialog.Username, HashPassword(dialog.Password, salt));
+                        salts.Add(dialog.Username, salt);
                 ***REMOVED***
                     else
                     ***REMOVED***
@@ -64,26 +71,51 @@ namespace TypTop.Gui
     ***REMOVED***
 
         /// <summary>
-        /// Generates a SHA256 hash of the specified string.
+        /// Creates a salt to be used in HashPassword and VerifyHash
         /// </summary>
-        /// <param name="rawData"> A string to be hashed</param>
-        /// <returns>A string containing a SHA256 hash.</returns>
-        static string ComputeSha256Hash(string rawData)
+        /// <returns></returns>
+        private byte[] CreateSalt()
         ***REMOVED***
-            // Create a SHA256   
-            using (SHA256 sha256Hash = SHA256.Create())
-            ***REMOVED***
-                // ComputeHash - returns byte array  
-                byte[] bytes = sha256Hash.ComputeHash(Encoding.UTF8.GetBytes(rawData));
+            var buffer = new byte[16];
+            var rng = new RNGCryptoServiceProvider();
+            rng.GetBytes(buffer);
+            return buffer;
+    ***REMOVED***
 
-                // Convert byte array to a string   
-                StringBuilder builder = new StringBuilder();
-                for (int i = 0; i < bytes.Length; i++)
-                ***REMOVED***
-                    builder.Append(bytes[i].ToString("x2"));
-            ***REMOVED***
-                return builder.ToString();
+        /// <summary>
+        /// Generate a hash using Argon2id
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <returns></returns>
+        private byte[] HashPassword(string password, byte[] salt)
         ***REMOVED***
+            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
+            ***REMOVED***
+                Salt = salt,
+                DegreeOfParallelism = 4,
+                Iterations = 4,
+                MemorySize = 1024 * 100
+        ***REMOVED***;
+            
+            var r = argon2.GetBytes(1024);
+            string converted = Encoding.UTF8.GetString(r, 0, r.Length);
+            MessageBox.Show(converted);
+            argon2.Dispose();
+            return r;
+    ***REMOVED***
+
+        /// <summary>
+        /// Verify if an entered password equals the stored password.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <param name="salt"></param>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        private bool VerifyHash(string password, byte[] salt, byte[] hash)
+        ***REMOVED***
+            var newHash = HashPassword(password, salt);
+            return hash.SequenceEqual(newHash);
     ***REMOVED***
 
         /// <summary>
