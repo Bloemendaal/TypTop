@@ -27,12 +27,10 @@ namespace TypTop.Gui
         {
             KeyStyle.Default = new KeyStyle()
             {
-                BaseBrush = Brushes.Purple,
-                SymbolBrush = Brushes.White,
-                FaceBrush = Brushes.Violet
+                FaceBrush = Brushes.Orange
             };
 
-            _highlightKeyStyle = new KeyStyle()
+            _highlightKeyStyle = new KeyStyle
             {
                 BaseBrush = KeyStyle.Default.BaseBrush,
                 SymbolBrush = Brushes.White,
