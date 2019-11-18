@@ -73,7 +73,6 @@ namespace TypTop.Gui
         /// <summary>
         /// Creates a salt to be used in HashPassword and VerifyHash
         /// </summary>
-        /// <returns></returns>
         private byte[] CreateSalt()
         ***REMOVED***
             var buffer = new byte[16];
@@ -83,11 +82,8 @@ namespace TypTop.Gui
     ***REMOVED***
 
         /// <summary>
-        /// Generate a hash using Argon2id
+        /// Generate a hash using Argon2id based on the password
         /// </summary>
-        /// <param name="password"></param>
-        /// <param name="salt"></param>
-        /// <returns></returns>
         private byte[] HashPassword(string password, byte[] salt)
         ***REMOVED***
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
@@ -99,19 +95,13 @@ namespace TypTop.Gui
         ***REMOVED***;
             
             var r = argon2.GetBytes(1024);
-            string converted = Encoding.UTF8.GetString(r, 0, r.Length);
-            MessageBox.Show(converted);
             argon2.Dispose();
             return r;
     ***REMOVED***
 
         /// <summary>
-        /// Verify if an entered password equals the stored password.
+        /// Verify that an entered password matches the stored hash.
         /// </summary>
-        /// <param name="password"></param>
-        /// <param name="salt"></param>
-        /// <param name="hash"></param>
-        /// <returns></returns>
         private bool VerifyHash(string password, byte[] salt, byte[] hash)
         ***REMOVED***
             var newHash = HashPassword(password, salt);
