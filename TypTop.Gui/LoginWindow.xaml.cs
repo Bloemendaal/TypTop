@@ -1,10 +1,10 @@
-﻿***REMOVED***
-using System.Windows;
-using System.Windows.Controls;
+﻿using Konscious.Security.Cryptography;
+***REMOVED***
+using System.Linq;
 using System.Security.Cryptography;
 ***REMOVED***
-using Konscious.Security.Cryptography;
-using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace TypTop.Gui
 ***REMOVED***
@@ -37,7 +37,7 @@ namespace TypTop.Gui
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 Close();
-       ***REMOVED***
+        ***REMOVED***
             else
             ***REMOVED***
                 MessageBox.Show("Onjuiste naam of wachtwoord.");
@@ -49,25 +49,10 @@ namespace TypTop.Gui
         /// </summary>
         private void NewAccountButton_Click(object sender, RoutedEventArgs e)
         ***REMOVED***
-            CreateAccountDialog dialog = new CreateAccountDialog();
-            if (dialog.ShowDialog() == true)
-            ***REMOVED***
-
-                if (!dialog.Cancelled)
-                ***REMOVED***
-                    if (!accounts.ContainsKey(dialog.UsernameTextBox.Text))
-                    ***REMOVED***
-                        byte[] salt = CreateSalt();
-                        accounts.Add(dialog.Username, HashPassword(dialog.Password, salt));
-                        salts.Add(dialog.Username, salt);
-                ***REMOVED***
-                    else
-                    ***REMOVED***
-                        MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
-                ***REMOVED***
-
-            ***REMOVED***
-        ***REMOVED***
+            CreationUsernameBox.Text = UsernameBox.Text;
+            CreationPasswordBox.Password = PasswordBox.Password;
+            AccountCreationCanvas.Visibility = Visibility.Visible;
+            LoginCanvas.Visibility = Visibility.Hidden;
     ***REMOVED***
 
         /// <summary>
@@ -93,7 +78,7 @@ namespace TypTop.Gui
                 Iterations = 4,
                 MemorySize = 1024 * 100
         ***REMOVED***;
-            
+
             var r = argon2.GetBytes(1024);
             argon2.Dispose();
             return r;
@@ -116,6 +101,48 @@ namespace TypTop.Gui
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             Close();
+    ***REMOVED***
+
+        /// <summary>
+        /// Store a new account in the database if the given values are valid.
+        /// Valid being:
+        /// -non-empty string for username and password
+        /// -username not already in the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
+        ***REMOVED***
+            if (CreationUsernameBox.Text != "" && CreationPasswordBox.Password != "")
+            ***REMOVED***
+                if (!accounts.ContainsKey(CreationUsernameBox.Text))
+                ***REMOVED***
+                    byte[] salt = CreateSalt();
+                    accounts.Add(CreationUsernameBox.Text, HashPassword(CreationPasswordBox.Password, salt));
+                    salts.Add(CreationUsernameBox.Text, salt);
+                    AccountCreationCanvas.Visibility = Visibility.Hidden;
+                    LoginCanvas.Visibility = Visibility.Visible;
+            ***REMOVED***
+                else
+                ***REMOVED***
+                    MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+            ***REMOVED***
+        ***REMOVED***
+            else
+            ***REMOVED***
+                MessageBox.Show("Vul een gebruikersnaam en wachtwoord in.");
+        ***REMOVED***
+    ***REMOVED***
+
+        /// <summary>
+        /// Go back to the loginscreen from the account creation screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        ***REMOVED***
+            AccountCreationCanvas.Visibility = Visibility.Hidden;
+            LoginCanvas.Visibility = Visibility.Visible;
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
