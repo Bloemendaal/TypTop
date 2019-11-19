@@ -25,11 +25,6 @@ namespace TypTop.Gui
 
         public MainWindow()
         ***REMOVED***
-            KeyStyle.Default = new KeyStyle()
-            ***REMOVED***
-                FaceBrush = Brushes.Orange
-        ***REMOVED***;
-
             _highlightKeyStyle = new KeyStyle
             ***REMOVED***
                 BaseBrush = KeyStyle.Default.BaseBrush,
@@ -65,7 +60,7 @@ namespace TypTop.Gui
             ***REMOVED***
                 VisualKeyboard.Layout = KeyboardLayout.Qwerty;
         ***REMOVED***
-            else if (sender == AzertyRadioButton)
+            else if (sender == ColemakRadioButton)
             ***REMOVED***
                 VisualKeyboard.Layout = KeyboardLayout.Azerty;
         ***REMOVED***
