@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
+    <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
   </ItemGroup>
 
 </Project>
