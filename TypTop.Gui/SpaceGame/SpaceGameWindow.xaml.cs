@@ -17,18 +17,18 @@ namespace TypTop.Gui.SpaceGame
     /// </summary>
     public partial class SpaceGameWindow : Window
     {
-        SpaceGame Game = new SpaceGame(); // create spacegame object
+        public SpaceGame Game { get; set; } = new SpaceGame(); // create spacegame object
 
         // the following rectangle represents the player
-        Rectangle PlayerRect = new Rectangle
+        public Rectangle PlayerRect { get; set; } = new Rectangle
         {
             Name = "Player",
             Width = 50,
             Height = 50,
             Fill = Brushes.DarkCyan
-        };
+        }; 
 
-        List<Rectangle> EnemyRectList = new List<Rectangle>();  // list of rectangles for the enemies, should never countain more than largest what is shown at once on screen
+        public List<Rectangle> EnemyRectList = new List<Rectangle>();  // list of rectangles for the enemies, should never countain more than largest what is shown at once on screen
 
         public SpaceGameWindow()
         {
