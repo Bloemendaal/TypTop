@@ -20,7 +20,7 @@ namespace TypTop.Gui.SpaceGame
         public SpaceGame Game { get; set; } = new SpaceGame(); // create spacegame object
 
         // the following rectangle represents the player
-        public Rectangle PlayerRect { get; set; } = new Rectangle
+        Rectangle PlayerRect = new Rectangle
         {
             Name = "Player",
             Width = 50,
