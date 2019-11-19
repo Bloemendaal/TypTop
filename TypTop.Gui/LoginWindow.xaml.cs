@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Windows;
-using System.Windows.Controls;
+﻿using Konscious.Security.Cryptography;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using Konscious.Security.Cryptography;
-using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace TypTop.Gui
 {
@@ -37,7 +37,7 @@ namespace TypTop.Gui
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 Close();
-           }
+            }
             else
             {
                 MessageBox.Show("Onjuiste naam of wachtwoord.");
@@ -49,25 +49,10 @@ namespace TypTop.Gui
         /// </summary>
         private void NewAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            CreateAccountDialog dialog = new CreateAccountDialog();
-            if (dialog.ShowDialog() == true)
-            {
-
-                if (!dialog.Cancelled)
-                {
-                    if (!accounts.ContainsKey(dialog.UsernameTextBox.Text))
-                    {
-                        byte[] salt = CreateSalt();
-                        accounts.Add(dialog.Username, HashPassword(dialog.Password, salt));
-                        salts.Add(dialog.Username, salt);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
-                    }
-
-                }
-            }
+            CreationUsernameBox.Text = UsernameBox.Text;
+            CreationPasswordBox.Password = PasswordBox.Password;
+            AccountCreationCanvas.Visibility = Visibility.Visible;
+            LoginCanvas.Visibility = Visibility.Hidden;
         }
 
         /// <summary>
@@ -93,7 +78,7 @@ namespace TypTop.Gui
                 Iterations = 4,
                 MemorySize = 1024 * 100
             };
-            
+
             var r = argon2.GetBytes(1024);
             argon2.Dispose();
             return r;
@@ -116,6 +101,48 @@ namespace TypTop.Gui
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             Close();
+        }
+
+        /// <summary>
+        /// Store a new account in the database if the given values are valid.
+        /// Valid being:
+        /// -non-empty string for username and password
+        /// -username not already in the database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CreateAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CreationUsernameBox.Text != "" && CreationPasswordBox.Password != "")
+            {
+                if (!accounts.ContainsKey(CreationUsernameBox.Text))
+                {
+                    byte[] salt = CreateSalt();
+                    accounts.Add(CreationUsernameBox.Text, HashPassword(CreationPasswordBox.Password, salt));
+                    salts.Add(CreationUsernameBox.Text, salt);
+                    AccountCreationCanvas.Visibility = Visibility.Hidden;
+                    LoginCanvas.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Vul een gebruikersnaam en wachtwoord in.");
+            }
+        }
+
+        /// <summary>
+        /// Go back to the loginscreen from the account creation screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            AccountCreationCanvas.Visibility = Visibility.Hidden;
+            LoginCanvas.Visibility = Visibility.Visible;
         }
     }
 }

@@ -9,9 +9,16 @@
 
     <Grid Background="Black">
         <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="Images/LoginBackground.png" />
-
-        <Button Content="Button" HorizontalAlignment="Left" Margin="1101,351,0,0" VerticalAlignment="Top" Width="0"/>
-        <Canvas HorizontalAlignment="Right" Margin="0,50,50,50"  VerticalAlignment="Top" Height="337" Width="200">
+        <Canvas x:Name="AccountCreationCanvas" Visibility="Hidden" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Height="337" Width="200">
+            <Rectangle HorizontalAlignment="Right"  Stroke="Black" VerticalAlignment="Top" Height="337" Width="200" Fill="#FFEBE7E4" RadiusX="20" RadiusY="20" StrokeThickness="5"/>
+            <TextBox x:Name="CreationUsernameBox" Margin="0,0,0,0" TextWrapping="Wrap" Width="120" Height="25" Canvas.Left="40" Canvas.Top="62" FontFamily="Comic Sans MS" FontSize="14"/>
+            <PasswordBox x:Name="CreationPasswordBox" Margin="0,0,0,0" Width="120" Height="28" Canvas.Left="39" Canvas.Top="125" FontFamily="Comic Sans MS" FontSize="14"/>
+            <Button x:Name="CreateAccountButton" Content="Account aanmaken" Margin="0,0,0,0" Height="23" Width="110" Canvas.Left="45" Canvas.Top="192" Click="CreateAccountButton_Click"/>
+            <Label Content="Gebruikersnaam:" Canvas.Left="39" Canvas.Top="36"/>
+            <Label Content="Wachtwoord:" Canvas.Left="39" Canvas.Top="99"/>
+            <Button x:Name="BackButton" Content="Terug" Canvas.Left="83" Canvas.Top="285" Click="BackButton_Click" />
+        </Canvas>
+        <Canvas x:Name="LoginCanvas" Visibility="Visible" HorizontalAlignment="Right" Margin="0,50,50,50"  VerticalAlignment="Top" Height="337" Width="200">
             <Rectangle HorizontalAlignment="Right"  Stroke="Black" VerticalAlignment="Top" Height="337" Width="200" Fill="#FFEBE7E4" RadiusX="20" RadiusY="20" StrokeThickness="5"/>
             <TextBox x:Name="UsernameBox" Margin="0,0,0,0" TextWrapping="Wrap" Width="120" Height="25" Canvas.Left="40" Canvas.Top="62" FontFamily="Comic Sans MS" FontSize="14"/>
             <PasswordBox x:Name="PasswordBox" Margin="0,0,0,0" Width="120" Height="28" Canvas.Left="39" Canvas.Top="125" FontFamily="Comic Sans MS" FontSize="14"/>
@@ -21,6 +28,7 @@
             <Button x:Name="NewAccountButton" Content="Ik heb nog geen account." Canvas.Left="28" Canvas.Top="256" Click="NewAccountButton_Click" Width="142"/>
             <Button x:Name="NoAccountButton" Content="Doorgaan zonder account" Canvas.Left="28" Canvas.Top="290" Click="NoAccountButton_Click"/>
         </Canvas>
+        
 
     </Grid>
 </Window>
