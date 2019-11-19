@@ -1,12 +1,10 @@
-﻿using System.Drawing;
-using System.Linq.Expressions;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace TypTop.VisualKeyboard
 {
-    public class QwertyKeyboardLayout : KeyboardLayout
+    public class ColemakKeyboardLayout : KeyboardLayout
     {
-        public QwertyKeyboardLayout() : base(new KeyFactory())
+        public ColemakKeyboardLayout() :base(new KeyFactory())
         {
             AddKey(Key.OemTilde);
 
@@ -33,14 +31,14 @@ namespace TypTop.VisualKeyboard
 
             AddKey(Key.Q);
             AddKey(Key.W);
-            AddKey(Key.E);
-            AddKey(Key.R);
-            AddKey(Key.T);
-            AddKey(Key.Y);
-            AddKey(Key.U);
-            AddKey(Key.I);
-            AddKey(Key.O);
+            AddKey(Key.F);
             AddKey(Key.P);
+            AddKey(Key.G);
+            AddKey(Key.J);
+            AddKey(Key.L);
+            AddKey(Key.U);
+            AddKey(Key.Y);
+            AddKey(Key.OemSemicolon);
 
             AddKey(Key.OemOpenBrackets);
             AddKey(Key.OemCloseBrackets);
@@ -51,16 +49,16 @@ namespace TypTop.VisualKeyboard
             AddKey(Key.CapsLock);
 
             AddKey(Key.A);
+            AddKey(Key.R);
             AddKey(Key.S);
+            AddKey(Key.T);
             AddKey(Key.D);
-            AddKey(Key.F);
-            AddKey(Key.G);
             AddKey(Key.H);
-            AddKey(Key.J);
-            AddKey(Key.K);
-            AddKey(Key.L);
+            AddKey(Key.N);
+            AddKey(Key.E);
+            AddKey(Key.I);
+            AddKey(Key.O);
 
-            AddKey(Key.OemSemicolon);
             AddKey(Key.OemQuotes);
             AddKey(Key.Enter);
 
@@ -73,7 +71,7 @@ namespace TypTop.VisualKeyboard
             AddKey(Key.C);
             AddKey(Key.V);
             AddKey(Key.B);
-            AddKey(Key.N);
+            AddKey(Key.K);
             AddKey(Key.M);
 
             AddKey(Key.OemComma);

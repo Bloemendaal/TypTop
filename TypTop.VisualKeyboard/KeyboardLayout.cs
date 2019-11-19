@@ -24,7 +24,7 @@ namespace TypTop.VisualKeyboard
         private static readonly Lazy<QwertyKeyboardLayout> LazyQwerty = new Lazy<QwertyKeyboardLayout>();
         public static KeyboardLayout Qwerty => LazyQwerty.Value;
 
-        private static readonly Lazy<AzertyKeyboardLayout> LazyAzerty = new Lazy<AzertyKeyboardLayout>();
+        private static readonly Lazy<ColemakKeyboardLayout> LazyAzerty = new Lazy<ColemakKeyboardLayout>();
         private readonly RowBox _rowBox;
         public static KeyboardLayout Azerty => LazyAzerty.Value;
 
