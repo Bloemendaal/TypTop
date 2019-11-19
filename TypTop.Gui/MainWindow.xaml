@@ -12,7 +12,7 @@
             <ColumnDefinition Width="100"></ColumnDefinition>
             <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <StackPanel>
             <RadioButton x:Name="QwertRadioButton" Checked="LayoutRadio_OnChecked" IsChecked="True">Qwerty</RadioButton>
             <RadioButton x:Name="ColemakRadioButton" Checked="LayoutRadio_OnChecked">Colemak</RadioButton>
@@ -22,7 +22,7 @@
         </StackPanel>
 
         <visualKeyBoard:VisualKeyboard Grid.Column="1" x:Name="VisualKeyboard">
-            
+
         </visualKeyBoard:VisualKeyboard>
 
     </Grid>
