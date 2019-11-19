@@ -5,6 +5,7 @@ using System.Text;
 using TypTop.Gui.SpaceGame;
 using NUnit.Framework;
 using Assert = NUnit.Framework.Assert;
+using TypTop.Logic;
 
 namespace TypTop.Gui.SpaceGame
 {
@@ -25,6 +26,7 @@ namespace TypTop.Gui.SpaceGame
         {
             //Arrange
             SpaceGame = new SpaceGame();
+            SpaceGame.Level.PlayerLives = 4;
 
             //Act
             while (decrease > 0)
@@ -76,7 +78,8 @@ namespace TypTop.Gui.SpaceGame
         {
             //Arrange
             SpaceGame = new SpaceGame();
-            SpaceGame.EnemyQueue.Enqueue(new Enemy(speed));
+            Word word = new Word("word");
+            SpaceGame.EnemyQueue.Enqueue(new Enemy(speed, word));
 
             //Act
             while(steps > 0)
@@ -108,7 +111,7 @@ namespace TypTop.Gui.SpaceGame
                 if ((_steps - steps) % interval == 0)
                     if (amount > 0)
                     {
-                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed));
+                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed, new Word("word")));
                         amount--;
                     }
 
@@ -139,7 +142,7 @@ namespace TypTop.Gui.SpaceGame
                 if ((_steps - steps) % interval == 0)
                     if (amount > 0)
                     {
-                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed));
+                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed, new Word("word")));
                         amount--;
                     }
 
@@ -167,7 +170,7 @@ namespace TypTop.Gui.SpaceGame
                 if ((_steps - steps) % interval == 0)
                     if (amount > 0)
                     {
-                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed));
+                        SpaceGame.EnemyQueue.Enqueue(new Enemy(speed, new Word(word)));
                         amount--;
                     }
 
@@ -178,10 +181,7 @@ namespace TypTop.Gui.SpaceGame
             }
 
             while (SpaceGame.EnemyQueue.Count > 0)
-            {
-                SpaceGame.EnemyQueue.Peek().ChangeWord(word);
                 SpaceGame.Shoot();
-            }
 
             //Assert
             Assert.AreEqual(SpaceGame.Player.Score, result);

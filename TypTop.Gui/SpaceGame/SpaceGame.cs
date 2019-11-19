@@ -18,7 +18,7 @@ namespace TypTop.Gui.SpaceGame
         public SpaceGame()
         {
             Level = new Level(1);
-            Player = new Player(Level.PlayerLives);
+            Player = new Player();
             EnemyQueue = new Queue<Enemy>();
 
             LineHeight = 400;
