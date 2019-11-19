@@ -20,15 +20,10 @@ namespace TypTop.Gui.SpaceGame
             EnemyQueue = new Queue<Enemy>();
 
             LineHeight = 400;
-
-            //  DispatcherTimer setup, ~59 intervals per second, 1000 / 60 = 16.6667... miliseconds
-            Timer.Tick += new EventHandler(Timer_Tick);
-            Timer.Interval = new TimeSpan(0, 0, 0, 0, 17);
-            Timer.Start();
     ***REMOVED***
 
         // timer event, fired each step
-        private void Timer_Tick(object sender, EventArgs e) 
+        protected override void Timer_Tick(object sender, EventArgs e) 
         ***REMOVED***
             // player loses one life and enemy leaves queue when enemy hits player
             if (EnemyQueue.Peek().Y <= LineHeight) 
