@@ -30,9 +30,10 @@ namespace TypTop.VisualKeyboard
             }
         }
 
-        public void SetKeyStyle(Key key, Color color)
+        public void SetKeyStyle(Key key, KeyStyle color)
         {
-
+            _layout.SetKeyStyle(key, color);
+            InvalidateVisual();
         }
 
         static VisualKeyboard()
@@ -42,18 +43,19 @@ namespace TypTop.VisualKeyboard
 
         public VisualKeyboard()
         {
-            KeyStyle keyStyle = new KeyStyle()
-            {
-                BaseBrush = new SolidColorBrush(Colors.Gray),
-                FaceBrush = new SolidColorBrush(Colors.WhiteSmoke),
-                SymbolBrush = new SolidColorBrush(Colors.Black)
-            };
+          
         }
 
         protected override void OnRender(DrawingContext drawingContext)
         {
             Layout.Render(drawingContext);
             base.OnRender(drawingContext);
+        }
+
+        public void InvalidateKeyStyle()
+        {
+            _layout.InvalidateKeyStyle();
+            InvalidateVisual();
         }
     }
 }
