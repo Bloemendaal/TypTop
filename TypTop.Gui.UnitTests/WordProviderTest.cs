@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using TypTop.Gui.SpaceGame;
 using TypTop.Logic;
 using Assert = NUnit.Framework.Assert;
@@ -98,11 +100,11 @@ namespace TypTop.Gui.UnitTests
         }
 
         [TestMethod]
-        public void WordLengthLimit_One_WordsWithOneLetter()
+        public void SetMaxWordLength_One_WordsWithOneLetter()
         {
             _wp = new WordProvider();
             _wp.LoadTestWords(testWords);
-            _wp.WordLengthLimit(1);
+            _wp.SetMaxWordLength(1);
 
             List<Word> answer = new List<Word>()
             {
@@ -110,6 +112,26 @@ namespace TypTop.Gui.UnitTests
             };
 
             Assert.AreEqual(answer, _wp.Serve());
+        }
+
+        [TestMethod]
+        public void SetMinWordLength_MinLengthOfTwo_WordsInCollectionNotSame()
+        {
+            _wp = new WordProvider();
+            _wp.LoadTestWords(testWords);
+            _wp.SetMinWordLength(2);
+
+            List<Word> wordsWithOneLetter = new List<Word>()
+            {
+                new Word("u"),
+                new Word("i"),
+                new Word("p"),
+                new Word("w"),
+            };
+
+            int amountSame = (from w in _wp.Serve() from wwOL in wordsWithOneLetter where w.Letters == wwOL.Letters select w).Count();
+
+            Assert.True(amountSame == 0);
         }
 
         [TestMethod]

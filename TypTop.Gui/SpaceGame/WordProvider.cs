@@ -16,7 +16,8 @@ namespace TypTop.Gui.SpaceGame
         // Amount of words to provide.
         public int WordCount { get; private set; }
         // Max length of word.
-        public int WordLetterLimit { get; private set; }
+        public int MaxWordLength { get; private set; }
+        public int MinWordLength { get; private set; }
         // #Optional: select only words with char in list.
         public List<char> UsageChars { get; private set; }
         public List<char> LimitChars { get; private set; }
@@ -59,13 +60,24 @@ namespace TypTop.Gui.SpaceGame
         }
 
         // Get max length of word.
-        public void WordLengthLimit(int limit)
+        public void SetMaxWordLength(int limit)
         {
             if (!AreWordsSet()) return;
-            WordLetterLimit = limit;
+            MaxWordLength = limit;
 
             WordsToServe = WordsToServe?
                 .Where(s => s.Letters.Length <= limit)
+                .ToList();
+        }
+
+        // Get min length of word
+        public void SetMinWordLength(int limit)
+        {
+            if (!AreWordsSet()) return;
+            MinWordLength = limit;
+            
+            WordsToServe = WordsToServe?
+                .Where(s => s.Letters.Length >= limit)
                 .ToList();
         }
 
