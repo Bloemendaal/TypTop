@@ -129,6 +129,12 @@ namespace TypTop.Gui.SpaceGame
             }
         }
 
+        // Reset words to initial
+        public void ResetToEmpty()
+        {
+            WordsToServe = new List<Word>();
+        }
+
         // Loading words from database
         public void LoadWords()
         {

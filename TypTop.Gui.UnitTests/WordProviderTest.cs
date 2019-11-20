@@ -156,6 +156,21 @@ namespace TypTop.Gui.UnitTests
         }
 
         [TestMethod]
+        public void ResetToEmpty_reset_EmptyServe()
+        {
+            _wp = new WordProvider();
+            _wp.LoadTestWords(testWords);
+            _wp.Shuffle();
+            _wp.SetMinWordLength(2);
+            _wp.SetMaxWordLength(8);
+            _wp.ResetToEmpty();
+
+            WordProvider answer = new WordProvider();
+
+            Assert.AreEqual(answer.Serve(), _wp.Serve());
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(NullReferenceException),
             "Variable WordProvider.WordsToServe is empty or not set.")]
         public void AreWordsSet_NoWords_Exception()
