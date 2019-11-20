@@ -14,12 +14,12 @@ namespace TypTop.Gui.SpaceGame
         public int Y { get; private set; }  //vertical position of enemy in field
         public int Score { get; private set; }  //amount of points the enemy represents
         public int Speed { get; private set; }  //amount of pixels the enemy moves each step
-        public static Random Random { get; set; } = new Random(DateTime.Now.Millisecond);
+        public static Random Random { get; set; } = new Random(DateTime.Now.Millisecond);   // static random object
         public Enemy(int speed, Word word)
         {
-            Word = word;  
-            X = Random.Next(400);    
-            Y = 0;      
+            Word = word;  // set word
+            X = (Random.Next(1,16))*50;   // set horizontal position 
+            Y = 0;      // set vertical position
             Speed = speed;  // set speed
             Score = Word.Letters.Length * Speed;    // set base score
         }

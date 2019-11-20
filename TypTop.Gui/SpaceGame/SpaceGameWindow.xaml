@@ -8,6 +8,5 @@
         Title="SpaceGameWindow" Height="450" Width="800">
     <Grid>
         <Canvas x:Name="SpaceGameCanvas" Background='#112'/>
-        <Line x:Name="Line" X1="0" X2="800" Y1="350" Y2="350" Stroke="Red" StrokeThickness="5"/>
     </Grid>
 </Window>

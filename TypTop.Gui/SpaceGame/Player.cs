@@ -13,6 +13,7 @@ namespace TypTop.Gui.SpaceGame
 
         public Player() :this(4)
         {
+            //  default player has 4 lives set
         }
 
         public Player(int lives)

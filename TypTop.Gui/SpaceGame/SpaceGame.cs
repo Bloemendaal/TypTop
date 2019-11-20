@@ -14,18 +14,29 @@ namespace TypTop.Gui.SpaceGame
         public int LineHeight { get; private set; } // line when enemy hits player
         public Level Level { get; private set; }
 
-        public SpaceGame()
+        public Boolean GameOver { get; private set; } = false;
+
+        public SpaceGame() : this(400)
+        {
+
+        }
+
+        public SpaceGame(int lineheight)
         {
             Level = new Level(1);
             Player = new Player();
             EnemyQueue = new Queue<Enemy>();
 
-            LineHeight = 400;
+            LineHeight = lineheight;
         }
 
         // timer event, fired each step
         protected override void Timer_Tick(object sender, EventArgs e) 
         {
+            // testcase to spawn enemies randomly
+            if(Rnd.Next(0, 1025) > 1000)
+                EnemyQueue.Enqueue(new Enemy(1, new Logic.Word("word")));
+            
             // player loses one life and enemy leaves queue when enemy hits player
             EnemyHitPlayer();
 
@@ -51,11 +62,16 @@ namespace TypTop.Gui.SpaceGame
             if (EnemyQueue.Count > 0)
             {
                 // player loses one life and enemy leaves queue when enemy hits player
-                if (EnemyQueue.Peek().Y >= LineHeight)
+                if (EnemyQueue.Peek().Y >= LineHeight-25)
                 {
                     Player.LoseLife();
                     EnemyQueue.Dequeue();
                 }
+            }
+
+            if (Player.Lives <= 0)
+            {
+                EndGame();
             }
         }
 
@@ -66,6 +82,13 @@ namespace TypTop.Gui.SpaceGame
             {
                 enemy.Move();
             }
+        }
+
+        public void EndGame()
+        {
+            // stops game
+            Timer.Stop();
+            GameOver = true;
         }
     }
 }
