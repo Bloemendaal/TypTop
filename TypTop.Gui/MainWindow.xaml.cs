@@ -25,14 +25,40 @@ namespace TypTop.Gui
 
         public MainWindow()
         {
+            InitializeComponent();
+
+
+            var imageBrush1 = new ImageBrush(new BitmapImage(
+                    new Uri(@"C:\Users\JanFokke\Desktop\stone.png", UriKind.Relative)))
+            {
+                Viewport = new Rect(0,0,50,50),
+                ViewportUnits = BrushMappingMode.Absolute,
+                TileMode = TileMode.Tile,
+                Stretch = Stretch.None
+            };
+            
+            var imageBrush2 = new ImageBrush(new BitmapImage(
+                new Uri(@"C:\Users\JanFokke\Desktop\diamond.png", UriKind.Relative)))
+                {
+                    Viewport = new Rect(0, 0, 50, 50),
+                    ViewportUnits = BrushMappingMode.Absolute,
+                    TileMode = TileMode.Tile,
+                    Stretch = Stretch.None
+            };
+            
+            KeyStyle.Default.FaceBrush = imageBrush1;
+            KeyStyle.Default.SymbolBrush = Brushes.White;
+            KeyStyle.Default.BaseBrush = Brushes.Black;
+
             _highlightKeyStyle = new KeyStyle
             {
-                BaseBrush = KeyStyle.Default.BaseBrush,
-                SymbolBrush = Brushes.White,
-                FaceBrush = Brushes.LightGreen
+                FaceBrush = imageBrush2,
             };
 
-            InitializeComponent();
+
+            
+
+
             KeyUp += OnKeyUp;
 
 
