@@ -25,6 +25,9 @@ namespace TypTop.Gui
 
         public MainWindow()
         ***REMOVED***
+            InitializeComponent();
+
+
             var imageBrush1 = new ImageBrush(new BitmapImage(
                     new Uri(@"C:\Users\JanFokke\Desktop\stone.png", UriKind.Relative)))
             ***REMOVED***
@@ -52,7 +55,10 @@ namespace TypTop.Gui
                 FaceBrush = imageBrush2,
         ***REMOVED***;
 
-            InitializeComponent();
+
+            
+
+
             KeyUp += OnKeyUp;
     ***REMOVED***
 

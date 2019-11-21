@@ -4,45 +4,50 @@ using System.Windows.Media;
 
 namespace BasicGameEngine
 ***REMOVED***
-    abstract class Entity
+    public abstract class Entity
     ***REMOVED***
         public string Name ***REMOVED*** get; ***REMOVED***
-        public Dictionary<Type, Component> Components = new Dictionary<Type, Component>();
-        private Game _game;
+        private readonly Dictionary<Type, Component> _components = new Dictionary<Type, Component>();
 
-        protected Entity(string name)
+        protected Entity(string name, Game game)
         ***REMOVED***
             Name = name;
+            Game = game;
     ***REMOVED***
 
-        public Game Game
+        public Game Game ***REMOVED*** get; ***REMOVED***
+
+        public bool TryGetComponent<TComponent>(out TComponent component) where TComponent : Component
         ***REMOVED***
-            get => _game;
-            set
+            if (_components.TryGetValue(typeof(TComponent), out var b))
             ***REMOVED***
-                _game = value;
-                AddedToGame();
+                component = (TComponent) b;
+                return true;
         ***REMOVED***
-    ***REMOVED***
-
-        protected virtual void AddedToGame()
-        ***REMOVED***
-
+            component = (TComponent) _components[typeof(TComponent)];
+            return false;
     ***REMOVED***
 
         public TComponent GetComponent<TComponent>() where TComponent : Component
         ***REMOVED***
-            return (TComponent)Components[typeof(TComponent)];
+            return (TComponent)_components[typeof(TComponent)];
     ***REMOVED***
 
         public void AddComponent(Component component)
         ***REMOVED***
-            Components.Add(component.GetType(), component);
+            component.Entity = this;
+            component.AddedToEntity();
+            _components.Add(component.GetType(), component);
+    ***REMOVED***
+
+        public bool HasComponent<TComponent>()
+        ***REMOVED***
+            return _components.ContainsKey(typeof(TComponent));
     ***REMOVED***
 
         public virtual void Update(float deltaTime)
         ***REMOVED***
-            foreach (Component component in Components.Values)
+            foreach (Component component in _components.Values)
             ***REMOVED***
                 if (component is IUpdateable updateable)
                 ***REMOVED***
@@ -53,7 +58,7 @@ namespace BasicGameEngine
 
         public virtual void Draw(DrawingContext drawingContext)
         ***REMOVED***
-            foreach (Component component in Components.Values)
+            foreach (Component component in _components.Values)
             ***REMOVED***
                 if (component is IDrawable drawable)
                 ***REMOVED***
