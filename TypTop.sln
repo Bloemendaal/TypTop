@@ -11,7 +11,19 @@ Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "Typ
 EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***"
 EndProject
-Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***"
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***"
+EndProject
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.VisualKeyboard.Tests", "TypTop.VisualKeyboard.Tests\TypTop.VisualKeyboard.Tests.csproj", "***REMOVED***BFD7635D-ACCA-4027-B556-15DA37C130C9***REMOVED***"
+EndProject
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.GameWindow", "TypTop.GameWindow\TypTop.GameWindow.csproj", "***REMOVED***22ED7249-496B-4352-85DC-081679BC039F***REMOVED***"
+EndProject
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.GameEngine", "TypTop.GameEngine\TypTop.GameEngine.csproj", "***REMOVED***03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E***REMOVED***"
+EndProject
+Project("***REMOVED***2150E333-8FDC-42A3-9474-1A3956D46DE8***REMOVED***") = "Minigames", "Minigames", "***REMOVED***A8EC2EEE-434D-470B-8C20-1814E7BF5120***REMOVED***"
+EndProject
+Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "SpaceInvadersMinigame", "SpaceInvadersMinigame\SpaceInvadersMinigame.csproj", "***REMOVED***405BF0EA-F49A-486A-92E0-D4100540337E***REMOVED***"
+EndProject
+Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "TypTop.GameGui", "TypTop.GameGui\TypTop.GameGui.csproj", "***REMOVED***813FF76E-7A24-4BB7-89BF-77F49031EFF7***REMOVED***"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +51,32 @@ Global
 		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
 		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***BFD7635D-ACCA-4027-B556-15DA37C130C9***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***BFD7635D-ACCA-4027-B556-15DA37C130C9***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***BFD7635D-ACCA-4027-B556-15DA37C130C9***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***BFD7635D-ACCA-4027-B556-15DA37C130C9***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***22ED7249-496B-4352-85DC-081679BC039F***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***22ED7249-496B-4352-85DC-081679BC039F***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***22ED7249-496B-4352-85DC-081679BC039F***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***22ED7249-496B-4352-85DC-081679BC039F***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***405BF0EA-F49A-486A-92E0-D4100540337E***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***405BF0EA-F49A-486A-92E0-D4100540337E***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***405BF0EA-F49A-486A-92E0-D4100540337E***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***405BF0EA-F49A-486A-92E0-D4100540337E***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***813FF76E-7A24-4BB7-89BF-77F49031EFF7***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***813FF76E-7A24-4BB7-89BF-77F49031EFF7***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***813FF76E-7A24-4BB7-89BF-77F49031EFF7***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***813FF76E-7A24-4BB7-89BF-77F49031EFF7***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		***REMOVED***405BF0EA-F49A-486A-92E0-D4100540337E***REMOVED*** = ***REMOVED***A8EC2EEE-434D-470B-8C20-1814E7BF5120***REMOVED***
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = ***REMOVED***A0A39D8C-9D9A-4838-8195-8AD76380FB26***REMOVED***
