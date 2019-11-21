@@ -1,6 +1,6 @@
 ﻿namespace BasicGameEngine
 {
-    abstract class Component
+    public abstract class Component
     {
         private Entity _entity;
 

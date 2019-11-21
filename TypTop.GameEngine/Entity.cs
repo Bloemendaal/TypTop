@@ -4,45 +4,50 @@ using System.Windows.Media;
 
 namespace BasicGameEngine
 {
-    abstract class Entity
+    public abstract class Entity
     {
         public string Name { get; }
-        public Dictionary<Type, Component> Components = new Dictionary<Type, Component>();
-        private Game _game;
+        private readonly Dictionary<Type, Component> _components = new Dictionary<Type, Component>();
 
-        protected Entity(string name)
+        protected Entity(string name, Game game)
         {
             Name = name;
+            Game = game;
         }
 
-        public Game Game
+        public Game Game { get; }
+
+        public bool TryGetComponent<TComponent>(out TComponent component) where TComponent : Component
         {
-            get => _game;
-            set
+            if (_components.TryGetValue(typeof(TComponent), out var b))
             {
-                _game = value;
-                AddedToGame();
+                component = (TComponent) b;
+                return true;
             }
-        }
-
-        protected virtual void AddedToGame()
-        {
-
+            component = (TComponent) _components[typeof(TComponent)];
+            return false;
         }
 
         public TComponent GetComponent<TComponent>() where TComponent : Component
         {
-            return (TComponent)Components[typeof(TComponent)];
+            return (TComponent)_components[typeof(TComponent)];
         }
 
         public void AddComponent(Component component)
         {
-            Components.Add(component.GetType(), component);
+            component.Entity = this;
+            component.AddedToEntity();
+            _components.Add(component.GetType(), component);
+        }
+
+        public bool HasComponent<TComponent>()
+        {
+            return _components.ContainsKey(typeof(TComponent));
         }
 
         public virtual void Update(float deltaTime)
         {
-            foreach (Component component in Components.Values)
+            foreach (Component component in _components.Values)
             {
                 if (component is IUpdateable updateable)
                 {
@@ -53,7 +58,7 @@ namespace BasicGameEngine
 
         public virtual void Draw(DrawingContext drawingContext)
         {
-            foreach (Component component in Components.Values)
+            foreach (Component component in _components.Values)
             {
                 if (component is IDrawable drawable)
                 {
