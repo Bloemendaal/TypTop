@@ -56,6 +56,17 @@ namespace BasicGameEngine
         ***REMOVED***
     ***REMOVED***
 
+        public virtual void Resize()
+        ***REMOVED***
+            foreach (Component component in _components.Values)
+            ***REMOVED***
+                if (component is IResizable resizable)
+                ***REMOVED***
+                    resizable.Resize();
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***
+
         public virtual void Draw(DrawingContext drawingContext)
         ***REMOVED***
             foreach (Component component in _components.Values)

@@ -2,12 +2,13 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SpaceInvadersMinigame\SpaceInvadersMinigame.csproj" />
+    <ProjectReference Include="..\TavernMinigame\TavernMinigame.csproj" />
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
   </ItemGroup>
