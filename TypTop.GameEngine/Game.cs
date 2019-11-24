@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Windows.Media;
 
@@ -6,7 +7,49 @@ namespace BasicGameEngine
 {
     public abstract class Game : IEnumerable<Entity>
     {
+        public readonly Random Rnd = new Random(DateTime.Now.Millisecond);
         readonly Dictionary<string, Entity> _entities = new Dictionary<string, Entity>();
+
+        public double Width
+        {
+            get => _width;
+            set
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+
+                if (value != _width)
+                {
+                    Resize();
+                }
+
+                _width = value;
+            }
+        }
+        private double _width;
+        public double Height
+        {
+            get => _height;
+            set
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+
+                if (value != _height)
+                {
+                    Resize();
+                }
+
+                _height = value;
+            }
+        }
+        private double _height;
+
+        public bool Relative;
 
         public void AddEntity(Entity entity)
         {
@@ -37,6 +80,14 @@ namespace BasicGameEngine
             foreach (Entity entity in _entities.Values)
             {
                 entity.Draw(drawingContext);
+            }
+        }
+
+        public void Resize()
+        {
+            foreach (Entity entity in _entities.Values)
+            {
+                entity.Resize();
             }
         }
 

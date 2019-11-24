@@ -40,9 +40,14 @@ namespace TypTop.GameWindow
         {
             float deltaTime = (float) Math.Min((DateTime.Now - previousFrame).TotalSeconds, 50);
 
-            if(_game == null)
+            if (_game == null)
+            {
                 return;
-            
+            }
+
+            _game.Width = Width;
+            _game.Height = Height;
+
             _game.Update(deltaTime);
             InvalidateVisual();
             previousFrame = DateTime.Now;

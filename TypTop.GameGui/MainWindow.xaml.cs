@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BasicGameEngine;
 using SpaceInvadersMinigame;
+using TavernMinigame;
+
 
 namespace TypTop.GameGui
 {
@@ -26,7 +28,7 @@ namespace TypTop.GameGui
         {
             InitializeComponent();
 
-            GameWindow.Start(new SpaceInvadersGame());
+            GameWindow.Start(new TavernGame(3));
         }
     }
 }
