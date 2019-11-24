@@ -8,9 +8,9 @@ namespace BasicGameEngine.GameEngine.Components
         public Vector2 Velocity ***REMOVED*** get; set; ***REMOVED***
         public float Speed ***REMOVED*** get; set; ***REMOVED*** = 25f;
 
-        public void Resize(bool relative)
+        public void Resize()
         ***REMOVED***
-            if (relative)
+            if (Entity.Game.Relative)
             ***REMOVED***
                 Position = new Vector2(Position.X / (float)Entity.Game.Width, Position.Y / (float)Entity.Game.Height);
         ***REMOVED***
