@@ -49,7 +49,20 @@ namespace BasicGameEngine
         }
         private double _height;
 
-        public bool Relative;
+        public bool Relative
+        {
+            get => _relative;
+            set
+            {
+                if (value != _relative)
+                {
+                    Resize();
+                }
+
+                _relative = value;
+            }
+        }
+        private bool _relative;
 
         public void AddEntity(Entity entity)
         {

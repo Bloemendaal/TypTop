@@ -8,35 +8,7 @@ namespace BasicGameEngine.GameEngine.Components
     {
         private readonly BitmapImage _bitmapImage;
         private TransformComponent _transformComponent;
-
-        public bool Relative
-        {
-            get => _relative;
-            set
-            {
-                if (value != _relative)
-                {
-                    if (value)
-                    {
-                        _width = Width / Entity.Game.Width;
-                        _height = Height / Entity.Game.Height;
-                        _maxWidth = MaxWidth / Entity.Game.Width;
-                        _maxHeight = MaxHeight / Entity.Game.Height;
-                    }
-                    else
-                    {
-                        _width = Width / 100 * Entity.Game.Width;
-                        _height = Height / 100 * Entity.Game.Height;
-                        _maxWidth = MaxWidth / 100 * Entity.Game.Width;
-                        _maxHeight = MaxHeight / 100 * Entity.Game.Height;
-                    }
-                }
-
-                _relative = value;
-            }
-        }
-        private bool _relative;
-
+        
         public double? Width
         {
             get => _width;
@@ -52,7 +24,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
                 }
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 {
                     value = 100;
                 }
@@ -76,7 +48,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
                 }
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 {
                     value = 100;
                 }
@@ -101,7 +73,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
                 }
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 {
                     value = 100;
                 }
@@ -125,7 +97,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
                 }
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 {
                     value = 100;
                 }
@@ -140,6 +112,67 @@ namespace BasicGameEngine.GameEngine.Components
             _bitmapImage = bitmapImage;
         }
 
+        public double GetWidth()
+        {
+            if (_bitmapImage != null)
+            {
+                double width = _bitmapImage.Width;
+                if (Width == null)
+                {
+                    if (MaxWidth != null)
+                    {
+                        if (Entity.Game.Relative)
+                        {
+                            double tWidth = (double)MaxWidth * Entity.Game.Width;
+                            width = width > tWidth ? tWidth : width;
+                        }
+                        else
+                        {
+                            width = width > (double)MaxWidth ? (double)MaxWidth : width;
+                        }
+                    }
+                }
+                else
+                {
+                    width = Entity.Game.Relative ? (double)Width * Entity.Game.Width : (double)Width;
+                }
+
+                return width;
+            }
+
+            return 0;
+        }
+        public double GetHeight()
+        {
+            if (_bitmapImage != null)
+            {
+                double height = _bitmapImage.Height;
+                if (Height == null)
+                {
+                    if (MaxHeight != null)
+                    {
+                        if (Entity.Game.Relative)
+                        {
+                            double tHeight = (double)MaxHeight * Entity.Game.Height;
+                            height = height > tHeight ? tHeight : height;
+                        }
+                        else
+                        {
+                            height = height > (double)MaxHeight ? (double)MaxHeight : height;
+                        }
+                    }
+                }
+                else
+                {
+                    height = Entity.Game.Relative ? (double)Height * Entity.Game.Height : (double)Height;
+                }
+
+                return height;
+            }
+
+            return 0;
+        }
+
         public override void AddedToEntity()
         {
             _transformComponent = Entity.GetComponent<TransformComponent>();
@@ -147,61 +180,30 @@ namespace BasicGameEngine.GameEngine.Components
 
         public void Draw(DrawingContext context)
         {
-            double width = _bitmapImage.Width;
-            double height = _bitmapImage.Height;
-
-            if (Width == null)
-            {
-                if (MaxWidth != null)
-                {
-                    if (Relative)
-                    {
-                        double tWidth = (double)MaxWidth * Entity.Game.Width;
-                        width = width > tWidth ? tWidth : width;
-                    }
-                    else
-                    {
-                        width = width > (double)MaxWidth ? (double)MaxWidth : width;
-                    }
-                }
-            }
-            else
-            {
-                width = Relative ? (double)Width * Entity.Game.Width : (double)Width;
-            }
-
-
-            if (Height == null)
-            {
-                if (MaxHeight != null)
-                {
-                    if (Relative)
-                    {
-                        double tHeight = (double)MaxHeight * Entity.Game.Height;
-                        height = height > tHeight ? tHeight : height;
-                    }
-                    else
-                    {
-                        height = height > (double)MaxHeight ? (double)MaxHeight : height;
-                    }
-                }
-            }
-            else
-            {
-                height = Relative ? (double)Height * Entity.Game.Height : (double)Height;
-            }
-
             context.DrawImage(_bitmapImage,
                 new Rect(
                     new Point(_transformComponent.Position.X, _transformComponent.Position.Y), 
-                    new Size(_bitmapImage.Width, _bitmapImage.Height)
+                    new Size(GetWidth(), GetHeight())
                 )
             );
         }
 
         public void Resize()
         {
-            Relative = Entity.Game.Relative;
+            if (Entity.Game.Relative)
+            {
+                _width = Width / Entity.Game.Width;
+                _height = Height / Entity.Game.Height;
+                _maxWidth = MaxWidth / Entity.Game.Width;
+                _maxHeight = MaxHeight / Entity.Game.Height;
+            }
+            else
+            {
+                _width = Width / 100 * Entity.Game.Width;
+                _height = Height / 100 * Entity.Game.Height;
+                _maxWidth = MaxWidth / 100 * Entity.Game.Width;
+                _maxHeight = MaxHeight / 100 * Entity.Game.Height;
+            }
         }
     }
 }

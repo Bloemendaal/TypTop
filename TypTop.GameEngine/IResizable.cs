@@ -6,8 +6,6 @@ namespace BasicGameEngine
 {
     interface IResizable
     {
-        public bool Relative { get; set; }
-
         void Resize();
     }
 }
