@@ -49,7 +49,20 @@ namespace BasicGameEngine
     ***REMOVED***
         private double _height;
 
-        public bool Relative;
+        public bool Relative
+        ***REMOVED***
+            get => _relative;
+            set
+            ***REMOVED***
+                if (value != _relative)
+                ***REMOVED***
+                    Resize();
+            ***REMOVED***
+
+                _relative = value;
+        ***REMOVED***
+    ***REMOVED***
+        private bool _relative;
 
         public void AddEntity(Entity entity)
         ***REMOVED***

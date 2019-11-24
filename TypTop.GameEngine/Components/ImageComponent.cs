@@ -8,35 +8,7 @@ namespace BasicGameEngine.GameEngine.Components
     ***REMOVED***
         private readonly BitmapImage _bitmapImage;
         private TransformComponent _transformComponent;
-
-        public bool Relative
-        ***REMOVED***
-            get => _relative;
-            set
-            ***REMOVED***
-                if (value != _relative)
-                ***REMOVED***
-                    if (value)
-                    ***REMOVED***
-                        _width = Width / Entity.Game.Width;
-                        _height = Height / Entity.Game.Height;
-                        _maxWidth = MaxWidth / Entity.Game.Width;
-                        _maxHeight = MaxHeight / Entity.Game.Height;
-                ***REMOVED***
-                    else
-                    ***REMOVED***
-                        _width = Width / 100 * Entity.Game.Width;
-                        _height = Height / 100 * Entity.Game.Height;
-                        _maxWidth = MaxWidth / 100 * Entity.Game.Width;
-                        _maxHeight = MaxHeight / 100 * Entity.Game.Height;
-                ***REMOVED***
-            ***REMOVED***
-
-                _relative = value;
-        ***REMOVED***
-    ***REMOVED***
-        private bool _relative;
-
+        
         public double? Width
         ***REMOVED***
             get => _width;
@@ -52,7 +24,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
             ***REMOVED***
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 ***REMOVED***
                     value = 100;
             ***REMOVED***
@@ -76,7 +48,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
             ***REMOVED***
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 ***REMOVED***
                     value = 100;
             ***REMOVED***
@@ -101,7 +73,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
             ***REMOVED***
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 ***REMOVED***
                     value = 100;
             ***REMOVED***
@@ -125,7 +97,7 @@ namespace BasicGameEngine.GameEngine.Components
                     value = 0;
             ***REMOVED***
 
-                if (value > 100 && Relative)
+                if (value > 100 && Entity.Game.Relative)
                 ***REMOVED***
                     value = 100;
             ***REMOVED***
@@ -140,6 +112,67 @@ namespace BasicGameEngine.GameEngine.Components
             _bitmapImage = bitmapImage;
     ***REMOVED***
 
+        public double GetWidth()
+        ***REMOVED***
+            if (_bitmapImage != null)
+            ***REMOVED***
+                double width = _bitmapImage.Width;
+                if (Width == null)
+                ***REMOVED***
+                    if (MaxWidth != null)
+                    ***REMOVED***
+                        if (Entity.Game.Relative)
+                        ***REMOVED***
+                            double tWidth = (double)MaxWidth * Entity.Game.Width;
+                            width = width > tWidth ? tWidth : width;
+                    ***REMOVED***
+                        else
+                        ***REMOVED***
+                            width = width > (double)MaxWidth ? (double)MaxWidth : width;
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***
+                else
+                ***REMOVED***
+                    width = Entity.Game.Relative ? (double)Width * Entity.Game.Width : (double)Width;
+            ***REMOVED***
+
+                return width;
+        ***REMOVED***
+
+            return 0;
+    ***REMOVED***
+        public double GetHeight()
+        ***REMOVED***
+            if (_bitmapImage != null)
+            ***REMOVED***
+                double height = _bitmapImage.Height;
+                if (Height == null)
+                ***REMOVED***
+                    if (MaxHeight != null)
+                    ***REMOVED***
+                        if (Entity.Game.Relative)
+                        ***REMOVED***
+                            double tHeight = (double)MaxHeight * Entity.Game.Height;
+                            height = height > tHeight ? tHeight : height;
+                    ***REMOVED***
+                        else
+                        ***REMOVED***
+                            height = height > (double)MaxHeight ? (double)MaxHeight : height;
+                    ***REMOVED***
+                ***REMOVED***
+            ***REMOVED***
+                else
+                ***REMOVED***
+                    height = Entity.Game.Relative ? (double)Height * Entity.Game.Height : (double)Height;
+            ***REMOVED***
+
+                return height;
+        ***REMOVED***
+
+            return 0;
+    ***REMOVED***
+
         public override void AddedToEntity()
         ***REMOVED***
             _transformComponent = Entity.GetComponent<TransformComponent>();
@@ -147,61 +180,30 @@ namespace BasicGameEngine.GameEngine.Components
 
         public void Draw(DrawingContext context)
         ***REMOVED***
-            double width = _bitmapImage.Width;
-            double height = _bitmapImage.Height;
-
-            if (Width == null)
-            ***REMOVED***
-                if (MaxWidth != null)
-                ***REMOVED***
-                    if (Relative)
-                    ***REMOVED***
-                        double tWidth = (double)MaxWidth * Entity.Game.Width;
-                        width = width > tWidth ? tWidth : width;
-                ***REMOVED***
-                    else
-                    ***REMOVED***
-                        width = width > (double)MaxWidth ? (double)MaxWidth : width;
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-            else
-            ***REMOVED***
-                width = Relative ? (double)Width * Entity.Game.Width : (double)Width;
-        ***REMOVED***
-
-
-            if (Height == null)
-            ***REMOVED***
-                if (MaxHeight != null)
-                ***REMOVED***
-                    if (Relative)
-                    ***REMOVED***
-                        double tHeight = (double)MaxHeight * Entity.Game.Height;
-                        height = height > tHeight ? tHeight : height;
-                ***REMOVED***
-                    else
-                    ***REMOVED***
-                        height = height > (double)MaxHeight ? (double)MaxHeight : height;
-                ***REMOVED***
-            ***REMOVED***
-        ***REMOVED***
-            else
-            ***REMOVED***
-                height = Relative ? (double)Height * Entity.Game.Height : (double)Height;
-        ***REMOVED***
-
             context.DrawImage(_bitmapImage,
                 new Rect(
                     new Point(_transformComponent.Position.X, _transformComponent.Position.Y), 
-                    new Size(_bitmapImage.Width, _bitmapImage.Height)
+                    new Size(GetWidth(), GetHeight())
                 )
             );
     ***REMOVED***
 
         public void Resize()
         ***REMOVED***
-            Relative = Entity.Game.Relative;
+            if (Entity.Game.Relative)
+            ***REMOVED***
+                _width = Width / Entity.Game.Width;
+                _height = Height / Entity.Game.Height;
+                _maxWidth = MaxWidth / Entity.Game.Width;
+                _maxHeight = MaxHeight / Entity.Game.Height;
+        ***REMOVED***
+            else
+            ***REMOVED***
+                _width = Width / 100 * Entity.Game.Width;
+                _height = Height / 100 * Entity.Game.Height;
+                _maxWidth = MaxWidth / 100 * Entity.Game.Width;
+                _maxHeight = MaxHeight / 100 * Entity.Game.Height;
+        ***REMOVED***
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
