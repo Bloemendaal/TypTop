@@ -26,12 +26,10 @@ namespace TavernMinigame
 
         public OrderType Type ***REMOVED*** get; private set; ***REMOVED***
 
-        private readonly TransformComponent _transformComponent;
         public Order(OrderType type, Game game) : base($"order ***REMOVED***type.ToString()***REMOVED***", game)
         ***REMOVED***
             Type = type;
-            _transformComponent = new TransformComponent();
-            AddComponent(_transformComponent);
+            AddComponent(new PositionComponent());
             AddComponent(new ImageComponent(new BitmapImage(new Uri($@"***REMOVED***Type.ToString().ToLower()***REMOVED***.png", UriKind.Relative))));
     ***REMOVED***
 ***REMOVED***

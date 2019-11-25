@@ -45,9 +45,6 @@ namespace TypTop.GameWindow
                 return;
         ***REMOVED***
 
-            _game.Width = Width;
-            _game.Height = Height;
-
             _game.Update(deltaTime);
             InvalidateVisual();
             previousFrame = DateTime.Now;

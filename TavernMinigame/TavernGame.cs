@@ -45,7 +45,7 @@ namespace TavernMinigame
                 foreach (int item in indexes)
                 ***REMOVED***
                     Order o = new Order((Order.OrderType)item, this);
-                    o.GetComponent<TransformComponent>().Position = new Vector2(200, 200);
+                    o.GetComponent<PositionComponent>().Position = new Vector2(200, 200);
                     _orderTypes.Add(o);
             ***REMOVED***
         ***REMOVED***

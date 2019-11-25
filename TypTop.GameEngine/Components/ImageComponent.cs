@@ -107,7 +107,7 @@ namespace BasicGameEngine.GameEngine.Components
         ***REMOVED***
             context.DrawImage(_bitmapImage,
                 new Rect(
-                    new Point(_transformComponent.Position.X, _transformComponent.Position.Y),
+                    new Point(_positionComponent.Position.X, _positionComponent.Position.Y),
                     new Size((double)Width, (double)Height)
                 )
             );
