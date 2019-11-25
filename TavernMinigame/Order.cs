@@ -26,12 +26,10 @@ namespace TavernMinigame
 
         public OrderType Type { get; private set; }
 
-        private readonly TransformComponent _transformComponent;
         public Order(OrderType type, Game game) : base($"order {type.ToString()}", game)
         {
             Type = type;
-            _transformComponent = new TransformComponent();
-            AddComponent(_transformComponent);
+            AddComponent(new PositionComponent());
             AddComponent(new ImageComponent(new BitmapImage(new Uri($@"{Type.ToString().ToLower()}.png", UriKind.Relative))));
         }
     }
