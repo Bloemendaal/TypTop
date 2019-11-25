@@ -11,7 +11,7 @@ namespace SpaceInvadersMinigame
     {
         public Player(Game game) : base("player", game)
         {
-            AddComponent(new TransformComponent());
+            AddComponent(new TransformComponent() {Speed = 50});
             AddComponent(new KeyboardMoveComponent());
             AddComponent(new CollisionComponent(new Size(150,150)));
             AddComponent(new ImageComponent(new BitmapImage(new Uri(@"player.png", UriKind.Relative))));
