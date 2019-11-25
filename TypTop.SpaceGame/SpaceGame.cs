@@ -4,6 +4,7 @@ using System.Windows.Shapes;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 using TypTop.Gui.SpaceGame;
+using TypTop.Logic;
 
 namespace TypTop.SpaceGame
 {
@@ -16,9 +17,11 @@ namespace TypTop.SpaceGame
         public SpaceGame()
         {
             Level = new Level(1);
-            Player = new Player();
+            Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
             LineHeight = 400;
+            AddEntity(Player);
+            AddEntity(new Enemy(1, new Word("test"), this));
         }
     }
 }

@@ -26,7 +26,7 @@ namespace TypTop.GameGui
         {
             InitializeComponent();
 
-            GameWindow.Start(new SpaceInvadersGame());
+            GameWindow.Start(new SpaceGame.SpaceGame());
         }
     }
 }

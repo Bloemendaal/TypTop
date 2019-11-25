@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Media.Imaging;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 using TypTop.Logic;
@@ -17,6 +18,7 @@ namespace TypTop.SpaceGame
         {
             _transformComponent = new TransformComponent();
             AddComponent(_transformComponent);
+            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"enemy.png", UriKind.Relative))));
             Word = word;
             Speed = speed;
         }

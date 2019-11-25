@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 
@@ -19,7 +20,9 @@ namespace TypTop.SpaceGame
             Lives = lives;  // start amount of lives
             Score = 0;  // start amount of points
 
-            AddComponent(new CollisionComponent(new Size(50, 50)));
+            AddComponent(new TransformComponent());
+            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"spaceship.png", UriKind.Relative))));
+
         }
 
         // gain points, add to score
