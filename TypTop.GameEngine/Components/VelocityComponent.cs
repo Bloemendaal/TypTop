@@ -2,16 +2,21 @@
 
 namespace BasicGameEngine.GameEngine.Components
 ***REMOVED***
-    public class TransformComponent : Component, IUpdateable
+    public class VelocityComponent : Component, IUpdateable
     ***REMOVED***
-        public Vector2 Position ***REMOVED*** get; set; ***REMOVED***
+        private PositionComponent _positionComponent;
         public Vector2 Velocity ***REMOVED*** get; set; ***REMOVED***
         public float Speed ***REMOVED*** get; set; ***REMOVED*** = 25f;
+
+        public override void AddedToEntity()
+        ***REMOVED***
+            _positionComponent = Entity.GetComponent<PositionComponent>();
+    ***REMOVED***
 
         public void Update(float deltaTime)
         ***REMOVED***
             // Update position
-            Position += Velocity * deltaTime * Speed;
+            _positionComponent.Position += Velocity * deltaTime * Speed;
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
