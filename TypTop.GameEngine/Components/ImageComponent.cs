@@ -78,26 +78,6 @@ namespace BasicGameEngine.GameEngine.Components
             _bitmapImage = bitmapImage;
         }
 
-        public double GetHeight()
-        {
-            if (_bitmapImage != null)
-            {
-                if (Height == null)
-                {
-                    if (Width == null)
-                    {
-                        return _bitmapImage.Height;
-                    }
-
-                    return _bitmapImage.Height * _bitmapImage.Width / (double)Width;
-                }
-
-                return (double)Width;
-            }
-
-            return 0;
-        }
-
         public override void AddedToEntity()
         {
             _positionComponent = Entity.GetComponent<PositionComponent>();
