@@ -9,9 +9,9 @@ namespace TavernMinigame
 {
     public class TavernGame : Game
     {
-        public int UniqueOrderTypes
+        public int TileAmount
         {
-            get => _uniqueOrderTypes;
+            get => _tileAmount;
             set {
                 if (value < 1)
                 {
@@ -24,50 +24,51 @@ namespace TavernMinigame
                     value = max;
                 }
 
-                _uniqueOrderTypes = value;
+                _tileAmount = value;
 
                 List<int> indexes = new List<int>();
-                for (int i = 0; i < _uniqueOrderTypes; i++)
+                for (int i = 0; i < _tileAmount; i++)
                 {
                     int index = Rnd.Next(0, i - indexes.Count);
-                    while (indexes.Contains(index) && index < _uniqueOrderTypes)
+                    while (indexes.Contains(index) && index < _tileAmount)
                     {
                         index++;
                     }
 
-                    if (index < _uniqueOrderTypes)
+                    if (index < _tileAmount)
                     {
                         indexes.Add(index);
                     }
                 }
 
-                _orderTypes = new List<Order>();
+                _tiles = new List<Tile>();
                 foreach (int item in indexes)
                 {
                     Order o = new Order((Order.OrderType)item, this);
                     o.GetComponent<PositionComponent>().Position = new Vector2(200, 200);
-                    _orderTypes.Add(o);
+                    _tiles.Add(new Tile(o, this));
                 }
             }
         }
-        private int _uniqueOrderTypes;
-        private List<Order> _orderTypes;
+        private int _tileAmount;
+        private List<Tile> _tiles;
 
         public List<Order> GetOrder(int amount)
         {
             List<Order> result = new List<Order>();
             for (int i = 0; i < amount; i++)
             {
-                result.Add(_orderTypes[Rnd.Next(0, UniqueOrderTypes)]);
+                result.Add(_tiles[Rnd.Next(0, TileAmount)].Order);
             }
 
             return result;
         }
 
-        public TavernGame(int uniqueOrderTypes)
+        public TavernGame(int tileAmount)
         {
-            UniqueOrderTypes = uniqueOrderTypes;
-            _orderTypes.ForEach(ot => AddEntity(ot));
+            AddEntity(new Background(this));
+            TileAmount = tileAmount;
+            _tiles.ForEach(t => AddEntity(t));
         }
     }
 }
