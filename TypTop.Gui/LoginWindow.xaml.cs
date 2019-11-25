@@ -93,15 +93,6 @@ namespace TypTop.Gui
             return hash.SequenceEqual(newHash);
     ***REMOVED***
 
-        /// <summary>
-        /// Continue to MainWindow without setting a logged in account.
-        /// </summary>
-        private void NoAccountButton_Click(object sender, RoutedEventArgs e)
-        ***REMOVED***
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            Close();
-    ***REMOVED***
 
         /// <summary>
         /// Store a new account in the database if the given values are valid.
@@ -115,18 +106,26 @@ namespace TypTop.Gui
         ***REMOVED***
             if (CreationUsernameBox.Text != "" && CreationPasswordBox.Password != "")
             ***REMOVED***
-                if (!accounts.ContainsKey(CreationUsernameBox.Text))
+                if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
                 ***REMOVED***
-                    byte[] salt = CreateSalt();
-                    accounts.Add(CreationUsernameBox.Text, HashPassword(CreationPasswordBox.Password, salt));
-                    salts.Add(CreationUsernameBox.Text, salt);
-                    AccountCreationCanvas.Visibility = Visibility.Hidden;
-                    LoginCanvas.Visibility = Visibility.Visible;
+                    if (!accounts.ContainsKey(CreationUsernameBox.Text))
+                    ***REMOVED***
+                        byte[] salt = CreateSalt();
+                        accounts.Add(CreationUsernameBox.Text, HashPassword(CreationPasswordBox.Password, salt));
+                        salts.Add(CreationUsernameBox.Text, salt);
+                        AccountCreationCanvas.Visibility = Visibility.Hidden;
+                        LoginCanvas.Visibility = Visibility.Visible;
+                ***REMOVED***
+                    else
+                    ***REMOVED***
+                        MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                ***REMOVED***
             ***REMOVED***
                 else
                 ***REMOVED***
-                    MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                    MessageBox.Show("Wachtwoord niet bevestigd.");
             ***REMOVED***
+
         ***REMOVED***
             else
             ***REMOVED***
@@ -144,5 +143,6 @@ namespace TypTop.Gui
             AccountCreationCanvas.Visibility = Visibility.Hidden;
             LoginCanvas.Visibility = Visibility.Visible;
     ***REMOVED***
+
 ***REMOVED***
 ***REMOVED***
