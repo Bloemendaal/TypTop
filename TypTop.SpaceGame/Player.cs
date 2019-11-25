@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
@@ -20,8 +21,11 @@ namespace TypTop.SpaceGame
             Lives = lives;  // start amount of lives
             Score = 0;  // start amount of points
 
-            AddComponent(new TransformComponent());
-            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"spaceship.png", UriKind.Relative))));
+            AddComponent(new PositionComponent()
+            {
+                Position = new Vector2(960, 1000)
+            });
+            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative))){Width = 50});
 
         }
 

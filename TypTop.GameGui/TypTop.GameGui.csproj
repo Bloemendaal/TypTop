@@ -15,9 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="enemy.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="krat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

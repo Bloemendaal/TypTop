@@ -12,13 +12,17 @@ namespace TypTop.SpaceGame
     {
         public Word Word { get; private set; }
         public int Speed { get; set; }
-        private TransformComponent _transformComponent;
+        private PositionComponent _positionComponent;
+        private VelocityComponent _velocityComponent;
 
         public Enemy(int speed, Word word, Game game) : base("Enemy", game)
         {
-            _transformComponent = new TransformComponent();
-            AddComponent(_transformComponent);
-            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"enemy.png", UriKind.Relative))));
+            _positionComponent = new PositionComponent();
+            _velocityComponent = new VelocityComponent();
+            AddComponent(_positionComponent);
+            AddComponent(_velocityComponent);
+            AddComponent(
+                new ImageComponent(new BitmapImage(new Uri(@"Images/enemy.png", UriKind.Relative))));
             Word = word;
             Speed = speed;
         }
