@@ -7,11 +7,11 @@ namespace SpaceInvadersMinigame
 {
     public class KeyboardMoveComponent : Component, IUpdateable
     {
-        private TransformComponent _transformComponent;
-
+        private VelocityComponent _velocityComponent;
+        
         public override void AddedToEntity()
         {
-            _transformComponent = Entity.GetComponent<TransformComponent>();
+            _velocityComponent = Entity.GetComponent<VelocityComponent>();
         }
 
         public void Update(float deltaTime)
@@ -43,7 +43,7 @@ namespace SpaceInvadersMinigame
             {
                 tmpVelocity.Y = 0;
             }
-            _transformComponent.Velocity = tmpVelocity;
+            _velocityComponent.Velocity = tmpVelocity;
         }
     }
 }
