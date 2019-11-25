@@ -21,7 +21,7 @@ namespace BasicGameEngine.GameEngine.Components
                             return _bitmapImage.Width;
                         }
 
-                        return _bitmapImage.Width * _bitmapImage.Height / (double)_height;
+                        return _bitmapImage.Width * (double)_height / _bitmapImage.Height;
                     }
 
                     return (double)_width;
@@ -53,7 +53,7 @@ namespace BasicGameEngine.GameEngine.Components
                             return _bitmapImage.Height;
                         }
 
-                        return _bitmapImage.Height * _bitmapImage.Width / (double)_width;
+                        return _bitmapImage.Height * (double)_width / _bitmapImage.Width;
                     }
 
                     return (double)_height;
