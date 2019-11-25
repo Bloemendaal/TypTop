@@ -30,7 +30,10 @@ namespace TavernMinigame
         ***REMOVED***
             Type = type;
             AddComponent(new PositionComponent());
-            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"***REMOVED***Type.ToString().ToLower()***REMOVED***.png", UriKind.Relative))));
+            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/***REMOVED***Type.ToString().ToLower()***REMOVED***.png", UriKind.Relative)))
+            ***REMOVED***
+                Width = 100
+        ***REMOVED***);
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
