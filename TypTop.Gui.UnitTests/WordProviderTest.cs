@@ -1,7 +1,9 @@
 using System;
 ***REMOVED***
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using TypTop.Gui.SpaceGame;
 using TypTop.Logic;
 using Assert = NUnit.Framework.Assert;
@@ -9,7 +11,7 @@ using Assert = NUnit.Framework.Assert;
 namespace TypTop.Gui.UnitTests
 ***REMOVED***
     [TestClass]
-    public class UnitTest1
+    public class WordProviderTest
     ***REMOVED***
         private WordProvider _wp;
         private List<string> testWords = new List<string>()***REMOVED***
@@ -41,12 +43,9 @@ namespace TypTop.Gui.UnitTests
         [TestMethod]
         public void LimitByCharacter_LeftMiddleRow_ListOfWords()
         ***REMOVED***
-            _wp = new WordProvider
-            ***REMOVED***
-                TempWords = testWords
-        ***REMOVED***;
+            _wp = new WordProvider();
 
-            _wp.LoadTestWords();
+            _wp.LoadTestWords(testWords);
 
             List<Word> answer = new List<Word>()
             ***REMOVED***
@@ -68,17 +67,13 @@ namespace TypTop.Gui.UnitTests
         [TestMethod]
         public void Shuffle_ListOfStrings_AreNotEqual()
         ***REMOVED***
-            _wp = new WordProvider
-            ***REMOVED***
-                TempWords = testWords
-        ***REMOVED***;
-            _wp.LoadTestWords();
-            
-            WordProvider wpCopy = new WordProvider
-            ***REMOVED***
-                TempWords = testWords
-        ***REMOVED***;
-            wpCopy.LoadTestWords();
+            _wp = new WordProvider();
+
+            _wp.LoadTestWords(testWords);
+
+
+            WordProvider wpCopy = new WordProvider();
+            wpCopy.LoadTestWords(testWords);
 
             _wp.Shuffle();
 
@@ -88,11 +83,8 @@ namespace TypTop.Gui.UnitTests
         [TestMethod]
         public void WordLimit_Five_FirstFive()
         ***REMOVED***
-            _wp = new WordProvider
-            ***REMOVED***
-                TempWords = testWords
-        ***REMOVED***;
-            _wp.LoadTestWords();
+            _wp = new WordProvider();
+            _wp.LoadTestWords(testWords);
             _wp.WordLimit(5);
 
             List<Word> answer = new List<Word>()
@@ -108,14 +100,11 @@ namespace TypTop.Gui.UnitTests
     ***REMOVED***
 
         [TestMethod]
-        public void WordLengthLimit_One_WordsWithOneLetter()
+        public void SetMaxWordLength_One_WordsWithOneLetter()
         ***REMOVED***
-            _wp = new WordProvider
-            ***REMOVED***
-                TempWords = testWords
-        ***REMOVED***;
-            _wp.LoadTestWords();
-            _wp.WordLengthLimit(1);
+            _wp = new WordProvider();
+            _wp.LoadTestWords(testWords);
+            _wp.SetMaxWordLength(1);
 
             List<Word> answer = new List<Word>()
             ***REMOVED***
@@ -126,13 +115,30 @@ namespace TypTop.Gui.UnitTests
     ***REMOVED***
 
         [TestMethod]
+        public void SetMinWordLength_MinLengthOfTwo_WordsInCollectionNotSame()
+        ***REMOVED***
+            _wp = new WordProvider();
+            _wp.LoadTestWords(testWords);
+            _wp.SetMinWordLength(2);
+
+            List<Word> wordsWithOneLetter = new List<Word>()
+            ***REMOVED***
+                new Word("u"),
+                new Word("i"),
+                new Word("p"),
+                new Word("w"),
+        ***REMOVED***;
+
+            int amountSame = (from w in _wp.Serve() from wwOL in wordsWithOneLetter where w.Letters == wwOL.Letters select w).Count();
+
+            Assert.True(amountSame == 0);
+    ***REMOVED***
+
+        [TestMethod]
         public void UsageOfCharacter_Z_MoreThenOneWord()
         ***REMOVED***
-            _wp = new WordProvider
-            ***REMOVED***
-                TempWords = testWords
-        ***REMOVED***;
-            _wp.LoadTestWords();
+            _wp = new WordProvider();
+            _wp.LoadTestWords(testWords);
 
             List<char> testChars = new List<char>()
             ***REMOVED***
@@ -150,14 +156,26 @@ namespace TypTop.Gui.UnitTests
     ***REMOVED***
 
         [TestMethod]
+        public void ResetToEmpty_reset_EmptyServe()
+        ***REMOVED***
+            _wp = new WordProvider();
+            _wp.LoadTestWords(testWords);
+            _wp.Shuffle();
+            _wp.SetMinWordLength(2);
+            _wp.SetMaxWordLength(8);
+            _wp.ResetToEmpty();
+
+            WordProvider answer = new WordProvider();
+
+            Assert.AreEqual(answer.Serve(), _wp.Serve());
+    ***REMOVED***
+
+        [TestMethod]
         [ExpectedException(typeof(NullReferenceException),
             "Variable WordProvider.WordsToServe is empty or not set.")]
         public void AreWordsSet_NoWords_Exception()
         ***REMOVED***
-            _wp = new WordProvider
-            ***REMOVED***
-                TempWords = testWords
-        ***REMOVED***;
+            _wp = new WordProvider();
             _wp.AreWordsSet();
     ***REMOVED***
 ***REMOVED***

@@ -11,9 +11,13 @@ namespace TypTop.Gui.SpaceGame
         public int Lives ***REMOVED*** get; private set; ***REMOVED***  //amount of chances left
         public int Score ***REMOVED*** get; private set; ***REMOVED***  //total amount of earned points
 
-        public Player()
+        public Player() :this(4)
         ***REMOVED***
-            Lives = 4;  // start amount of lives
+    ***REMOVED***
+
+        public Player(int lives)
+        ***REMOVED***
+            Lives = lives;  // start amount of lives
             Score = 0;  // start amount of points
     ***REMOVED***
 
@@ -27,7 +31,6 @@ namespace TypTop.Gui.SpaceGame
         public void GainLife() => Lives++;  
 
         // lose on life
-        public void LoseLife() => Lives--;  
-        
+        public void LoseLife() => Lives--;
 ***REMOVED***
 ***REMOVED***
