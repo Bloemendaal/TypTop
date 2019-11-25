@@ -7,8 +7,8 @@ namespace BasicGameEngine.GameEngine.Components
     public class ImageComponent : Component, IDrawable
     {
         private readonly BitmapImage _bitmapImage;
-        private TransformComponent _transformComponent;
-        
+        private PositionComponent _positionComponent;
+
         public double? Width
         {
             get {
@@ -100,14 +100,14 @@ namespace BasicGameEngine.GameEngine.Components
 
         public override void AddedToEntity()
         {
-            _transformComponent = Entity.GetComponent<TransformComponent>();
+            _positionComponent = Entity.GetComponent<PositionComponent>();
         }
 
         public void Draw(DrawingContext context)
         {
             context.DrawImage(_bitmapImage,
                 new Rect(
-                    new Point(_transformComponent.Position.X, _transformComponent.Position.Y), 
+                    new Point(_transformComponent.Position.X, _transformComponent.Position.Y),
                     new Size((double)Width, (double)Height)
                 )
             );

@@ -20,7 +20,7 @@ namespace BasicGameEngine.GameEngine.Components
 
     public class CollisionComponent : Component, IUpdateable
     {
-        private TransformComponent _transformComponent;
+        private PositionComponent _positionComponent;
 
         public CollisionComponent(Size size)
         {
@@ -29,7 +29,7 @@ namespace BasicGameEngine.GameEngine.Components
 
         public override void AddedToEntity()
         {
-            _transformComponent = Entity.GetComponent<TransformComponent>();
+            _positionComponent = Entity.GetComponent<PositionComponent>();
         }
 
         public Rect Bounding;
@@ -37,7 +37,7 @@ namespace BasicGameEngine.GameEngine.Components
         public void Update(float deltaTime)
         {
             //Update bounding box location
-            Bounding.Location = new Point(_transformComponent.Position.X, _transformComponent.Position.Y);
+            Bounding.Location = new Point(_positionComponent.Position.X, _positionComponent.Position.Y);
 
             //Check for collisions
             foreach (Entity otherEntity in Entity.Game.GetEntitiesWithComponent<CollisionComponent>())
@@ -72,7 +72,6 @@ namespace BasicGameEngine.GameEngine.Components
                             : -intersectingRectangle.Height;
                         penetration = new Vector2(0, (float) d);
                     }
-
 
                     OnCollision(new CollisionEventArgs(otherEntity, penetration));
                 }

@@ -6,8 +6,11 @@
         xmlns:local="clr-namespace:TypTop.GameGui"
         xmlns:gameWindow="clr-namespace:TypTop.GameWindow;assembly=TypTop.GameWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="1000"
+        Background="Black">
     <Grid>
-        <gameWindow:GameWindow x:Name="GameWindow"></gameWindow:GameWindow>
+        <Viewbox Stretch="Uniform">
+            <gameWindow:GameWindow Height="1080" Width="1920" x:Name="GameWindow"></gameWindow:GameWindow>
+        </Viewbox>
     </Grid>
 </Window>
