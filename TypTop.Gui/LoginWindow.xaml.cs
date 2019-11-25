@@ -51,7 +51,6 @@ namespace TypTop.Gui
         ***REMOVED***
             CreationUsernameBox.Text = UsernameBox.Text;
             CreationPasswordBox.Password = PasswordBox.Password;
-            AccountCreationCanvas.Visibility = Visibility.Visible;
             LoginCanvas.Visibility = Visibility.Hidden;
     ***REMOVED***
 
@@ -113,7 +112,6 @@ namespace TypTop.Gui
                         byte[] salt = CreateSalt();
                         accounts.Add(CreationUsernameBox.Text, HashPassword(CreationPasswordBox.Password, salt));
                         salts.Add(CreationUsernameBox.Text, salt);
-                        AccountCreationCanvas.Visibility = Visibility.Hidden;
                         LoginCanvas.Visibility = Visibility.Visible;
                 ***REMOVED***
                     else
@@ -140,7 +138,6 @@ namespace TypTop.Gui
         /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         ***REMOVED***
-            AccountCreationCanvas.Visibility = Visibility.Hidden;
             LoginCanvas.Visibility = Visibility.Visible;
     ***REMOVED***
 
