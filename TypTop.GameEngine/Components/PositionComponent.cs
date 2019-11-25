@@ -46,5 +46,13 @@ namespace BasicGameEngine.GameEngine.Components
 
         ***REMOVED***
     ***REMOVED***
+
+        public PositionComponent() : this(new Vector2(0, 0)) ***REMOVED*** ***REMOVED***
+        public PositionComponent(float x, float y) : this(new Vector2(x, y)) ***REMOVED*** ***REMOVED***
+        public PositionComponent(Vector2 position)
+        ***REMOVED***
+            Position = position;
+    ***REMOVED***
+
 ***REMOVED***
 ***REMOVED***

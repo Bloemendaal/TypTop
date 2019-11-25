@@ -11,7 +11,7 @@ namespace TavernMinigame
     ***REMOVED***
         public int TileAmount
         ***REMOVED***
-            get => _tileAmount;
+            get => _tiles.Count;
             set ***REMOVED***
                 if (value < 1)
                 ***REMOVED***
@@ -24,33 +24,30 @@ namespace TavernMinigame
                     value = max;
             ***REMOVED***
 
-                _tileAmount = value;
-
                 List<int> indexes = new List<int>();
-                for (int i = 0; i < _tileAmount; i++)
+                for (int i = 0; i < value; i++)
                 ***REMOVED***
-                    int index = Rnd.Next(0, i - indexes.Count);
-                    while (indexes.Contains(index) && index < _tileAmount)
+                    int index = Rnd.Next(0, max - i);
+                    while (indexes.Contains(index))
                     ***REMOVED***
                         index++;
+                        if (index == value)
+                        ***REMOVED***
+                            index = 0;
+                    ***REMOVED***
                 ***REMOVED***
 
-                    if (index < _tileAmount)
-                    ***REMOVED***
-                        indexes.Add(index);
-                ***REMOVED***
+                    indexes.Add(index);
             ***REMOVED***
 
                 _tiles = new List<Tile>();
-                foreach (int item in indexes)
+                for (int i = 0; i < indexes.Count; i++)
                 ***REMOVED***
-                    Order o = new Order((Order.OrderType)item, this);
-                    o.GetComponent<PositionComponent>().Position = new Vector2(200, 200);
-                    _tiles.Add(new Tile(o, this));
+                    Tile t = new Tile((Order.OrderType)indexes[i], (float)Width - ((i + 1) * ((float)Tile.Width + 20)), this);
+                    _tiles.Add(t);
             ***REMOVED***
         ***REMOVED***
     ***REMOVED***
-        private int _tileAmount;
         private List<Tile> _tiles;
 
         public List<Order> GetOrder(int amount)
@@ -68,7 +65,10 @@ namespace TavernMinigame
         ***REMOVED***
             AddEntity(new Background(this));
             TileAmount = tileAmount;
-            _tiles.ForEach(t => AddEntity(t));
+            _tiles.ForEach(t => ***REMOVED***
+                AddEntity(t);
+                AddEntity(t.Order);
+        ***REMOVED***);
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
