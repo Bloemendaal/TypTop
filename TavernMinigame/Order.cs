@@ -32,7 +32,7 @@ namespace TavernMinigame
             AddComponent(new PositionComponent());
             AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/***REMOVED***Type.ToString().ToLower()***REMOVED***.png", UriKind.Relative)))
             ***REMOVED***
-                Width = 100
+                Width = 200
         ***REMOVED***);
     ***REMOVED***
 ***REMOVED***
