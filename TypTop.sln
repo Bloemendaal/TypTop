@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.GameGui", "TypTop.Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.SpaceGame", "TypTop.SpaceGame\TypTop.SpaceGame.csproj", "{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TavernMinigame", "TavernMinigame\TavernMinigame.csproj", "{29768497-8C22-4952-972A-8393E0C8BDC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

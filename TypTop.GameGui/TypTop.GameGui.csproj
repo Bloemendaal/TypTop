@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SpaceInvadersMinigame\SpaceInvadersMinigame.csproj" />
+    <ProjectReference Include="..\TavernMinigame\TavernMinigame.csproj" />
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
     <ProjectReference Include="..\TypTop.SpaceGame\TypTop.SpaceGame.csproj" />
