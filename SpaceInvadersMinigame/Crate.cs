@@ -6,16 +6,14 @@ using BasicGameEngine.GameEngine.Components;
 
 namespace SpaceInvadersMinigame
 ***REMOVED***
-
-
     public class Crate : Entity
     ***REMOVED***
-        private readonly TransformComponent _transformComponent;
+        private readonly PositionComponent _positionComponent;
 
         public Crate(string name, Game game) : base(name, game)
         ***REMOVED***
-            _transformComponent = new TransformComponent();
-            AddComponent(_transformComponent);
+            _positionComponent = new PositionComponent();
+            AddComponent(_positionComponent);
             var collisionComponent = new CollisionComponent(new Size(150, 150));
             AddComponent(collisionComponent);
             AddComponent(new ImageComponent(new BitmapImage(new Uri(@"krat.png", UriKind.Relative))));
@@ -26,11 +24,11 @@ namespace SpaceInvadersMinigame
         ***REMOVED***
             if (e.Entity is Crate)
             ***REMOVED***
-                _transformComponent.Position -= e.PenetrationVector / 2;
+                _positionComponent.Position -= e.PenetrationVector / 2;
 
         ***REMOVED***
             else
-                _transformComponent.Position -= e.PenetrationVector;
+                _positionComponent.Position -= e.PenetrationVector;
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
