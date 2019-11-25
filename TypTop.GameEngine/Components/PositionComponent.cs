@@ -46,5 +46,13 @@ namespace BasicGameEngine.GameEngine.Components
 
             }
         }
+
+        public PositionComponent() : this(new Vector2(0, 0)) { }
+        public PositionComponent(float x, float y) : this(new Vector2(x, y)) { }
+        public PositionComponent(Vector2 position)
+        {
+            Position = position;
+        }
+
     }
 }
