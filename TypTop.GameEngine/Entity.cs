@@ -56,17 +56,6 @@ namespace BasicGameEngine
             }
         }
 
-        public virtual void Resize()
-        {
-            foreach (Component component in _components.Values)
-            {
-                if (component is IResizable resizable)
-                {
-                    resizable.Resize();
-                }
-            }
-        }
-
         public virtual void Draw(DrawingContext drawingContext)
         {
             foreach (Component component in _components.Values)
