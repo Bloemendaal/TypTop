@@ -36,7 +36,7 @@ namespace TypTop.GameWindow
 
         private DateTime previousFrame;
 
-        private void TimerOnTick(object? sender, EventArgs e)
+        private void TimerOnTick(object sender, EventArgs e)
         ***REMOVED***
             float deltaTime = (float) Math.Min((DateTime.Now - previousFrame).TotalSeconds, 50);
 
@@ -58,6 +58,7 @@ namespace TypTop.GameWindow
 
         protected override void OnRender(DrawingContext drawingContext)
         ***REMOVED***
+            drawingContext.DrawRectangle(Brushes.White, null, new Rect(0,0,1920,1080));
             _game.Draw(drawingContext);
     ***REMOVED***
 

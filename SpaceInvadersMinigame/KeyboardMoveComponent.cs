@@ -7,11 +7,11 @@ namespace SpaceInvadersMinigame
 ***REMOVED***
     public class KeyboardMoveComponent : Component, IUpdateable
     ***REMOVED***
-        private TransformComponent _transformComponent;
-
+        private VelocityComponent _velocityComponent;
+        
         public override void AddedToEntity()
         ***REMOVED***
-            _transformComponent = Entity.GetComponent<TransformComponent>();
+            _velocityComponent = Entity.GetComponent<VelocityComponent>();
     ***REMOVED***
 
         public void Update(float deltaTime)
@@ -43,7 +43,7 @@ namespace SpaceInvadersMinigame
             ***REMOVED***
                 tmpVelocity.Y = 0;
         ***REMOVED***
-            _transformComponent.Velocity = tmpVelocity;
+            _velocityComponent.Velocity = tmpVelocity;
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
