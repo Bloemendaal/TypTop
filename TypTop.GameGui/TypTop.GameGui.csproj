@@ -11,13 +11,11 @@
     <ProjectReference Include="..\TavernMinigame\TavernMinigame.csproj" />
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
+    <ProjectReference Include="..\TypTop.SpaceGame\TypTop.SpaceGame.csproj" />
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="fries.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Update="krat.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
