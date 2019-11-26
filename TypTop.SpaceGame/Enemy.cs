@@ -12,7 +12,7 @@ namespace TypTop.SpaceGame
     public class Enemy : Entity
     {
         public Word Word { get; private set; }
-        public int Speed { get; set; }
+        public int Speed { get; private set; }
         private PositionComponent _positionComponent;
 
         public Enemy(int speed, Word word, string name, Game game) : base(name, game)
@@ -25,8 +25,9 @@ namespace TypTop.SpaceGame
             AddComponent(_positionComponent);
             AddComponent(new VelocityComponent()
             {
-                Velocity = new Vector2(0, 1)
+                Velocity = new Vector2(0, Speed)
             });
+            AddComponent(new WordComponent(word));
             AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/enemy.png", UriKind.Relative))));
             Word = word;
             Speed = speed;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using BasicGameEngine;
+using TypTop.Logic;
 using TypTop.SpaceGame;
 
 namespace TypTop.Gui.SpaceGame
@@ -12,8 +13,8 @@ namespace TypTop.Gui.SpaceGame
         public int AmountOfEnemies { get; private set; }
         public int PlayerLives { get; set; }
         
-        private WordProvider _wordProvider;
-        private List<string> _testWords = new List<string>(){
+        private readonly WordProvider _wordProvider;
+        private readonly List<string> _testWords = new List<string>(){
                 "aan", "aanbod", "aanraken", "aanval", "aap", "aardappel", "aarde", "aardig", "acht", "achter", "actief", "activiteit", "ademen", "af", "afgelopen", "afhangen", "afmaken", "afname", "afspraak", "afval", "al", "algemeen", "alleen", "alles", "als", "alsjeblieft", "altijd", "ander", "andere", "anders", "angst", "antwoord", "antwoorden", "appel", "arm", "auto", "avond", "avondeten",
                 "baan", "baby", "bad", "bal", "bang", "bank", "basis", "bed", "bedekken", "bedreiging", "bedreven", "been", "beer", "beest", "beetje", "begin", "begrijpen", "begrip", "behalve", "beide", "beker", "bel", "belangrijk", "bellen", "belofte", "beneden", "benzine", "berg", "beroemd", "beroep", "bescherm", "beslissen", "best", "betalen", "beter", "bevatten", "bewegen", "bewolkt", "bezoek", "bibliotheek", "bieden", "bij", "bijna", "bijten", "bijvoorbeeld", "bijzonder", "binnen", "binnenkort", "blad", "blauw", "blazen", "blij", "blijven", "bloed", "bloem", "bodem", "boek", "boerderij", "boete", "boom", "boon", "boord", "boos", "bord", "borstelen", "bos", "bot", "bouwen", "boven", "branden", "brandstof", "breed", "breken", "brengen", "brief", "broer", "broek", "brood", "brug", "bruikbaar", "bruiloft", "bruin", "bui", "buiten", "bureau", "buren", "bus", "buurman", "buurvrouw",
                 "cadeau", "chocolade", "cirkel", "comfortabel", "compleet", "computer", "conditie", "controle", "cool", "correct",
@@ -39,20 +40,17 @@ namespace TypTop.Gui.SpaceGame
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
             };
 
-        public Level(int level)
+        public Level(int level, Game game)
         {
-            // Init wordprovider and call loading words
             _wordProvider = new WordProvider();
             _wordProvider.LoadTestWords(_testWords);
 
             EnemyList = new List<Enemy>();
+            Initialize(game);
         }
 
         public bool Initialize(Game game)
         {
-            // filled with test data
-            // data from database, according to level
-
             var livesOfPlayer = 3;
             var limitChar = new List<char>()
             {
@@ -67,14 +65,12 @@ namespace TypTop.Gui.SpaceGame
             _wordProvider.LimitByCharacter(limitChar);
             _wordProvider.UsageOfCharacter(usageChar);
 
-            // Setting appropriated data-values 
 
             PlayerLives = livesOfPlayer;
-            int i = 0;
+            
             foreach (var word in _wordProvider.Serve())
             {
-                EnemyList.Add(new Enemy(1,word, $"Enemy-{i}", game));
-                i++;
+                EnemyList.Add(new Enemy(1, word, "Enemy",game));
             }
 
 
