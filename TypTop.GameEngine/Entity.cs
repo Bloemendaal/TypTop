@@ -6,12 +6,10 @@ namespace BasicGameEngine
 ***REMOVED***
     public abstract class Entity
     ***REMOVED***
-        public string Name ***REMOVED*** get; ***REMOVED***
         private readonly Dictionary<Type, Component> _components = new Dictionary<Type, Component>();
 
-        protected Entity(string name, Game game)
+        protected Entity(Game game)
         ***REMOVED***
-            Name = name;
             Game = game;
     ***REMOVED***
 

@@ -8,19 +8,19 @@ namespace BasicGameEngine
     public abstract class Game : IEnumerable<Entity>
     ***REMOVED***
         public readonly Random Rnd = new Random(DateTime.Now.Millisecond);
-        readonly Dictionary<string, Entity> _entities = new Dictionary<string, Entity>();
+        readonly HashSet<Entity> _entities = new HashSet<Entity>();
 
         public const double Width = 1920;
         public const double Height = 1080;
 
         public void AddEntity(Entity entity)
         ***REMOVED***
-            _entities.Add(entity.Name, entity);
+            _entities.Add(entity);
     ***REMOVED***
 
         public IEnumerable<Entity> GetEntitiesWithComponent<TComponent>() where TComponent : Component
         ***REMOVED***
-            foreach (var entity in _entities.Values)
+            foreach (var entity in _entities)
             ***REMOVED***
                 if (entity.HasComponent<TComponent>())
                 ***REMOVED***
@@ -31,7 +31,7 @@ namespace BasicGameEngine
 
         public virtual void Update(float deltaTime)
         ***REMOVED***
-            foreach (Entity entity in _entities.Values)
+            foreach (Entity entity in _entities)
             ***REMOVED***
                 entity.Update(deltaTime);
         ***REMOVED***
@@ -39,7 +39,7 @@ namespace BasicGameEngine
 
         public void Draw(DrawingContext drawingContext)
         ***REMOVED***
-            foreach (Entity entity in _entities.Values)
+            foreach (Entity entity in _entities)
             ***REMOVED***
                 entity.Draw(drawingContext);
         ***REMOVED***
@@ -47,7 +47,7 @@ namespace BasicGameEngine
 
         public IEnumerator<Entity> GetEnumerator()
         ***REMOVED***
-            return _entities.Values.GetEnumerator();
+            return _entities.GetEnumerator();
     ***REMOVED***
 
         IEnumerator IEnumerable.GetEnumerator()
