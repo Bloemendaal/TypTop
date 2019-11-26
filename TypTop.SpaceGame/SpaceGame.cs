@@ -12,14 +12,18 @@ namespace TypTop.SpaceGame
     {
         public Player Player { get; set; }
         public Queue<Enemy> EnemyQueue { get; set; }
-        public Level Level { get; set; }    
+        public int LineHeight { get; set; }
+        public Level Level { get; set; }
+        public Random R { get; set; }
         public SpaceGame()
         {
+            R = new Random(DateTime.Now.Millisecond);
             Level = new Level(1);
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
+            LineHeight = 400;
             AddEntity(Player);
-            AddEntity(new Enemy(1, new Word("test"), this));
+            AddEntity(new Enemy(1, new Word("test"), "Enemy",this));
         }
     }
 }

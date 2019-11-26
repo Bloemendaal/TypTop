@@ -71,10 +71,13 @@ namespace TypTop.Gui.SpaceGame
             // Setting appropriated data-values 
 
             PlayerLives = livesOfPlayer;
+            int i = 0;
             foreach (var word in _wordProvider.Serve())
             {
-                EnemyList.Add(new Enemy(1,word, game));
+                EnemyList.Add(new Enemy(1,word, $"Enemy-{i}", game));
+                i++;
             }
+
 
             AmountOfEnemies = EnemyList.Count;
             

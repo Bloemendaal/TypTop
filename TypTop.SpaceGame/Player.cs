@@ -16,17 +16,19 @@ namespace TypTop.SpaceGame
 
         public Player(Game game) : this(4, game) { }
 
-        public Player(int lives, Game game) : base("player", game)
+        public Player(int lives, Game game) : base("Player", game)
         {
             Lives = lives;  // start amount of lives
             Score = 0;  // start amount of points
 
             AddComponent(new PositionComponent()
             {
-                Position = new Vector2(960, 1000)
+                Position = new Vector2(885, 885)
             });
-            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative))){Width = 50});
-
+            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative)))
+            {
+                Width = 150
+            });
         }
 
         // gain points, add to score
