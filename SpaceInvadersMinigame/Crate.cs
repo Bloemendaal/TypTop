@@ -10,7 +10,7 @@ namespace SpaceInvadersMinigame
     {
         private readonly PositionComponent _positionComponent;
 
-        public Crate(string name, Game game) : base(name, game)
+        public Crate(string name, Game game) : base(game)
         {
             _positionComponent = new PositionComponent();
             AddComponent(_positionComponent);

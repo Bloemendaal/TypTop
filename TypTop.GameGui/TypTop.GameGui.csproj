@@ -12,6 +12,7 @@
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
     <ProjectReference Include="..\TypTop.SpaceGame\TypTop.SpaceGame.csproj" />
+    <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
   </ItemGroup>
 
   <ItemGroup>
