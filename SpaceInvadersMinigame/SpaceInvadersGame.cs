@@ -1,4 +1,5 @@
 using System.Numerics;
+using System.Windows;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 
@@ -25,6 +26,11 @@ namespace SpaceInvadersMinigame
             var crate4 = new Crate("krat4", this);
             AddEntity(crate4);
             crate4.GetComponent<PositionComponent>().Position = new Vector2(400, 200);
+
+            Floor = new CollisionRectangle(this, new Rect(0,1040, 1920,40));
+            AddEntity(Floor);
         }
+
+        public CollisionRectangle Floor { get; set; }
     }
 }

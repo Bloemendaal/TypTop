@@ -25,7 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceInvadersMinigame", "Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.GameGui", "TypTop.GameGui\TypTop.GameGui.csproj", "{813FF76E-7A24-4BB7-89BF-77F49031EFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TavernMinigame", "TavernMinigame\TavernMinigame.csproj", "{29768497-8C22-4952-972A-8393E0C8BDC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.SpaceGame", "TypTop.SpaceGame\TypTop.SpaceGame.csproj", "{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TavernMinigame", "TavernMinigame\TavernMinigame.csproj", "{29768497-8C22-4952-972A-8393E0C8BDC1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{813FF76E-7A24-4BB7-89BF-77F49031EFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{813FF76E-7A24-4BB7-89BF-77F49031EFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{813FF76E-7A24-4BB7-89BF-77F49031EFF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{29768497-8C22-4952-972A-8393E0C8BDC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{29768497-8C22-4952-972A-8393E0C8BDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29768497-8C22-4952-972A-8393E0C8BDC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,7 +89,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{405BF0EA-F49A-486A-92E0-D4100540337E} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
-		{29768497-8C22-4952-972A-8393E0C8BDC1} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
+		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0A39D8C-9D9A-4838-8195-8AD76380FB26}
