@@ -6,16 +6,16 @@ namespace BasicGameEngine
 {
     public abstract class Game : IEnumerable<Entity>
     {
-        readonly Dictionary<string, Entity> _entities = new Dictionary<string, Entity>();
+        readonly HashSet<Entity> _entities = new HashSet<Entity>();
 
         public void AddEntity(Entity entity)
         {
-            _entities.Add(entity.Name, entity);
+            _entities.Add(entity);
         }
 
         public IEnumerable<Entity> GetEntitiesWithComponent<TComponent>() where TComponent : Component
         {
-            foreach (var entity in _entities.Values)
+            foreach (var entity in _entities)
             {
                 if (entity.HasComponent<TComponent>())
                 {
@@ -26,7 +26,7 @@ namespace BasicGameEngine
 
         public virtual void Update(float deltaTime)
         {
-            foreach (Entity entity in _entities.Values)
+            foreach (Entity entity in _entities)
             {
                 entity.Update(deltaTime);
             }
@@ -34,7 +34,7 @@ namespace BasicGameEngine
 
         public void Draw(DrawingContext drawingContext)
         {
-            foreach (Entity entity in _entities.Values)
+            foreach (Entity entity in _entities)
             {
                 entity.Draw(drawingContext);
             }
@@ -42,7 +42,7 @@ namespace BasicGameEngine
 
         public IEnumerator<Entity> GetEnumerator()
         {
-            return _entities.Values.GetEnumerator();
+            return _entities.GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
