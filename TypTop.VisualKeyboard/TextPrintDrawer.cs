@@ -45,6 +45,8 @@ namespace TypTop.VisualKeyboard
                 new Typeface(Style.Font),
                 Style.FontSize,
                 Style.SymbolBrush);
+
+
     ***REMOVED***
 
         public virtual void Draw(Rect key, DrawingContext drawingContext)
