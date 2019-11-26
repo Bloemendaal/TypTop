@@ -15,12 +15,11 @@ namespace TypTop.SpaceGame
         public int Speed { get; private set; }
         private PositionComponent _positionComponent;
 
-        public Enemy(int speed, Word word, string name, Game game) : base(name, game)
+        public Enemy(int speed, int amountOfWords, Word word, string name, Game game) : base(name, game)
         {
-            
             _positionComponent = new PositionComponent()
             {
-                Position = new Vector2(game.Rnd.Next(200, 1720), 0)
+                Position = new Vector2(game.Rnd.Next(150, 1720), (game.Rnd.Next(0, amountOfWords * 150)*-1))
             };
             AddComponent(_positionComponent);
             AddComponent(new VelocityComponent()
