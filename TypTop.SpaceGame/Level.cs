@@ -6,12 +6,13 @@ using TypTop.SpaceGame;
 
 namespace TypTop.Gui.SpaceGame
 {
-    public class Level
+    public class Level : Entity
     {
         public List<Enemy> EnemyList { get; private set; }
         public int AmountOfEnemies { get; private set; }
         public int PlayerLives { get; set; }
-        
+        public int LineHeight { get; set; }
+
         private WordProvider _wordProvider;
         private List<string> _testWords = new List<string>(){
                 "aan", "aanbod", "aanraken", "aanval", "aap", "aardappel", "aarde", "aardig", "acht", "achter", "actief", "activiteit", "ademen", "af", "afgelopen", "afhangen", "afmaken", "afname", "afspraak", "afval", "al", "algemeen", "alleen", "alles", "als", "alsjeblieft", "altijd", "ander", "andere", "anders", "angst", "antwoord", "antwoorden", "appel", "arm", "auto", "avond", "avondeten",
@@ -39,7 +40,7 @@ namespace TypTop.Gui.SpaceGame
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
             };
 
-        public Level(int level)
+        public Level(int level, string name, Game game) :base (name, game)
         {
             // Init wordprovider and call loading words
             _wordProvider = new WordProvider();
