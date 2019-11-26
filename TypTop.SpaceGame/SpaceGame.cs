@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Shapes;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
+using Typop.SpaceGame;
 using TypTop.Gui.SpaceGame;
 using TypTop.Logic;
 
@@ -30,6 +31,8 @@ namespace TypTop.SpaceGame
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
             LineHeight = Level.LineHeight;
+
+            AddEntity(new Background(this));
 
             AddEntity(Player);
             AddEntity(new Enemy(1, new Word("test"), "Enemy",this));
