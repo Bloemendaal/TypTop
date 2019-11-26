@@ -10,9 +10,9 @@ namespace TavernMinigame
     public class Customer : Entity
     ***REMOVED***
         private List<Order> _orders;
-        public Customer(Game game) : base(game)
+        public Customer(List<Order> orders, Game game) : base(game)
         ***REMOVED***
-            
+            _orders = orders;
     ***REMOVED***
 
         public Order GetOrder(Order.OrderType orderType) => _orders.Where(o => o.Type == orderType).First();
