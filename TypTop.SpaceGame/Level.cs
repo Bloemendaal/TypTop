@@ -2,23 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 using BasicGameEngine;
+using TypTop.Logic;
 using TypTop.SpaceGame;
 
 namespace TypTop.Gui.SpaceGame
 {
-    public class Level : Entity
+    public class Level
     {
-        // the properties are explained as follows
-        //   EnemyList gives a list of Enemy objects that will be spwanwed throughout the level
-        //   AmountOfenemies gives an integer that represents the amount of Enemy objects
-        //   PlayerLives gives an integer that represents the start amount of lives the player has
-        //   LineHeight gives an integer that represents the lowest possible position Enemies can be in without hurting the player
         public List<Enemy> EnemyList { get; private set; }
         public int AmountOfEnemies { get; private set; }
         public int PlayerLives { get; set; }
-        public int LineHeight { get; set; } = 400;
-
-        // _wordProvider isan instance of the WordProvider class, it willmake use of _testWords, a list of strings, declared below
+        
         private readonly WordProvider _wordProvider;
         private readonly List<string> _testWords = new List<string>(){
                 "aan", "aanbod", "aanraken", "aanval", "aap", "aardappel", "aarde", "aardig", "acht", "achter", "actief", "activiteit", "ademen", "af", "afgelopen", "afhangen", "afmaken", "afname", "afspraak", "afval", "al", "algemeen", "alleen", "alles", "als", "alsjeblieft", "altijd", "ander", "andere", "anders", "angst", "antwoord", "antwoorden", "appel", "arm", "auto", "avond", "avondeten",
@@ -46,21 +40,17 @@ namespace TypTop.Gui.SpaceGame
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
             };
 
-        public Level(int level, string name, Game game) :base (name, game)
+        public Level(int level, Game game)
         {
-            // initialize  WordProvider and call loading words
             _wordProvider = new WordProvider();
             _wordProvider.LoadTestWords(_testWords);
 
-            // initialize EnemyList
             EnemyList = new List<Enemy>();
+            Initialize(game);
         }
 
         public bool Initialize(Game game)
         {
-            // filled with test data
-            // data from database, according to level
-
             var livesOfPlayer = 3;
             var limitChar = new List<char>()
             {
@@ -75,18 +65,18 @@ namespace TypTop.Gui.SpaceGame
             _wordProvider.LimitByCharacter(limitChar);
             _wordProvider.UsageOfCharacter(usageChar);
 
-            // Setting appropriated data-values 
 
             PlayerLives = livesOfPlayer;
-            int i = 0;
+            
             foreach (var word in _wordProvider.Serve())
             {
-                EnemyList.Add(new Enemy(1,word, $"Enemy-{i}", game));
-                i++;
+                EnemyList.Add(new Enemy(1, word, "Enemy",game));
             }
+
 
             AmountOfEnemies = EnemyList.Count;
             
+
             return true;
         }
     }
