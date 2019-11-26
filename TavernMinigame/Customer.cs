@@ -10,7 +10,7 @@ namespace TavernMinigame
     public class Customer : Entity
     {
         private List<Order> _orders;
-        public Customer(Game game) : base("customer", game)
+        public Customer(Game game) : base(game)
         {
             
         }

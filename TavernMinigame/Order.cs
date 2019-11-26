@@ -26,7 +26,7 @@ namespace TavernMinigame
 
         public OrderType Type { get; private set; }
 
-        public Order(OrderType type, Game game) : base($"order {type.ToString()}", game)
+        public Order(OrderType type, Game game) : base(game)
         {
             Type = type;
             AddComponent(new PositionComponent());

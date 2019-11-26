@@ -10,7 +10,7 @@ namespace Typop.SpaceGame
 {
     public class Background : Entity
     {
-        public Background(Game game) : base("background", game)
+        public Background(Game game) : base(game)
         {
             AddComponent(new PositionComponent() { Position = new System.Numerics.Vector2(0, 0) });
             AddComponent(new ImageComponent(new BitmapImage(new Uri($@"background.png", UriKind.Relative)))

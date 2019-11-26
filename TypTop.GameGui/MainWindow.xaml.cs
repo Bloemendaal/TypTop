@@ -6,6 +6,7 @@ using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 using TypTop.Gui.SpaceGame;
 using TypTop.Logic;
+using TavernMinigame;
 
 namespace TypTop.GameGui
 {
@@ -18,7 +19,7 @@ namespace TypTop.GameGui
         {
             InitializeComponent();
 
-            GameWindow.Start(new SpaceGame.SpaceGame());
+            GameWindow.Start(new TavernGame(4));
         }
     }
 }

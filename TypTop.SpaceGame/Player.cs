@@ -16,7 +16,7 @@ namespace TypTop.SpaceGame
 
         public Player(Game game) : this(4, game) { }
 
-        public Player(int lives, Game game) : base("Player", game)
+        public Player(int lives, Game game) : base(game)
         {
             Lives = lives;  // start amount of lives
             Score = 0;  // start amount of points
