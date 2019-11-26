@@ -1,21 +1,11 @@
 ***REMOVED***
 ***REMOVED***
-using System.Linq;
-***REMOVED***
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BasicGameEngine;
-using SpaceInvadersMinigame;
-using TavernMinigame;
-
+using BasicGameEngine.GameEngine.Components;
+using TypTop.Gui.SpaceGame;
+using TypTop.Logic;
 
 namespace TypTop.GameGui
 ***REMOVED***
@@ -28,7 +18,7 @@ namespace TypTop.GameGui
         ***REMOVED***
             InitializeComponent();
 
-            GameWindow.Start(new TavernGame(3));
+            GameWindow.Start(new SpaceGame.SpaceGame());
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***

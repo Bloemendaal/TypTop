@@ -17,7 +17,7 @@ namespace TypTop.Gui.SpaceGame
     /// </summary>
     public partial class SpaceGameWindow : Window
     ***REMOVED***
-        SpaceGame Game = new SpaceGame(); // create spacegame object
+        public SpaceGame Game ***REMOVED*** get; set; ***REMOVED*** = new SpaceGame(); // create spacegame object
 
         // the following rectangle represents the player
         Rectangle PlayerRect = new Rectangle
@@ -26,9 +26,9 @@ namespace TypTop.Gui.SpaceGame
             Width = 50,
             Height = 50,
             Fill = Brushes.DarkCyan
-    ***REMOVED***;
+    ***REMOVED***; 
 
-        List<Rectangle> EnemyRectList = new List<Rectangle>();  // list of rectangles for the enemies, should never countain more than largest what is shown at once on screen
+        public List<Rectangle> EnemyRectList = new List<Rectangle>();  // list of rectangles for the enemies, should never countain more than largest what is shown at once on screen
 
         public SpaceGameWindow()
         ***REMOVED***
