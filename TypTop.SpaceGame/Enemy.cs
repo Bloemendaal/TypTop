@@ -15,7 +15,7 @@ namespace TypTop.SpaceGame
         public int Speed ***REMOVED*** get; private set; ***REMOVED***
         private PositionComponent _positionComponent;
 
-        public Enemy(int speed, int amountOfWords, Word word, string name, Game game) : base(name, game)
+        public Enemy(int speed, int amountOfWords, Word word, Game game) : base(game)
         ***REMOVED***
             _positionComponent = new PositionComponent()
             ***REMOVED***

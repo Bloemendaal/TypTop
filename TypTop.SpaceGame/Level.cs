@@ -70,7 +70,7 @@ namespace TypTop.Gui.SpaceGame
             
             foreach (var word in _wordProvider.Serve())
             ***REMOVED***
-                EnemyList.Add(new Enemy(1, _wordProvider.Serve().Count, word, $"Enemy-***REMOVED***word.Letters***REMOVED***",game));
+                EnemyList.Add(new Enemy(1, _wordProvider.Serve().Count, word,game));
         ***REMOVED***
 
 

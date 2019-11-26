@@ -26,7 +26,7 @@ namespace TavernMinigame
 
         public OrderType Type ***REMOVED*** get; private set; ***REMOVED***
 
-        public Order(OrderType type, Game game) : base($"order ***REMOVED***type.ToString()***REMOVED***", game)
+        public Order(OrderType type, Game game) : base(game)
         ***REMOVED***
             Type = type;
             AddComponent(new PositionComponent());

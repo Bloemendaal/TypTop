@@ -14,7 +14,7 @@ namespace TavernMinigame
 
         public const double Width = 200;
 
-        public Tile(Order.OrderType orderType, float x, Game game) : base($"tile ***REMOVED***orderType***REMOVED***", game)
+        public Tile(Order.OrderType orderType, float x, Game game) : base(game)
         ***REMOVED***
             AddComponent(new PositionComponent(x, 20));
             AddComponent(new ImageComponent(new System.Windows.Media.Imaging.BitmapImage(new Uri(@"Images/tile.png", UriKind.Relative)))

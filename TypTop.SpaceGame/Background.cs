@@ -10,7 +10,7 @@ namespace Typop.SpaceGame
 ***REMOVED***
     public class Background : Entity
     ***REMOVED***
-        public Background(Game game) : base("background", game)
+        public Background(Game game) : base(game)
         ***REMOVED***
             AddComponent(new PositionComponent() ***REMOVED*** Position = new System.Numerics.Vector2(0, 0) ***REMOVED***);
             AddComponent(new ImageComponent(new BitmapImage(new Uri($@"background.png", UriKind.Relative)))
