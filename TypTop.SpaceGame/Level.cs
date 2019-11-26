@@ -54,7 +54,7 @@ namespace TypTop.Gui.SpaceGame
             var livesOfPlayer = 3;
             var limitChar = new List<char>()
             {
-                'a','s','d','f','g'
+                'a','s','d','f','g','h','j','k','l'
             };
 
             var usageChar = new List<char>()
@@ -70,7 +70,7 @@ namespace TypTop.Gui.SpaceGame
             
             foreach (var word in _wordProvider.Serve())
             {
-                EnemyList.Add(new Enemy(1, word, "Enemy",game));
+                EnemyList.Add(new Enemy(1, word, $"Enemy-{word.Letters}",game));
             }
 
 

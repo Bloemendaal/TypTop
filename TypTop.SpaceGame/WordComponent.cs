@@ -32,7 +32,7 @@ namespace TypTop.SpaceGame
                 new Typeface("Myriad"),
                 30,
                 Brushes.Red);
-            context.DrawText(FormattedText, new Point(pc.Position.X, pc.Position.Y));
+            context.DrawText(FormattedText, new Point(pc.Position.X + 75 - (FormattedText.WidthIncludingTrailingWhitespace /2), pc.Position.Y + 150));
         }
 
         public override void AddedToEntity()

@@ -25,10 +25,13 @@ namespace TypTop.SpaceGame
             AddComponent(_positionComponent);
             AddComponent(new VelocityComponent()
             {
-                Velocity = new Vector2(0, Speed)
+                Velocity = new Vector2(0, (float)speed)
             });
             AddComponent(new WordComponent(word));
-            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/enemy.png", UriKind.Relative))));
+            AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/enemy.png", UriKind.Relative)))
+            {
+                Width = 150
+            });
             Word = word;
             Speed = speed;
         }

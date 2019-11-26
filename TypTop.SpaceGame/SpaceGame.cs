@@ -14,10 +14,8 @@ namespace TypTop.SpaceGame
         public Queue<Enemy> EnemyQueue { get; set; }
         public int LineHeight { get; set; }
         public Level Level { get; set; }
-        public Random R { get; set; }
         public SpaceGame()
         {
-            R = new Random(DateTime.Now.Millisecond);
             Level = new Level(1, this);
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
