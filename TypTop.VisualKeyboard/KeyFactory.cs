@@ -90,7 +90,7 @@ namespace TypTop.VisualKeyboard
                         VerticalAlignment.Center, new Vector2(-5, 0));
 
                 case Key.Tab:
-                    return CreateTextKey(key, "~", tabSize, style, HorizontalAlignment.Left, VerticalAlignment.Center, new Vector2(5, 0));
+                    return CreateTextKey(key, "Tab", tabSize, style, HorizontalAlignment.Left, VerticalAlignment.Center, new Vector2(5, 0));
                 case Key.CapsLock:
                     return CreateTextKey(key, "Caps", capsSize, style, HorizontalAlignment.Left, VerticalAlignment.Center, new Vector2(5, 0));
                 case Key.LeftShift:

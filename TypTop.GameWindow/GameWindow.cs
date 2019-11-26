@@ -40,9 +40,11 @@ namespace TypTop.GameWindow
         ***REMOVED***
             float deltaTime = (float) Math.Min((DateTime.Now - previousFrame).TotalSeconds, 50);
 
-            if(_game == null)
+            if (_game == null)
+            ***REMOVED***
                 return;
-            
+        ***REMOVED***
+
             _game.Update(deltaTime);
             InvalidateVisual();
             previousFrame = DateTime.Now;

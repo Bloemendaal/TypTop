@@ -1,4 +1,5 @@
-﻿using System.Collections;
+***REMOVED***
+using System.Collections;
 ***REMOVED***
 using System.Windows.Media;
 
@@ -6,7 +7,11 @@ namespace BasicGameEngine
 ***REMOVED***
     public abstract class Game : IEnumerable<Entity>
     ***REMOVED***
+        public readonly Random Rnd = new Random(DateTime.Now.Millisecond);
         readonly HashSet<Entity> _entities = new HashSet<Entity>();
+
+        public const double Width = 1920;
+        public const double Height = 1080;
 
         public void AddEntity(Entity entity)
         ***REMOVED***

@@ -10,15 +10,14 @@ namespace TypTop.Gui.SpaceGame
 ***REMOVED***
     public class WordProvider
     ***REMOVED***
-        // List for testing
-        public List<string> TempWords ***REMOVED*** get; set; ***REMOVED***
         // List of words to serve with conditions
         private List<Word> WordsToServe ***REMOVED*** get; set; ***REMOVED***
 
         // Amount of words to provide.
         public int WordCount ***REMOVED*** get; private set; ***REMOVED***
         // Max length of word.
-        public int WordLetterLimit ***REMOVED*** get; private set; ***REMOVED***
+        public int MaxWordLength ***REMOVED*** get; private set; ***REMOVED***
+        public int MinWordLength ***REMOVED*** get; private set; ***REMOVED***
         // #Optional: select only words with char in list.
         public List<char> UsageChars ***REMOVED*** get; private set; ***REMOVED***
         public List<char> LimitChars ***REMOVED*** get; private set; ***REMOVED***
@@ -61,13 +60,24 @@ namespace TypTop.Gui.SpaceGame
     ***REMOVED***
 
         // Get max length of word.
-        public void WordLengthLimit(int limit)
+        public void SetMaxWordLength(int limit)
         ***REMOVED***
             if (!AreWordsSet()) return;
-            WordLetterLimit = limit;
+            MaxWordLength = limit;
 
             WordsToServe = WordsToServe?
                 .Where(s => s.Letters.Length <= limit)
+                .ToList();
+    ***REMOVED***
+
+        // Get min length of word
+        public void SetMinWordLength(int limit)
+        ***REMOVED***
+            if (!AreWordsSet()) return;
+            MinWordLength = limit;
+            
+            WordsToServe = WordsToServe?
+                .Where(s => s.Letters.Length >= limit)
                 .ToList();
     ***REMOVED***
 
@@ -111,13 +121,26 @@ namespace TypTop.Gui.SpaceGame
             return true;
     ***REMOVED***
 
-        public void LoadTestWords()
+        public void LoadTestWords(List<string> tempWords)
         ***REMOVED***
-            foreach (var s in TempWords)
+            foreach (var s in tempWords)
             ***REMOVED***
                 WordsToServe.Add(new Word(s));
         ***REMOVED***
     ***REMOVED***
+
+        // Reset words to initial
+        public void ResetToEmpty()
+        ***REMOVED***
+            WordsToServe = new List<Word>();
+    ***REMOVED***
+
+        // Loading words from database
+        public void LoadWords()
+        ***REMOVED***
+            
+    ***REMOVED***
+
         // return filtered words
         public List<Word> Serve() => WordsToServe;
         
