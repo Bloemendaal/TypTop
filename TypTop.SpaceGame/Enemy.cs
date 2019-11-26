@@ -13,7 +13,7 @@ namespace TypTop.SpaceGame
     {
         public Word Word { get; private set; }
         public int Speed { get; set; }
-        private PositionComponent _positionComponent;
+        private readonly PositionComponent _positionComponent;
 
         public Enemy(int speed, Word word, string name, Game game) : base(name, game)
         {

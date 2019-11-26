@@ -8,13 +8,19 @@ namespace TypTop.Gui.SpaceGame
 {
     public class Level : Entity
     {
+        // the properties are explained as follows
+        //   EnemyList gives a list of Enemy objects that will be spwanwed throughout the level
+        //   AmountOfenemies gives an integer that represents the amount of Enemy objects
+        //   PlayerLives gives an integer that represents the start amount of lives the player has
+        //   LineHeight gives an integer that represents the lowest possible position Enemies can be in without hurting the player
         public List<Enemy> EnemyList { get; private set; }
         public int AmountOfEnemies { get; private set; }
         public int PlayerLives { get; set; }
-        public int LineHeight { get; set; }
+        public int LineHeight { get; set; } = 400;
 
-        private WordProvider _wordProvider;
-        private List<string> _testWords = new List<string>(){
+        // _wordProvider isan instance of the WordProvider class, it willmake use of _testWords, a list of strings, declared below
+        private readonly WordProvider _wordProvider;
+        private readonly List<string> _testWords = new List<string>(){
                 "aan", "aanbod", "aanraken", "aanval", "aap", "aardappel", "aarde", "aardig", "acht", "achter", "actief", "activiteit", "ademen", "af", "afgelopen", "afhangen", "afmaken", "afname", "afspraak", "afval", "al", "algemeen", "alleen", "alles", "als", "alsjeblieft", "altijd", "ander", "andere", "anders", "angst", "antwoord", "antwoorden", "appel", "arm", "auto", "avond", "avondeten",
                 "baan", "baby", "bad", "bal", "bang", "bank", "basis", "bed", "bedekken", "bedreiging", "bedreven", "been", "beer", "beest", "beetje", "begin", "begrijpen", "begrip", "behalve", "beide", "beker", "bel", "belangrijk", "bellen", "belofte", "beneden", "benzine", "berg", "beroemd", "beroep", "bescherm", "beslissen", "best", "betalen", "beter", "bevatten", "bewegen", "bewolkt", "bezoek", "bibliotheek", "bieden", "bij", "bijna", "bijten", "bijvoorbeeld", "bijzonder", "binnen", "binnenkort", "blad", "blauw", "blazen", "blij", "blijven", "bloed", "bloem", "bodem", "boek", "boerderij", "boete", "boom", "boon", "boord", "boos", "bord", "borstelen", "bos", "bot", "bouwen", "boven", "branden", "brandstof", "breed", "breken", "brengen", "brief", "broer", "broek", "brood", "brug", "bruikbaar", "bruiloft", "bruin", "bui", "buiten", "bureau", "buren", "bus", "buurman", "buurvrouw",
                 "cadeau", "chocolade", "cirkel", "comfortabel", "compleet", "computer", "conditie", "controle", "cool", "correct",
@@ -42,10 +48,11 @@ namespace TypTop.Gui.SpaceGame
 
         public Level(int level, string name, Game game) :base (name, game)
         {
-            // Init wordprovider and call loading words
+            // initialize  WordProvider and call loading words
             _wordProvider = new WordProvider();
             _wordProvider.LoadTestWords(_testWords);
 
+            // initialize EnemyList
             EnemyList = new List<Enemy>();
         }
 
@@ -78,10 +85,8 @@ namespace TypTop.Gui.SpaceGame
                 i++;
             }
 
-
             AmountOfEnemies = EnemyList.Count;
             
-
             return true;
         }
     }
