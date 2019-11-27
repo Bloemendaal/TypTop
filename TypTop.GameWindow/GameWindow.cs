@@ -29,16 +29,21 @@ namespace TypTop.GameWindow
 
         public GameWindow()
         {
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(16), IsEnabled = false};
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(16), IsEnabled = false };
             previousFrame = DateTime.Now;
             _timer.Tick += TimerOnTick;
+        }
+
+        public void OnTextInput(TextCompositionEventArgs e)
+        {
+            _game?.OnTextInput(e);
         }
 
         private DateTime previousFrame;
 
         private void TimerOnTick(object sender, EventArgs e)
         {
-            float deltaTime = (float) Math.Min((DateTime.Now - previousFrame).TotalSeconds, 50);
+            float deltaTime = (float)Math.Min((DateTime.Now - previousFrame).TotalSeconds, 50);
 
             if (_game == null)
             {
@@ -60,7 +65,7 @@ namespace TypTop.GameWindow
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            drawingContext.DrawRectangle(Brushes.White, null, new Rect(0,0,1920,1080));
+            drawingContext.DrawRectangle(Brushes.White, null, new Rect(0, 0, 1920, 1080));
             _game.Draw(drawingContext);
         }
 

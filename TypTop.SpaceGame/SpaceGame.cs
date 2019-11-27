@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
@@ -28,6 +29,16 @@ namespace TypTop.SpaceGame
 
             AddEntity(Player);
             AddEntity(new Line(this));
+
+            TextInput += OnTextInput;
+        }
+
+        private void OnTextInput(object sender, TextCompositionEventArgs e)
+        {
+            foreach (Enemy enemy in Level.EnemyList)
+            {
+                enemy.GetComponent<WordComponent>().Word.Letters += e.Text;
+            }
         }
     }
 }

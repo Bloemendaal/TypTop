@@ -14,7 +14,7 @@ namespace TypTop.SpaceGame
     public class WordComponent : Component, IDrawable
     {
         private PositionComponent pc;
-        private Word Word;
+        public Word Word;
 
         public WordComponent(Word word)
         {
