@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+***REMOVED***
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -7,15 +8,33 @@ namespace TypTop.VisualKeyboard
 ***REMOVED***
     public abstract class KeyboardKey
     ***REMOVED***
-        protected Rect Rectangle ***REMOVED*** get; ***REMOVED***
-        public abstract KeyStyle Style ***REMOVED*** get; set; ***REMOVED***
+        private KeyStyle _style;
+        public Point Point ***REMOVED*** get; set; ***REMOVED***
+        public Size Size ***REMOVED*** get; set; ***REMOVED***
+        protected Rect Rectangle => new Rect(Point, Size);
+
+        public KeyStyle Style
+        ***REMOVED***
+            get => _style;
+            set
+            ***REMOVED***
+                if (value != _style)
+                ***REMOVED***
+                    _style = value;
+                    OnStyleChanged(new KeyStyleChangedEventArgs(value));
+            ***REMOVED***
+        ***REMOVED***
+    ***REMOVED***
 
         public Key Key ***REMOVED*** get; ***REMOVED***
 
-        protected KeyboardKey(Key key,Rect rectangle)
+        public event EventHandler<KeyStyleChangedEventArgs> StyleChanged;
+
+        protected KeyboardKey(Key key,Size size,KeyStyle style)
         ***REMOVED***
             Key = key;
-            Rectangle = rectangle;
+            Size = size;
+            Style = style;
     ***REMOVED***
 
         public virtual void Render(DrawingContext drawingContext)
@@ -27,7 +46,7 @@ namespace TypTop.VisualKeyboard
 
         public virtual void DrawKeyBase(DrawingContext drawingContext)
         ***REMOVED***
-            Rect baseRectangle = Rectangle;
+            Rect baseRectangle = new Rect(Point, Size);
             baseRectangle.Height -= 5;
             baseRectangle.Y += 5;
 
@@ -55,5 +74,10 @@ namespace TypTop.VisualKeyboard
     ***REMOVED***
 
         public abstract void DrawSymbols(DrawingContext drawingContext);
+
+        protected virtual void OnStyleChanged(KeyStyleChangedEventArgs e)
+        ***REMOVED***
+            StyleChanged?.Invoke(this, e);
+    ***REMOVED***
 ***REMOVED***
 ***REMOVED***

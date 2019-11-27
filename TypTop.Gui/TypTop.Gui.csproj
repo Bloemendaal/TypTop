@@ -17,10 +17,13 @@
   <ItemGroup>
     <ProjectReference Include="..\TypTop.Database\TypTop.Database.csproj" />
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
+    <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
   </ItemGroup>
+
 
   <ItemGroup>
     <Resource Include="Images\LoginBackground.png" />
   </ItemGroup>
 
 </Project>
+

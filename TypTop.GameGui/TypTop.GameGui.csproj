@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TavernMinigame\TavernMinigame.csproj" />
+    <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
+    <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
+    <ProjectReference Include="..\TypTop.SpaceGame\TypTop.SpaceGame.csproj" />
+    <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="krat.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="player.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
