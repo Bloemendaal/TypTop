@@ -4,11 +4,11 @@ using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 
 namespace SpaceInvadersMinigame
-***REMOVED***
+{
     public class SpaceInvadersGame : Game
-    ***REMOVED***
+    {
         public SpaceInvadersGame()
-        ***REMOVED***
+        {
             AddEntity(new Player(this));
 
             var crate1 = new Crate("krat1", this);
@@ -29,8 +29,8 @@ namespace SpaceInvadersMinigame
 
             Floor = new CollisionRectangle(this, new Rect(0,1040, 1920,40));
             AddEntity(Floor);
-    ***REMOVED***
+        }
 
-        public CollisionRectangle Floor ***REMOVED*** get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public CollisionRectangle Floor { get; set; }
+    }
+}

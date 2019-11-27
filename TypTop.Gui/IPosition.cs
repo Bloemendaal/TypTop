@@ -1,20 +1,20 @@
-***REMOVED***
-***REMOVED***
-***REMOVED***
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace TypTop.Gui
-***REMOVED***
+{
     interface IPosition
-    ***REMOVED***
-        public double X ***REMOVED*** get; set; ***REMOVED***
-        public double Y ***REMOVED*** get; set; ***REMOVED***
+    {
+        public double X { get; set; }
+        public double Y { get; set; }
 
-        public double VelocityX ***REMOVED*** get; set; ***REMOVED***
-        public double VelocityY ***REMOVED*** get; set; ***REMOVED***
+        public double VelocityX { get; set; }
+        public double VelocityY { get; set; }
 
-        public double DragCoefficient ***REMOVED*** get; set; ***REMOVED***
+        public double DragCoefficient { get; set; }
 
         void UpdateVelocity();
 
-***REMOVED***
-***REMOVED***
+    }
+}

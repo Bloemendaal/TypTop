@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-***REMOVED***.Migrations
-***REMOVED***
+namespace TypTop.Database.Migrations
+{
     public partial class Requireds : Migration
-    ***REMOVED***
+    {
         protected override void Up(MigrationBuilder migrationBuilder)
-        ***REMOVED***
+        {
             migrationBuilder.AlterColumn<string>(
                 name: "Username",
                 table: "User",
@@ -29,10 +29,10 @@
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
-    ***REMOVED***
+        }
 
         protected override void Down(MigrationBuilder migrationBuilder)
-        ***REMOVED***
+        {
             migrationBuilder.AlterColumn<string>(
                 name: "Username",
                 table: "User",
@@ -53,6 +53,6 @@
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string));
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

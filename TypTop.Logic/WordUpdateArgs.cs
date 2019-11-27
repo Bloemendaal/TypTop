@@ -1,11 +1,11 @@
-***REMOVED***
-***REMOVED***
-***REMOVED***
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace TypTop.Logic
-***REMOVED***
+{
     class WordUpdateArgs : EventArgs
-    ***REMOVED***
+    {
         public List<Word> Words;
 
         //
@@ -13,5 +13,5 @@ namespace TypTop.Logic
         //     The previously/currently inputted letter with the TextInput function.
         public char PreviousChar;
         public char CurrentChar;
-***REMOVED***
-***REMOVED***
+    }
+}

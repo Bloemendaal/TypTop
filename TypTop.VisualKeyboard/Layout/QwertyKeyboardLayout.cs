@@ -3,11 +3,11 @@ using System.Linq.Expressions;
 using System.Windows.Input;
 
 namespace TypTop.VisualKeyboard
-***REMOVED***
+{
     public class QwertyKeyboardLayout : KeyboardLayout
-    ***REMOVED***
+    {
         public QwertyKeyboardLayout() : base(new KeyFactory())
-        ***REMOVED***
+        {
             AddKey(Key.OemTilde);
 
             AddKey(Key.D1);
@@ -81,6 +81,6 @@ namespace TypTop.VisualKeyboard
             AddKey(Key.OemQuestion);
 
             AddKey(Key.RightShift);
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}
