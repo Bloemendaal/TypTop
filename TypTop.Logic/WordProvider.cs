@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using TypTop.Logic;
+using TypTop.Database;
+using Word = TypTop.Logic.Word;
 
-namespace TypTop.Gui.SpaceGame
+namespace TypTop.SpaceGame
 {
     public class WordProvider
     {
@@ -30,9 +31,9 @@ namespace TypTop.Gui.SpaceGame
         private int? _wordCount = null;
 
         // Max length of word.
-        public int? MaxWordLength 
-        { 
-            get => _maxWordLength; 
+        public int? MaxWordLength
+        {
+            get => _maxWordLength;
             set
             {
                 if (value != null)
@@ -105,7 +106,15 @@ namespace TypTop.Gui.SpaceGame
 
 
         // Loading words from database
-        public void LoadWords() { }
+        public void LoadWords()
+        {
+             using var db = new Context();
+             var words = db.Word.OrderBy(w => w.Letters).ToList();
+             foreach (var w in words)
+             {
+                WordsToServe.Add(new Word(w.Letters));
+             }
+        }
         public void LoadTestWords()
         {
             _wordsToServe = new List<string>(){
@@ -145,7 +154,7 @@ namespace TypTop.Gui.SpaceGame
             if (shuffle) Shuffle();
 
             IEnumerable<Word> serve = _wordsToServe;
-            
+
             if (LimitChars != null && LimitChars.Count > 0)
             {
                 var charString = LimitChars.Aggregate("", (current, c) => current + c);
@@ -171,6 +180,6 @@ namespace TypTop.Gui.SpaceGame
             }
 
             return serve.ToList();
-        }
+         }
     }
 }

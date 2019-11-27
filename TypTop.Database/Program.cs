@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using TypTop.Logic;
 
-namespace TypTop.Gui.SpaceGame
+namespace TypTop.Database
 {
-    public class Level
+    class Program
     {
-        public List<Enemy> EnemyList { get; private set; }
-        public int AmountOfEnemies { get; private set; }
-        public int PlayerLives { get; set; }
-        
-        private WordProvider _wordProvider;
-        private List<string> _testWords = new List<string>(){
+        private static List<string> _testWords = new List<string>(){
                 "aan", "aanbod", "aanraken", "aanval", "aap", "aardappel", "aarde", "aardig", "acht", "achter", "actief", "activiteit", "ademen", "af", "afgelopen", "afhangen", "afmaken", "afname", "afspraak", "afval", "al", "algemeen", "alleen", "alles", "als", "alsjeblieft", "altijd", "ander", "andere", "anders", "angst", "antwoord", "antwoorden", "appel", "arm", "auto", "avond", "avondeten",
                 "baan", "baby", "bad", "bal", "bang", "bank", "basis", "bed", "bedekken", "bedreiging", "bedreven", "been", "beer", "beest", "beetje", "begin", "begrijpen", "begrip", "behalve", "beide", "beker", "bel", "belangrijk", "bellen", "belofte", "beneden", "benzine", "berg", "beroemd", "beroep", "bescherm", "beslissen", "best", "betalen", "beter", "bevatten", "bewegen", "bewolkt", "bezoek", "bibliotheek", "bieden", "bij", "bijna", "bijten", "bijvoorbeeld", "bijzonder", "binnen", "binnenkort", "blad", "blauw", "blazen", "blij", "blijven", "bloed", "bloem", "bodem", "boek", "boerderij", "boete", "boom", "boon", "boord", "boos", "bord", "borstelen", "bos", "bot", "bouwen", "boven", "branden", "brandstof", "breed", "breken", "brengen", "brief", "broer", "broek", "brood", "brug", "bruikbaar", "bruiloft", "bruin", "bui", "buiten", "bureau", "buren", "bus", "buurman", "buurvrouw",
                 "cadeau", "chocolade", "cirkel", "comfortabel", "compleet", "computer", "conditie", "controle", "cool", "correct",
@@ -37,47 +30,21 @@ namespace TypTop.Gui.SpaceGame
                 "waar", "waarom", "waarschijnlijk", "wachten", "wakker", "wanneer", "want", "wapen", "warm", "wassen", "wat", "water", "we", "week", "weer", "weg", "welke", "welkom", "wens", "wereld", "werelddeel", "werk", "west", "wetenschap", "wie", "wiel", "wij", "wijn", "wijs", "wild", "willen", "wind", "winkel", "winnen", "winter", "wissen", "wit", "wolf", "wolk", "wonder", "woord", "woud", "wreed",
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
             };
-
-        public Level(int level)
+        static void Main(string[] args)
         {
-            // Init wordprovider and call loading words
-            _wordProvider = new WordProvider();
-            _wordProvider.LoadTestWords(_testWords);
-
-            EnemyList = new List<Enemy>();
-        }
-
-        public bool Initialize()
-        {
-            // filled with test data
-            // data from database, according to level
-
-            var livesOfPlayer = 3;
-            var limitChar = new List<char>()
+            using (var db = new Context())
             {
-                'a','s','d','f','g'
-            };
+                /*
+                foreach (var word in _testWords)
+                {
+                    db.Add(new Word { Letters = word });
+                }
 
-            var usageChar = new List<char>()
-            {
-                'a'
-            };
-
-            _wordProvider.LimitByCharacter(limitChar);
-            _wordProvider.UsageOfCharacter(usageChar);
-
-            // Setting appropriated data-values 
-
-            PlayerLives = livesOfPlayer;
-            foreach (var word in _wordProvider.Serve())
-            {
-                EnemyList.Add(new Enemy(1,word));
+                Console.WriteLine("Adding done");
+                db.SaveChanges();
+                Console.WriteLine("saved");
+                */
             }
-
-            AmountOfEnemies = EnemyList.Count;
-            
-
-            return true;
         }
     }
 }
