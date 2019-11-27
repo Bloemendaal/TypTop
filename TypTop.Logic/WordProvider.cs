@@ -57,18 +57,15 @@ namespace TypTop.SpaceGame
             get => _minWordLength;
             set
             {
-                if (value != null && value < 0)
+                if (value != null)
                 {
-                    if (value != null)
+                    if (value < 0)
                     {
-                        if (value < 0)
-                        {
-                            value = 0;
-                        }
-                        if (MaxWordLength != null && value > MaxWordLength)
-                        {
-                            value = MaxWordLength;
-                        }
+                        value = 0;
+                    }
+                    if (MaxWordLength != null && value > MaxWordLength)
+                    {
+                        value = MaxWordLength;
                     }
                 }
 
