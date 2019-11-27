@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -7,15 +8,33 @@ namespace TypTop.VisualKeyboard
 {
     public abstract class KeyboardKey
     {
-        protected Rect Rectangle { get; }
-        public abstract KeyStyle Style { get; set; }
+        private KeyStyle _style;
+        public Point Point { get; set; }
+        public Size Size { get; set; }
+        protected Rect Rectangle => new Rect(Point, Size);
+
+        public KeyStyle Style
+        {
+            get => _style;
+            set
+            {
+                if (value != _style)
+                {
+                    _style = value;
+                    OnStyleChanged(new KeyStyleChangedEventArgs(value));
+                }
+            }
+        }
 
         public Key Key { get; }
 
-        protected KeyboardKey(Key key,Rect rectangle)
+        public event EventHandler<KeyStyleChangedEventArgs> StyleChanged;
+
+        protected KeyboardKey(Key key,Size size,KeyStyle style)
         {
             Key = key;
-            Rectangle = rectangle;
+            Size = size;
+            Style = style;
         }
 
         public virtual void Render(DrawingContext drawingContext)
@@ -27,7 +46,7 @@ namespace TypTop.VisualKeyboard
 
         public virtual void DrawKeyBase(DrawingContext drawingContext)
         {
-            Rect baseRectangle = Rectangle;
+            Rect baseRectangle = new Rect(Point, Size);
             baseRectangle.Height -= 5;
             baseRectangle.Y += 5;
 
@@ -55,5 +74,10 @@ namespace TypTop.VisualKeyboard
         }
 
         public abstract void DrawSymbols(DrawingContext drawingContext);
+
+        protected virtual void OnStyleChanged(KeyStyleChangedEventArgs e)
+        {
+            StyleChanged?.Invoke(this, e);
+        }
     }
 }
