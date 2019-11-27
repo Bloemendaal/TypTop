@@ -3,13 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29505.145
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***"
-EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Gui", "TypTop.Gui\TypTop.Gui.csproj", "***REMOVED***6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19***REMOVED***"
 EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Logic", "TypTop.Logic\TypTop.Logic.csproj", "***REMOVED***55172CE7-CBF5-47B9-90CC-217EF307FF1E***REMOVED***"
 EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***"
+EndProject
+
+Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "***REMOVED***3BCB292B-F745-4465-B7F2-1109D74CCF91***REMOVED***"
 EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***"
 EndProject
@@ -28,6 +29,7 @@ EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TypTop.SpaceGame", "TypTop.SpaceGame\TypTop.SpaceGame.csproj", "***REMOVED***7D10E802-54BB-4BE5-A051-12ACFBFF93CF***REMOVED***"
 EndProject
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "TavernMinigame", "TavernMinigame\TavernMinigame.csproj", "***REMOVED***29768497-8C22-4952-972A-8393E0C8BDC1***REMOVED***"
+
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +37,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
-		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
-		***REMOVED***B4951B83-021E-49BF-8129-B883E6EAD7DF***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
 		***REMOVED***6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		***REMOVED***6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +49,12 @@ Global
 		***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
 		***REMOVED***28F590C5-6700-44EB-A452-ECEBA5A100F5***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+
+		***REMOVED***3BCB292B-F745-4465-B7F2-1109D74CCF91***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***3BCB292B-F745-4465-B7F2-1109D74CCF91***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***3BCB292B-F745-4465-B7F2-1109D74CCF91***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***3BCB292B-F745-4465-B7F2-1109D74CCF91***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+
 		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***4CC4919F-5F2D-4694-972B-8758C06587D3***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -83,6 +87,7 @@ Global
 		***REMOVED***29768497-8C22-4952-972A-8393E0C8BDC1***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***29768497-8C22-4952-972A-8393E0C8BDC1***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
 		***REMOVED***29768497-8C22-4952-972A-8393E0C8BDC1***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
