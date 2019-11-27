@@ -23,11 +23,11 @@ namespace TypTop.SpaceGame
 
             AddComponent(new PositionComponent()
             ***REMOVED***
-                Position = new Vector2(885, 885)
+                Position = new Vector2(885, 975)
         ***REMOVED***);
             AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative)))
             ***REMOVED***
-                Width = 150
+                Width = 100
         ***REMOVED***);
     ***REMOVED***
 
