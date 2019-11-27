@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.VisualKeyboard", "Ty
 EndProject
 
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "{3BCB292B-F745-4465-B7F2-1109D74CCF91}"
-
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "{4CC4919F-5F2D-4694-972B-8758C06587D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.VisualKeyboard.Tests", "TypTop.VisualKeyboard.Tests\TypTop.VisualKeyboard.Tests.csproj", "{BFD7635D-ACCA-4027-B556-15DA37C130C9}"
