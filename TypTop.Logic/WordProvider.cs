@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using TypTop.Logic;
+using TypTop.Database;
+using Word = TypTop.Logic.Word;
 
-namespace TypTop.Gui.SpaceGame
+namespace TypTop.SpaceGame
 {
     public class WordProvider
     {
@@ -138,7 +139,12 @@ namespace TypTop.Gui.SpaceGame
         // Loading words from database
         public void LoadWords()
         {
-            
+            using var db = new Context();
+            var words = db.Word.OrderBy(w => w.Letters).ToList();
+            foreach (var w in words)
+            {
+                WordsToServe.Add(new Word(w.Letters));
+            }
         }
 
         // return filtered words
