@@ -3,15 +3,17 @@ using System;
 ***REMOVED***
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TypTop.Database;
 
 ***REMOVED***.Migrations
 ***REMOVED***
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20191127095826_word")]
+    partial class word
     ***REMOVED***
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         ***REMOVED***
 #pragma warning disable 612, 618
             modelBuilder
