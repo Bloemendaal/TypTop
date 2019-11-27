@@ -7,7 +7,7 @@ using System.Numerics;
 using System.Text;
 using System.Windows.Media.Imaging;
 
-namespace Typop.SpaceGame
+namespace TypTop.SpaceGame
 {
     public class Background : Entity
     {
