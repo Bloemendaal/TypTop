@@ -17,8 +17,11 @@ namespace TypTop.SpaceGame
 
         public Level(int level, Game game)
         {
-            _wordProvider = new WordProvider();
-            _wordProvider.LoadWords();
+            _wordProvider = new WordProvider()
+            {
+                MinWordLength = 4
+            };
+            _wordProvider.LoadTestWords();
 
             EnemyList = new List<Enemy>();
             Initialize(game);
