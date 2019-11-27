@@ -1,4 +1,5 @@
 ﻿using Konscious.Security.Cryptography;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -45,7 +46,7 @@ namespace TypTop.Gui
         }
 
         ///<summary>
-        /// Opens a dialog in which the user enters the username and password of a new account and adds it to the database if valid.
+        /// Changes view to window in which the user enters the username and password of a new account and adds it to the database if valid.
         /// </summary>
         private void NewAccountButton_Click(object sender, RoutedEventArgs e)
         {
@@ -105,25 +106,39 @@ namespace TypTop.Gui
         {
             if (CreationUsernameBox.Text != "" && CreationPasswordBox.Password != "")
             {
-                if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
+                using (var db = new Database.Context())
                 {
-                    if (!accounts.ContainsKey(CreationUsernameBox.Text))
+                    if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
                     {
-                        byte[] salt = CreateSalt();
-                        accounts.Add(CreationUsernameBox.Text, HashPassword(CreationPasswordBox.Password, salt));
-                        salts.Add(CreationUsernameBox.Text, salt);
-                        LoginCanvas.Visibility = Visibility.Visible;
+                        if (!db.User.Where(user => user.Username.Equals(CreationUsernameBox.Text)).Any())
+                        {
+                            byte[] saltBytes = CreateSalt();
+                            string salt = Encoding.ASCII.GetString(saltBytes);
+
+                            db.Add(new Database.User
+                            {
+                                UserId = 0,
+                                Username = CreationUsernameBox.Text,
+                                Password = CreationPasswordBox.Password,
+                                Salt = salt,
+                                Teacher = (bool)AccountTypeCheckbox.IsChecked
+                            });
+                            db.SaveChanges();
+
+                            
+                            LoginCanvas.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                        MessageBox.Show("Wachtwoord niet bevestigd.");
                     }
-                }
-                else
-                {
-                    MessageBox.Show("Wachtwoord niet bevestigd.");
-                }
 
+                }
             }
             else
             {
