@@ -112,7 +112,7 @@ namespace TypTop.SpaceGame
              var words = db.Word.OrderBy(w => w.Letters).ToList();
              foreach (var w in words)
              {
-                WordsToServe.Add(new Word(w.Letters));
+                _wordsToServe.Add(new Word(w.Letters));
              }
         }
         public void LoadTestWords()
