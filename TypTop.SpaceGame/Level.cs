@@ -12,7 +12,7 @@ namespace TypTop.SpaceGame
         public List<Enemy> EnemyList { get; private set; }
         public int AmountOfEnemies { get; private set; }
         public int PlayerLives { get; set; }
-        
+
         private readonly WordProvider _wordProvider;
 
         public Level(int level, Game game)
@@ -27,28 +27,20 @@ namespace TypTop.SpaceGame
         public bool Initialize(Game game)
         {
             var livesOfPlayer = 3;
-            var limitChar = new List<char>()
-            {
-                'a','s','d','f','g','h','j','k','l'
-            };
 
-            var usageChar = new List<char>()
-            {
-                'a'
-            };
 
-            _wordProvider.LimitByCharacter(limitChar);
-            _wordProvider.UsageOfCharacter(usageChar);
+            _wordProvider.LimitChars = new List<char>() { 'a','s','d','f','g','h','j','k','l' };
+            _wordProvider.UsageChars = new List<char>() { 'a' };
 
             PlayerLives = livesOfPlayer;
-            
+
             foreach (var word in _wordProvider.Serve())
             {
                 EnemyList.Add(new Enemy(1, _wordProvider.Serve().Count, word, game));
             }
 
             AmountOfEnemies = EnemyList.Count;
-            
+
             return true;
         }
     }
