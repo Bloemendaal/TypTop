@@ -1,11 +1,11 @@
 ﻿using System.Windows.Input;
 
 namespace TypTop.VisualKeyboard
-***REMOVED***
+{
     public class ColemakKeyboardLayout : KeyboardLayout
-    ***REMOVED***
+    {
         public ColemakKeyboardLayout() :base(new KeyFactory())
-        ***REMOVED***
+        {
             AddKey(Key.OemTilde);
 
             AddKey(Key.D1);
@@ -79,6 +79,6 @@ namespace TypTop.VisualKeyboard
             AddKey(Key.OemQuestion);
 
             AddKey(Key.RightShift);
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

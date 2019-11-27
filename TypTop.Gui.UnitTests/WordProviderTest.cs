@@ -1,5 +1,5 @@
 using System;
-***REMOVED***
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
@@ -9,12 +9,12 @@ using TypTop.Logic;
 using Assert = NUnit.Framework.Assert;
 
 namespace TypTop.Gui.UnitTests
-***REMOVED***
+{
     [TestClass]
     public class WordProviderTest
-    ***REMOVED***
+    {
         private WordProvider _wp;
-        private readonly List<string> testWords = new List<string>()***REMOVED***
+        private readonly List<string> testWords = new List<string>(){
                 "aan", "aanbod", "aanraken", "aanval", "aap", "aardappel", "aarde", "aardig", "acht", "achter", "actief", "activiteit", "ademen", "af", "afgelopen", "afhangen", "afmaken", "afname", "afspraak", "afval", "al", "algemeen", "alleen", "alles", "als", "alsjeblieft", "altijd", "ander", "andere", "anders", "angst", "antwoord", "antwoorden", "appel", "arm", "auto", "avond", "avondeten",
                 "baan", "baby", "bad", "bal", "bang", "bank", "basis", "bed", "bedekken", "bedreiging", "bedreven", "been", "beer", "beest", "beetje", "begin", "begrijpen", "begrip", "behalve", "beide", "beker", "bel", "belangrijk", "bellen", "belofte", "beneden", "benzine", "berg", "beroemd", "beroep", "bescherm", "beslissen", "best", "betalen", "beter", "bevatten", "bewegen", "bewolkt", "bezoek", "bibliotheek", "bieden", "bij", "bijna", "bijten", "bijvoorbeeld", "bijzonder", "binnen", "binnenkort", "blad", "blauw", "blazen", "blij", "blijven", "bloed", "bloem", "bodem", "boek", "boerderij", "boete", "boom", "boon", "boord", "boos", "bord", "borstelen", "bos", "bot", "bouwen", "boven", "branden", "brandstof", "breed", "breken", "brengen", "brief", "broer", "broek", "brood", "brug", "bruikbaar", "bruiloft", "bruin", "bui", "buiten", "bureau", "buren", "bus", "buurman", "buurvrouw",
                 "cadeau", "chocolade", "cirkel", "comfortabel", "compleet", "computer", "conditie", "controle", "cool", "correct",
@@ -38,35 +38,35 @@ namespace TypTop.Gui.UnitTests
                 "vaak", "vaarwel", "vader", "vak", "vakantie", "vallen", "vals", "van", "vandaag", "vangen", "vanmorgen", "vannacht", "varken", "vast", "vechten", "veel", "veer", "veilig", "ver", "veranderen", "verandering", "verder", "verdienen", "verdrietig", "verenigen", "verf", "vergelijkbaar", "vergelijken", "vergelijking", "vergeten", "vergeven", "vergissen", "verhaal", "verhoging", "verjaardag", "verkeerd", "verkopen", "verlaten", "verleden", "verliezen", "vernietigen", "veroveren", "verrassen", "vers", "verschil", "verschrikkelijk", "verspreiden", "verstand", "verstoppen", "versturen", "vertellen", "vertrekken", "vertrouwen", "verwachten", "verwijderen", "verzamelen", "verzameling", "vet", "vier", "vierkant", "vies", "vijand", "vijf", "vijver", "vinden", "vinger", "vis", "vlag", "vlees", "vlieg", "vliegtuig", "vloer", "voeden", "voedsel", "voelen", "voet", "voetbal", "vogel", "vol", "volgende", "volgorde", "voor", "voorbeeld", "voorkomen", "voorzichtig", "voorzien", "vork", "vorm", "vos", "vouwen", "vraag", "vragen", "vrede", "vreemd", "vreemde", "vriend", "vriendelijk", "vriezen", "vrij", "vrijheid", "vroeg", "vroeger", "vrouw", "vullen", "vuur",
                 "waar", "waarom", "waarschijnlijk", "wachten", "wakker", "wanneer", "want", "wapen", "warm", "wassen", "wat", "water", "we", "week", "weer", "weg", "welke", "welkom", "wens", "wereld", "werelddeel", "werk", "west", "wetenschap", "wie", "wiel", "wij", "wijn", "wijs", "wild", "willen", "wind", "winkel", "winnen", "winter", "wissen", "wit", "wolf", "wolk", "wonder", "woord", "woud", "wreed",
                 "zaak", "zacht", "zak", "zand", "zee", "zeep", "zeer", "zeggen", "zeil", "zeker", "zelfde", "zes", "zetten", "zeven", "ziek", "ziekenhuis", "ziel", "zien", "zij", "zijn", "zilver", "zingen", "zinken", "zitten", "zo", "zoals", "zoeken", "zoet", "zomer", "zon", "zonder", "zonnig", "zoon", "zorg", "zorgen", "zou", "zout", "zuid", "zulke", "zullen", "zus", "zwaar", "zwak", "zwembad", "zwemmen"
-        ***REMOVED***;
+            };
         
         [TestMethod]
         public void LimitByCharacter_LeftMiddleRow_ListOfWords()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
 
             _wp.LoadTestWords(testWords);
 
             List<Word> answer = new List<Word>()
-            ***REMOVED***
+            {
                 new Word("af"),
                 new Word("dag")
-        ***REMOVED***;
+            };
 
             List<char> testChars = new List<char>()
-            ***REMOVED***
+            {
                 'a','s','d','f','g'
-        ***REMOVED***;
+            };
 
             //Filter
             _wp.LimitByCharacter(testChars);
 
             Assert.AreEqual(answer, _wp.Serve());
-    ***REMOVED***
+        }
 
         [TestMethod]
         public void Shuffle_ListOfStrings_AreNotEqual()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
 
             _wp.LoadTestWords(testWords);
@@ -78,86 +78,86 @@ namespace TypTop.Gui.UnitTests
             _wp.Shuffle();
 
             Assert.AreNotEqual(wpCopy.Serve(), _wp.Serve());
-    ***REMOVED***
+        }
 
         [TestMethod]
         public void WordLimit_Five_FirstFive()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
             _wp.LoadTestWords(testWords);
             _wp.WordLimit(5);
 
             List<Word> answer = new List<Word>()
-            ***REMOVED***
+            {
                 new Word("aan"),
                 new Word("aanbod"),
                 new Word("aanraken"),
                 new Word("aanval"),
                 new Word("aap")
-        ***REMOVED***;
+            };
 
             Assert.AreEqual(answer, _wp.Serve());
-    ***REMOVED***
+        }
 
         [TestMethod]
         public void SetMaxWordLength_One_WordsWithOneLetter()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
             _wp.LoadTestWords(testWords);
             _wp.SetMaxWordLength(1);
 
             List<Word> answer = new List<Word>()
-            ***REMOVED***
+            {
                 new Word("u"),
-        ***REMOVED***;
+            };
 
             Assert.AreEqual(answer, _wp.Serve());
-    ***REMOVED***
+        }
 
         [TestMethod]
         public void SetMinWordLength_MinLengthOfTwo_WordsInCollectionNotSame()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
             _wp.LoadTestWords(testWords);
             _wp.SetMinWordLength(2);
 
             List<Word> wordsWithOneLetter = new List<Word>()
-            ***REMOVED***
+            {
                 new Word("u"),
                 new Word("i"),
                 new Word("p"),
                 new Word("w"),
-        ***REMOVED***;
+            };
 
             int amountSame = (from w in _wp.Serve() from wwOL in wordsWithOneLetter where w.Letters == wwOL.Letters select w).Count();
 
             Assert.True(amountSame == 0);
-    ***REMOVED***
+        }
 
         [TestMethod]
         public void UsageOfCharacter_Z_MoreThenOneWord()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
             _wp.LoadTestWords(testWords);
 
             List<char> testChars = new List<char>()
-            ***REMOVED***
+            {
                 'z'
-        ***REMOVED***;
+            };
 
             _wp.UsageOfCharacter(testChars);
 
             List<Word> answer = new List<Word>()
-            ***REMOVED***
+            {
                 new Word("zaak"),
-        ***REMOVED***;
+            };
 
             Assert.AreNotEqual(answer, _wp.Serve());
-    ***REMOVED***
+        }
 
         [TestMethod]
         public void ResetToEmpty_reset_EmptyServe()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
             _wp.LoadTestWords(testWords);
             _wp.Shuffle();
@@ -168,15 +168,15 @@ namespace TypTop.Gui.UnitTests
             WordProvider answer = new WordProvider();
 
             Assert.AreEqual(answer.Serve(), _wp.Serve());
-    ***REMOVED***
+        }
 
         [TestMethod]
         [ExpectedException(typeof(NullReferenceException),
             "Variable WordProvider.WordsToServe is empty or not set.")]
         public void AreWordsSet_NoWords_Exception()
-        ***REMOVED***
+        {
             _wp = new WordProvider();
             _wp.AreWordsSet();
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

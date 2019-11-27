@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-***REMOVED***
-***REMOVED***
+namespace TypTop.Database
+{
     public class Word
-    ***REMOVED***
+    {
         [Key]
-        public string Letters ***REMOVED*** get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public string Letters { get; set; }
+    }
+}

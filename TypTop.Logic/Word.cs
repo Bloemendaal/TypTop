@@ -1,45 +1,45 @@
-***REMOVED***
-***REMOVED***
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-***REMOVED***
+using System.Text;
 using System.Threading.Tasks;
 
 namespace TypTop.Logic
-***REMOVED***
+{
     public class Word
-    ***REMOVED***
+    {
         //
         // Summary:
         //     Index of the character that is currently being checked by the program.
         public int Index
-        ***REMOVED***
+        {
             get => _index;
             set
-            ***REMOVED***
+            {
                 _index = value;
                 if (_index >= Letters.Length)
-                ***REMOVED***
+                {
                     _index = Letters.Length - 1;
-            ***REMOVED***
+                }
                 if (_index < 0)
-                ***REMOVED***
+                {
                     _index = 0;
-            ***REMOVED***
-        ***REMOVED***
-    ***REMOVED***
+                }
+            }
+        }
         private int _index = 0;
 
 
         //
         // Summary:
         //     The word saved as a string.
-        public string Letters ***REMOVED*** get; private set; ***REMOVED***
+        public string Letters { get; private set; }
 
 
         //
         // Summary:
         //     Gives the input given by the user for this word.
-        public Stack<char> Input ***REMOVED*** get; set; ***REMOVED***
+        public Stack<char> Input { get; set; }
 
 
         //
@@ -59,9 +59,9 @@ namespace TypTop.Logic
 
 
         public Word(string letters)
-        ***REMOVED***
+        {
             Letters = letters;
-    ***REMOVED***
+        }
 
 
         //
@@ -70,30 +70,30 @@ namespace TypTop.Logic
         // Returns:
         //     True if valid.
         public bool ValidIndex(int index)
-        ***REMOVED***
+        {
             return index >= 0 && index < Letters.Length;
-    ***REMOVED***
+        }
 
 
         //
         // Summary:
         //     Removes the last character from the Input and lowers the input by one
         public void Backspace()
-        ***REMOVED***
+        {
             Input.Pop();
             Index--;
-    ***REMOVED***
+        }
 
 
         public override string ToString() => Letters;
         public override bool Equals(object obj)
-        ***REMOVED***
+        {
             if (obj is Word word)
-            ***REMOVED***
+            {
                 return word.Letters != null && Letters != null && word.Letters.Equals(Letters);
-        ***REMOVED***
+            }
 
             return false;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

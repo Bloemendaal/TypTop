@@ -4,11 +4,11 @@ using System.Windows;
 using System.Windows.Input;
 
 namespace TypTop.VisualKeyboard
-***REMOVED***
+{
     public class KeyFactory
-    ***REMOVED***
+    {
         public KeyboardKey CreateKey(Key key, KeyStyle style)
-        ***REMOVED***
+        {
             var normalKeySize = new Size(50, 50);//A key
             var ctrlKeySize = new Size(62.5D, 50);//A key
             var tabSize = new Size(75, 50);//Caps key
@@ -18,12 +18,12 @@ namespace TypTop.VisualKeyboard
             var rightShiftSize = new Size(160, 50); // Right Shift
             var spaceSize = new Size(312.5D, 50);
             if (key >= Key.A && key <= Key.Z)
-            ***REMOVED***
+            {
                 return CreateSingleSymbolKey(key, normalKeySize, style);
-        ***REMOVED***
+            }
 
             switch (key)
-            ***REMOVED***
+            {
                 case Key.D1:
                     return CreateDualSymbolKey(key, "!", "1", normalKeySize, style);
                 case Key.D2:
@@ -51,9 +51,9 @@ namespace TypTop.VisualKeyboard
                 case Key.OemTilde:
                     return CreateDualSymbolKey(key, "~", "`", normalKeySize, style);
                 case Key.OemOpenBrackets:
-                    return CreateDualSymbolKey(key, "***REMOVED***", "[", normalKeySize, style);
+                    return CreateDualSymbolKey(key, "{", "[", normalKeySize, style);
                 case Key.OemCloseBrackets:
-                    return CreateDualSymbolKey(key, "***REMOVED***", "]", normalKeySize, style);
+                    return CreateDualSymbolKey(key, "}", "]", normalKeySize, style);
                 case Key.OemPipe:
                     return CreateDualSymbolKey(key, "|", "\\", tabSize, style);
                 case Key.OemSemicolon:
@@ -102,53 +102,53 @@ namespace TypTop.VisualKeyboard
 
                 default:
                     throw new InvalidEnumArgumentException();
-        ***REMOVED***
-    ***REMOVED***
+            }
+        }
 
         private KeyboardKey CreateTextKey(Key key, string text, Size size, KeyStyle style,
             HorizontalAlignment horizontalAlignment = default,
             VerticalAlignment verticalAlignment = default,
             Vector2 offset = default
             )
-        ***REMOVED***
+        {
             var textPrintDrawer = new TextPrintDrawer(text, style)
-            ***REMOVED***
+            {
                 HorizontalAlignment = horizontalAlignment,
                 VerticalAlignment = verticalAlignment,
                 Offset = offset
-        ***REMOVED***;
+            };
             var keyboardKey = new PrintedKey(key, size, style, textPrintDrawer);
-            keyboardKey.StyleChanged += (o, e) => ***REMOVED*** textPrintDrawer.Style = e.KeyStyle; ***REMOVED***;
+            keyboardKey.StyleChanged += (o, e) => { textPrintDrawer.Style = e.KeyStyle; };
             return keyboardKey;
-    ***REMOVED***
+        }
 
         private KeyboardKey CreateSingleSymbolKey(Key key,Size size, KeyStyle style)
-        ***REMOVED***
+        {
             return CreateTextKey(key,key.ToString(), size,style, offset: new Vector2(3,3));
-    ***REMOVED***
+        }
 
         private KeyboardKey CreateDualSymbolKey(Key key,string firstSymbol, string secondSymbol, Size size, KeyStyle style)
-        ***REMOVED***
+        {
             var firstSymbolPrinter = new TextPrintDrawer(firstSymbol, style)
-            ***REMOVED***
+            {
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Top,
                 Offset = new Vector2(3, 0)
-        ***REMOVED***;
+            };
 
             var secondSymbolPrinter = new TextPrintDrawer(secondSymbol, style)
-            ***REMOVED***
+            {
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Bottom,
                 Offset = new Vector2(3, -7)
-        ***REMOVED***;
+            };
             var keyboardKey = new PrintedKey(key, size, style, firstSymbolPrinter, secondSymbolPrinter);
             keyboardKey.StyleChanged += (o, e) =>
-            ***REMOVED***
+            {
                 firstSymbolPrinter.Style = e.KeyStyle;
                 secondSymbolPrinter.Style = e.KeyStyle;
-        ***REMOVED***;
+            };
             return keyboardKey;
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+        }
+    }
+}

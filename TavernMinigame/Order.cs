@@ -1,16 +1,16 @@
 ﻿using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 using System;
-***REMOVED***
-***REMOVED***
+using System.Collections.Generic;
+using System.Text;
 using System.Windows.Media.Imaging;
 
 namespace TavernMinigame
-***REMOVED***
+{
     public class Order : Entity
-    ***REMOVED***
+    {
         public enum OrderType
-        ***REMOVED***
+        {
             Salad,
             Fries,
             Burger,
@@ -22,18 +22,18 @@ namespace TavernMinigame
             OrangeJuice,
             Coffee,
             Tea
-    ***REMOVED***
+        }
 
-        public OrderType Type ***REMOVED*** get; private set; ***REMOVED***
+        public OrderType Type { get; private set; }
 
         public Order(OrderType type, Game game) : base(game)
-        ***REMOVED***
+        {
             Type = type;
             AddComponent(new PositionComponent());
-            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/***REMOVED***Type.ToString().ToLower()***REMOVED***.png", UriKind.Relative)))
-            ***REMOVED***
+            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/{Type.ToString().ToLower()}.png", UriKind.Relative)))
+            {
                 Width = 200
-        ***REMOVED***);
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+            });
+        }
+    }
+}

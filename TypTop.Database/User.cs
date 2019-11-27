@@ -1,21 +1,21 @@
-***REMOVED***
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-***REMOVED***
-***REMOVED***
+namespace TypTop.Database
+{
     public class User
-    ***REMOVED***
+    {
         [Key]
-        public int UserId ***REMOVED*** get; set; ***REMOVED***
+        public int UserId { get; set; }
         [Required]
-        public string Username ***REMOVED*** get; set; ***REMOVED***
+        public string Username { get; set; }
         [Required]
-        public string Password ***REMOVED*** get; set; ***REMOVED***
+        public string Password { get; set; }
         [Required]
-        public string Salt ***REMOVED*** get; set; ***REMOVED***
-        public DateTime LastLogin ***REMOVED*** get; set; ***REMOVED***
+        public string Salt { get; set; }
+        public DateTime LastLogin { get; set; }
         [Required]
-        public bool Teacher ***REMOVED*** get; set; ***REMOVED***
-        public int TeacherId ***REMOVED*** get; set; ***REMOVED***
-***REMOVED***
-***REMOVED***
+        public bool Teacher { get; set; }
+        public int TeacherId { get; set; }
+    }
+}

@@ -2,13 +2,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:TypTop.GameWindow">
-    <Style TargetType="***REMOVED***x:Type local:GameWindow***REMOVED***">
+    <Style TargetType="{x:Type local:GameWindow}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="***REMOVED***x:Type local:GameWindow***REMOVED***">
-                    <Border Background="***REMOVED***TemplateBinding Background***REMOVED***"
-                            BorderBrush="***REMOVED***TemplateBinding BorderBrush***REMOVED***"
-                            BorderThickness="***REMOVED***TemplateBinding BorderThickness***REMOVED***">
+                <ControlTemplate TargetType="{x:Type local:GameWindow}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
