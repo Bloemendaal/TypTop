@@ -1,4 +1,5 @@
 ﻿using Konscious.Security.Cryptography;
+using System;
 ***REMOVED***
 using System.Linq;
 using System.Security.Cryptography;
@@ -45,7 +46,7 @@ namespace TypTop.Gui
     ***REMOVED***
 
         ///<summary>
-        /// Opens a dialog in which the user enters the username and password of a new account and adds it to the database if valid.
+        /// Changes view to window in which the user enters the username and password of a new account and adds it to the database if valid.
         /// </summary>
         private void NewAccountButton_Click(object sender, RoutedEventArgs e)
         ***REMOVED***
@@ -105,25 +106,39 @@ namespace TypTop.Gui
         ***REMOVED***
             if (CreationUsernameBox.Text != "" && CreationPasswordBox.Password != "")
             ***REMOVED***
-                if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
+                using (var db = new Database.Context())
                 ***REMOVED***
-                    if (!accounts.ContainsKey(CreationUsernameBox.Text))
+                    if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
                     ***REMOVED***
-                        byte[] salt = CreateSalt();
-                        accounts.Add(CreationUsernameBox.Text, HashPassword(CreationPasswordBox.Password, salt));
-                        salts.Add(CreationUsernameBox.Text, salt);
-                        LoginCanvas.Visibility = Visibility.Visible;
+                        if (!db.User.Where(user => user.Username.Equals(CreationUsernameBox.Text)).Any())
+                        ***REMOVED***
+                            byte[] saltBytes = CreateSalt();
+                            string salt = Encoding.ASCII.GetString(saltBytes);
+
+                            db.Add(new Database.User
+                            ***REMOVED***
+                                UserId = 0,
+                                Username = CreationUsernameBox.Text,
+                                Password = CreationPasswordBox.Password,
+                                Salt = salt,
+                                Teacher = (bool)AccountTypeCheckbox.IsChecked
+                        ***REMOVED***);
+                            db.SaveChanges();
+
+                            
+                            LoginCanvas.Visibility = Visibility.Visible;
+                    ***REMOVED***
+                        else
+                        ***REMOVED***
+                            MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                    ***REMOVED***
                 ***REMOVED***
                     else
                     ***REMOVED***
-                        MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                        MessageBox.Show("Wachtwoord niet bevestigd.");
                 ***REMOVED***
-            ***REMOVED***
-                else
-                ***REMOVED***
-                    MessageBox.Show("Wachtwoord niet bevestigd.");
-            ***REMOVED***
 
+            ***REMOVED***
         ***REMOVED***
             else
             ***REMOVED***

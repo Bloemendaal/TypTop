@@ -1,7 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20191126132700_UpdateSalt.cs" />
+    <Compile Remove="Migrations\20191126132700_UpdateSalt.Designer.cs" />
+    <Compile Remove="Migrations\20191127092221_Salt.cs" />
+    <Compile Remove="Migrations\20191127092221_Salt.Designer.cs" />
+    <Compile Remove="Migrations\20191127092936_SaltString.cs" />
+    <Compile Remove="Migrations\20191127092936_SaltString.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>
