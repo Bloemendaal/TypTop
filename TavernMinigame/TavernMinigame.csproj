@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
+    <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Images\background.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\burger.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -38,6 +42,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\tea.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\tile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
