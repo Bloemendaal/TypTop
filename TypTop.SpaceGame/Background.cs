@@ -11,7 +11,7 @@ namespace Typop.SpaceGame
 {
     public class Background : Entity
     {
-        public Background(Game game) : base("background", game)
+        public Background(Game game) : base(game)
         {
             AddComponent(new PositionComponent()
             {

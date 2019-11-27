@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Shapes;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
-using TypTop.Gui.SpaceGame;
 using TypTop.Logic;
 
 namespace TypTop.GameGui
