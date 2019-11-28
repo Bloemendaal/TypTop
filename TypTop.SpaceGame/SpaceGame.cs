@@ -45,6 +45,11 @@ namespace TypTop.SpaceGame
             AddEntity(new Line(this));
 
             TextInput += OnTextInput;
+
+            AddTimer(() =>
+            {
+                Console.WriteLine("Timer tick");
+            }, 1000);
         }
 
         private Queue<Enemy> MakeEnemyQueue(List<Enemy> enemyList)
