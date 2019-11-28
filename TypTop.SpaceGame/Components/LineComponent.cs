@@ -10,7 +10,7 @@ namespace TypTop.SpaceGame
 {
     public class LineComponent : Component, IDrawable
     {
-        private PositionComponent pc;
+        private PositionComponent _positionComponent;
         public void Draw(DrawingContext context)
         {
             Pen pen = new Pen(Brushes.YellowGreen, 5);
@@ -19,14 +19,14 @@ namespace TypTop.SpaceGame
                 new double[] { 5, 5 }, 0);
             pen.DashStyle = dash_style1;
             
-            Point point1 = new Point(0, 950);
-            Point point2 = new Point(1920, 950);
+            Point point1 = new Point(0, _positionComponent.Y);
+            Point point2 = new Point(1920, _positionComponent.Y);
             context.DrawLine(pen, point1, point2);
             
         }
         public override void AddedToEntity()
         {
-            pc = Entity.GetComponent<PositionComponent>();
+            _positionComponent = Entity.GetComponent<PositionComponent>();
         }
     }
 }

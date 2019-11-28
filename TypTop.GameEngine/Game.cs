@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Channels;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -17,6 +19,42 @@ namespace BasicGameEngine
 
         public const double Width = 1920;
         public const double Height = 1080;
+
+        private readonly HashSet<ITimed> _timedObjects = new HashSet<ITimed>();
+
+        public ITimer AddTimer(Action callback, int interval)
+        {
+            var gameTimer = new GameTimer(callback, interval);
+            _timedObjects.Add(gameTimer);
+            return gameTimer;
+        }
+
+        public void AddDelayedAction(Action callback, int millisecondsDelay, CancellationToken cancellationToken = default)
+        {
+            _timedObjects.Add(new DelayedAction(callback, millisecondsDelay, cancellationToken));
+        }
+
+        private void RunTimedObjects(double deltaTime)
+        {
+            List<ITimed> removedTimers = null;
+            foreach (ITimed timedObject in _timedObjects)
+            {
+                if (timedObject.IncrementTime(deltaTime))
+                {
+                    if(removedTimers == null)
+                        removedTimers = new List<ITimed>();
+
+                    removedTimers.Add(timedObject);
+                }
+            }
+            if (removedTimers != null)
+            {
+                foreach (ITimed removedTimer in removedTimers)
+                {
+                    _timedObjects.Remove(removedTimer);
+                }
+            }
+        }
 
         public void AddEntity(Entity entity)
         {
@@ -49,6 +87,8 @@ namespace BasicGameEngine
             {
                 entity.Update(deltaTime);
             }
+
+            RunTimedObjects(deltaTime);
         }
 
         public void Draw(DrawingContext drawingContext)
