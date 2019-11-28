@@ -24,17 +24,18 @@ namespace TypTop.SpaceGame
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
 
-            // Sort enemy by height
-
             EnemyQueue = MakeEnemyQueue(Level.EnemyList);
             _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
             {
-                RemoveOnSpace = true
+                RemoveOnSpace = false,
+                RemoveOnFinished = true
             };
+
             // 
             // Adding entities 
             //
-            //AddEntity(new Background(this));
+
+            AddEntity(new Background(this));
 
             foreach (var enemy in EnemyQueue)
             {
@@ -43,6 +44,10 @@ namespace TypTop.SpaceGame
 
             AddEntity(Player);
             AddEntity(new Line(this));
+
+            //
+            // Events
+            //
 
             TextInput += OnTextInput;
         }
@@ -72,23 +77,21 @@ namespace TypTop.SpaceGame
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputQueue.TextInput(e.Text);
-            if (_inputQueue.Input.Peek().Finished)
+
+            foreach (var entity in this.ToList())
             {
-                foreach (var entity in this)
+                if (entity is Enemy enemy && enemy.Word.Finished)
                 {
-                    if (entity is Enemy enemy)
+                    if (Equals(enemy.Word, EnemyQueue.First().Word))
                     {
-                        if (Equals(enemy.Word, _inputQueue.Input.Peek()))
-                        {
-                            var currentEnemy = enemy.GetComponent<WordComponent>();
-                            currentEnemy.Color = Brushes.GreenYellow;
-                            currentEnemy.TypedColor = Brushes.GreenYellow;
-                        }
+                        var currentEnemy = enemy.GetComponent<WordComponent>();
+                        currentEnemy.Color = Brushes.GreenYellow;
+                        currentEnemy.TypedColor = Brushes.BlanchedAlmond;
+                        RemoveEntity(enemy);
+                        EnemyQueue.Dequeue();
                     }
                 }
-                
             }
-            
         }
     }
 }
