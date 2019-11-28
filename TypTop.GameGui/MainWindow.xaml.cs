@@ -6,6 +6,7 @@ using System.Windows.Shapes;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 using TypTop.Logic;
+using TavernMinigame;
 
 namespace TypTop.GameGui
 {
@@ -18,6 +19,14 @@ namespace TypTop.GameGui
         {
             InitializeComponent();
             PreviewTextInput += OnPreviewTextInput;
+
+            WordProvider wordProvider = new WordProvider()
+            {
+                MaxWordLength = 8,
+                MinWordLength = 3
+            };
+            wordProvider.LoadTestWords();
+            // GameWindow.Start(new TavernGame(3, wordProvider.Serve()));
             GameWindow.Start(new SpaceGame.SpaceGame());
         }
 

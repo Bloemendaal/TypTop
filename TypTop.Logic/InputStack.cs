@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    class InputStack : Input
+    public class InputStack : Input
     {
         public Stack<Word> Input;
         public InputStack(Stack<Word> input)

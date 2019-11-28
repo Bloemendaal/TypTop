@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    abstract class Input
+    public abstract class Input
     {
         //
         // Summary:

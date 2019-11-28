@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using TypTop.Logic;
 
 namespace TavernMinigame
 {
@@ -49,6 +50,9 @@ namespace TavernMinigame
             }
         }
         private List<Tile> _tiles;
+        private List<Word> _words;
+
+        private InputList _inputList;
 
         public List<Order> GetOrder(int amount)
         {
@@ -61,8 +65,12 @@ namespace TavernMinigame
             return result;
         }
 
-        public TavernGame(int tileAmount)
+        public TavernGame(int tileAmount, List<Word> words)
         {
+            _words = words;
+            _inputList = new InputList(_words);
+
+
             AddEntity(new Background(this));
             TileAmount = tileAmount;
             _tiles.ForEach(t => {
