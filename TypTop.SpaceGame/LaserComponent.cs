@@ -11,10 +11,10 @@ namespace TypTop.SpaceGame
 {
     public class LaserComponent : Component, IDrawable
     {
-        private PositionComponent _positionComponentPlayer;
-        private PositionComponent _positionComponentEnemy;
-        private ImageComponent _imageComponentPlayer;
-        private ImageComponent _imageComponentEnemy;
+        private readonly PositionComponent _positionComponentPlayer;
+        private readonly PositionComponent _positionComponentEnemy;
+        private readonly ImageComponent _imageComponentPlayer;
+        private readonly ImageComponent _imageComponentEnemy;
 
         public LaserComponent(SpaceGame game)
         {
