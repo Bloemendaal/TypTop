@@ -27,13 +27,15 @@ namespace TypTop.SpaceGame
             // Sort enemy by height
 
             EnemyQueue = MakeEnemyQueue(Level.EnemyList);
-            _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue));
-
+            _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
+            {
+                RemoveOnSpace = true
+            };
             // 
             // Adding entities 
             //
             //AddEntity(new Background(this));
-            
+
             foreach (var enemy in EnemyQueue)
             {
                 AddEntity(enemy);
@@ -72,9 +74,19 @@ namespace TypTop.SpaceGame
             _inputQueue.TextInput(e.Text);
             if (_inputQueue.Input.Peek().Finished)
             {
-                var first = this.First().GetComponent<WordComponent>();
-                first.Color = Brushes.GreenYellow;
-                first.TypedColor = Brushes.GreenYellow;
+                foreach (var entity in this)
+                {
+                    if (entity is Enemy enemy)
+                    {
+                        if (Equals(enemy.Word, _inputQueue.Input.Peek()))
+                        {
+                            var currentEnemy = enemy.GetComponent<WordComponent>();
+                            currentEnemy.Color = Brushes.GreenYellow;
+                            currentEnemy.TypedColor = Brushes.GreenYellow;
+                        }
+                    }
+                }
+                
             }
             
         }
