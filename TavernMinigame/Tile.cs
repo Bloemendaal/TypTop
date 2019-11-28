@@ -10,7 +10,14 @@ namespace TavernMinigame
     public class Tile : Entity
     {
         public Order Order { get; private set; }
-        public Word Word { get; set; }
+        public Word Word {
+            get => _word;
+            set {
+                _word = value;
+                GetComponent<WordComponent>().Word = Word;
+            } 
+        }
+        private Word _word;
 
         public const double Width = 200;
         public const double HeightOffset = 100;
@@ -37,6 +44,13 @@ namespace TavernMinigame
             }
 
             Order.GetComponent<PositionComponent>().Position = new System.Numerics.Vector2(x + (float)addWidth, (float)(GetComponent<ImageComponent>().Height - Order.GetComponent<ImageComponent>().Height) / 2);
+
+            AddComponent(new WordComponent()
+            {
+                TransformX = (float)Width / 2,
+                TransformY = (float)(HeightOffset * 1.8),
+                Center = true
+            });
         }
     }
 }

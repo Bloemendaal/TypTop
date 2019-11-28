@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TypTop.Database;
-using Word = TypTop.Logic.Word;
 
 namespace TypTop.Logic
 {

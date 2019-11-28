@@ -29,7 +29,12 @@ namespace TypTop.SpaceGame
             {
                 Velocity = new Vector2(0, (float)speed)
             });
-            AddComponent(new WordComponent(word, Brushes.Red));
+            AddComponent(new WordComponent(word, Brushes.Red, Brushes.DarkRed)
+            {
+                TransformX = 75,
+                TransformY = 150,
+                Center = true
+            });
             AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/enemy.png", UriKind.Relative)))
             {
                 Width = 150
