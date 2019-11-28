@@ -64,6 +64,11 @@ namespace TypTop.Logic
                 CurrentChar = letter
             });
 
+            if (RemoveOnFinished && Input.Finished)
+            {
+                Input = null;
+            }
+
             base.TextInput(letter);
         }
         public override void Backspace()

@@ -79,6 +79,11 @@ namespace TypTop.Logic
                     PreviousChar = PreviousChar,
                     CurrentChar = letter
                 });
+
+                if (RemoveOnFinished)
+                {
+                    Input = Input.Where(e => !e.Finished).ToList();
+                }
             }
 
             base.TextInput(letter);

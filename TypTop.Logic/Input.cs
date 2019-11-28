@@ -80,6 +80,12 @@ namespace TypTop.Logic
 
         //
         // Summary:
+        //     Remove the a word when it is finished.
+        public bool RemoveOnFinished = true;
+
+
+        //
+        // Summary:
         //     Updates all the requested words with the given char.
         // Parameters:
         //     letter:
