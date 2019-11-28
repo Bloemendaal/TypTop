@@ -48,8 +48,10 @@ namespace TavernMinigame
             AddComponent(new WordComponent()
             {
                 TransformX = (float)Width / 2,
-                TransformY = (float)(HeightOffset * 1.8),
-                Center = true
+                TransformY = (float)(HeightOffset * 1.72),
+                Center = true,
+                FontSize = 40,
+                Typeface = new System.Windows.Media.Typeface("MV Boli")
             });
         }
     }

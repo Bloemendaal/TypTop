@@ -27,6 +27,7 @@ namespace BasicGameEngine.GameEngine.Components
         public SolidColorBrush Color = Brushes.Black;
         public SolidColorBrush TypedColor = Brushes.Gray;
         public Typeface Typeface = new Typeface("Myriad");
+        public int FontSize = 30;
 
 
         public Word Word { 
@@ -39,7 +40,7 @@ namespace BasicGameEngine.GameEngine.Components
                     CultureInfo.GetCultureInfo("en-us"),
                     FlowDirection.LeftToRight,
                     Typeface,
-                    30,
+                    FontSize,
                     Color
                 );
             } 
@@ -70,6 +71,7 @@ namespace BasicGameEngine.GameEngine.Components
                 {
                     _formattedText.SetFontTypeface(Typeface);
                 }
+                _formattedText.SetFontSize(FontSize);
 
                 context.DrawText(_formattedText, new Point(X, Y));
             }

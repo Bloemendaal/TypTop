@@ -35,5 +35,15 @@ namespace TavernMinigame
                 Width = 200
             });
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Order order)
+            {
+                return order.Type == Type;
+            }
+
+            return false;
+        }
     }
 }

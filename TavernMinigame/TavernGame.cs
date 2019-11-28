@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
+using System.Linq;
 using TypTop.Logic;
+using System.Windows.Input;
 
 namespace TavernMinigame
 {
@@ -60,7 +62,73 @@ namespace TavernMinigame
         private List<Tile> _tiles;
         private Queue<Word> _words;
 
-        private InputList _inputList;
+        private readonly InputList _inputList = new InputList(null);
+
+        public enum PlayVariant { Default, TimeBased, BossBattle }
+        public PlayVariant Variant = PlayVariant.Default;
+
+        public bool AngryCustomers = false;
+
+        public int MaxCustomers
+        {
+            get => _maxCustomers;
+            set
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+
+                _maxCustomers = value;
+            }
+        }
+        private int _maxCustomers;
+
+        private readonly List<Customer> _customers = new List<Customer>();
+        private readonly Queue<Customer> _customerQueue = new Queue<Customer>();
+
+
+        public TavernGame(int tileAmount, List<Word> words)
+        {
+            _words = new Queue<Word>(words);
+
+            AddEntity(new Background(this));
+            TileAmount = tileAmount;
+
+            TextInput += OnTextInput;
+        }
+
+        public void AddCustomer(Customer customer)
+        {
+            if (_customers.Count >= MaxCustomers)
+            {
+                _customerQueue.Enqueue(customer);
+            }
+            else
+            {
+                _customers.Add(customer);
+                UpdateWordlist();
+            }
+        }
+        public bool NextCustomer()
+        {
+            if (_customerQueue.Count > 0 && _customers.Count < MaxCustomers)
+            {
+                _customers.Add(_customerQueue.Dequeue());
+                UpdateWordlist();
+                return true;
+            }
+
+            return false;
+        }
+        public bool RemoveCustomer(Customer customer) => _customers.Remove(customer);
+
+
+        public void UpdateWordlist()
+        {
+            _inputList.Input = _tiles.Where(t => _customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList();
+        }
+
 
         public List<Order> GetOrder(int amount)
         {
@@ -73,12 +141,17 @@ namespace TavernMinigame
             return result;
         }
 
-        public TavernGame(int tileAmount, List<Word> words)
-        {
-            _words = new Queue<Word>(words);
 
-            AddEntity(new Background(this));
-            TileAmount = tileAmount;
+        private void OnTextInput(object sender, TextCompositionEventArgs e)
+        {
+            _inputList.TextInput(e.Text);
+            _tiles.ForEach(c =>
+            {
+                if (c.Word.Finished)
+                {
+                    c.Word = _words.Dequeue();
+                }
+            });
         }
     }
 }
