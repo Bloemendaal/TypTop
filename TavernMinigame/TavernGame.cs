@@ -60,7 +60,7 @@ namespace TavernMinigame
             }
         }
         private List<Tile> _tiles;
-        private Queue<Word> _words;
+        private readonly Queue<Word> _words;
 
         private readonly InputList _inputList = new InputList(null);
 
@@ -87,6 +87,8 @@ namespace TavernMinigame
         private readonly List<Customer> _customers = new List<Customer>();
         private readonly Queue<Customer> _customerQueue = new Queue<Customer>();
 
+        private readonly ITimer _timer;
+
 
         public TavernGame(int tileAmount, List<Word> words)
         {
@@ -96,6 +98,12 @@ namespace TavernMinigame
             TileAmount = tileAmount;
 
             TextInput += OnTextInput;
+
+            _timer = AddTimer(() =>
+            {
+                AddCustomer(new Customer(this));
+                _timer.Interval = Rnd.Next(3000, 5000);
+            }, Rnd.Next(3000, 5000));
         }
         
 
@@ -108,7 +116,8 @@ namespace TavernMinigame
             else
             {
                 _customers.Add(customer);
-                AddEntity(customer);
+                customer.UpdatePosition(CustomerIndex(customer));
+                customer.AddEntities();
                 UpdateWordlist();
             }
         }
@@ -116,14 +125,26 @@ namespace TavernMinigame
         {
             if (_customerQueue.Count > 0 && _customers.Count < MaxCustomers)
             {
-                _customers.Add(_customerQueue.Dequeue());
+                Customer next = _customerQueue.Dequeue();
+                _customers.Add(next);
+                next.UpdatePosition(CustomerIndex(next));
+                next.AddEntities();
                 UpdateWordlist();
                 return true;
             }
 
             return false;
         }
-        public bool RemoveCustomer(Customer customer) => _customers.Remove(customer);
+        public bool RemoveCustomer(Customer customer) {
+            bool result = _customers.Remove(customer);
+            if (result && _customers.Count > 0)
+            {
+                _customers.ForEach(c => c.UpdatePosition(CustomerIndex(c)));
+            }
+            UpdateWordlist();
+            return result;
+        }
+        public int CustomerIndex(Customer customer) => _customers.IndexOf(customer);
 
 
         public void UpdateWordlist()
@@ -137,7 +158,16 @@ namespace TavernMinigame
             List<Order> result = new List<Order>();
             for (int i = 0; i < amount; i++)
             {
-                result.Add(_tiles[Rnd.Next(0, TileAmount)].Order);
+                Order o = new Order(_tiles[Rnd.Next(0, TileAmount)].Order.Type, this);
+
+                o.GetComponent<ImageComponent>().Width = 190;
+                if (o.GetComponent<ImageComponent>().Height > 190)
+                {
+                    o.GetComponent<ImageComponent>().Height = 190;
+                    o.GetComponent<ImageComponent>().Width = null;
+                }
+
+                result.Add(o);
             }
 
             return result;
@@ -152,6 +182,21 @@ namespace TavernMinigame
                 if (c.Word.Finished)
                 {
                     c.Word = _words.Dequeue();
+                    foreach (Customer customer in _customers)
+                    {
+                        if (customer.RemoveOrder(c.Order))
+                        {
+                            if (customer.Count == 0)
+                            {
+                                customer.RemoveEntities();
+                                RemoveCustomer(customer);
+                                NextCustomer();
+                            }
+                            break;
+                        }
+                    }
+
+                    UpdateWordlist();
                 }
             });
         }
