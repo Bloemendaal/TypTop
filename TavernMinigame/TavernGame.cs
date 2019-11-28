@@ -82,7 +82,7 @@ namespace TavernMinigame
                 _maxCustomers = value;
             }
         }
-        private int _maxCustomers;
+        private int _maxCustomers = 3;
 
         private readonly List<Customer> _customers = new List<Customer>();
         private readonly Queue<Customer> _customerQueue = new Queue<Customer>();
@@ -97,6 +97,7 @@ namespace TavernMinigame
 
             TextInput += OnTextInput;
         }
+        
 
         public void AddCustomer(Customer customer)
         {
@@ -107,6 +108,7 @@ namespace TavernMinigame
             else
             {
                 _customers.Add(customer);
+                AddEntity(customer);
                 UpdateWordlist();
             }
         }
