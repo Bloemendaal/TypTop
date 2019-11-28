@@ -17,8 +17,8 @@ namespace TypTop.SpaceGame
 
         public Player(int lives, Game game) : base(game)
         {
-            Lives = lives;  // start amount of lives
-            Score = 0;  // start amount of points
+            Lives = lives; 
+            Score = 0;  
 
             AddComponent(new PositionComponent()
             {

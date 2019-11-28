@@ -36,7 +36,7 @@ namespace TypTop.SpaceGame
             //
 
             AddEntity(new Background(this));
-
+            AddEntity(new GameStatistics(this));
             foreach (var enemy in EnemyQueue)
             {
                 AddEntity(enemy);
