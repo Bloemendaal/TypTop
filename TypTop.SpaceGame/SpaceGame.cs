@@ -84,9 +84,6 @@ namespace TypTop.SpaceGame
                 {
                     if (Equals(enemy.Word, EnemyQueue.First().Word))
                     {
-                        var currentEnemy = enemy.GetComponent<WordComponent>();
-                        currentEnemy.Color = Brushes.GreenYellow;
-                        currentEnemy.TypedColor = Brushes.BlanchedAlmond;
                         RemoveEntity(enemy);
                         EnemyQueue.Dequeue();
                     }
