@@ -180,7 +180,7 @@ namespace TypTop.Logic
 
             if (input == null)
             {
-                word.Index = index;
+                word.Index = index + 1;
             }
 
             if (result && index == word.Letters.Length - 1)
