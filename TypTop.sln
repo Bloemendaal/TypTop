@@ -9,8 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Logic", "TypTop.Logi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "{28F590C5-6700-44EB-A452-ECEBA5A100F5}"
 EndProject
-
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "{3BCB292B-F745-4465-B7F2-1109D74CCF91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "{3BCB292B-F745-4465-B7F2-1109D74CCF91}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "{4CC4919F-5F2D-4694-972B-8758C06587D3}"
 EndProject
@@ -29,7 +28,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.SpaceGame", "TypTop.SpaceGame\TypTop.SpaceGame.csproj", "{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TavernMinigame", "TavernMinigame\TavernMinigame.csproj", "{29768497-8C22-4952-972A-8393E0C8BDC1}"
-
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Shared", "TypTop.Shared\TypTop.Shared.csproj", "{1622366E-B221-4E79-8461-9C46418D560E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,12 +49,10 @@ Global
 		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28F590C5-6700-44EB-A452-ECEBA5A100F5}.Release|Any CPU.Build.0 = Release|Any CPU
-
 		{3BCB292B-F745-4465-B7F2-1109D74CCF91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3BCB292B-F745-4465-B7F2-1109D74CCF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BCB292B-F745-4465-B7F2-1109D74CCF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BCB292B-F745-4465-B7F2-1109D74CCF91}.Release|Any CPU.Build.0 = Release|Any CPU
-
 		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -87,7 +85,10 @@ Global
 		{29768497-8C22-4952-972A-8393E0C8BDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29768497-8C22-4952-972A-8393E0C8BDC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29768497-8C22-4952-972A-8393E0C8BDC1}.Release|Any CPU.Build.0 = Release|Any CPU
-
+		{1622366E-B221-4E79-8461-9C46418D560E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1622366E-B221-4E79-8461-9C46418D560E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1622366E-B221-4E79-8461-9C46418D560E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1622366E-B221-4E79-8461-9C46418D560E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

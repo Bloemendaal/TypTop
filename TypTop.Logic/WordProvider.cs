@@ -105,7 +105,7 @@ namespace TypTop.SpaceGame
         // Loading words from database
         public void LoadWords()
         {
-             using var db = new Context();
+             using var db = new Context("");
              var words = db.Word.OrderBy(w => w.Letters).ToList();
              foreach (var w in words)
              {
