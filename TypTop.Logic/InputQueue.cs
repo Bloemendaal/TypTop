@@ -68,6 +68,11 @@ namespace TypTop.Logic
                 CurrentChar = letter
             });
 
+            if (RemoveOnFinished)
+            {
+                Input = new Queue<Word>(Input.Where(e => !e.Finished));
+            }
+
             base.TextInput(letter);
         }
         public override void Backspace()

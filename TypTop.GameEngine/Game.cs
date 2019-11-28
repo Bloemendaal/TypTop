@@ -23,6 +23,10 @@ namespace BasicGameEngine
             _entities.Add(entity);
         }
 
+        public void RemoveEntity(Entity entity)
+        {
+            _entities.Remove(entity);
+        }
 
         public IEnumerable<Entity> GetEntitiesWithComponent<TComponent>() where TComponent : Component
         {

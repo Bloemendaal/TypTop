@@ -80,6 +80,12 @@ namespace TypTop.Logic
 
         //
         // Summary:
+        //     Remove the a word when it is finished.
+        public bool RemoveOnFinished = true;
+
+
+        //
+        // Summary:
         //     Updates all the requested words with the given char.
         // Parameters:
         //     letter:
@@ -180,7 +186,7 @@ namespace TypTop.Logic
 
             if (input == null)
             {
-                word.Index = index;
+                word.Index = index + 1;
             }
 
             if (result && index == word.Letters.Length - 1)
