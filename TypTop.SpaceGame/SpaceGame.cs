@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -45,11 +46,6 @@ namespace TypTop.SpaceGame
             AddEntity(new Line(this));
 
             TextInput += OnTextInput;
-
-            AddTimer(() =>
-            {
-                Console.WriteLine("Timer tick");
-            }, 1000);
         }
 
         private Queue<Enemy> MakeEnemyQueue(List<Enemy> enemyList)
