@@ -70,11 +70,11 @@ namespace TypTop.SpaceGame
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputQueue.TextInput(e.Text);
-            MessageBox.Show($"Index: {_inputQueue.Input.Peek().Index}, fini: {_inputQueue.Input.Peek().Finished}");
             if (_inputQueue.Input.Peek().Finished)
             {
-                
-                this.First().GetComponent<WordComponent>().Color = Brushes.GreenYellow;
+                var first = this.First().GetComponent<WordComponent>();
+                first.Color = Brushes.GreenYellow;
+                first.TypedColor = Brushes.GreenYellow;
             }
             
         }
