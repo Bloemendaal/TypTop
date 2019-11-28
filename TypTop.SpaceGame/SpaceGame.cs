@@ -25,18 +25,19 @@ namespace TypTop.SpaceGame
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
 
-            // Sort enemy by height
-
             EnemyQueue = MakeEnemyQueue(Level.EnemyList);
             _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
             {
-                RemoveOnSpace = true
+                RemoveOnSpace = false,
+                RemoveOnFinished = true
             };
+
             // 
             // Adding entities 
             //
-            //AddEntity(new Background(this));
 
+            AddEntity(new Background(this));
+            AddEntity(new GameStatistics(this));
             foreach (var enemy in EnemyQueue)
             {
                 AddEntity(enemy);
@@ -44,6 +45,10 @@ namespace TypTop.SpaceGame
 
             AddEntity(Player);
             AddEntity(new Line(this));
+
+            //
+            // Events
+            //
 
             TextInput += OnTextInput;
         }
@@ -73,23 +78,27 @@ namespace TypTop.SpaceGame
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputQueue.TextInput(e.Text);
-            if (_inputQueue.Input.Peek().Finished)
+            foreach (var entity in this.ToList().OfType<Laser>())
             {
-                foreach (var entity in this)
+                RemoveEntity(entity);
+            }
+
+            foreach (var entity in this.ToList())
+            {
+                if (entity is Enemy enemy)
                 {
-                    if (entity is Enemy enemy)
+                    if (enemy.Word.Finished)
                     {
-                        if (Equals(enemy.Word, _inputQueue.Input.Peek()))
+                        if (Equals(enemy.Word, EnemyQueue.First().Word))
                         {
-                            var currentEnemy = enemy.GetComponent<WordComponent>();
-                            currentEnemy.Color = Brushes.GreenYellow;
-                            currentEnemy.TypedColor = Brushes.GreenYellow;
+                            RemoveEntity(enemy);
+                            AddEntity(new Laser(this));
+                            EnemyQueue.Dequeue();
+                            Player.GainScore(enemy.Score);
                         }
                     }
                 }
-                
             }
-            
         }
     }
 }

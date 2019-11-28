@@ -14,7 +14,7 @@ namespace TypTop.SpaceGame
         {
             _positionComponent = new PositionComponent()
             {
-                Position = new Vector2(0, 900)
+                Position = new Vector2(0, 950)
             };
             AddComponent(_positionComponent);
             AddComponent(new LineComponent());
