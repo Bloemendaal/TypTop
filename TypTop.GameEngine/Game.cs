@@ -27,6 +27,10 @@ namespace BasicGameEngine
         {
             _entities.Remove(entity);
         }
+        public void RemoveEntity<TEntity>() where TEntity : Entity
+        {
+            _entities.RemoveWhere(e => e is TEntity);
+        }
 
         public IEnumerable<Entity> GetEntitiesWithComponent<TComponent>() where TComponent : Component
         {

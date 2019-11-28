@@ -41,11 +41,19 @@ namespace TavernMinigame
                     indexes.Add(index);
                 }
 
+                RemoveEntity<Tile>();
+                RemoveEntity<Order>();
                 _tiles = new List<Tile>();
                 for (int i = 0; i < indexes.Count; i++)
                 {
-                    Tile t = new Tile((Order.OrderType)indexes[i], (float)Width - ((i + 1) * ((float)Tile.Width + 20)), this);
+                    Tile t = new Tile((Order.OrderType)indexes[i], (float)Width - ((i + 1) * ((float)Tile.Width + 20)), this)
+                    {
+                        Word = _words.Dequeue()
+                    };
+
                     _tiles.Add(t);
+                    AddEntity(t);
+                    AddEntity(t.Order);
                 }
             }
         }
@@ -71,11 +79,6 @@ namespace TavernMinigame
 
             AddEntity(new Background(this));
             TileAmount = tileAmount;
-            _tiles.ForEach(t => {
-                t.Word = _words.Dequeue();
-                AddEntity(t);
-                AddEntity(t.Order);
-            });
         }
     }
 }
