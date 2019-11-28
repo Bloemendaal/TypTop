@@ -14,6 +14,7 @@ namespace TypTop.SpaceGame
     {
         public Word Word { get; private set; }
         public int Speed { get; private set; }
+        public int Score { get; private set; }
         public int Y { get; set; }
         private PositionComponent _positionComponent;
 
@@ -41,6 +42,7 @@ namespace TypTop.SpaceGame
             });
             Word = word;
             Speed = speed;
+            Score = Word.Letters.Length * Speed;
         }
     }
 }

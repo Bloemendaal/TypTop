@@ -77,15 +77,24 @@ namespace TypTop.SpaceGame
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputQueue.TextInput(e.Text);
+            foreach (var entity in this.ToList().OfType<Laser>())
+            {
+                RemoveEntity(entity);
+            }
 
             foreach (var entity in this.ToList())
             {
-                if (entity is Enemy enemy && enemy.Word.Finished)
+                if (entity is Enemy enemy)
                 {
-                    if (Equals(enemy.Word, EnemyQueue.First().Word))
+                    if (enemy.Word.Finished)
                     {
-                        RemoveEntity(enemy);
-                        EnemyQueue.Dequeue();
+                        if (Equals(enemy.Word, EnemyQueue.First().Word))
+                        {
+                            RemoveEntity(enemy);
+                            AddEntity(new Laser(this));
+                            EnemyQueue.Dequeue();
+                            Player.GainScore(enemy.Score);
+                        }
                     }
                 }
             }

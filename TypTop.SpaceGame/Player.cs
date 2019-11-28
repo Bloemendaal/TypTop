@@ -11,9 +11,8 @@ namespace TypTop.SpaceGame
 {
     public class Player : Entity
     {
-        public int Lives { get; private set; }  //amount of chances left
-        public int Score { get; private set; }  //total amount of earned points
-
+        public int Lives { get; private set; } 
+        public int Score { get; private set; } 
         public Player(Game game) : this(4, game) { }
 
         public Player(int lives, Game game) : base(game)
@@ -32,16 +31,9 @@ namespace TypTop.SpaceGame
             });
         }
 
-        // gain points, add to score
         public void GainScore(int score) => Score += score;
-
-        // lose points, substract from score
         public void LoseScore(int score) => Score -= score;
-
-        // gain one life
         public void GainLife() => Lives++;
-
-        // lose on life
         public void LoseLife() => Lives--;
     }
 }
