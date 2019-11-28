@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TypTop.Database;
 using Word = TypTop.Logic.Word;
 
-namespace TypTop.SpaceGame
+namespace TypTop.Logic
 {
     public class WordProvider
     {

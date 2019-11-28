@@ -15,10 +15,11 @@ namespace TypTop.SpaceGame
     {
         private PositionComponent pc;
         public Word Word;
-
-        public WordComponent(Word word)
+        public SolidColorBrush Color { get; set; }
+        public WordComponent(Word word, SolidColorBrush color)
         {
             Word = word;
+            Color = color;
         }
 
         public void Draw(DrawingContext context)
@@ -31,7 +32,7 @@ namespace TypTop.SpaceGame
                 FlowDirection.LeftToRight,
                 new Typeface("Myriad"),
                 30,
-                Brushes.Red);
+                Color);
             context.DrawText(FormattedText, new Point(pc.Position.X + 75 - (FormattedText.WidthIncludingTrailingWhitespace /2), pc.Position.Y + 150));
         }
 

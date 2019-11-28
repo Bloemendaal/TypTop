@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Shapes;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
@@ -13,6 +16,7 @@ namespace TypTop.SpaceGame
     {
         public Player Player { get; set; }
         public Queue<Enemy> EnemyQueue { get; set; }
+        private InputQueue _inputQueue;
         public Level Level { get; set; }
         public SpaceGame()
         {
@@ -20,9 +24,17 @@ namespace TypTop.SpaceGame
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
 
-            AddEntity(new Background(this));
+            // Sort enemy by height
+
+            EnemyQueue = MakeEnemyQueue(Level.EnemyList);
+            _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue));
+
+            // 
+            // Adding entities 
+            //
+            //AddEntity(new Background(this));
             
-            foreach (var enemy in Level.EnemyList)
+            foreach (var enemy in EnemyQueue)
             {
                 AddEntity(enemy);
             }
@@ -33,12 +45,38 @@ namespace TypTop.SpaceGame
             TextInput += OnTextInput;
         }
 
+        private Queue<Enemy> MakeEnemyQueue(List<Enemy> enemyList)
+        {
+            var tempQueue = new Queue<Enemy>();
+            foreach (var enemy in enemyList.OrderByDescending(e => e.Y))
+            {
+                tempQueue.Enqueue(enemy);
+            }
+
+            return tempQueue;
+        }
+
+        private Queue<Word> MakeWordsQueue(Queue<Enemy> enemyQueue)
+        {
+            Queue<Word> tempWordsQueue = new Queue<Word>();
+            foreach (var enemy in enemyQueue)
+            {
+                tempWordsQueue.Enqueue(enemy.Word);
+            }
+
+            return tempWordsQueue;
+        }
+
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
-            foreach (Enemy enemy in Level.EnemyList)
+            _inputQueue.TextInput(e.Text);
+            MessageBox.Show($"Index: {_inputQueue.Input.Peek().Index}, fini: {_inputQueue.Input.Peek().Finished}");
+            if (_inputQueue.Input.Peek().Finished)
             {
-                enemy.GetComponent<WordComponent>().Word.Letters += e.Text;
+                
+                this.First().GetComponent<WordComponent>().Color = Brushes.GreenYellow;
             }
+            
         }
     }
 }
