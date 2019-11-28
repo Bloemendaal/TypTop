@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    class InputList : Input
+    public class InputList : Input
     {
         public List<Word> Input;
         public InputList(List<Word> input)
@@ -79,6 +79,11 @@ namespace TypTop.Logic
                     PreviousChar = PreviousChar,
                     CurrentChar = letter
                 });
+
+                if (RemoveOnFinished)
+                {
+                    Input = Input.Where(e => !e.Finished).ToList();
+                }
             }
 
             base.TextInput(letter);

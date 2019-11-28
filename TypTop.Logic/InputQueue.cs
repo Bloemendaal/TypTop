@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    class InputQueue : Input
+    public class InputQueue : Input
     {
         public Queue<Word> Input;
         public InputQueue(Queue<Word> input)
@@ -67,6 +67,11 @@ namespace TypTop.Logic
                 PreviousChar = PreviousChar,
                 CurrentChar = letter
             });
+
+            if (RemoveOnFinished)
+            {
+                Input = new Queue<Word>(Input.Where(e => !e.Finished));
+            }
 
             base.TextInput(letter);
         }

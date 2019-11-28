@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    class InputStack : Input
+    public class InputStack : Input
     {
         public Stack<Word> Input;
         public InputStack(Stack<Word> input)
@@ -67,6 +67,11 @@ namespace TypTop.Logic
                 PreviousChar = PreviousChar,
                 CurrentChar = letter
             });
+
+            if (RemoveOnFinished)
+            {
+                Input = new Stack<Word>(Input.Where(e => !e.Finished));
+            }
 
             base.TextInput(letter);
         }
