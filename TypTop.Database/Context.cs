@@ -11,6 +11,6 @@ namespace TypTop.Database
         public DbSet<Word> Word { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlServer("Server=127.0.0.1;Database=Test;User Id=sa;Password = SuperDB@Top01;");
+            => options.UseSqlServer("");
     }
 }

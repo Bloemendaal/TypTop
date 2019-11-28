@@ -30,7 +30,12 @@ namespace TypTop.Gui
         /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (accounts.ContainsKey(UsernameBox.Text) && VerifyHash(PasswordBox.Password, salts[UsernameBox.Text], accounts[UsernameBox.Text]))
+            using var db = new Database.Context();
+
+            byte[] salt = Convert.FromBase64String(db.User.Where(user => user.Username.Equals(UsernameBox.Text)).Select(u => u.Salt).Single());
+            byte[] hash = Convert.FromBase64String(db.User.Where(user => user.Username.Equals(UsernameBox.Text)).Select(u => u.Password).Single());
+
+            if (db.User.Where(user => user.Username.Equals(UsernameBox.Text)).Any() && VerifyHash(PasswordBox.Password, salt , hash))
             {
                 /* Set logged in account here
                  * (coming later)
@@ -52,6 +57,7 @@ namespace TypTop.Gui
         {
             CreationUsernameBox.Text = UsernameBox.Text;
             CreationPasswordBox.Password = PasswordBox.Password;
+            AccountCreationCanvas.Visibility = Visibility.Visible;
             LoginCanvas.Visibility = Visibility.Hidden;
         }
 
@@ -112,21 +118,20 @@ namespace TypTop.Gui
                     {
                         if (!db.User.Where(user => user.Username.Equals(CreationUsernameBox.Text)).Any())
                         {
-                            byte[] saltBytes = CreateSalt();
-                            string salt = Encoding.ASCII.GetString(saltBytes);
+                            byte[] salt = CreateSalt();
 
                             db.Add(new Database.User
                             {
                                 UserId = 0,
                                 Username = CreationUsernameBox.Text,
-                                Password = CreationPasswordBox.Password,
-                                Salt = salt,
+                                Password = Convert.ToBase64String(HashPassword(CreationPasswordBox.Password, salt)),
+                                Salt = Convert.ToBase64String(salt),
                                 Teacher = (bool)AccountTypeCheckbox.IsChecked
                             });
                             db.SaveChanges();
-
                             
                             LoginCanvas.Visibility = Visibility.Visible;
+                            AccountCreationCanvas.Visibility = Visibility.Hidden;
                         }
                         else
                         {
@@ -154,6 +159,7 @@ namespace TypTop.Gui
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             LoginCanvas.Visibility = Visibility.Visible;
+            AccountCreationCanvas.Visibility = Visibility.Hidden;
         }
 
     }
