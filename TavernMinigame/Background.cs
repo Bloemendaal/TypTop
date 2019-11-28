@@ -11,6 +11,7 @@ namespace TavernMinigame
     {
         public Background(Game game) : base(game)
         {
+            ZIndex = -1;
             AddComponent(new PositionComponent() { Position = new System.Numerics.Vector2(0, 0) });
             AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/tavern.png", UriKind.Relative)))
             {

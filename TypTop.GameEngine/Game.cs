@@ -13,7 +13,7 @@ namespace BasicGameEngine
     public abstract class Game : IEnumerable<Entity>
     {
         public readonly Random Rnd = new Random(DateTime.Now.Millisecond);
-        readonly HashSet<Entity> _entities = new HashSet<Entity>();
+        HashSet<Entity> _entities = new HashSet<Entity>();
 
         public event TextCompositionEventHandler TextInput;
 
@@ -59,6 +59,7 @@ namespace BasicGameEngine
         public void AddEntity(Entity entity)
         {
             _entities.Add(entity);
+            _entities = _entities.OrderBy(e => e.ZIndex).ToHashSet();
         }
 
         public void RemoveEntity(Entity entity)

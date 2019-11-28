@@ -28,22 +28,13 @@ namespace TavernMinigame
 
         public Order(OrderType type, Game game) : base(game)
         {
+            ZIndex = 3;
             Type = type;
             AddComponent(new PositionComponent());
-            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/{Type.ToString().ToLower()}.png", UriKind.Relative)))
+            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/Order/{Type.ToString().ToLower()}.png", UriKind.Relative)))
             {
                 Width = 200
             });
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (obj is Order order)
-            {
-                return order.Type == Type;
-            }
-
-            return false;
         }
     }
 }

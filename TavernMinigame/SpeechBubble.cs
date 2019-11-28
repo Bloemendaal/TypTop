@@ -12,6 +12,7 @@ namespace TavernMinigame
         public Customer Customer;
         public SpeechBubble(Customer customer, Game game) : base(game)
         {
+            ZIndex = 2;
             Customer = customer;
             AddComponent(new PositionComponent()
             {

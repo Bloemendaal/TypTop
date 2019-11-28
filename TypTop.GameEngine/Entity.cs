@@ -8,6 +8,8 @@ namespace BasicGameEngine
     {
         private readonly Dictionary<Type, Component> _components = new Dictionary<Type, Component>();
 
+        public int ZIndex = 0;
+
         protected Entity(Game game)
         {
             Game = game;

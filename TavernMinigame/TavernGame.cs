@@ -62,7 +62,10 @@ namespace TavernMinigame
         private List<Tile> _tiles;
         private readonly Queue<Word> _words;
 
-        private readonly InputList _inputList = new InputList(null);
+        private readonly InputList _inputList = new InputList(null)
+        {
+            FocusOnHighIndex = true
+        };
 
         public enum PlayVariant { Default, TimeBased, BossBattle }
         public PlayVariant Variant = PlayVariant.Default;

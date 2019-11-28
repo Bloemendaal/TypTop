@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Windows.Media.Imaging;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 
@@ -13,15 +14,27 @@ namespace TavernMinigame
         public SpeechBubble SpeechBubble;
         public int Count => _orders.Count;
         private readonly List<Order> _orders;
+
+        public enum CustomerType { GunslingerMan, GunslingerWoman, LawsMan, LawsWoman, NativeGirl, NativeMan, OutlawMan, OutlawWoman, TownsMan, TownsWoman }
+        public readonly CustomerType Type;
+
         public Customer(TavernGame game) : base(game)
         {
+            ZIndex = 1;
             if (game is TavernGame tGame)
             {
                 _orders = tGame.GetOrder(Game.Rnd.Next(1, 4));
 
+                var types = Enum.GetNames(typeof(CustomerType));
+                Type = (CustomerType)tGame.Rnd.Next(0, types.Length);
+
                 AddComponent(new PositionComponent()
                 {
                     Y = 800
+                });
+                AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/Customer/{Type.ToString().ToLower()}.png", UriKind.Relative)))
+                {
+                    Width = 500
                 });
 
                 SpeechBubble = new SpeechBubble(this, tGame);
@@ -43,7 +56,7 @@ namespace TavernMinigame
 
         public bool RemoveOrder(Order order)
         {
-            List<Order> orders = _orders.Where(o => o.Equals(order)).ToList();
+            List<Order> orders = _orders.Where(o => o.Type == order.Type).ToList();
             if (orders.Count > 0)
             {
                 Order o = orders.First();
@@ -96,7 +109,7 @@ namespace TavernMinigame
             }
         }
 
-        public bool HasOrder(Order order) => _orders.Any(o => o.Equals(order));
+        public bool HasOrder(Order order) => _orders.Any(o => o.Type == order.Type);
         public bool HasOrder(Order.OrderType order) => _orders.Any(o => o.Type == order);
 
         public Order GetOrder(Order.OrderType orderType) => _orders.Where(o => o.Type == orderType).First();

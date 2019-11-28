@@ -25,6 +25,7 @@ namespace TavernMinigame
 
         public Tile(Order.OrderType orderType, float x, Game game) : base(game)
         {
+            ZIndex = 2;
             AddComponent(new PositionComponent(x, 20));
             AddComponent(new ImageComponent(new System.Windows.Media.Imaging.BitmapImage(new Uri(@"Images/tile.png", UriKind.Relative)))
             {
