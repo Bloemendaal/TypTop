@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Shapes;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
@@ -16,8 +17,13 @@ namespace TypTop.GameGui
         public MainWindow()
         {
             InitializeComponent();
-
+            PreviewTextInput += OnPreviewTextInput;
             GameWindow.Start(new SpaceGame.SpaceGame());
+        }
+
+        private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            GameWindow.OnTextInput(e);
         }
     }
 }

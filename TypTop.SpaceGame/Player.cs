@@ -25,6 +25,7 @@ namespace TypTop.SpaceGame
             {
                 Position = new Vector2(885, 975)
             });
+
             AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative)))
             {
                 Width = 100

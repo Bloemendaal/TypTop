@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace BasicGameEngine
@@ -10,12 +13,19 @@ namespace BasicGameEngine
         public readonly Random Rnd = new Random(DateTime.Now.Millisecond);
         readonly HashSet<Entity> _entities = new HashSet<Entity>();
 
+        public event TextCompositionEventHandler TextInput;
+
         public const double Width = 1920;
         public const double Height = 1080;
 
         public void AddEntity(Entity entity)
         {
             _entities.Add(entity);
+        }
+
+        public void RemoveEntity(Entity entity)
+        {
+            _entities.Remove(entity);
         }
 
         public IEnumerable<Entity> GetEntitiesWithComponent<TComponent>() where TComponent : Component
@@ -53,6 +63,11 @@ namespace BasicGameEngine
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        public virtual void OnTextInput(TextCompositionEventArgs e)
+        {
+            TextInput?.Invoke(this, e);
         }
     }
 }
