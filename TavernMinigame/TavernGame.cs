@@ -50,7 +50,7 @@ namespace TavernMinigame
             }
         }
         private List<Tile> _tiles;
-        private List<Word> _words;
+        private Queue<Word> _words;
 
         private InputList _inputList;
 
@@ -67,13 +67,12 @@ namespace TavernMinigame
 
         public TavernGame(int tileAmount, List<Word> words)
         {
-            _words = words;
-            _inputList = new InputList(_words);
-
+            _words = new Queue<Word>(words);
 
             AddEntity(new Background(this));
             TileAmount = tileAmount;
             _tiles.ForEach(t => {
+                t.Word = _words.Dequeue();
                 AddEntity(t);
                 AddEntity(t.Order);
             });

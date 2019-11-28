@@ -26,8 +26,8 @@ namespace TypTop.GameGui
                 MinWordLength = 3
             };
             wordProvider.LoadTestWords();
-            // GameWindow.Start(new TavernGame(3, wordProvider.Serve()));
-            GameWindow.Start(new SpaceGame.SpaceGame());
+            GameWindow.Start(new TavernGame(3, wordProvider.Serve()));
+            //GameWindow.Start(new SpaceGame.SpaceGame());
         }
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)

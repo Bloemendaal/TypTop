@@ -47,29 +47,32 @@ namespace BasicGameEngine.GameEngine.Components
         private Word _word;
         private FormattedText _formattedText;
 
-        public WordComponent(Word word, SolidColorBrush color = null, SolidColorBrush typedColor = null)
+        public WordComponent(Word word = null, SolidColorBrush color = null, SolidColorBrush typedColor = null)
         {
             if (color != null) Color = color;
             if (typedColor != null) TypedColor = typedColor;
-            Word = word;
+            if (word != null) Word = word;
         }
 
         public void Draw(DrawingContext context)
         {
-            if (Color != null)
+            if (Word != null)
             {
-                _formattedText.SetForegroundBrush(Color);
-                if (Word.Index > 0 && TypedColor != null)
+                if (Color != null)
                 {
-                    _formattedText.SetForegroundBrush(TypedColor, 0, Word.Index);
+                    _formattedText.SetForegroundBrush(Color);
+                    if (Word.Index > 0 && TypedColor != null)
+                    {
+                        _formattedText.SetForegroundBrush(TypedColor, 0, Word.Index);
+                    }
                 }
-            }
-            if (Typeface != null)
-            {
-                _formattedText.SetFontTypeface(Typeface);
-            }
+                if (Typeface != null)
+                {
+                    _formattedText.SetFontTypeface(Typeface);
+                }
 
-            context.DrawText(_formattedText, new Point(X, Y));
+                context.DrawText(_formattedText, new Point(X, Y));
+            }
         }
 
         public override void AddedToEntity()
