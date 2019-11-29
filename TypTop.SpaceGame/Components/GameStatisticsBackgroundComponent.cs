@@ -5,7 +5,6 @@ using System.Windows;
 using System.Windows.Media;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
-using Point = System.Windows.Point;
 
 namespace TypTop.SpaceGame.Components
 {
@@ -14,8 +13,6 @@ namespace TypTop.SpaceGame.Components
         private PositionComponent _positionComponent;
         public void Draw(DrawingContext context)
         {
-            Pen pen = new Pen(Brushes.YellowGreen, 5);
-
             Rect rect = new Rect
             {
                 Height = 100, 

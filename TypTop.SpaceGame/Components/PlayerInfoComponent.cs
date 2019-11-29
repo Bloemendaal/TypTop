@@ -13,10 +13,10 @@ namespace TypTop.SpaceGame
     public class PlayerInfoComponent : Component, IDrawable
     {
         private PositionComponent _positionComponent;
-        private Player p;
+        private readonly Player _player;
         public PlayerInfoComponent(SpaceGame game)
         {
-            p = game.Player;
+            _player = game.Player;
         }
 
         public void Draw(DrawingContext context)
@@ -24,11 +24,11 @@ namespace TypTop.SpaceGame
                 #pragma warning disable 618
             var formattedText = new FormattedText(
                 #pragma warning restore 618
-                $"{p.Score}",
+                $"{_player.Score}",
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
                 new Typeface("Myriad"),
-                30,
+                50,
                 Brushes.WhiteSmoke);
 
             context.DrawText(formattedText, new Point(_positionComponent.X+10, _positionComponent.Y+10));
