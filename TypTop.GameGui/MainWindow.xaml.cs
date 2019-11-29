@@ -9,7 +9,7 @@ using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 using Microsoft.EntityFrameworkCore;
 using TypTop.Logic;
-using TavernMinigame;
+using TypTop.TavernMinigame;
 
 namespace TypTop.GameGui
 {

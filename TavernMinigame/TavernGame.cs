@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using System.Linq;
-using TypTop.Logic;
 using System.Windows.Input;
+using TypTop.Logic;
 
-namespace TavernMinigame
+namespace TypTop.TavernMinigame
 {
-    public class TavernGame : Game
+    public class TavernGame : Minigame.Minigame
     {
         public int TileAmount
         {

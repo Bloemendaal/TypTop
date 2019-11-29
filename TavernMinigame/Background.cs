@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Media.Imaging;
 
-namespace TavernMinigame
+namespace TypTop.TavernMinigame
 {
     public class Background : Entity
     {

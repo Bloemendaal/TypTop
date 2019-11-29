@@ -1,0 +1,63 @@
+﻿using System;
+using BasicGameEngine;
+
+namespace TypTop.Minigame
+{
+    public class Minigame : Game
+    {
+        public int? Lives
+        {
+            get => _lives;
+            set
+            {
+                if (value != null && value < 0)
+                {
+                    value = 0;
+                }
+
+                _lives = value;
+            }
+        }
+        private int? _lives;
+
+        public int? TimeLimit
+        {
+            get => _timeLimit;
+            set
+            {
+                if (value != null && value < 0)
+                {
+                    value = 0;
+                }
+
+                _timeLimit = value;
+            }
+        }
+        private int? _timeLimit;
+
+        public int? Stars
+        {
+            get => _stars;
+            set
+            {
+                if (value != null)
+                {
+                    if (value < 0)
+                    {
+                        value = 0;
+                    }
+                    if (value > 3)
+                    {
+                        value = 3;
+                    }
+                }
+
+                _stars = value;
+            }
+        }
+        private int? _stars;
+
+        public int Score;
+
+    }
+}

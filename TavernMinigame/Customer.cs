@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 
-namespace TavernMinigame
+namespace TypTop.TavernMinigame
 {
     public class Customer : Entity
     {

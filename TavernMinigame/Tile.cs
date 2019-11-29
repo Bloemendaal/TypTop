@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using TypTop.Logic;
 
-namespace TavernMinigame
+namespace TypTop.TavernMinigame
 {
     public class Tile : Entity
     {
