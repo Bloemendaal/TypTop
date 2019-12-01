@@ -1,36 +1,38 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TypTop.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        protected readonly DbContext Context;
-
+        protected readonly DbContext DbContext;
+        private readonly DbSet<TEntity> _entities;
         public Repository(DbContext context)
         {
-            Context = context;
+            DbContext = context;
+            _entities = DbContext.Set<TEntity>();
         }
 
         public void Add(TEntity entity)
         {
-            throw new NotImplementedException();
+            _entities.Add(entity);
         }
 
         public TEntity Get(int id)
         {
-            throw new NotImplementedException();
+           return _entities.Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _entities.ToList();
         }
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            _entities.Remove(entity);
         }
     }
 }

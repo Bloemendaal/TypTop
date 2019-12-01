@@ -13,6 +13,6 @@ namespace TypTop.Repository
         byte[] GetSalt(string username);
         DateTime GetLastLogin(int userId);
         bool GetType(int userId);
-        int GetTeacherId(int userId);
+        int? GetTeacherId(int userId);
     }
 }

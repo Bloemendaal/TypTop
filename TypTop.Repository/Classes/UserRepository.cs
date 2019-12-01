@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using TypTop.Database;
+using System.Linq;
 
 
 namespace TypTop.Repository
@@ -15,32 +16,42 @@ namespace TypTop.Repository
 
         public int GetId(string username)
         {
-            throw new NotImplementedException();
+            return ((Context)DbContext).User
+                .Where(u => u.Username.Equals(username))
+                .Select(u => u.UserId).Single();
         }
 
         public DateTime GetLastLogin(int userId)
         {
-            throw new NotImplementedException();
+            return ((Context)DbContext).User
+                .Find(userId)
+                .LastLogin;
         }
 
         public byte[] GetPasswordHash(string username)
         {
-            throw new NotImplementedException();
+            return Convert.FromBase64String(
+                ((Context)DbContext).User
+                .Where(u => u.Username.Equals(username))
+                .Single().Password);
         }
 
         public byte[] GetSalt(string username)
         {
-            throw new NotImplementedException();
+            return Convert.FromBase64String(
+                ((Context)DbContext).User
+                .Where(u => u.Username.Equals(username))
+                .Single().Salt);
         }
 
-        public int GetTeacherId(int userId)
+        public int? GetTeacherId(int userId)
         {
-            throw new NotImplementedException();
+            return ((Context)DbContext).User.Find(userId).TeacherId;
         }
 
         public bool GetType(int userId)
         {
-            throw new NotImplementedException();
+            return ((Context)DbContext).User.Find(userId).Teacher;
         }
 
     }
