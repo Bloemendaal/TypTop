@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace TypTop.Repository
@@ -9,6 +10,7 @@ namespace TypTop.Repository
         void Add(TEntity entity);
         void Remove(TEntity entity);
         TEntity Get(int id);
+        IEnumerable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate);
         IEnumerable<TEntity> GetAll();
     }
 }
