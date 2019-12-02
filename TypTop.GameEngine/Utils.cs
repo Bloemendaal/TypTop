@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using System.Windows;
 
-namespace BasicGameEngine
+namespace TypTop.GameEngine
 {
     public static class Utils
     {

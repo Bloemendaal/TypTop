@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using BasicGameEngine;
+using TypTop.GameEngine;
 using TypTop.Logic;
 using TypTop.SpaceGame;
 

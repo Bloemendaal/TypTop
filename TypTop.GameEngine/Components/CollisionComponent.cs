@@ -6,7 +6,7 @@ using Microsoft.VisualBasic.FileIO;
 using Point = System.Windows.Point;
 using Size = System.Windows.Size;
 
-namespace BasicGameEngine.GameEngine.Components
+namespace TypTop.GameEngine.Components
 {
     public static class RectangleExtension
     {

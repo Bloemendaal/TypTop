@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BasicGameEngine
+namespace TypTop.GameEngine
 {
     public interface ITimer : IDisposable
     {

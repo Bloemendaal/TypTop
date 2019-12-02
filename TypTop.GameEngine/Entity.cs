@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Windows.Media;
 
-namespace BasicGameEngine
+namespace TypTop.GameEngine
 {
     public abstract class Entity
     {
         private readonly Dictionary<Type, Component> _components = new Dictionary<Type, Component>();
+
+        public int ZIndex = 0;
 
         protected Entity(Game game)
         {
@@ -58,7 +60,7 @@ namespace BasicGameEngine
         {
             foreach (Component component in _components.Values)
             {
-                if (component is IDrawable drawable)
+                if (component is IDrawable drawable && !drawable.Hidden)
                 {
                     drawable.Draw(drawingContext);
                 }

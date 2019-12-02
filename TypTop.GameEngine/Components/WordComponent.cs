@@ -5,11 +5,9 @@ using System.Net.Mime;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
 using TypTop.Logic;
 
-namespace BasicGameEngine.GameEngine.Components
+namespace TypTop.GameEngine.Components
 {
     public class WordComponent : Component, IDrawable
     {
@@ -27,7 +25,9 @@ namespace BasicGameEngine.GameEngine.Components
         public SolidColorBrush Color = Brushes.Black;
         public SolidColorBrush TypedColor = Brushes.Gray;
         public Typeface Typeface = new Typeface("Myriad");
+        public int FontSize = 30;
 
+        public bool Hidden { get; set; }
 
         public Word Word { 
             get => _word; 
@@ -39,7 +39,7 @@ namespace BasicGameEngine.GameEngine.Components
                     CultureInfo.GetCultureInfo("en-us"),
                     FlowDirection.LeftToRight,
                     Typeface,
-                    30,
+                    FontSize,
                     Color
                 );
             } 
@@ -70,6 +70,7 @@ namespace BasicGameEngine.GameEngine.Components
                 {
                     _formattedText.SetFontTypeface(Typeface);
                 }
+                _formattedText.SetFontSize(FontSize);
 
                 context.DrawText(_formattedText, new Point(X, Y));
             }
