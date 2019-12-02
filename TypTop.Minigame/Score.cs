@@ -26,15 +26,6 @@ namespace TypTop.MinigameEngine
         }
         private int _amount = 0;
 
-        public float LabelTransformX {
-            get => _labelComponent.TransformX;
-            set => _labelComponent.TransformX = value;
-        }
-        public float LabelTransformY {
-            get => _labelComponent.TransformY;
-            set => _labelComponent.TransformY = value;
-        }
-
         public float LabelX => _labelComponent.X;
         public float LabelY => _labelComponent.Y;
 
@@ -52,21 +43,12 @@ namespace TypTop.MinigameEngine
         public string Prefix = null;
         public string Suffix = null;
 
-        public Score(Vector2 position, Game game, string background = null, float? width = null) : base(game)
+        public Score(Vector2 position, Game game) : base(game)
         {
             AddComponent(new PositionComponent(position));
-
-            if (background != null)
-            {
-                AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/{background}.png", UriKind.Relative)))
-                {
-                    Width = width
-                });
-            }
-
             AddComponent(_labelComponent);
         }
-        public Score(float x, float y, Game game, string background = null, float? width = null) : this(new Vector2(x, y), game, background, width) { }
+        public Score(float x, float y, Game game) : this(new Vector2(x, y), game) { }
 
         public void UpdateText()
         {

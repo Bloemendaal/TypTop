@@ -72,8 +72,6 @@ namespace TypTop.TavernMinigame
         public enum PlayVariant { Default, TimeBased, BossBattle }
         public PlayVariant Variant = PlayVariant.Default;
 
-        public bool AngryCustomers = false;
-
         public int MaxCustomers
         {
             get => _maxCustomers;
@@ -101,7 +99,7 @@ namespace TypTop.TavernMinigame
         {
             _words = new Queue<Word>(words);
 
-            AddEntity(new Background(this));
+            AddEntity(new Background("tavern.png", this));
             TileAmount = tileAmount;
 
             _customerQueue = new CustomerQueue(this);
@@ -115,13 +113,19 @@ namespace TypTop.TavernMinigame
                 _timer.Interval = Rnd.Next(3000, 5000) * (1 + _customerQueue.Count / 10);
             }, Rnd.Next(3000, 5000));
 
-            Score = new Score(20, (float)Height - 70, this, "tavernscore", 500)
+            AddEntity(new Background("tavernscore.png", this)
+            {
+                X = 10,
+                Y = (float)Height - 70,
+                Width = 500,
+                Height = null,
+                ZIndex = 4
+            });
+            Score = new Score(50, (float)Height - 50, this)
             {
                 Direction = Score.FloatDirection.Up,
                 Typeface = DefaultTypeface,
                 ZIndex = 5,
-                LabelTransformX = 40,
-                LabelTransformY = 20,
                 Prefix = "Score : "
             };
 
