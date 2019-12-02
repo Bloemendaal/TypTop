@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
@@ -21,21 +24,40 @@ namespace TypTop.TavernMinigame
             {
                 Height = 200
             });
+            AddComponent(new LabelComponent(null)
+            {
+                TransformX = 100,
+                TransformY = 100,
+                Middle = true
+            });
 
-            SetHidden();
+            UpdateCount();
         }
 
         public void Enqueue(Customer customer)
         {
             _customerQueue.Enqueue(customer);
-            SetHidden();
+            UpdateCount();
         }
         public Customer Dequeue() {
             Customer c = _customerQueue.Dequeue();
-            SetHidden();
+            UpdateCount();
             return c;
         }
 
-        private void SetHidden() => GetComponent<ImageComponent>().Hidden = Count < 1;
+        private void UpdateCount()
+        {
+            bool hidden = Count < 1;
+            GetComponent<ImageComponent>().Hidden = hidden;
+            GetComponent<LabelComponent>().Hidden = hidden;
+            GetComponent<LabelComponent>().Text = new FormattedText(
+                Count.ToString(),
+                CultureInfo.GetCultureInfo("en-us"),
+                FlowDirection.LeftToRight,
+                new Typeface("MV Boli"),
+                80,
+                Brushes.Black
+           );
+        }
     }
 }
