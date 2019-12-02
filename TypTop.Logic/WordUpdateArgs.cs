@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TypTop.Logic
 {
-    class WordUpdateArgs : EventArgs
+    public class WordUpdateArgs : EventArgs
     {
         public List<Word> Words;
 

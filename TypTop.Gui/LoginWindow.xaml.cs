@@ -112,7 +112,7 @@ namespace TypTop.Gui
         {
             if (CreationUsernameBox.Text != "" && CreationPasswordBox.Password != "")
             {
-                using (var db = new Database.Context())
+                using (var db = new Database.Context(""))
                 {
                     if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
                     {

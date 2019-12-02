@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
-    abstract class Input
+    public abstract class Input
     {
         //
         // Summary:
@@ -76,6 +76,12 @@ namespace TypTop.Logic
         // Summary:
         //     Remove the current word when the spacebar is pressed. Only works when IgnoreSpace is false. Note that when a list is used, all words will be removed when none of the words match.
         public bool RemoveOnSpace = false;
+
+
+        //
+        // Summary:
+        //     Remove the a word when it is finished.
+        public bool RemoveOnFinished = true;
 
 
         //
@@ -180,7 +186,7 @@ namespace TypTop.Logic
 
             if (input == null)
             {
-                word.Index = index;
+                word.Index = index + 1;
             }
 
             if (result && index == word.Letters.Length - 1)

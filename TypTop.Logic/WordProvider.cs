@@ -5,9 +5,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TypTop.Database;
-using Word = TypTop.Logic.Word;
 
-namespace TypTop.SpaceGame
+namespace TypTop.Logic
 {
     public class WordProvider
     {
@@ -105,7 +104,7 @@ namespace TypTop.SpaceGame
         // Loading words from database
         public void LoadWords()
         {
-             using var db = new Context();
+             using var db = new Context("");
              var words = db.Word.OrderBy(w => w.Letters).ToList();
              foreach (var w in words)
              {

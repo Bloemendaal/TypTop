@@ -39,7 +39,7 @@ namespace TypTop.Logic
         //
         // Summary:
         //     Gives the input given by the user for this word.
-        public Stack<char> Input { get; set; }
+        public Stack<char> Input { get; private set; } = new Stack<char>();
 
 
         //
