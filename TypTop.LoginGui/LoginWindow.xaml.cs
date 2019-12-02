@@ -18,12 +18,12 @@ namespace TypTop.Gui
         public LoginWindow()
         {
             InitializeComponent();
-
+            UsernameBox.Focus();
         }
 
         ///<summary>
         /// Attempt to log in with the given username and password.
-        /// If successful open a MainWindow,
+        /// If successful open a GameGUI.MainWindow,
         /// else show an error message.
         /// </summary>
         private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -99,6 +99,7 @@ namespace TypTop.Gui
                             unitOfWork.Complete();
 
                             LoginCanvas.Visibility = Visibility.Visible;
+                            UsernameBox.Focus();
                             AccountCreationCanvas.Visibility = Visibility.Hidden;
                         }
                         else
@@ -126,6 +127,7 @@ namespace TypTop.Gui
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             LoginCanvas.Visibility = Visibility.Visible;
+            UsernameBox.Focus();
             AccountCreationCanvas.Visibility = Visibility.Hidden;
         }
 
