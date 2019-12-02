@@ -10,9 +10,14 @@ namespace TypTop.SpaceGame
 {
     public class LineComponent : Component, IDrawable
     {
+        public bool Hidden { get; set; }
+
         private PositionComponent _positionComponent;
 
-        public bool Hidden { get; set; }
+        public LineComponent()
+        {
+            Hidden = false;
+        }
 
         public void Draw(DrawingContext context)
         {

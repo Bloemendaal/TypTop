@@ -5,20 +5,21 @@ using System.Windows;
 using System.Windows.Media;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
-using Point = System.Windows.Point;
 
 namespace TypTop.SpaceGame.Components
 {
     public class GameStatisticsBackgroundComponent : Component, IDrawable
     {
+        public bool Hidden { get; set; }
         private PositionComponent _positionComponent;
 
-        public bool Hidden { get; set; }
+        public GameStatisticsBackgroundComponent()
+        {
+            Hidden = false;
+        }
 
         public void Draw(DrawingContext context)
         {
-            Pen pen = new Pen(Brushes.YellowGreen, 5);
-
             Rect rect = new Rect
             {
                 Height = 100, 

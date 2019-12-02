@@ -25,6 +25,8 @@ namespace TypTop.SpaceGame
 
             _positionComponentPlayer = game.Player.GetComponent<PositionComponent>();
             _imageComponentPlayer = game.Player.GetComponent<ImageComponent>();
+
+            Hidden = false;
         }
 
         public void Draw(DrawingContext context)
