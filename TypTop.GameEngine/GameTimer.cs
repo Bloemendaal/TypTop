@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BasicGameEngine
+namespace TypTop.GameEngine
 {
     class GameTimer : ITimed, ITimer
     {

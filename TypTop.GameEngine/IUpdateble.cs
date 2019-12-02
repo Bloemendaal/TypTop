@@ -1,4 +1,4 @@
-﻿namespace BasicGameEngine
+﻿namespace TypTop.GameEngine
 {
     public interface IUpdateable
     {

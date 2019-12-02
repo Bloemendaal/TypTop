@@ -1,4 +1,4 @@
-﻿namespace BasicGameEngine
+﻿namespace TypTop.GameEngine
 {
     interface ITimed
     {

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 using Microsoft.EntityFrameworkCore;
 using TypTop.Logic;
-using TavernMinigame;
+using TypTop.TavernMinigame;
 
 namespace TypTop.GameGui
 {
@@ -34,8 +34,8 @@ namespace TypTop.GameGui
                 MinWordLength = 3
             };
             wordProvider.LoadTestWords();
-            //GameWindow.Start(new TavernGame(3, wordProvider.Serve()));
-            GameWindow.Start(new SpaceGame.SpaceGame());
+            GameWindow.Start(new TavernGame(3, wordProvider.Serve()));
+            //GameWindow.Start(new SpaceGame.SpaceGame());
         }
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)

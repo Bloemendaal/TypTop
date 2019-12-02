@@ -1,11 +1,11 @@
-﻿using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using TypTop.Logic;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
-namespace TavernMinigame
+namespace TypTop.TavernMinigame
 {
     public class Tile : Entity
     {
@@ -25,6 +25,7 @@ namespace TavernMinigame
 
         public Tile(Order.OrderType orderType, float x, Game game) : base(game)
         {
+            ZIndex = 2;
             AddComponent(new PositionComponent(x, 20));
             AddComponent(new ImageComponent(new System.Windows.Media.Imaging.BitmapImage(new Uri(@"Images/tile.png", UriKind.Relative)))
             {
@@ -48,8 +49,10 @@ namespace TavernMinigame
             AddComponent(new WordComponent()
             {
                 TransformX = (float)Width / 2,
-                TransformY = (float)(HeightOffset * 1.8),
-                Center = true
+                TransformY = (float)(HeightOffset * 1.72),
+                Center = true,
+                FontSize = 40,
+                Typeface = ((TavernGame)Game).DefaultTypeface
             });
         }
     }

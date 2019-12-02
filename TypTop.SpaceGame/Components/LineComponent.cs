@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Text;
 using System.Windows.Media;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.SpaceGame
 {
     public class LineComponent : Component, IDrawable
     {
         private PositionComponent _positionComponent;
+
+        public bool Hidden { get; set; }
+
         public void Draw(DrawingContext context)
         {
             Pen pen = new Pen(Brushes.YellowGreen, 5);

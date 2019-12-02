@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using System.Windows;
 
-namespace BasicGameEngine.GameEngine.Components
+namespace TypTop.GameEngine.Components
 {
     public class CollisionEventArgs
     {

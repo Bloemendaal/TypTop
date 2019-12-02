@@ -81,7 +81,7 @@ namespace TypTop.Logic
         //
         // Summary:
         //     Remove the a word when it is finished.
-        public bool RemoveOnFinished = true;
+        public bool RemoveOnFinished = false;
 
 
         //

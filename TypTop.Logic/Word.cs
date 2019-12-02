@@ -33,7 +33,11 @@ namespace TypTop.Logic
         //
         // Summary:
         //     The word saved as a string.
-        public string Letters { get; set; }
+        public string Letters { 
+            get => _letters; 
+            set => _letters = value.Trim(); 
+        }
+        private string _letters;
 
 
         //

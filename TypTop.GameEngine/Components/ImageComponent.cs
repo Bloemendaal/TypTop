@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace BasicGameEngine.GameEngine.Components
+namespace TypTop.GameEngine.Components
 {
     public class ImageComponent : Component, IDrawable
     {
@@ -72,6 +72,8 @@ namespace BasicGameEngine.GameEngine.Components
             }
         }
         private double? _height;
+
+        public bool Hidden { get; set; }
 
         public ImageComponent(BitmapImage bitmapImage)
         {

@@ -4,8 +4,8 @@ using System.Numerics;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 using TypTop.Logic;
 
 namespace TypTop.SpaceGame
