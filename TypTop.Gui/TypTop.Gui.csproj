@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\LoginBackground.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Konscious.Security.Cryptography.Argon2" Version="1.2.1" />
   </ItemGroup>
 
@@ -20,11 +16,6 @@
     <ProjectReference Include="..\TypTop.Repository\TypTop.Repository.csproj" />
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
     <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Resource Include="Images\LoginBackground.png" />
   </ItemGroup>
 
 </Project>

@@ -1,10 +1,8 @@
-﻿using Konscious.Security.Cryptography;
-using System;
+﻿using System;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using TypTop.LoginGui;
 using TypTop.Repository;
 
 
@@ -37,9 +35,8 @@ namespace TypTop.Gui
             {
                 byte[] salt = unitOfWork.Users.GetSalt(UsernameBox.Text);
                 byte[] hash = unitOfWork.Users.GetPasswordHash(UsernameBox.Text);
-                //byte[] hash = Convert.FromBase64String(db.User.Where(user => user.Username.Equals(UsernameBox.Text)).Select(u => u.Password).Single());
 
-                if (VerifyHash(PasswordBox.Password, salt, hash))
+                if (PasswordHasher.VerifyHash(PasswordBox.Password, salt, hash))
                 {
                     /* Set logged in account here
                     * (coming later)
@@ -72,46 +69,6 @@ namespace TypTop.Gui
         }
 
         /// <summary>
-        /// Creates a salt to be used in HashPassword and VerifyHash
-        /// </summary>
-        private byte[] CreateSalt()
-        {
-            var buffer = new byte[16];
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(buffer);
-            rng.Dispose();
-            return buffer;
-        }
-
-        /// <summary>
-        /// Generate a hash using Argon2id based on the password
-        /// </summary>
-        private byte[] HashPassword(string password, byte[] salt)
-        {
-            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
-            {
-                Salt = salt,
-                DegreeOfParallelism = 4,
-                Iterations = 4,
-                MemorySize = 1024 * 100
-            };
-
-            var r = argon2.GetBytes(1024);
-            argon2.Dispose();
-            return r;
-        }
-
-        /// <summary>
-        /// Verify that an entered password matches the stored hash.
-        /// </summary>
-        private bool VerifyHash(string password, byte[] salt, byte[] hash)
-        {
-            var newHash = HashPassword(password, salt);
-            return hash.SequenceEqual(newHash);
-        }
-
-
-        /// <summary>
         /// Store a new account in the database if the given values are valid.
         /// Valid being:
         /// -non-empty string for username and password
@@ -129,13 +86,13 @@ namespace TypTop.Gui
                     {
                         if (!unitOfWork.Users.GetWhere(u => u.Username.Equals(CreationUsernameBox.Text)).Any())
                         {
-                            byte[] salt = CreateSalt();
+                            byte[] salt = PasswordHasher.CreateSalt();
 
                             unitOfWork.Users.Add(new Database.User
                             {
                                 UserId = 0,
                                 Username = CreationUsernameBox.Text,
-                                Password = Convert.ToBase64String(HashPassword(CreationPasswordBox.Password, salt)),
+                                Password = Convert.ToBase64String(PasswordHasher.HashPassword(CreationPasswordBox.Password, salt)),
                                 Salt = Convert.ToBase64String(salt),
                                 Teacher = (bool)AccountTypeCheckbox.IsChecked
                             });
