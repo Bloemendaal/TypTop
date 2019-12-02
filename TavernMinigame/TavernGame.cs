@@ -92,14 +92,13 @@ namespace TypTop.TavernMinigame
         private readonly List<Customer> _customers = new List<Customer>();
         private readonly CustomerQueue _customerQueue;
 
+        private readonly Count _count;
         private readonly ITimer _timer;
 
         public readonly Typeface DefaultTypeface = new Typeface("MV Boli");
 
-        private readonly Count _count;
 
-
-        public TavernGame(PlayVariant variant, List<Word> words, int secondsOrQueue = 0, int tileAmount = 3)
+        public TavernGame(PlayVariant variant, List<Word> words, int secondsOrQueue = 0, int tileAmount = 3, int lives = 3)
         {
             _words = new Queue<Word>(words);
             Variant = variant;
@@ -112,7 +111,6 @@ namespace TypTop.TavernMinigame
 
             TextInput += OnTextInput;
 
-            
 
             if (Variant == PlayVariant.QueueBased)
             {
@@ -137,6 +135,13 @@ namespace TypTop.TavernMinigame
             if (Variant == PlayVariant.LifeBased)
             {
                 AngryCustomers = true;
+                Lives = new Lives(550, (float)Height - 60, this)
+                {
+                    Amount = lives,
+                    ZIndex = 6
+                };
+
+                AddEntity(Lives);
             }
 
             _count.Typeface = DefaultTypeface;

@@ -5,21 +5,6 @@ namespace TypTop.MinigameEngine
 {
     public class Minigame : Game
     {
-        public int? Lives
-        {
-            get => _lives;
-            set
-            {
-                if (value != null && value < 0)
-                {
-                    value = 0;
-                }
-
-                _lives = value;
-            }
-        }
-        private int? _lives;
-
         public int? TimeLimit
         {
             get => _timeLimit;
@@ -58,6 +43,7 @@ namespace TypTop.MinigameEngine
         private int? _stars;
 
         public Score Score;
+        public Lives Lives;
 
     }
 }
