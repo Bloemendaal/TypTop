@@ -50,18 +50,11 @@ namespace TypTop.SpaceGame
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-            var lineHeight = 0;
-            
-            foreach (var entity in _game)
-            {
-                if (entity is Line line)
-                {
-                    lineHeight = (int)line.GetComponent<PositionComponent>().Y;
-                }
-            }
+            var lineHeight = _game.Line.GetComponent<PositionComponent>().Y;
 
             if (GetComponent<PositionComponent>().Y > lineHeight)
             {
+                _game.RemoveEntity(this);
                 _game.EnemyQueue.Dequeue();
                 _game.Player.LoseLife();
             }

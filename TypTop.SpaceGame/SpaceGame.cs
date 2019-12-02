@@ -19,12 +19,14 @@ namespace TypTop.SpaceGame
         public Queue<Enemy> EnemyQueue { get; set; }
         private InputQueue _inputQueue;
         public Level Level { get; set; }
+        public Line Line { get; set; }
+
         public SpaceGame()
         {
             Level = new Level(1, this);
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
-
+            Line = new Line(this);
             EnemyQueue = MakeEnemyQueue(Level.EnemyList);
             _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
             {
@@ -44,7 +46,7 @@ namespace TypTop.SpaceGame
             }
 
             AddEntity(Player);
-            AddEntity(new Line(this));
+            AddEntity(Line);
 
             //
             // Events
