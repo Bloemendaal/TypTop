@@ -14,7 +14,7 @@ namespace TypTop.MinigameEngine
     {
 
         private readonly DateTime _dateTime;
-        private readonly bool _countDown;
+        private readonly DateTime _startTime;
 
         private readonly LabelComponent _labelComponent = new LabelComponent();
         private readonly PositionComponent _positionComponent;
@@ -42,19 +42,14 @@ namespace TypTop.MinigameEngine
         public string Prefix = null;
         public string Suffix = null;
 
-        public int Seconds => (int)(_countDown ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime)).TotalSeconds;
+        public int Seconds => (int)(_dateTime == null ? DateTime.Now.Subtract(_startTime) : _dateTime.Subtract(DateTime.Now)).TotalSeconds;
+        public int SecondsSpent => (int)DateTime.Now.Subtract(_startTime).TotalSeconds;
 
         public Count(int seconds, Vector2 position, Game game) : base(game)
         {
-            _dateTime = DateTime.Now;
-            if (seconds == 0)
-            {
-                _countDown = false;
-            }
-            else
-            {
-                _countDown = true;
-                _dateTime = _dateTime.AddSeconds(seconds);
+            _startTime = DateTime.Now;
+            if (seconds != 0) { 
+                _dateTime = _startTime.AddSeconds(seconds);
             }
 
             _positionComponent = new PositionComponent(position);
@@ -66,7 +61,7 @@ namespace TypTop.MinigameEngine
 
         public override void Update(float deltaTime)
         {
-            TimeSpan timeSpan = _countDown ^ Finished ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime);
+            TimeSpan timeSpan = _dateTime != null ^ Finished ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime);
 
             StringBuilder sb = new StringBuilder();
 
@@ -97,7 +92,7 @@ namespace TypTop.MinigameEngine
                 Finished ? FinishedColor : Color
             );
 
-            if (_countDown && (int)timeSpan.TotalSeconds < 0)
+            if (_dateTime != null && (int)timeSpan.TotalSeconds < 0)
             {
                 Finished = true;
             }

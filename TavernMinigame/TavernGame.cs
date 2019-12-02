@@ -182,6 +182,8 @@ namespace TypTop.TavernMinigame
 
             Score.UpdateText();
             AddEntity(Score);
+
+            UpdateWordlist();
         }
         
 

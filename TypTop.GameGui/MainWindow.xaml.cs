@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using TypTop.Logic;
 using TypTop.TavernMinigame;
 using TypTop.MinigameEngine.WinConditions;
+using TypTop.MinigameEngine;
 
 namespace TypTop.GameGui
 {
@@ -35,14 +36,22 @@ namespace TypTop.GameGui
                 MinWordLength = 3
             };
             wordProvider.LoadTestWords();
-            GameWindow.Start(
-                new TavernGame(
-                    new ScoreCondition(100, 300, 600), 
-                    wordProvider.Serve(), 
-                    10
-                )
+
+            TavernGame game = new TavernGame(
+              new ScoreCondition(100, 300, 600),
+              wordProvider.Serve(),
+              10
             );
+
+            game.OnFinished += OnFinishedGame;
+
+            GameWindow.Start(game);
             //GameWindow.Start(new SpaceGame.SpaceGame());
+        }
+
+        private void OnFinishedGame(object sender, FinishEventArgs e)
+        {
+            GameWindow.Stop();
         }
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)

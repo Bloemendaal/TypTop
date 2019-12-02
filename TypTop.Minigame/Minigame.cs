@@ -9,7 +9,6 @@ namespace TypTop.MinigameEngine
         public Score Score { get; protected set; }
         public Lives Lives { get; protected set; }
         public Count Count { get; protected set; }
-
         public int Stars
         {
             get
@@ -25,7 +24,7 @@ namespace TypTop.MinigameEngine
         public WinCondition WinCondition { get; private set; }
         public FinishCondition Finish { get; set; }
         public delegate bool FinishCondition();
-
+        public event EventHandler<FinishEventArgs> OnFinished;
 
         public Minigame(WinCondition winCondition)
         {
@@ -37,6 +36,13 @@ namespace TypTop.MinigameEngine
         {
             if (Finish?.Invoke() ?? false)
             {
+                OnFinished?.Invoke(this, new FinishEventArgs()
+                {
+                    Lives = Lives?.Amount,
+                    Count = Count.SecondsSpent,
+                    Score = Score?.Amount,
+                    Stars = Stars
+                });
                 return;
             }
 
