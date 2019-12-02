@@ -69,8 +69,8 @@ namespace TypTop.TavernMinigame
             FocusOnHighIndex = true
         };
 
-        public enum PlayVariant { Default, TimeBased, BossBattle }
-        public PlayVariant Variant = PlayVariant.Default;
+        public enum PlayVariant { TimeBased, QueueBased, LifeBased }
+        public readonly PlayVariant Variant;
 
         public int MaxCustomers
         {
@@ -94,10 +94,13 @@ namespace TypTop.TavernMinigame
 
         public readonly Typeface DefaultTypeface = new Typeface("MV Boli");
 
+        private readonly Count _count;
 
-        public TavernGame(int tileAmount, List<Word> words)
+
+        public TavernGame(PlayVariant variant, List<Word> words, int secondsOrQueue = 0, int tileAmount = 3)
         {
             _words = new Queue<Word>(words);
+            Variant = variant;
 
             AddEntity(new Background("tavern.png", this));
             TileAmount = tileAmount;
@@ -107,11 +110,31 @@ namespace TypTop.TavernMinigame
 
             TextInput += OnTextInput;
 
-            _timer = AddTimer(() =>
+            
+
+            if (Variant == PlayVariant.QueueBased)
             {
-                AddCustomer(new Customer(this));
-                _timer.Interval = Rnd.Next(3000, 5000) * (1 + _customerQueue.Count / 10);
-            }, Rnd.Next(3000, 5000));
+                for (int i = 0; i < secondsOrQueue; i++)
+                {
+                    AddCustomer(new Customer(this));
+                }
+
+                _count = new Count(0, 100, (float)Height - 50, this);
+            }
+            else
+            {
+                _timer = AddTimer(() =>
+                {
+                    AddCustomer(new Customer(this));
+                    _timer.Interval = Rnd.Next(3000, 5000) * (1 + _customerQueue.Count / 10);
+                }, Rnd.Next(3000, 5000));
+
+                _count = new Count(secondsOrQueue, 360, (float)Height - 50, this);
+            }
+            _count.Typeface = DefaultTypeface;
+            _count.ZIndex = 5;
+            AddEntity(_count);
+
 
             AddEntity(new Background("tavernscore.png", this)
             {

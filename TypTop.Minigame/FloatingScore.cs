@@ -12,7 +12,7 @@ namespace TypTop.MinigameEngine
 {
     public class FloatingScore : Entity
     {
-        private SolidColorBrush _color;
+        private readonly SolidColorBrush _color;
         private readonly Score _score;
 
         public float LabelTransformX
