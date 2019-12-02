@@ -54,6 +54,7 @@ namespace TypTop.SpaceGame
 
             if (GetComponent<PositionComponent>().Y > lineHeight)
             {
+                _game.InputQueue.Input.Dequeue();
                 _game.RemoveEntity(this);
                 _game.EnemyQueue.Dequeue();
                 _game.Player.LoseLife();

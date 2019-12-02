@@ -17,7 +17,7 @@ namespace TypTop.SpaceGame
     {
         public Player Player { get; set; }
         public Queue<Enemy> EnemyQueue { get; set; }
-        private InputQueue _inputQueue;
+        public InputQueue InputQueue { get; set; }
         public Level Level { get; set; }
         public Line Line { get; set; }
 
@@ -28,7 +28,7 @@ namespace TypTop.SpaceGame
             EnemyQueue = new Queue<Enemy>();
             Line = new Line(this);
             EnemyQueue = MakeEnemyQueue(Level.EnemyList);
-            _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
+            InputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
             {
                 RemoveOnSpace = false,
                 RemoveOnFinished = true
@@ -79,7 +79,7 @@ namespace TypTop.SpaceGame
 
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
-            _inputQueue.TextInput(e.Text);
+            InputQueue.TextInput(e.Text);
             foreach (var entity in this.ToList().OfType<Laser>())
             {
                 RemoveEntity(entity);
