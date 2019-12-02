@@ -9,6 +9,7 @@ using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 using TypTop.MinigameEngine;
 using System.Windows.Media;
+using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.TavernMinigame
 {
@@ -69,9 +70,6 @@ namespace TypTop.TavernMinigame
             FocusOnHighIndex = true
         };
 
-        public enum PlayVariant { TimeBased, QueueBased, LifeBased }
-        public readonly PlayVariant Variant;
-
         public int MaxCustomers
         {
             get => _maxCustomers;
@@ -92,16 +90,14 @@ namespace TypTop.TavernMinigame
         private readonly List<Customer> _customers = new List<Customer>();
         private readonly CustomerQueue _customerQueue;
 
-        private readonly Count _count;
         private readonly ITimer _timer;
 
         public readonly Typeface DefaultTypeface = new Typeface("MV Boli");
 
 
-        public TavernGame(PlayVariant variant, List<Word> words, int secondsOrQueue = 0, int tileAmount = 3, int lives = 3)
+        public TavernGame(WinCondition winCondition, List<Word> words, int secondsOrQueue = 0, int tileAmount = 3, int lives = 3) : base(winCondition)
         {
             _words = new Queue<Word>(words);
-            Variant = variant;
 
             AddEntity(new Background("tavern.png", this));
             TileAmount = tileAmount;
@@ -111,15 +107,46 @@ namespace TypTop.TavernMinigame
 
             TextInput += OnTextInput;
 
+            int countOffset = 360;
 
-            if (Variant == PlayVariant.QueueBased)
+            if (winCondition is ScoreCondition)
+            {
+                Finish = delegate ()
+                {
+                    return Count.Seconds < 0;
+                };
+            }
+
+            if (winCondition is LifeCondition)
+            {
+                AngryCustomers = true;
+                Lives = new Lives(550, (float)Height - 60, this)
+                {
+                    Amount = lives,
+                    ZIndex = 6
+                };
+
+                Finish = delegate ()
+                {
+                    return Lives.Amount <= 0 || Count.Seconds < 0;
+                };
+
+                AddEntity(Lives);
+            }
+
+            if (winCondition is TimeCondition)
             {
                 for (int i = 0; i < secondsOrQueue; i++)
                 {
                     AddCustomer(new Customer(this));
                 }
 
-                _count = new Count(0, 100, (float)Height - 50, this);
+                Count = new Count(0, countOffset, (float)Height - 50, this);
+
+                Finish = delegate ()
+                {
+                    return _customerQueue.Count <= 0;
+                };
             }
             else
             {
@@ -129,24 +156,12 @@ namespace TypTop.TavernMinigame
                     _timer.Interval = Rnd.Next(3000, 5000) * (1 + _customerQueue.Count / 10);
                 }, Rnd.Next(3000, 5000));
 
-                _count = new Count(secondsOrQueue, 360, (float)Height - 50, this);
+                Count = new Count(secondsOrQueue, countOffset, (float)Height - 50, this);
             }
 
-            if (Variant == PlayVariant.LifeBased)
-            {
-                AngryCustomers = true;
-                Lives = new Lives(550, (float)Height - 60, this)
-                {
-                    Amount = lives,
-                    ZIndex = 6
-                };
-
-                AddEntity(Lives);
-            }
-
-            _count.Typeface = DefaultTypeface;
-            _count.ZIndex = 5;
-            AddEntity(_count);
+            Count.Typeface = DefaultTypeface;
+            Count.ZIndex = 5;
+            AddEntity(Count);
 
 
             AddEntity(new Background("tavernscore.png", this)

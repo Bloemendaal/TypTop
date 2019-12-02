@@ -42,7 +42,7 @@ namespace TypTop.MinigameEngine
         public string Prefix = null;
         public string Suffix = null;
 
-        public int Seconds => (int)(_countDown ^ Finished ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime)).TotalSeconds;
+        public int Seconds => (int)(_countDown ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime)).TotalSeconds;
 
         public Count(int seconds, Vector2 position, Game game) : base(game)
         {
@@ -97,7 +97,7 @@ namespace TypTop.MinigameEngine
                 Finished ? FinishedColor : Color
             );
 
-            if (_countDown && timeSpan.TotalSeconds <= 0)
+            if (_countDown && (int)timeSpan.TotalSeconds < 0)
             {
                 Finished = true;
             }

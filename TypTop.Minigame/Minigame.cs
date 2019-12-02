@@ -1,49 +1,46 @@
 ﻿using System;
 using TypTop.GameEngine;
+using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.MinigameEngine
 {
-    public class Minigame : Game
+    public abstract class Minigame : Game
     {
-        public int? TimeLimit
-        {
-            get => _timeLimit;
-            set
-            {
-                if (value != null && value < 0)
-                {
-                    value = 0;
-                }
+        public Score Score { get; protected set; }
+        public Lives Lives { get; protected set; }
+        public Count Count { get; protected set; }
 
-                _timeLimit = value;
+        public int Stars
+        {
+            get
+            {
+                if (WinCondition.ThreeStar()) return 3;
+                if (WinCondition.TwoStar()) return 2;
+                if (WinCondition.OneStar()) return 1;
+
+                return 0;
             }
         }
-        private int? _timeLimit;
 
-        public int? Stars
+        public WinCondition WinCondition { get; private set; }
+        public FinishCondition Finish { get; set; }
+        public delegate bool FinishCondition();
+
+
+        public Minigame(WinCondition winCondition)
         {
-            get => _stars;
-            set
-            {
-                if (value != null)
-                {
-                    if (value < 0)
-                    {
-                        value = 0;
-                    }
-                    if (value > 3)
-                    {
-                        value = 3;
-                    }
-                }
-
-                _stars = value;
-            }
+            WinCondition = winCondition ?? throw new ArgumentNullException(nameof(winCondition));
+            WinCondition.Minigame = this;
         }
-        private int? _stars;
 
-        public Score Score;
-        public Lives Lives;
+        public override void Update(float deltaTime)
+        {
+            if (Finish?.Invoke() ?? false)
+            {
+                return;
+            }
 
+            base.Update(deltaTime);
+        }
     }
 }

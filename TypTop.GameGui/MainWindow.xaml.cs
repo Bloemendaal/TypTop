@@ -10,6 +10,7 @@ using TypTop.GameEngine.Components;
 using Microsoft.EntityFrameworkCore;
 using TypTop.Logic;
 using TypTop.TavernMinigame;
+using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.GameGui
 {
@@ -34,7 +35,13 @@ namespace TypTop.GameGui
                 MinWordLength = 3
             };
             wordProvider.LoadTestWords();
-            GameWindow.Start(new TavernGame(TavernGame.PlayVariant.LifeBased, wordProvider.Serve(), 120));
+            GameWindow.Start(
+                new TavernGame(
+                    new ScoreCondition(100, 300, 600), 
+                    wordProvider.Serve(), 
+                    10
+                )
+            );
             //GameWindow.Start(new SpaceGame.SpaceGame());
         }
 
