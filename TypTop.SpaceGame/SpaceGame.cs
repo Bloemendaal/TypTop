@@ -18,8 +18,8 @@ namespace TypTop.SpaceMinigame
     public class SpaceGame : Minigame
     {
         public Player Player { get; set; }
-        public Queue<Enemy> EnemyQueue { get; set; }
-        public InputQueue InputQueue { get; set; }
+        public List<Enemy> EnemyList { get; set; }
+        private readonly InputList _inputList;
         public Level Level { get; set; }
         public Line Line { get; set; }
 
@@ -49,13 +49,11 @@ namespace TypTop.SpaceMinigame
 
             Level = new Level(1, this);
             Player = new Player(this);
-            EnemyQueue = new Queue<Enemy>();
             Line = new Line(this);
-            EnemyQueue = MakeEnemyQueue(Level.EnemyList);
-            InputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
+            EnemyList = Level.EnemyList;
+            _inputList = new InputList(new List<Word>())
             {
-                RemoveOnSpace = false,
-                RemoveOnFinished = true
+                FocusOnHighIndex = true
             };
 
             // 
@@ -64,10 +62,7 @@ namespace TypTop.SpaceMinigame
 
             AddEntity(new Background("space.jpg", this));
             AddEntity(new GameStatistics(this));
-            foreach (var enemy in EnemyQueue)
-            {
-                AddEntity(enemy);
-            }
+            EnemyList.ForEach(e => AddEntity(e));
 
             AddEntity(Player);
             AddEntity(Line);
@@ -83,52 +78,24 @@ namespace TypTop.SpaceMinigame
             TextInput += OnTextInput;
         }
 
-        private Queue<Enemy> MakeEnemyQueue(List<Enemy> enemyList)
+        public override void Update(float deltaTime)
         {
-            var tempQueue = new Queue<Enemy>();
-            foreach (var enemy in enemyList.OrderByDescending(e => e.Y))
-            {
-                tempQueue.Enqueue(enemy);
-            }
-
-            return tempQueue;
-        }
-
-        private Queue<Word> MakeWordsQueue(Queue<Enemy> enemyQueue)
-        {
-            Queue<Word> tempWordsQueue = new Queue<Word>();
-            foreach (var enemy in enemyQueue)
-            {
-                tempWordsQueue.Enqueue(enemy.Word);
-            }
-
-            return tempWordsQueue;
+            _inputList.Input = EnemyList.Where(e => e.Y - 150 > 0).Select(e => e.Word).ToList();
+            base.Update(deltaTime);
         }
 
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
-            InputQueue.TextInput(e.Text);
-            foreach (var entity in this.ToList().OfType<Laser>())
-            {
-                RemoveEntity(entity);
-            }
+            _inputList.Input = EnemyList.Where(e => e.Y + 150 > 0).Select(e => e.Word).ToList();
+            _inputList.TextInput(e.Text);
+            RemoveEntity<Laser>();
 
-            foreach (var entity in this.ToList())
-            {
-                if (entity is Enemy enemy)
-                {
-                    if (enemy.Word.Finished)
-                    {
-                        if (Equals(enemy.Word, EnemyQueue.First().Word))
-                        {
-                            RemoveEntity(enemy);
-                            AddEntity(new Laser(this));
-                            EnemyQueue.Dequeue();
-                            Score.Amount += enemy.Score;
-                        }
-                    }
-                }
-            }
+            EnemyList.Where(e => e.Word.Finished).ToList().ForEach(e => {
+                AddEntity(new Laser(e, this));
+                RemoveEntity(e);
+                Score.Amount += e.Score;
+                EnemyList.Remove(e);
+            });
         }
     }
 }

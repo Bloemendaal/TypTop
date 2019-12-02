@@ -9,10 +9,10 @@ namespace TypTop.SpaceMinigame
 {
     public class Laser : Entity
     {
-        public Laser(SpaceGame game) : base(game)
+        public Laser(Enemy e, SpaceGame game) : base(game)
         {
             ZIndex = 3;
-            AddComponent(new LaserComponent(game));
+            AddComponent(new LaserComponent(e, game));
         }
     }
 }
