@@ -31,12 +31,6 @@ namespace TypTop.Logic
                 {
                     int index = input.Index;
 
-                    if (char.IsWhiteSpace(letter))
-                    {
-                        Input?.Remove(input);
-                        return;
-                    }
-
                     if (input != null)
                     {
                         if (CheckWord(letter, input))

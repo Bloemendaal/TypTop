@@ -40,7 +40,7 @@ namespace TypTop.GameGui
             TavernGame game = new TavernGame(
               new ScoreCondition(100, 300, 600),
               wordProvider.Serve(),
-              10
+              60
             );
 
             game.OnFinished += OnFinishedGame;

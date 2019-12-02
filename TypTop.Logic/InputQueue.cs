@@ -20,12 +20,6 @@ namespace TypTop.Logic
             Word input = Input?.Peek();
             int index = input.Index;
 
-            if (char.IsWhiteSpace(letter))
-            {
-                Input?.Dequeue();
-                return;
-            }
-
             if (input != null)
             {
                 if (CheckWord(letter, input))
