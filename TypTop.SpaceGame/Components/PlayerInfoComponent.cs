@@ -4,19 +4,22 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 using TypTop.Logic;
 
 namespace TypTop.SpaceGame
 {
     public class PlayerInfoComponent : Component, IDrawable
     {
+        public bool Hidden { get; set; }
+
         private PositionComponent _positionComponent;
         private readonly Player _player;
         public PlayerInfoComponent(SpaceGame game)
         {
             _player = game.Player;
+            Hidden = false;
         }
 
         public void Draw(DrawingContext context)

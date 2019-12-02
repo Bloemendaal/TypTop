@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using System.Windows.Media.Imaging;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 using TypTop.SpaceGame.Components;
 
 namespace TypTop.SpaceGame

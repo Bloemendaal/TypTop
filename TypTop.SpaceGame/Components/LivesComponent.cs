@@ -5,18 +5,21 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.SpaceGame
 {
     public class LivesComponent : Component, IDrawable
     {
+        public bool Hidden { get; set; }
         private PositionComponent _positionComponent;
         private readonly Player _player;
+        
         public LivesComponent(SpaceGame game)
         {
             _player = game.Player;
+            Hidden = false;
         }
 
         public void Draw(DrawingContext context)
