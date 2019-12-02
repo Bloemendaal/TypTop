@@ -10,5 +10,11 @@
   <ItemGroup>
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Images\heart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
