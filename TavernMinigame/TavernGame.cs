@@ -87,6 +87,8 @@ namespace TypTop.TavernMinigame
         }
         private int _maxCustomers = 3;
 
+        public bool AngryCustomers { get; private set; } = false;
+
         private readonly List<Customer> _customers = new List<Customer>();
         private readonly CustomerQueue _customerQueue;
 
@@ -131,6 +133,12 @@ namespace TypTop.TavernMinigame
 
                 _count = new Count(secondsOrQueue, 360, (float)Height - 50, this);
             }
+
+            if (Variant == PlayVariant.LifeBased)
+            {
+                AngryCustomers = true;
+            }
+
             _count.Typeface = DefaultTypeface;
             _count.ZIndex = 5;
             AddEntity(_count);

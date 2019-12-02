@@ -42,6 +42,8 @@ namespace TypTop.MinigameEngine
         public string Prefix = null;
         public string Suffix = null;
 
+        public int Seconds => (int)(_countDown ^ Finished ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime)).TotalSeconds;
+
         public Count(int seconds, Vector2 position, Game game) : base(game)
         {
             _dateTime = DateTime.Now;
@@ -64,7 +66,7 @@ namespace TypTop.MinigameEngine
 
         public override void Update(float deltaTime)
         {
-            TimeSpan timeSpan = _countDown ^ Finished ? _dateTime.Subtract(DateTime.Now) : (DateTime.Now).Subtract(_dateTime);
+            TimeSpan timeSpan = _countDown ^ Finished ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime);
 
             StringBuilder sb = new StringBuilder();
 
