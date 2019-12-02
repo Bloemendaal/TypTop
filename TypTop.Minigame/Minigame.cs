@@ -1,5 +1,5 @@
 ﻿using System;
-using BasicGameEngine;
+using TypTop.GameEngine;
 
 namespace TypTop.Minigame
 {

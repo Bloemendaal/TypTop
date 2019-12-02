@@ -1,11 +1,10 @@
-﻿
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using System.Windows.Media.Imaging;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.SpaceGame
 {

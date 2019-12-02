@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Media;
 
-namespace BasicGameEngine
+namespace TypTop.GameEngine
 {
     public abstract class Entity
     {
@@ -60,7 +60,7 @@ namespace BasicGameEngine
         {
             foreach (Component component in _components.Values)
             {
-                if (component is IDrawable drawable)
+                if (component is IDrawable drawable && !drawable.Hidden)
                 {
                     drawable.Draw(drawingContext);
                 }

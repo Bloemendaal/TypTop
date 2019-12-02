@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace BasicGameEngine
+namespace TypTop.GameEngine
 {
     public abstract class Game : IEnumerable<Entity>
     {

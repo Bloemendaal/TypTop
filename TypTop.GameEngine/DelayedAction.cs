@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace BasicGameEngine
+namespace TypTop.GameEngine
 {
     internal class DelayedAction : ITimed
     {

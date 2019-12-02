@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.SpaceGame
 {
@@ -15,6 +15,8 @@ namespace TypTop.SpaceGame
         private readonly PositionComponent _positionComponentEnemy;
         private readonly ImageComponent _imageComponentPlayer;
         private readonly ImageComponent _imageComponentEnemy;
+
+        public bool Hidden { get; set; }
 
         public LaserComponent(SpaceGame game)
         {

@@ -1,12 +1,12 @@
-﻿using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
 using System.Linq;
 using System.Windows.Input;
 using TypTop.Logic;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.TavernMinigame
 {
@@ -88,7 +88,7 @@ namespace TypTop.TavernMinigame
         private int _maxCustomers = 3;
 
         private readonly List<Customer> _customers = new List<Customer>();
-        private readonly Queue<Customer> _customerQueue = new Queue<Customer>();
+        private readonly CustomerQueue _customerQueue;
 
         private readonly ITimer _timer;
 
@@ -99,6 +99,9 @@ namespace TypTop.TavernMinigame
 
             AddEntity(new Background(this));
             TileAmount = tileAmount;
+
+            _customerQueue = new CustomerQueue(this);
+            AddEntity(_customerQueue);
 
             TextInput += OnTextInput;
 

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Windows.Media.Imaging;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.TavernMinigame
 {

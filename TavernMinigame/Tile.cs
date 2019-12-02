@@ -1,9 +1,9 @@
-﻿using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using TypTop.Logic;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.TavernMinigame
 {

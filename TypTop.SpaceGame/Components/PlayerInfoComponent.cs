@@ -4,9 +4,8 @@ using System.Globalization;
 using System.Text;
 using System.Windows;
 using System.Windows.Media;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
-using TypTop.Logic;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.SpaceGame
 {
@@ -14,6 +13,9 @@ namespace TypTop.SpaceGame
     {
         private PositionComponent _positionComponent;
         private int score;
+
+        public bool Hidden { get; set; }
+
         public PlayerInfoComponent(SpaceGame game)
         {
             score = game.Player.Score;
