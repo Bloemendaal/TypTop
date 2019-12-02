@@ -1,12 +1,29 @@
-﻿<Window x:Class="TypTop.LoginGui.MainWindow"
+﻿<Window x:Class="TypTop.Gui.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TypTop.LoginGui"
+        xmlns:local="clr-namespace:TypTop.Gui"
+        xmlns:visualKeyBoard="clr-namespace:TypTop.VisualKeyboard;assembly=TypTop.VisualKeyboard"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="1099">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <RadioButton x:Name="QwertRadioButton" Checked="LayoutRadio_OnChecked" IsChecked="True">Qwerty</RadioButton>
+            <RadioButton x:Name="ColemakRadioButton" Checked="LayoutRadio_OnChecked">Colemak</RadioButton>
+            <Separator />
+            <Button Click="ResetButton_OnClick">Reset highlights</Button>
+            
+        </StackPanel>
+
+        <visualKeyBoard:VisualKeyboard Grid.Column="1" x:Name="VisualKeyboard">
+
+        </visualKeyBoard:VisualKeyboard>
+
     </Grid>
 </Window>

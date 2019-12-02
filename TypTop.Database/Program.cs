@@ -32,9 +32,10 @@ namespace TypTop.Database
             };
         static void Main(string[] args)
         {
+            /*
             using (var db = new Context(""))
             {
-                /*
+                
                 foreach (var word in _testWords)
                 {
                     db.Add(new Word { Letters = word });
@@ -43,8 +44,9 @@ namespace TypTop.Database
                 Console.WriteLine("Adding done");
                 db.SaveChanges();
                 Console.WriteLine("saved");
-                */
+                
             }
+            */
         }
     }
 }

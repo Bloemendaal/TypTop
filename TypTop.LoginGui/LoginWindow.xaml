@@ -8,7 +8,7 @@
         Title="LoginWindow" Height="512" Width="726" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
 
     <Grid Background="Black">
-        <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="Images/LoginBackground.png" />
+        <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="LoginBackground.png" />
         <Canvas x:Name="AccountCreationCanvas" Visibility= "Hidden" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Height="337" Width="220">
             <Rectangle HorizontalAlignment="Right"  Stroke="#FF968D87" VerticalAlignment="Top" Height="337" Width="220" Fill="#FFEBE7E4" RadiusX="20" RadiusY="20" StrokeThickness="5"/>
             <Label Content="Gebruikersnaam:" Canvas.Left="38" Canvas.Top="38"/>

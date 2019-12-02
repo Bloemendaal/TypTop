@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using TypTop.Repository;
 
+
 namespace TypTop.Gui
 {
     /// <summary>
@@ -43,7 +44,7 @@ namespace TypTop.Gui
                     /* Set logged in account here
                     * (coming later)
                     */
-                    MainWindow mainWindow = new MainWindow();
+                    GameGui.MainWindow mainWindow = new GameGui.MainWindow();
                     mainWindow.Show();
                     Close();
                 }
