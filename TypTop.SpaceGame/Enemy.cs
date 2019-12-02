@@ -7,6 +7,7 @@ using System.Windows.Media.Imaging;
 using BasicGameEngine;
 using BasicGameEngine.GameEngine.Components;
 using TypTop.Logic;
+using TypTop.SpaceGame.Components;
 
 namespace TypTop.SpaceGame
 {
@@ -16,6 +17,7 @@ namespace TypTop.SpaceGame
         public int Speed { get; private set; }
         public int Score { get; private set; }
         public int Y { get; set; }
+        private readonly SpaceGame _game;
 
         public Enemy(int speed, int amountOfWords, Word word, Game game) : base(game)
         {
@@ -42,6 +44,27 @@ namespace TypTop.SpaceGame
             Word = word;
             Speed = speed;
             Score = Word.Letters.Length * Speed;
+            _game = (SpaceGame)game;
+        }
+
+        public override void Update(float deltaTime)
+        {
+            base.Update(deltaTime);
+            var lineHeight = 0;
+            
+            foreach (var entity in _game)
+            {
+                if (entity is Line line)
+                {
+                    lineHeight = (int)line.GetComponent<PositionComponent>().Y;
+                }
+            }
+
+            if (GetComponent<PositionComponent>().Y > lineHeight)
+            {
+                _game.EnemyQueue.Dequeue();
+                _game.Player.LoseLife();
+            }
         }
     }
 }

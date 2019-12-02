@@ -17,8 +17,6 @@ namespace TypTop.SpaceGame
             //AddComponent(new GameStatisticsBackgroundComponent());
             AddComponent(new PlayerInfoComponent(game));
             AddComponent(new LivesComponent(game));
-            
-            
         }
     }
 }
