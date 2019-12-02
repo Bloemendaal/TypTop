@@ -6,7 +6,7 @@ using TypTop.Database;
 
 namespace TypTop.Repository
 {
-    class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork
     {
         private readonly Context _context;
         public IUserRepository Users { get; private set; }

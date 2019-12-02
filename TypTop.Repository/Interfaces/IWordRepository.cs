@@ -1,6 +1,6 @@
-﻿namespace TypTop.Repository.Classes
+﻿namespace TypTop.Repository
 {
-    internal interface IWordRepository
+    public interface IWordRepository
     {
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace TypTop.Repository
 {
-    class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(Context context) : base(context)
         {

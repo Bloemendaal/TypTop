@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace TypTop.Repository
 {
@@ -28,6 +29,11 @@ namespace TypTop.Repository
         public IEnumerable<TEntity> GetAll()
         {
             return _entities.ToList();
+        }
+
+        public IEnumerable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _entities.Where(predicate).ToList();
         }
 
         public void Remove(TEntity entity)

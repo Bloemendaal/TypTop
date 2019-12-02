@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TypTop.Database;
 
-namespace TypTop.Repository.Classes
+namespace TypTop.Repository
 {
-    class WordRepository
+    public class WordRepository : Repository<Word>, IWordRepository
     {
+
+        public WordRepository(Context context) : base(context)
+        {
+        }
     }
 }

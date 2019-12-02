@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TavernMinigame", "TavernMin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Shared", "TypTop.Shared\TypTop.Shared.csproj", "{1622366E-B221-4E79-8461-9C46418D560E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Repository", "TypTop.Repository\TypTop.Repository.csproj", "{D06BA6BF-F418-4D1E-9DE5-B8FBD6F02DCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Repository", "TypTop.Repository\TypTop.Repository.csproj", "{D06BA6BF-F418-4D1E-9DE5-B8FBD6F02DCF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.LoginGui", "TypTop.LoginGui\TypTop.LoginGui.csproj", "{2AE9FC5F-8F63-447A-ABFF-1E1BEF892ADD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{D06BA6BF-F418-4D1E-9DE5-B8FBD6F02DCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D06BA6BF-F418-4D1E-9DE5-B8FBD6F02DCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D06BA6BF-F418-4D1E-9DE5-B8FBD6F02DCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AE9FC5F-8F63-447A-ABFF-1E1BEF892ADD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AE9FC5F-8F63-447A-ABFF-1E1BEF892ADD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AE9FC5F-8F63-447A-ABFF-1E1BEF892ADD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AE9FC5F-8F63-447A-ABFF-1E1BEF892ADD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
