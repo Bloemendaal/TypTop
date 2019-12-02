@@ -7,9 +7,9 @@ using System.Windows.Media.Imaging;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 using TypTop.Logic;
-using TypTop.SpaceGame.Components;
+using TypTop.SpaceMinigame.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     public class Enemy : Entity
     {
@@ -21,6 +21,7 @@ namespace TypTop.SpaceGame
 
         public Enemy(int speed, int amountOfWords, Word word, Game game) : base(game)
         {
+            ZIndex = 2;
             Y = (game.Rnd.Next(0, amountOfWords * 150) * -1);
             var positionComponent = new PositionComponent()
             {
@@ -57,7 +58,7 @@ namespace TypTop.SpaceGame
                 _game.InputQueue.Input.Dequeue();
                 _game.RemoveEntity(this);
                 _game.EnemyQueue.Dequeue();
-                _game.Player.LoseLife();
+                _game.Lives.Amount--;
             }
         }
     }

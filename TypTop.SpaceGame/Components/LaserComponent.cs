@@ -7,7 +7,7 @@ using System.Windows.Media;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame.Components
 {
     public class LaserComponent : Component, IDrawable
     {

@@ -5,18 +5,17 @@ using System.Text;
 using System.Windows.Media.Imaging;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
-using TypTop.SpaceGame.Components;
+using TypTop.SpaceMinigame.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     class GameStatistics : Entity
     {
         public GameStatistics(SpaceGame game) : base(game)
         {
+            ZIndex = 4;
             AddComponent(new PositionComponent(new Vector2(0,0)));
             //AddComponent(new GameStatisticsBackgroundComponent());
-            AddComponent(new PlayerInfoComponent(game));
-            AddComponent(new LivesComponent(game));
         }
     }
 }

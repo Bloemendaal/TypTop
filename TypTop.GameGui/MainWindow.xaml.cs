@@ -12,6 +12,7 @@ using TypTop.Logic;
 using TypTop.TavernMinigame;
 using TypTop.MinigameEngine.WinConditions;
 using TypTop.MinigameEngine;
+using TypTop.SpaceMinigame;
 
 namespace TypTop.GameGui
 {
@@ -45,8 +46,8 @@ namespace TypTop.GameGui
 
             game.OnFinished += OnFinishedGame;
 
-            GameWindow.Start(game);
-            //GameWindow.Start(new SpaceGame.SpaceGame());
+            //GameWindow.Start(game);
+            GameWindow.Start(new SpaceGame(new ScoreCondition(100)));
         }
 
         private void OnFinishedGame(object sender, FinishEventArgs e)

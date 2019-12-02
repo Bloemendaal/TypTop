@@ -22,6 +22,9 @@ namespace TypTop.GameEngine.Components
         public bool Center = false;
         public bool Middle = false;
 
+        public double Width => Text?.WidthIncludingTrailingWhitespace ?? 0;
+        public double Height => Text?.Height ?? 0;
+
         public bool Hidden { get; set; }
 
         public FormattedText Text;

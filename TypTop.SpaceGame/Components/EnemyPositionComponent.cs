@@ -4,7 +4,7 @@ using System.Text;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 
-namespace TypTop.SpaceGame.Components
+namespace TypTop.SpaceMinigame.Components
 {
     public class EnemyPositionComponent : Component
     {
@@ -28,7 +28,7 @@ namespace TypTop.SpaceGame.Components
         {
             if (Entity.GetComponent<PositionComponent>().Y > _line.GetComponent<PositionComponent>().Y)
             {
-                _game.Player.LoseLife();
+                _game.Lives.Amount--;
             }
         }
     }

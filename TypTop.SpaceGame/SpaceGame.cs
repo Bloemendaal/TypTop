@@ -8,12 +8,14 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
-using TypTop.SpaceGame;
+using TypTop.SpaceMinigame;
 using TypTop.Logic;
+using TypTop.MinigameEngine;
+using TypTop.MinigameEngine.WinConditions;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
-    public class SpaceGame : Game
+    public class SpaceGame : Minigame
     {
         public Player Player { get; set; }
         public Queue<Enemy> EnemyQueue { get; set; }
@@ -21,8 +23,30 @@ namespace TypTop.SpaceGame
         public Level Level { get; set; }
         public Line Line { get; set; }
 
-        public SpaceGame()
+        public SpaceGame(WinCondition winCondition) : base(winCondition)
         {
+            Score = new Score(10, 10, this)
+            {
+                Direction = Score.FloatDirection.Down,
+                ZIndex = 5,
+                Prefix = "Score : ",
+                Color = Brushes.White,
+                Positive = Brushes.LightGreen,
+                Negative = Brushes.Red,
+                FontSize = 40,
+                Right = true
+            };
+            Lives = new Lives(200, 10, this) 
+            { 
+                Amount = 4,
+                ZIndex = 5 
+            };
+
+            Finish = delegate ()
+            {
+                return Lives.Amount <= 0;
+            };
+
             Level = new Level(1, this);
             Player = new Player(this);
             EnemyQueue = new Queue<Enemy>();
@@ -38,7 +62,7 @@ namespace TypTop.SpaceGame
             // Adding entities 
             //
 
-            AddEntity(new Background(this));
+            AddEntity(new Background("space.jpg", this));
             AddEntity(new GameStatistics(this));
             foreach (var enemy in EnemyQueue)
             {
@@ -47,6 +71,10 @@ namespace TypTop.SpaceGame
 
             AddEntity(Player);
             AddEntity(Line);
+
+            Score.UpdateText();
+            AddEntity(Score);
+            AddEntity(Lives);
 
             //
             // Events
@@ -96,7 +124,7 @@ namespace TypTop.SpaceGame
                             RemoveEntity(enemy);
                             AddEntity(new Laser(this));
                             EnemyQueue.Dequeue();
-                            Player.GainScore(enemy.Score);
+                            Score.Amount += enemy.Score;
                         }
                     }
                 }

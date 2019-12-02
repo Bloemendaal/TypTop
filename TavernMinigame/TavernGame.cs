@@ -177,7 +177,8 @@ namespace TypTop.TavernMinigame
                 Direction = Score.FloatDirection.Up,
                 Typeface = DefaultTypeface,
                 ZIndex = 5,
-                Prefix = "Score : "
+                Prefix = "Score : ",
+                Right = true
             };
 
             Score.UpdateText();
