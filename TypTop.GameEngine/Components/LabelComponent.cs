@@ -26,7 +26,7 @@ namespace TypTop.GameEngine.Components
 
         public FormattedText Text;
 
-        public LabelComponent(FormattedText text)
+        public LabelComponent(FormattedText text = null)
         {
             Text = text;
         }

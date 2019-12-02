@@ -14,6 +14,7 @@ namespace TypTop.GameEngine
     {
         public readonly Random Rnd = new Random(DateTime.Now.Millisecond);
         HashSet<Entity> _entities = new HashSet<Entity>();
+        HashSet<Entity> _removeEntities = new HashSet<Entity>();
 
         public event TextCompositionEventHandler TextInput;
 
@@ -64,11 +65,14 @@ namespace TypTop.GameEngine
 
         public void RemoveEntity(Entity entity)
         {
-            _entities.Remove(entity);
+            _removeEntities.Add(entity);
         }
         public void RemoveEntity<TEntity>() where TEntity : Entity
         {
-            _entities.RemoveWhere(e => e is TEntity);
+            foreach (Entity entity in _entities.Where(e => e is TEntity))
+            {
+                _removeEntities.Add(entity);
+            }
         }
 
         public IEnumerable<Entity> GetEntitiesWithComponent<TComponent>() where TComponent : Component
@@ -88,6 +92,12 @@ namespace TypTop.GameEngine
             {
                 entity.Update(deltaTime);
             }
+
+            foreach (Entity entity in _removeEntities)
+            {
+                _entities.Remove(entity);
+            }
+            _removeEntities.Clear();
 
             RunTimedObjects(deltaTime);
         }

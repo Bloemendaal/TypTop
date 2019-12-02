@@ -24,7 +24,7 @@ namespace TypTop.TavernMinigame
             {
                 Height = 200
             });
-            AddComponent(new LabelComponent(null)
+            AddComponent(new LabelComponent()
             {
                 TransformX = 100,
                 TransformY = 100,
@@ -54,9 +54,15 @@ namespace TypTop.TavernMinigame
                 Count.ToString(),
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
-                new Typeface("MV Boli"),
+                ((TavernGame)Game).DefaultTypeface,
                 80,
-                Brushes.Black
+                new SolidColorBrush(new Color()
+                {
+                    R = 58,
+                    G = 37, 
+                    B = 21, 
+                    A = 255
+                })
            );
         }
     }

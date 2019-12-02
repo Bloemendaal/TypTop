@@ -7,10 +7,12 @@ using System.Windows.Input;
 using TypTop.Logic;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
+using TypTop.MinigameEngine;
+using System.Windows.Media;
 
 namespace TypTop.TavernMinigame
 {
-    public class TavernGame : Minigame.Minigame
+    public class TavernGame : Minigame
     {
         public int TileAmount
         {
@@ -92,6 +94,8 @@ namespace TypTop.TavernMinigame
 
         private readonly ITimer _timer;
 
+        public readonly Typeface DefaultTypeface = new Typeface("MV Boli");
+
 
         public TavernGame(int tileAmount, List<Word> words)
         {
@@ -108,8 +112,21 @@ namespace TypTop.TavernMinigame
             _timer = AddTimer(() =>
             {
                 AddCustomer(new Customer(this));
-                _timer.Interval = Rnd.Next(3000, 5000);
+                _timer.Interval = Rnd.Next(3000, 5000) * (1 + _customerQueue.Count / 10);
             }, Rnd.Next(3000, 5000));
+
+            Score = new Score(20, (float)Height - 70, this, "tavernscore", 500)
+            {
+                Direction = Score.FloatDirection.Up,
+                Typeface = DefaultTypeface,
+                ZIndex = 5,
+                LabelTransformX = 40,
+                LabelTransformY = 20,
+                Prefix = "Score : "
+            };
+
+            Score.UpdateText();
+            AddEntity(Score);
         }
         
 

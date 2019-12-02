@@ -52,6 +52,8 @@ namespace TypTop.TavernMinigame
             _orders.ForEach(o => Game.RemoveEntity(o));
             Game.RemoveEntity(this);
             Game.RemoveEntity(SpeechBubble);
+
+            ((TavernGame)Game).Score.Amount += 100;
         }
 
         public bool RemoveOrder(Order order)

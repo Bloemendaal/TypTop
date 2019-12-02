@@ -1,7 +1,7 @@
 ﻿using System;
 using TypTop.GameEngine;
 
-namespace TypTop.Minigame
+namespace TypTop.MinigameEngine
 {
     public class Minigame : Game
     {
@@ -57,7 +57,7 @@ namespace TypTop.Minigame
         }
         private int? _stars;
 
-        public int Score;
+        public Score Score;
 
     }
 }

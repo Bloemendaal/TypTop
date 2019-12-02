@@ -80,6 +80,9 @@
     <None Update="Images\Order\tea.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\tavernscore.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\tile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

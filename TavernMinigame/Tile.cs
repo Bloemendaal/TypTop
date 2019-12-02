@@ -52,7 +52,7 @@ namespace TypTop.TavernMinigame
                 TransformY = (float)(HeightOffset * 1.72),
                 Center = true,
                 FontSize = 40,
-                Typeface = new System.Windows.Media.Typeface("MV Boli")
+                Typeface = ((TavernGame)Game).DefaultTypeface
             });
         }
     }
