@@ -1,8 +1,8 @@
 using System;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace SpaceInvadersMinigame
 {

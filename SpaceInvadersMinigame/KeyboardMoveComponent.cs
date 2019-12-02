@@ -1,7 +1,7 @@
 using System.Numerics;
 using System.Windows.Input;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace SpaceInvadersMinigame
 {
