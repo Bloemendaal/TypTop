@@ -4,8 +4,9 @@ using System.Numerics;
 using System.Text;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
+using TypTop.SpaceMinigame.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     public class Line : Entity
     {

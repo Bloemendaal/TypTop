@@ -7,18 +7,15 @@ using System.Windows.Media.Imaging;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     public class Player : Entity
     {
-        public int Lives { get; private set; } 
-        public int Score { get; private set; } 
         public Player(Game game) : this(4, game) { }
 
         public Player(int lives, Game game) : base(game)
         {
-            Lives = lives; 
-            Score = 0;  
+            ZIndex = 1;
 
             AddComponent(new PositionComponent()
             {
@@ -31,9 +28,5 @@ namespace TypTop.SpaceGame
             });
         }
 
-        public void GainScore(int score) => Score += score;
-        public void LoseScore(int score) => Score -= score;
-        public void GainLife() => Lives++;
-        public void LoseLife() => Lives--;
     }
 }

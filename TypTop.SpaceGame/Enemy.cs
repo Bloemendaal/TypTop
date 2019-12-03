@@ -7,29 +7,29 @@ using System.Windows.Media.Imaging;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 using TypTop.Logic;
-using TypTop.SpaceGame.Components;
+using TypTop.SpaceMinigame.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     public class Enemy : Entity
     {
         public Word Word { get; private set; }
         public int Speed { get; private set; }
         public int Score { get; private set; }
-        public int Y { get; set; }
+        public float Y => _positionComponent.Y;
+
         private readonly SpaceGame _game;
+        private readonly PositionComponent _positionComponent;
 
         public Enemy(int speed, int amountOfWords, Word word, Game game) : base(game)
         {
-            Y = (game.Rnd.Next(0, amountOfWords * 150) * -1);
-            var positionComponent = new PositionComponent()
-            {
-                Position = new Vector2(game.Rnd.Next(150, 1720), Y)
-            };
-            AddComponent(positionComponent);
+            ZIndex = 2;
+
+            _positionComponent = new PositionComponent(game.Rnd.Next(150, 1720), game.Rnd.Next(0, amountOfWords * 150) * -1);
+            AddComponent(_positionComponent);
             AddComponent(new VelocityComponent()
             {
-                Velocity = new Vector2(0, (float)speed)
+                Velocity = new Vector2(0, speed)
             });
             AddComponent(new WordComponent(word, Brushes.Red, Brushes.DarkRed)
             {
@@ -50,14 +50,12 @@ namespace TypTop.SpaceGame
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
-            var lineHeight = _game.Line.GetComponent<PositionComponent>().Y;
 
-            if (GetComponent<PositionComponent>().Y > lineHeight)
+            if (Y > _game.Line.GetComponent<PositionComponent>().Y)
             {
-                _game.InputQueue.Input.Dequeue();
+                _game.EnemyList.Remove(this);
                 _game.RemoveEntity(this);
-                _game.EnemyQueue.Dequeue();
-                _game.Player.LoseLife();
+                _game.Lives.Amount--;
             }
         }
     }

@@ -27,6 +27,9 @@ namespace TypTop.GameEngine.Components
         public Typeface Typeface = new Typeface("Myriad");
         public int FontSize = 30;
 
+        public double Width => _formattedText?.WidthIncludingTrailingWhitespace ?? 0;
+        public double Height => _formattedText?.Height ?? 0;
+
         public bool Hidden { get; set; }
 
         public Word Word { 

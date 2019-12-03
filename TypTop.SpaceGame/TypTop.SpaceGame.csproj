@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>TypTop.SpaceMinigame</AssemblyName>
+    <RootNamespace>TypTop.SpaceMinigame</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
+    <ProjectReference Include="..\TypTop.Minigame\TypTop.Minigame.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,9 +21,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\enemy.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\heart.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\space.jpg">

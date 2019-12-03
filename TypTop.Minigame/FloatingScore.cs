@@ -13,7 +13,6 @@ namespace TypTop.MinigameEngine
     public class FloatingScore : Entity
     {
         private readonly SolidColorBrush _color;
-        private readonly Score _score;
 
         public float LabelTransformX
         {
@@ -26,28 +25,31 @@ namespace TypTop.MinigameEngine
             set => _labelComponent.TransformY = value;
         }
 
-        private LabelComponent _labelComponent;
+        public bool ShowOperator = true;
+
+        private readonly LabelComponent _labelComponent;
 
         public FloatingScore(int diff, Score score) : base(score.Game)
         {
-            _score = score;
-            _color = new SolidColorBrush((diff < 0 ? _score.Negative : _score.Positive).Color)
+            _color = new SolidColorBrush((diff < 0 ? score.Negative : score.Positive).Color)
             {
                 Opacity = 1
             };
 
-            AddComponent(new PositionComponent(_score.LabelX, _score.LabelY));
+            AddComponent(new PositionComponent(score.LabelX, score.LabelY));
             AddComponent(new VelocityComponent()
             {
-                Velocity = new Vector2(0, _score.Direction == Score.FloatDirection.Down ? 1 : -1)
+                Velocity = new Vector2(0, score.Direction == Score.FloatDirection.Down ? 1 : -1)
             });
 
+            string o = ShowOperator ? (diff < 0 ? "- " : "+ ") : "";
+
             _labelComponent = new LabelComponent(new FormattedText(
-                diff.ToString(),
+                $"{o}{diff.ToString()}",
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
-                _score.Typeface,
-                _score.FontSize,
+                score.Typeface,
+                score.FontSize,
                 _color
             ));
             AddComponent(_labelComponent);

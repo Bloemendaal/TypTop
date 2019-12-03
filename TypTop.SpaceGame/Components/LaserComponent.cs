@@ -7,7 +7,7 @@ using System.Windows.Media;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame.Components
 {
     public class LaserComponent : Component, IDrawable
     {
@@ -18,10 +18,10 @@ namespace TypTop.SpaceGame
 
         public bool Hidden { get; set; }
 
-        public LaserComponent(SpaceGame game)
+        public LaserComponent(Enemy e, SpaceGame game)
         {
-            _positionComponentEnemy = game.EnemyQueue.First().GetComponent<PositionComponent>();
-            _imageComponentEnemy = game.EnemyQueue.First().GetComponent<ImageComponent>();
+            _positionComponentEnemy = e.GetComponent<PositionComponent>();
+            _imageComponentEnemy = e.GetComponent<ImageComponent>();
 
             _positionComponentPlayer = game.Player.GetComponent<PositionComponent>();
             _imageComponentPlayer = game.Player.GetComponent<ImageComponent>();

@@ -25,6 +25,9 @@ namespace TypTop.MinigameEngine
             }
         }
         private int _amount = 0;
+        
+        public float LabelTransformX = 0;
+        public float LabelTransformY = 0;
 
         public float LabelX => _labelComponent.X;
         public float LabelY => _labelComponent.Y;
@@ -42,6 +45,9 @@ namespace TypTop.MinigameEngine
 
         public string Prefix = null;
         public string Suffix = null;
+
+        public bool Right = false;
+        public bool ShowOperator = true;
 
         public Score(Vector2 position, Game game) : base(game)
         {
@@ -71,8 +77,15 @@ namespace TypTop.MinigameEngine
                 FloatingScore fScore = new FloatingScore(diff, this)
                 {
                     ZIndex = ZIndex + 1,
-                    LabelTransformX = 118
+                    LabelTransformX = LabelTransformX,
+                    LabelTransformY = LabelTransformY,
+                    ShowOperator = ShowOperator
                 };
+
+                if (Right)
+                {
+                    fScore.LabelTransformX += (float)_labelComponent.Width - (float)fScore.GetComponent<LabelComponent>().Width;
+                }
 
                 Game.AddEntity(fScore);
             }

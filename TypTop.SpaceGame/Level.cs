@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using TypTop.GameEngine;
 using TypTop.Logic;
-using TypTop.SpaceGame;
+using TypTop.SpaceMinigame;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     public class Level
     {
         public List<Enemy> EnemyList { get; private set; }
         public int AmountOfEnemies { get; private set; }
-        public int PlayerLives { get; set; }
 
         private readonly WordProvider _wordProvider;
 
@@ -26,13 +25,8 @@ namespace TypTop.SpaceGame
 
         public bool Initialize(Game game)
         {
-            var livesOfPlayer = 3;
-
-
             _wordProvider.LimitChars = new List<char>() { 'a','s','d','f','g','h','j','k','l' };
             _wordProvider.UsageChars = new List<char>() { 'a' };
-
-            PlayerLives = livesOfPlayer;
 
             foreach (var word in _wordProvider.Serve())
             {

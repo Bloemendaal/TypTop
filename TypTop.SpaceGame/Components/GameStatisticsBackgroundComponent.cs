@@ -6,7 +6,7 @@ using System.Windows.Media;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 
-namespace TypTop.SpaceGame.Components
+namespace TypTop.SpaceMinigame.Components
 {
     public class GameStatisticsBackgroundComponent : Component, IDrawable
     {
