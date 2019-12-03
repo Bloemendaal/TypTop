@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29505.145
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Gui", "TypTop.Gui\TypTop.Gui.csproj", "{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Logic", "TypTop.Logic\TypTop.Logic.csproj", "{55172CE7-CBF5-47B9-90CC-217EF307FF1E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.VisualKeyboard", "TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj", "{28F590C5-6700-44EB-A452-ECEBA5A100F5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Database", "TypTop.Database\TypTop.Database.csproj", "{3BCB292B-F745-4465-B7F2-1109D74CCF91}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Gui.UnitTests", "TypTop.Gui.UnitTests\TypTop.Gui.UnitTests.csproj", "{4CC4919F-5F2D-4694-972B-8758C06587D3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.VisualKeyboard.Tests", "TypTop.VisualKeyboard.Tests\TypTop.VisualKeyboard.Tests.csproj", "{BFD7635D-ACCA-4027-B556-15DA37C130C9}"
 EndProject
@@ -21,8 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.GameEngine", "TypTop
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minigames", "Minigames", "{A8EC2EEE-434D-470B-8C20-1814E7BF5120}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpaceInvadersMinigame", "SpaceInvadersMinigame\SpaceInvadersMinigame.csproj", "{405BF0EA-F49A-486A-92E0-D4100540337E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.GameGui", "TypTop.GameGui\TypTop.GameGui.csproj", "{813FF76E-7A24-4BB7-89BF-77F49031EFF7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.SpaceGame", "TypTop.SpaceGame\TypTop.SpaceGame.csproj", "{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}"
@@ -31,13 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.TavernMinigame", "Ta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Shared", "TypTop.Shared\TypTop.Shared.csproj", "{1622366E-B221-4E79-8461-9C46418D560E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Minigame", "TypTop.Minigame\TypTop.Minigame.csproj", "{2F2A9241-F201-4580-B17C-5E5005D7D099}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Minigame", "TypTop.Minigame\TypTop.Minigame.csproj", "{2F2A9241-F201-4580-B17C-5E5005D7D099}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Repository", "TypTop.Repository\TypTop.Repository.csproj", "{D06BA6BF-F418-4D1E-9DE5-B8FBD6F02DCF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.LoginGui", "TypTop.LoginGui\TypTop.LoginGui.csproj", "{CDB7ABE1-49E8-4786-B6EC-7F0BEBE3EE6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.LoginGui.UnitTests", "TypTop.LoginGui.UnitTests\TypTop.LoginGui.UnitTests.csproj", "{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.LoginGui.UnitTests", "TypTop.LoginGui.UnitTests\TypTop.LoginGui.UnitTests.csproj", "{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,10 +39,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6B5870EF-25AC-4DBF-9EC4-B6D395EB8A19}.Release|Any CPU.Build.0 = Release|Any CPU
 		{55172CE7-CBF5-47B9-90CC-217EF307FF1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{55172CE7-CBF5-47B9-90CC-217EF307FF1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55172CE7-CBF5-47B9-90CC-217EF307FF1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -61,10 +51,6 @@ Global
 		{3BCB292B-F745-4465-B7F2-1109D74CCF91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BCB292B-F745-4465-B7F2-1109D74CCF91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BCB292B-F745-4465-B7F2-1109D74CCF91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4CC4919F-5F2D-4694-972B-8758C06587D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFD7635D-ACCA-4027-B556-15DA37C130C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFD7635D-ACCA-4027-B556-15DA37C130C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFD7635D-ACCA-4027-B556-15DA37C130C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,10 +63,6 @@ Global
 		{03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03BD04BD-55F8-4B3E-B86D-7FEC6BBE2C6E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{405BF0EA-F49A-486A-92E0-D4100540337E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{405BF0EA-F49A-486A-92E0-D4100540337E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{405BF0EA-F49A-486A-92E0-D4100540337E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{405BF0EA-F49A-486A-92E0-D4100540337E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{813FF76E-7A24-4BB7-89BF-77F49031EFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{813FF76E-7A24-4BB7-89BF-77F49031EFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{813FF76E-7A24-4BB7-89BF-77F49031EFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -118,7 +100,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{405BF0EA-F49A-486A-92E0-D4100540337E} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 		{29768497-8C22-4952-972A-8393E0C8BDC1} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 	EndGlobalSection
