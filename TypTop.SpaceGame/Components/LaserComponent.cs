@@ -11,38 +11,34 @@ namespace TypTop.SpaceMinigame.Components
 {
     public class LaserComponent : Component, IDrawable
     {
-        private readonly PositionComponent _positionComponentPlayer;
-        private readonly PositionComponent _positionComponentEnemy;
-        private readonly ImageComponent _imageComponentPlayer;
-        private readonly ImageComponent _imageComponentEnemy;
+        private readonly SolidColorBrush _color = new SolidColorBrush(Brushes.LightBlue.Color);
+        private readonly Point _point1;
+        private readonly Point _point2;
 
         public bool Hidden { get; set; }
 
-        public LaserComponent(Enemy e, SpaceGame game)
+        public LaserComponent(Point point1, Point point2)
         {
-            _positionComponentEnemy = e.GetComponent<PositionComponent>();
-            _imageComponentEnemy = e.GetComponent<ImageComponent>();
-
-            _positionComponentPlayer = game.Player.GetComponent<PositionComponent>();
-            _imageComponentPlayer = game.Player.GetComponent<ImageComponent>();
-
-            Hidden = false;
+            _point1 = point1;
+            _point2 = point2;
         }
 
         public void Draw(DrawingContext context)
         {
-            Pen pen = new Pen(Brushes.LightBlue, 5);
+            _color.Opacity -= 0.01;
+            if (_color.Opacity <= 0)
+            {
+                Entity.Game.RemoveEntity(Entity);
+                return;
+            }
+
+            Pen pen = new Pen(_color, 5);
 
             DashStyle dash_style1 = new DashStyle(
                 new double[] { 5, 5 }, 0);
             pen.DashStyle = dash_style1;
 
-            if (_imageComponentEnemy.Width == null) return;
-            if (_imageComponentEnemy.Height == null) return;
-            if (_imageComponentPlayer.Width == null) return;
-            Point point1 = new Point(_positionComponentEnemy.X + (_imageComponentEnemy.Width.Value / 2), _positionComponentEnemy.Y + (_imageComponentEnemy.Height.Value / 2));
-            Point point2 = new Point(_positionComponentPlayer.X + (_imageComponentPlayer.Width.Value /2), _positionComponentPlayer.Y);
-            context.DrawLine(pen, point1, point2);
+            context.DrawLine(pen, _point1, _point2);
         }
     }
 }

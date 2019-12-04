@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -73,6 +74,16 @@ namespace TypTop.GameEngine.Components
         }
         private double? _height;
 
+        public double Rotation
+        {
+            get => _rotation;
+            set
+            {
+                _rotation = value % 360;
+            }
+        }
+        private double _rotation = 0;
+
         public bool Hidden { get; set; }
 
         public ImageComponent(BitmapImage bitmapImage)
@@ -87,12 +98,42 @@ namespace TypTop.GameEngine.Components
 
         public void Draw(DrawingContext context)
         {
-            context.DrawImage(_bitmapImage,
+            context.DrawImage(
+                Rotation == 0 ? _bitmapImage : ComposeImage(_bitmapImage, Rotation),
                 new Rect(
                     new Point(_positionComponent.Position.X, _positionComponent.Position.Y),
                     new Size((double)Width, (double)Height)
                 )
             );
+        }
+
+        private BitmapSource ComposeImage(BitmapSource image, double rotationAngle)
+        {
+            RotateTransform rotation = new RotateTransform(rotationAngle);
+            Size size = new Size(image.PixelWidth, image.PixelHeight);
+            Vector center2 = new Vector(size.Width / 2, size.Height / 2);
+            Size rotatedSize = rotation.TransformBounds(new Rect(size)).Size;
+            Size totalSize = new Size(
+                Math.Max(size.Width, rotatedSize.Width),
+                Math.Max(size.Height, rotatedSize.Height)
+            );
+            Point center = new Point(totalSize.Width / 2, totalSize.Height / 2);
+
+            rotation.CenterX = center.X;
+            rotation.CenterY = center.Y;
+
+            DrawingVisual dv = new DrawingVisual();
+
+            using (DrawingContext dc = dv.RenderOpen())
+            {
+                dc.PushTransform(rotation);
+                dc.DrawImage(image, new Rect(center - center2, size));
+            }
+
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)totalSize.Width, (int)totalSize.Height, 96, 96, PixelFormats.Default);
+            rtb.Render(dv);
+
+            return rtb;
         }
     }
 }
