@@ -13,7 +13,7 @@ namespace TypTop.MinigameEngine
     public class Count : Entity
     {
 
-        private readonly DateTime _dateTime;
+        private readonly DateTime? _dateTime = null;
         private readonly DateTime _startTime;
 
         private readonly LabelComponent _labelComponent = new LabelComponent();
@@ -42,7 +42,7 @@ namespace TypTop.MinigameEngine
         public string Prefix = null;
         public string Suffix = null;
 
-        public int Seconds => (int)(_dateTime == null ? DateTime.Now.Subtract(_startTime) : _dateTime.Subtract(DateTime.Now)).TotalSeconds;
+        public int Seconds => (int)(_dateTime == null ? DateTime.Now.Subtract(_startTime) : ((DateTime)_dateTime).Subtract(DateTime.Now)).TotalSeconds;
         public int SecondsSpent => (int)DateTime.Now.Subtract(_startTime).TotalSeconds;
 
         public Count(int seconds, Vector2 position, Game game) : base(game)
@@ -61,7 +61,8 @@ namespace TypTop.MinigameEngine
 
         public override void Update(float deltaTime)
         {
-            TimeSpan timeSpan = _dateTime != null ^ Finished ? _dateTime.Subtract(DateTime.Now) : DateTime.Now.Subtract(_dateTime);
+            var dt = _dateTime ?? _startTime;
+            TimeSpan timeSpan = _dateTime != null ^ Finished ? dt.Subtract(DateTime.Now) : DateTime.Now.Subtract(dt);
 
             StringBuilder sb = new StringBuilder();
 
