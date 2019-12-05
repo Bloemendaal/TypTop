@@ -64,7 +64,9 @@ namespace TypTop.Gui
         {
             CreationUsernameBox.Text = UsernameBox.Text;
             CreationPasswordBox.Password = PasswordBox.Password;
+            CreationPasswordBoxConfirmation.Password = "";
             AccountCreationCanvas.Visibility = Visibility.Visible;
+            CreationUsernameBox.Focus();
             LoginCanvas.Visibility = Visibility.Hidden;
         }
 
