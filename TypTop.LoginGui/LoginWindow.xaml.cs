@@ -29,9 +29,9 @@ namespace TypTop.Gui
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
 
-            using var unitOfWork = new UnitOfWork(new TypTop.GameGui.ContextFactory().CreateDbContext(null));
+            using var unitOfWork = new UnitOfWork(new GameGui.ContextFactory().CreateDbContext(null));
 
-            if (unitOfWork.Users.GetWhere(u => u.Username.Equals(UsernameBox.Text)).Any())
+            if (PasswordBox.Password != "" && unitOfWork.Users.GetWhere(u => u.Username.Equals(UsernameBox.Text)).Any())
             {
                 byte[] salt = unitOfWork.Users.GetSalt(UsernameBox.Text);
                 byte[] hash = unitOfWork.Users.GetPasswordHash(UsernameBox.Text);
@@ -65,6 +65,7 @@ namespace TypTop.Gui
             CreationUsernameBox.Text = UsernameBox.Text;
             CreationPasswordBox.Password = PasswordBox.Password;
             CreationPasswordBoxConfirmation.Password = "";
+
             AccountCreationCanvas.Visibility = Visibility.Visible;
             CreationUsernameBox.Focus();
             LoginCanvas.Visibility = Visibility.Hidden;
@@ -82,38 +83,46 @@ namespace TypTop.Gui
         {
             if (CreationUsernameBox.Text != "" && CreationPasswordBox.Password != "")
             {
-                if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
+                if (CreationPasswordBox.Password.Length >= 8)
                 {
-                    using (var unitOfWork = new UnitOfWork(new TypTop.GameGui.ContextFactory().CreateDbContext(null)))
+
+
+                    if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
                     {
-                        if (!unitOfWork.Users.GetWhere(u => u.Username.Equals(CreationUsernameBox.Text)).Any())
+                        using (var unitOfWork = new UnitOfWork(new TypTop.GameGui.ContextFactory().CreateDbContext(null)))
                         {
-                            byte[] salt = PasswordHasher.CreateSalt();
-
-                            unitOfWork.Users.Add(new Database.User
+                            if (!unitOfWork.Users.GetWhere(u => u.Username.Equals(CreationUsernameBox.Text)).Any())
                             {
-                                UserId = 0,
-                                Username = CreationUsernameBox.Text,
-                                Password = Convert.ToBase64String(PasswordHasher.HashPassword(CreationPasswordBox.Password, salt)),
-                                Salt = Convert.ToBase64String(salt),
-                                Teacher = (bool)AccountTypeCheckbox.IsChecked
-                            });
-                            unitOfWork.Complete();
+                                byte[] salt = PasswordHasher.CreateSalt();
 
-                            LoginCanvas.Visibility = Visibility.Visible;
-                            UsernameBox.Focus();
-                            AccountCreationCanvas.Visibility = Visibility.Hidden;
+                                unitOfWork.Users.Add(new Database.User
+                                {
+                                    UserId = 0,
+                                    Username = CreationUsernameBox.Text,
+                                    Password = Convert.ToBase64String(PasswordHasher.HashPassword(CreationPasswordBox.Password, salt)),
+                                    Salt = Convert.ToBase64String(salt),
+                                    Teacher = (bool)AccountTypeCheckbox.IsChecked
+                                });
+                                unitOfWork.Complete();
+
+                                BackToLogin();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
+                            }
                         }
-                        else
-                        {
-                            MessageBox.Show("Deze gebruikersnaam is al in gebruik.");
-                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wachtwoord niet bevestigd.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Wachtwoord niet bevestigd.");
+                    MessageBox.Show("Je wachtwoord moet minimaal 8 tekens lang zijn.");
                 }
+
             }
             else
             {
@@ -128,10 +137,17 @@ namespace TypTop.Gui
         /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            BackToLogin();
+        }
+
+        private void BackToLogin()
+        {
+            UsernameBox.Text = "";
+            PasswordBox.Password = "";
+
             LoginCanvas.Visibility = Visibility.Visible;
             UsernameBox.Focus();
             AccountCreationCanvas.Visibility = Visibility.Hidden;
         }
-
     }
 }
