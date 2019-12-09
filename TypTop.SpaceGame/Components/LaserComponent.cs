@@ -25,7 +25,7 @@ namespace TypTop.SpaceMinigame.Components
 
         public void Draw(DrawingContext context)
         {
-            _color.Opacity -= 0.01;
+            _color.Opacity -= 0.02;
             if (_color.Opacity <= 0)
             {
                 Entity.Game.RemoveEntity(Entity);
