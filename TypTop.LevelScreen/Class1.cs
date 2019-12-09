@@ -1,6 +1,6 @@
 using System;
 
-namespace LevelScreen
+namespace TypTop.LevelScreen
 {
     public class Class1
     {
