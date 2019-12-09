@@ -40,7 +40,7 @@ namespace TypTop.GameEngine.Components
             Bounding.Location = new Point(_positionComponent.Position.X, _positionComponent.Position.Y);
 
             //Check for collisions
-            foreach (Entity otherEntity in Entity.Minigame.GetEntitiesWithComponent<CollisionComponent>())
+            foreach (Entity otherEntity in Entity.Game.GetEntitiesWithComponent<CollisionComponent>())
             {
                 //Skip self
                 if(otherEntity == Entity)

@@ -16,7 +16,7 @@ namespace TypTop.SpaceMinigame
         private readonly ImageComponent _imageComponentPlayer;
         private readonly ImageComponent _imageComponentEnemy;
 
-        public Laser(Enemy e, SpaceGame game) : base(game)
+        public Laser(Enemy e, SpaceMinigame game) : base(game)
         {
             ZIndex = 3;
 

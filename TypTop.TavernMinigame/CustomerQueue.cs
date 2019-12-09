@@ -54,7 +54,7 @@ namespace TypTop.TavernMinigame
                 Count.ToString(),
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
-                ((TavernGame)Minigame).DefaultTypeface,
+                ((TavernGame)Game).DefaultTypeface,
                 80,
                 new SolidColorBrush(new Color()
                 {
