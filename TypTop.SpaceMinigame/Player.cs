@@ -11,9 +11,7 @@ namespace TypTop.SpaceMinigame
 {
     public class Player : Entity
     {
-        public Player(Game game) : this(4, game) { }
-
-        public Player(int lives, Game game) : base(game)
+        public Player(Game game) : base(game)
         {
             ZIndex = 1;
 
