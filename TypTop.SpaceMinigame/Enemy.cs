@@ -13,19 +13,27 @@ namespace TypTop.SpaceMinigame
 {
     public class Enemy : Entity
     {
+        //
+        // Props
+        //
         public Word Word { get; private set; }
         public int Speed { get; private set; }
         public int Score { get; private set; }
+        
+        //
+        // Vars
+        //
         public float Y => _positionComponent.Y;
-
-        private readonly SpaceGame _game;
+        private readonly SpaceMinigame _minigame;
         private readonly PositionComponent _positionComponent;
 
         public Enemy(int speed, int amountOfWords, Word word, Game game) : base(game)
         {
             ZIndex = 2;
 
-            _positionComponent = new PositionComponent(game.Rnd.Next(150, 1720), game.Rnd.Next(0, amountOfWords * 150) * -1);
+            _positionComponent = new PositionComponent(
+                game.Rnd.Next(150, 1720), 
+                game.Rnd.Next(0, amountOfWords * 150) * -1);
             AddComponent(_positionComponent);
             AddComponent(new VelocityComponent()
             {
@@ -41,21 +49,22 @@ namespace TypTop.SpaceMinigame
             {
                 Width = 150
             });
+
             Word = word;
             Speed = speed;
             Score = Word.Letters.Length * Speed;
-            _game = (SpaceGame)game;
+            _minigame = (SpaceMinigame)game;
         }
 
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
 
-            if (Y > _game.Line.GetComponent<PositionComponent>().Y)
+            if (Y > _minigame.Line.GetComponent<PositionComponent>().Y)
             {
-                _game.EnemyList.Remove(this);
-                _game.RemoveEntity(this);
-                _game.Lives.Amount--;
+                _minigame.EnemyList.Remove(this);
+                _minigame.RemoveEntity(this);
+                _minigame.Lives.Amount--;
             }
         }
     }

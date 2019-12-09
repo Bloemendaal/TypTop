@@ -23,7 +23,7 @@ namespace TypTop.TavernMinigame
             ZIndex = 1;
             if (game is TavernGame tGame)
             {
-                _orders = tGame.GetOrder(Game.Rnd.Next(1, 5));
+                _orders = tGame.GetOrder(Game.Rnd.Next(1, 4));
 
                 var types = Enum.GetNames(typeof(CustomerType));
                 Type = (CustomerType)tGame.Rnd.Next(0, types.Length);

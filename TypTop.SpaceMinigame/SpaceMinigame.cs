@@ -15,15 +15,22 @@ using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.SpaceMinigame
 {
-    public class SpaceGame : Minigame
+    public class SpaceMinigame : Minigame
     {
+        //
+        // Props
+        //
         public Player Player { get; set; }
         public List<Enemy> EnemyList { get; set; }
-        private readonly InputList _inputList;
         public Level Level { get; set; }
         public Line Line { get; set; }
 
-        public SpaceGame(WinCondition winCondition) : base(winCondition)
+        //
+        // Vars
+        //
+        private readonly InputList _inputList;
+
+        public SpaceMinigame(WinCondition winCondition) : base(winCondition)
         {
             Score = new Score(10, 10, this)
             {
@@ -36,21 +43,20 @@ namespace TypTop.SpaceMinigame
                 FontSize = 40,
                 Right = true
             };
+
             Lives = new Lives(200, 10, this) 
             { 
                 Amount = 4,
                 ZIndex = 5 
             };
 
-            Finish = delegate ()
-            {
-                return Lives.Amount <= 0;
-            };
+            Finish = () => Lives.Amount <= 0;
 
-            Level = new Level(1, this);
+            Level = new Level(this);
             Player = new Player(this);
             Line = new Line(this);
             EnemyList = Level.EnemyList;
+            
             _inputList = new InputList(new List<Word>())
             {
                 FocusOnHighIndex = true
@@ -61,7 +67,6 @@ namespace TypTop.SpaceMinigame
             //
 
             AddEntity(new Background("space.jpg", this));
-            AddEntity(new GameStatistics(this));
             EnemyList.ForEach(e => AddEntity(e));
 
             AddEntity(Player);

@@ -13,16 +13,16 @@ namespace TypTop.MinigameEngine
         {
             get
             {
-                if (WinCondition.ThreeStar()) return 3;
-                if (WinCondition.TwoStar()) return 2;
-                if (WinCondition.OneStar()) return 1;
+                if (WinCondition?.ThreeStar() ?? false) return 3;
+                if (WinCondition?.TwoStar() ?? false) return 2;
+                if (WinCondition?.OneStar() ?? false) return 1;
 
                 return 0;
             }
         }
 
         public WinCondition WinCondition { get; private set; }
-        public FinishCondition Finish { get; set; }
+        public FinishCondition Finish { get; protected set; }
         public delegate bool FinishCondition();
         public event EventHandler<FinishEventArgs> OnFinished;
 
@@ -39,7 +39,7 @@ namespace TypTop.MinigameEngine
                 OnFinished?.Invoke(this, new FinishEventArgs()
                 {
                     Lives = Lives?.Amount,
-                    Count = Count.SecondsSpent,
+                    Count = Count?.SecondsSpent,
                     Score = Score?.Amount,
                     Stars = Stars
                 });

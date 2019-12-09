@@ -145,7 +145,7 @@ namespace TypTop.TavernMinigame
 
                 Finish = delegate ()
                 {
-                    return _customers.Count <= 0 && _customerQueue.Count <= 0;
+                    return _customerQueue.Count <= 0;
                 };
             }
             else
