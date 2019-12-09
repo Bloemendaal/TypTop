@@ -29,7 +29,7 @@ namespace TypTop.GameGui
         public MainWindow()
         {
             InitializeComponent();
-            AllocConsole();
+            //AllocConsole();
             PreviewTextInput += OnPreviewTextInput;
             MouseDown += OnMouseDown;
 
