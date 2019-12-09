@@ -10,8 +10,14 @@ namespace TypTop.SpaceMinigame.Components
 {
     public class LineComponent : Component, IDrawable
     {
+        //
+        // Props
+        //
         public bool Hidden { get; set; }
 
+        //
+        // Vars
+        //
         private PositionComponent _positionComponent;
 
         public LineComponent()
@@ -21,14 +27,14 @@ namespace TypTop.SpaceMinigame.Components
 
         public void Draw(DrawingContext context)
         {
-            Pen pen = new Pen(Brushes.YellowGreen, 5);
+            var pen = new Pen(Brushes.YellowGreen, 5);
             
-            DashStyle dash_style1 = new DashStyle(
+            var dashStyle = new DashStyle(
                 new double[] { 5, 5 }, 0);
-            pen.DashStyle = dash_style1;
+            pen.DashStyle = dashStyle;
             
-            Point point1 = new Point(0, _positionComponent.Y);
-            Point point2 = new Point(1920, _positionComponent.Y);
+            var point1 = new Point(0, _positionComponent.Y);
+            var point2 = new Point(1920, _positionComponent.Y);
             context.DrawLine(pen, point1, point2);
             
         }

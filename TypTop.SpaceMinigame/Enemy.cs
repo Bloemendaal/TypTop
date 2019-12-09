@@ -25,7 +25,9 @@ namespace TypTop.SpaceMinigame
         {
             ZIndex = 2;
 
-            _positionComponent = new PositionComponent(game.Rnd.Next(150, 1720), game.Rnd.Next(0, amountOfWords * 150) * -1);
+            _positionComponent = new PositionComponent(
+                game.Rnd.Next(150, 1720), 
+                game.Rnd.Next(0, amountOfWords * 150) * -1);
             AddComponent(_positionComponent);
             AddComponent(new VelocityComponent()
             {
@@ -41,6 +43,7 @@ namespace TypTop.SpaceMinigame
             {
                 Width = 150
             });
+
             Word = word;
             Speed = speed;
             Score = Word.Letters.Length * Speed;

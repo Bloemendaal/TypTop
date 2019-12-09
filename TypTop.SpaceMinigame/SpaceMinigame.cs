@@ -52,7 +52,7 @@ namespace TypTop.SpaceMinigame
 
             Finish = () => Lives.Amount <= 0;
 
-            Level = new Level(1, this);
+            Level = new Level(this);
             Player = new Player(this);
             Line = new Line(this);
             EnemyList = Level.EnemyList;
