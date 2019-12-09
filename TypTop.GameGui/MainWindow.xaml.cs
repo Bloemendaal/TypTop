@@ -46,8 +46,8 @@ namespace TypTop.GameGui
 
             game.OnFinished += OnFinishedGame;
 
-            GameWindow.Start(game);
-            //GameWindow.Start(new SpaceGame(new ScoreCondition(100)));
+            //GameWindow.Start(game);
+            GameWindow.Start(new SpaceMinigame.SpaceMinigame(new ScoreCondition(100)));
         }
 
         private void OnFinishedGame(object sender, FinishEventArgs e)

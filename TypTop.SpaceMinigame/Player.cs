@@ -27,6 +27,5 @@ namespace TypTop.SpaceMinigame
                 Width = 100
             });
         }
-
     }
 }

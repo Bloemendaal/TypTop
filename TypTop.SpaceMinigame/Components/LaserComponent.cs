@@ -18,13 +18,13 @@ namespace TypTop.SpaceMinigame.Components
 
         public bool Hidden { get; set; }
 
-        public LaserComponent(Enemy e, SpaceGame game)
+        public LaserComponent(Enemy e, SpaceMinigame minigame)
         {
             _positionComponentEnemy = e.GetComponent<PositionComponent>();
             _imageComponentEnemy = e.GetComponent<ImageComponent>();
 
-            _positionComponentPlayer = game.Player.GetComponent<PositionComponent>();
-            _imageComponentPlayer = game.Player.GetComponent<ImageComponent>();
+            _positionComponentPlayer = minigame.Player.GetComponent<PositionComponent>();
+            _imageComponentPlayer = minigame.Player.GetComponent<ImageComponent>();
 
             Hidden = false;
         }

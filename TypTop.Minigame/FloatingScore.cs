@@ -29,7 +29,7 @@ namespace TypTop.MinigameEngine
 
         private readonly LabelComponent _labelComponent;
 
-        public FloatingScore(int diff, Score score) : base(score.Game)
+        public FloatingScore(int diff, Score score) : base(score.Minigame)
         {
             _color = new SolidColorBrush((diff < 0 ? score.Negative : score.Positive).Color)
             {
@@ -60,7 +60,7 @@ namespace TypTop.MinigameEngine
             _color.Opacity -= 0.01;
             if (_color.Opacity <= 0)
             {
-                Game.RemoveEntity(this);
+                Minigame.RemoveEntity(this);
                 return;
             }
 

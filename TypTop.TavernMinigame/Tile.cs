@@ -32,7 +32,7 @@ namespace TypTop.TavernMinigame
                 Width = Width
             });
 
-            Order = new Order(orderType, Game);
+            Order = new Order(orderType, Minigame);
 
             Order.GetComponent<ImageComponent>().Width = Width - WidthOffset;
             double addWidth = WidthOffset / 2;
@@ -52,7 +52,7 @@ namespace TypTop.TavernMinigame
                 TransformY = (float)(HeightOffset * 1.72),
                 Center = true,
                 FontSize = 40,
-                Typeface = ((TavernGame)Game).DefaultTypeface
+                Typeface = ((TavernGame)Minigame).DefaultTypeface
             });
         }
     }

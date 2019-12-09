@@ -15,7 +15,7 @@ using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.SpaceMinigame
 {
-    public class SpaceGame : Minigame
+    public class SpaceMinigame : Minigame
     {
         public Player Player { get; set; }
         public List<Enemy> EnemyList { get; set; }
@@ -23,7 +23,7 @@ namespace TypTop.SpaceMinigame
         public Level Level { get; set; }
         public Line Line { get; set; }
 
-        public SpaceGame(WinCondition winCondition) : base(winCondition)
+        public SpaceMinigame(WinCondition winCondition) : base(winCondition)
         {
             Score = new Score(10, 10, this)
             {

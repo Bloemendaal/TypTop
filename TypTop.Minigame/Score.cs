@@ -87,7 +87,7 @@ namespace TypTop.MinigameEngine
                     fScore.LabelTransformX += (float)_labelComponent.Width - (float)fScore.GetComponent<LabelComponent>().Width;
                 }
 
-                Game.AddEntity(fScore);
+                Minigame.AddEntity(fScore);
             }
         }
     }

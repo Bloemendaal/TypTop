@@ -11,7 +11,7 @@ namespace TypTop.SpaceMinigame
 {
     class GameStatistics : Entity
     {
-        public GameStatistics(SpaceGame game) : base(game)
+        public GameStatistics(SpaceMinigame minigame) : base(minigame)
         {
             ZIndex = 4;
             AddComponent(new PositionComponent(new Vector2(0,0)));

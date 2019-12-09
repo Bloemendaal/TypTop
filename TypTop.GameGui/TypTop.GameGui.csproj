@@ -16,12 +16,14 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TavernMinigame\TypTop.TavernMinigame.csproj" />
     <ProjectReference Include="..\TypTop.Database\TypTop.Database.csproj" />
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
-    <ProjectReference Include="..\TypTop.SpaceGame\TypTop.SpaceGame.csproj" />
+    <ProjectReference Include="..\TypTop.LevelScreen\TypTop.LevelScreen.csproj" />
+    <ProjectReference Include="..\TypTop.SpaceMinigame\TypTop.SpaceMinigame.csproj" />
+    <ProjectReference Include="..\TypTop.TavernMinigame\TypTop.TavernMinigame.csproj" />
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
+    <ProjectReference Include="..\TypTop.WorldScreen\TypTop.WorldScreen.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
