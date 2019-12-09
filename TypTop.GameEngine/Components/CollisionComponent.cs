@@ -16,7 +16,6 @@ namespace TypTop.GameEngine.Components
                 (float) (rect.Top + rect.Height / 2));
         }
     }
-    
 
     public class CollisionComponent : Component, IUpdateable
     {

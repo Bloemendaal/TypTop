@@ -32,11 +32,17 @@ namespace TypTop.GameWindow
             _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(16), IsEnabled = false };
             previousFrame = DateTime.Now;
             _timer.Tick += TimerOnTick;
+            
         }
 
         public void OnTextInput(TextCompositionEventArgs e)
         {
             _game?.OnTextInput(e);
+        }
+
+        public void OnMouseDown(Point point)
+        {
+            _game?.OnMouseDown(point);
         }
 
         private DateTime previousFrame;
