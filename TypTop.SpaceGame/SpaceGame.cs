@@ -1,94 +1,101 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
-using TypTop.SpaceGame;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
+using TypTop.SpaceMinigame;
 using TypTop.Logic;
+using TypTop.MinigameEngine;
+using TypTop.MinigameEngine.WinConditions;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
-    public class SpaceGame : Game
+    public class SpaceGame : Minigame
     {
         public Player Player { get; set; }
-        public Queue<Enemy> EnemyQueue { get; set; }
-        private InputQueue _inputQueue;
+        public List<Enemy> EnemyList { get; set; }
+        private readonly InputList _inputList;
         public Level Level { get; set; }
-        public SpaceGame()
+        public Line Line { get; set; }
+
+        public SpaceGame(WinCondition winCondition) : base(winCondition)
         {
+            Score = new Score(10, 10, this)
+            {
+                Direction = Score.FloatDirection.Down,
+                ZIndex = 5,
+                Prefix = "Score : ",
+                Color = Brushes.White,
+                Positive = Brushes.LightGreen,
+                Negative = Brushes.Red,
+                FontSize = 40,
+                Right = true
+            };
+            Lives = new Lives(200, 10, this) 
+            { 
+                Amount = 4,
+                ZIndex = 5 
+            };
+
+            Finish = delegate ()
+            {
+                return Lives.Amount <= 0;
+            };
+
             Level = new Level(1, this);
             Player = new Player(this);
-            EnemyQueue = new Queue<Enemy>();
-
-            // Sort enemy by height
-
-            EnemyQueue = MakeEnemyQueue(Level.EnemyList);
-            _inputQueue = new InputQueue(MakeWordsQueue(EnemyQueue))
+            Line = new Line(this);
+            EnemyList = Level.EnemyList;
+            _inputList = new InputList(new List<Word>())
             {
-                RemoveOnSpace = true
+                FocusOnHighIndex = true
             };
+
             // 
             // Adding entities 
             //
-            //AddEntity(new Background(this));
 
-            foreach (var enemy in EnemyQueue)
-            {
-                AddEntity(enemy);
-            }
+            AddEntity(new Background("space.jpg", this));
+            AddEntity(new GameStatistics(this));
+            EnemyList.ForEach(e => AddEntity(e));
 
             AddEntity(Player);
-            AddEntity(new Line(this));
+            AddEntity(Line);
+
+            Score.UpdateText();
+            AddEntity(Score);
+            AddEntity(Lives);
+
+            //
+            // Events
+            //
 
             TextInput += OnTextInput;
         }
 
-        private Queue<Enemy> MakeEnemyQueue(List<Enemy> enemyList)
+        public override void Update(float deltaTime)
         {
-            var tempQueue = new Queue<Enemy>();
-            foreach (var enemy in enemyList.OrderByDescending(e => e.Y))
-            {
-                tempQueue.Enqueue(enemy);
-            }
-
-            return tempQueue;
-        }
-
-        private Queue<Word> MakeWordsQueue(Queue<Enemy> enemyQueue)
-        {
-            Queue<Word> tempWordsQueue = new Queue<Word>();
-            foreach (var enemy in enemyQueue)
-            {
-                tempWordsQueue.Enqueue(enemy.Word);
-            }
-
-            return tempWordsQueue;
+            _inputList.Input = EnemyList.Where(e => e.Y - 150 > 0).Select(e => e.Word).ToList();
+            base.Update(deltaTime);
         }
 
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
-            _inputQueue.TextInput(e.Text);
-            if (_inputQueue.Input.Peek().Finished)
-            {
-                foreach (var entity in this)
-                {
-                    if (entity is Enemy enemy)
-                    {
-                        if (Equals(enemy.Word, _inputQueue.Input.Peek()))
-                        {
-                            var currentEnemy = enemy.GetComponent<WordComponent>();
-                            currentEnemy.Color = Brushes.GreenYellow;
-                            currentEnemy.TypedColor = Brushes.GreenYellow;
-                        }
-                    }
-                }
-                
-            }
-            
+            _inputList.Input = EnemyList.Where(e => e.Y + 150 > 0).Select(e => e.Word).ToList();
+            _inputList.TextInput(e.Text);
+            RemoveEntity<Laser>();
+
+            EnemyList.Where(e => e.Word.Finished).ToList().ForEach(e => {
+                AddEntity(new Laser(e, this));
+                RemoveEntity(e);
+                Score.Amount += e.Score;
+                EnemyList.Remove(e);
+            });
         }
     }
 }

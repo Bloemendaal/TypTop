@@ -4,30 +4,32 @@ using System.Numerics;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 using TypTop.Logic;
+using TypTop.SpaceMinigame.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     public class Enemy : Entity
     {
         public Word Word { get; private set; }
         public int Speed { get; private set; }
-        public int Y { get; set; }
-        private PositionComponent _positionComponent;
+        public int Score { get; private set; }
+        public float Y => _positionComponent.Y;
+
+        private readonly SpaceGame _game;
+        private readonly PositionComponent _positionComponent;
 
         public Enemy(int speed, int amountOfWords, Word word, Game game) : base(game)
         {
-            Y = (game.Rnd.Next(0, amountOfWords * 150) * -1);
-            _positionComponent = new PositionComponent()
-            {
-                Position = new Vector2(game.Rnd.Next(150, 1720), Y)
-            };
+            ZIndex = 2;
+
+            _positionComponent = new PositionComponent(game.Rnd.Next(150, 1720), game.Rnd.Next(0, amountOfWords * 150) * -1);
             AddComponent(_positionComponent);
             AddComponent(new VelocityComponent()
             {
-                Velocity = new Vector2(0, (float)speed)
+                Velocity = new Vector2(0, speed)
             });
             AddComponent(new WordComponent(word, Brushes.Red, Brushes.DarkRed)
             {
@@ -41,6 +43,20 @@ namespace TypTop.SpaceGame
             });
             Word = word;
             Speed = speed;
+            Score = Word.Letters.Length * Speed;
+            _game = (SpaceGame)game;
+        }
+
+        public override void Update(float deltaTime)
+        {
+            base.Update(deltaTime);
+
+            if (Y > _game.Line.GetComponent<PositionComponent>().Y)
+            {
+                _game.EnemyList.Remove(this);
+                _game.RemoveEntity(this);
+                _game.Lives.Amount--;
+            }
         }
     }
 }

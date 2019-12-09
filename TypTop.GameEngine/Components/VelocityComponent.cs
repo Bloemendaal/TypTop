@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace BasicGameEngine.GameEngine.Components
+namespace TypTop.GameEngine.Components
 {
     public class VelocityComponent : Component, IUpdateable
     {

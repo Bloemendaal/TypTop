@@ -19,12 +19,6 @@ namespace TypTop.Logic
         {
             int index = Input.Index;
 
-            if (char.IsWhiteSpace(letter))
-            {
-                Input = null;
-                return;
-            }
-
             if (CheckWord(letter, Input))
             {
                 Input.Input.Push(letter);

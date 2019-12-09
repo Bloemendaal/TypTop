@@ -23,19 +23,13 @@ namespace TypTop.Logic
 
         public override void TextInput(char letter)
         {
-            List<Word> wordlist = FocusOnHighIndex ? Input.Where(i => i.Index >= Input.Max(j => j.Index)).ToList() : Input;
+            List<Word> wordlist = FocusOnHighIndex ? new List<Word>(Input.Where(i => i.Index >= Input.Max(j => j.Index))) : Input;
 
             if (wordlist?.Count > 0)
             {
                 foreach (Word input in wordlist)
                 {
                     int index = input.Index;
-
-                    if (char.IsWhiteSpace(letter))
-                    {
-                        Input?.Remove(input);
-                        return;
-                    }
 
                     if (input != null)
                     {

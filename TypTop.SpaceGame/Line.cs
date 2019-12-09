@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
-using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
+using TypTop.SpaceMinigame.Components;
 
-namespace TypTop.SpaceGame
+namespace TypTop.SpaceMinigame
 {
     public class Line : Entity
     {
@@ -14,7 +15,7 @@ namespace TypTop.SpaceGame
         {
             _positionComponent = new PositionComponent()
             {
-                Position = new Vector2(0, 900)
+                Position = new Vector2(0, 950)
             };
             AddComponent(_positionComponent);
             AddComponent(new LineComponent());

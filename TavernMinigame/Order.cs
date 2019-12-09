@@ -1,11 +1,11 @@
-﻿using BasicGameEngine;
-using BasicGameEngine.GameEngine.Components;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Media.Imaging;
+using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
-namespace TavernMinigame
+namespace TypTop.TavernMinigame
 {
     public class Order : Entity
     {
@@ -28,9 +28,10 @@ namespace TavernMinigame
 
         public Order(OrderType type, Game game) : base(game)
         {
+            ZIndex = 3;
             Type = type;
             AddComponent(new PositionComponent());
-            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/{Type.ToString().ToLower()}.png", UriKind.Relative)))
+            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/Order/{Type.ToString().ToLower()}.png", UriKind.Relative)))
             {
                 Width = 200
             });
