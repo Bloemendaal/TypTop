@@ -33,8 +33,12 @@ namespace TypTop.SpaceMinigame
                 return;
             }
 
-            Point pointE = new Point(_positionComponentEnemy.X + (_imageComponentEnemy.Width.Value / 2), _positionComponentEnemy.Y + (_imageComponentEnemy.Height.Value / 2));
-            Point pointP = new Point(_positionComponentPlayer.X + (_imageComponentPlayer.Width.Value / 2), _positionComponentPlayer.Y);
+            var pointE = new Point(
+                _positionComponentEnemy.X + (_imageComponentEnemy.Width.Value / 2), 
+                _positionComponentEnemy.Y + (_imageComponentEnemy.Height.Value / 2));
+            var pointP = new Point(
+                _positionComponentPlayer.X + (_imageComponentPlayer.Width.Value / 2),
+                _positionComponentPlayer.Y);
 
             AddComponent(new LaserComponent(pointE, pointP));
 

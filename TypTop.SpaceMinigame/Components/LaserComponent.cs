@@ -11,11 +11,17 @@ namespace TypTop.SpaceMinigame.Components
 {
     public class LaserComponent : Component, IDrawable
     {
+        //
+        // Props
+        // 
+        public bool Hidden { get; set; }
+
+        //
+        // Props
+        //
         private readonly SolidColorBrush _color = new SolidColorBrush(Brushes.LightBlue.Color);
         private readonly Point _point1;
         private readonly Point _point2;
-
-        public bool Hidden { get; set; }
 
         public LaserComponent(Point point1, Point point2)
         {
@@ -32,11 +38,11 @@ namespace TypTop.SpaceMinigame.Components
                 return;
             }
 
-            Pen pen = new Pen(_color, 5);
+            var pen = new Pen(_color, 5);
 
-            DashStyle dash_style1 = new DashStyle(
+            var dashStyle = new DashStyle(
                 new double[] { 5, 5 }, 0);
-            pen.DashStyle = dash_style1;
+            pen.DashStyle = dashStyle;
 
             context.DrawLine(pen, _point1, _point2);
         }

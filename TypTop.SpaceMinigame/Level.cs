@@ -14,7 +14,7 @@ namespace TypTop.SpaceMinigame
 
         private readonly WordProvider _wordProvider;
 
-        public Level(int level, Game game)
+        public Level(Game game)
         {
             _wordProvider = new WordProvider();
             _wordProvider.LoadTestWords();
