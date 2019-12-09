@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minigames", "Minigames", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.GameGui", "TypTop.GameGui\TypTop.GameGui.csproj", "{813FF76E-7A24-4BB7-89BF-77F49031EFF7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.SpaceGame", "TypTop.SpaceGame\TypTop.SpaceGame.csproj", "{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.SpaceMinigame", "TypTop.SpaceMinigame\TypTop.SpaceMinigame.csproj", "{7D10E802-54BB-4BE5-A051-12ACFBFF93CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.TavernMinigame", "TavernMinigame\TypTop.TavernMinigame.csproj", "{29768497-8C22-4952-972A-8393E0C8BDC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.TavernMinigame", "TypTop.TavernMinigame\TypTop.TavernMinigame.csproj", "{29768497-8C22-4952-972A-8393E0C8BDC1}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Shared", "TypTop.Shared\TypTop.Shared.csproj", "{1622366E-B221-4E79-8461-9C46418D560E}"
 EndProject
@@ -32,10 +32,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.LoginGui", "TypTop.LoginGui\TypTop.LoginGui.csproj", "{CDB7ABE1-49E8-4786-B6EC-7F0BEBE3EE6F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.LoginGui.UnitTests", "TypTop.LoginGui.UnitTests\TypTop.LoginGui.UnitTests.csproj", "{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.LevelScreen", "TypTop.LevelScreen\TypTop.LevelScreen.csproj", "{D3F13DB4-3466-4879-9914-835DEBF5EB60}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.WorldScreen", "TypTop.WorldScreen\TypTop.WorldScreen.csproj", "{A34C8562-7EE0-45D4-8129-CF427D85A9B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,14 +95,6 @@ Global
 		{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3F13DB4-3466-4879-9914-835DEBF5EB60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3F13DB4-3466-4879-9914-835DEBF5EB60}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3F13DB4-3466-4879-9914-835DEBF5EB60}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3F13DB4-3466-4879-9914-835DEBF5EB60}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A34C8562-7EE0-45D4-8129-CF427D85A9B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A34C8562-7EE0-45D4-8129-CF427D85A9B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A34C8562-7EE0-45D4-8129-CF427D85A9B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A34C8562-7EE0-45D4-8129-CF427D85A9B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,8 +102,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 		{29768497-8C22-4952-972A-8393E0C8BDC1} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
-		{D3F13DB4-3466-4879-9914-835DEBF5EB60} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
-		{A34C8562-7EE0-45D4-8129-CF427D85A9B1} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0A39D8C-9D9A-4838-8195-8AD76380FB26}

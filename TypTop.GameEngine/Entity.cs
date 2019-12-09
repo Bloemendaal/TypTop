@@ -10,12 +10,12 @@ namespace TypTop.GameEngine
 
         public int ZIndex = 0;
 
-        protected Entity(Game game)
+        protected Entity(Game minigame)
         {
-            Game = game;
+            Minigame = minigame;
         }
 
-        public Game Game { get; }
+        public Game Minigame { get; }
 
         public bool TryGetComponent<TComponent>(out TComponent component) where TComponent : Component
         {
