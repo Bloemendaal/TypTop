@@ -16,7 +16,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TavernMinigame\TypTop.TavernMinigame.csproj" />
     <ProjectReference Include="..\TypTop.Database\TypTop.Database.csproj" />
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
