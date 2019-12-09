@@ -140,6 +140,9 @@ namespace TypTop.Gui
             BackToLogin();
         }
 
+        /// <summary>
+        /// Go back to the loginscreen
+        /// </summary>
         private void BackToLogin()
         {
             UsernameBox.Text = "";
