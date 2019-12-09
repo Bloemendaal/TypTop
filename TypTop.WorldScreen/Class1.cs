@@ -1,6 +1,6 @@
 using System;
 
-namespace WorldScreen
+namespace TypTop.WorldScreen
 {
     public class Class1
     {
