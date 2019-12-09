@@ -22,6 +22,7 @@
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
     <ProjectReference Include="..\TypTop.SpaceGame\TypTop.SpaceGame.csproj" />
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
+    <ProjectReference Include="..\TypTop.WorldScreen\TypTop.WorldScreen.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">
