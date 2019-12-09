@@ -23,7 +23,7 @@ namespace TypTop.TavernMinigame
             ZIndex = 1;
             if (game is TavernGame tGame)
             {
-                _orders = tGame.GetOrder(Minigame.Rnd.Next(1, 4));
+                _orders = tGame.GetOrder(Game.Rnd.Next(1, 4));
 
                 var types = Enum.GetNames(typeof(CustomerType));
                 Type = (CustomerType)tGame.Rnd.Next(0, types.Length);
@@ -43,17 +43,17 @@ namespace TypTop.TavernMinigame
 
         public void AddEntities()
         {
-            Minigame.AddEntity(SpeechBubble);
-            Minigame.AddEntity(this);
-            _orders.ForEach(o => Minigame.AddEntity(o));
+            Game.AddEntity(SpeechBubble);
+            Game.AddEntity(this);
+            _orders.ForEach(o => Game.AddEntity(o));
         }
         public void RemoveEntities()
         {
-            _orders.ForEach(o => Minigame.RemoveEntity(o));
-            Minigame.RemoveEntity(this);
-            Minigame.RemoveEntity(SpeechBubble);
+            _orders.ForEach(o => Game.RemoveEntity(o));
+            Game.RemoveEntity(this);
+            Game.RemoveEntity(SpeechBubble);
 
-            ((TavernGame)Minigame).Score.Amount += 100;
+            ((TavernGame)Game).Score.Amount += 100;
         }
 
         public bool RemoveOrder(Order order)
@@ -65,7 +65,7 @@ namespace TypTop.TavernMinigame
                 if (o != null)
                 {
                     bool removed = _orders.Remove(o);
-                    Minigame.RemoveEntity(o);
+                    Game.RemoveEntity(o);
                     if (_orders.Count > 0)
                     {
                         UpdateOrderPosition();
