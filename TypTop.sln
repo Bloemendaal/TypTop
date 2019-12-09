@@ -33,6 +33,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.LoginGui", "TypTop.L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.LoginGui.UnitTests", "TypTop.LoginGui.UnitTests\TypTop.LoginGui.UnitTests.csproj", "{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.LevelScreen", "TypTop.LevelScreen\TypTop.LevelScreen.csproj", "{6F561F06-1277-45FF-A9A1-31103F80A4A5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.WorldScreen", "TypTop.WorldScreen\TypTop.WorldScreen.csproj", "{461C8A52-7264-4017-B10B-112FDAB31853}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +99,14 @@ Global
 		{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0529997B-6AFF-4FDB-8CA4-0F524FB60A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F561F06-1277-45FF-A9A1-31103F80A4A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F561F06-1277-45FF-A9A1-31103F80A4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F561F06-1277-45FF-A9A1-31103F80A4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F561F06-1277-45FF-A9A1-31103F80A4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461C8A52-7264-4017-B10B-112FDAB31853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461C8A52-7264-4017-B10B-112FDAB31853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461C8A52-7264-4017-B10B-112FDAB31853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461C8A52-7264-4017-B10B-112FDAB31853}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +114,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7D10E802-54BB-4BE5-A051-12ACFBFF93CF} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 		{29768497-8C22-4952-972A-8393E0C8BDC1} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
+		{6F561F06-1277-45FF-A9A1-31103F80A4A5} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
+		{461C8A52-7264-4017-B10B-112FDAB31853} = {A8EC2EEE-434D-470B-8C20-1814E7BF5120}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0A39D8C-9D9A-4838-8195-8AD76380FB26}
