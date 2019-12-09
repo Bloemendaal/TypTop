@@ -39,7 +39,7 @@ namespace TypTop.MinigameEngine
                 OnFinished?.Invoke(this, new FinishEventArgs()
                 {
                     Lives = Lives?.Amount,
-                    Count = Count.SecondsSpent,
+                    Count = Count?.SecondsSpent,
                     Score = Score?.Amount,
                     Stars = Stars
                 });
