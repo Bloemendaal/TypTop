@@ -13,11 +13,17 @@ namespace TypTop.SpaceMinigame
 {
     public class Enemy : Entity
     {
+        //
+        // Props
+        //
         public Word Word { get; private set; }
         public int Speed { get; private set; }
         public int Score { get; private set; }
+        
+        //
+        // Vars
+        //
         public float Y => _positionComponent.Y;
-
         private readonly SpaceMinigame _minigame;
         private readonly PositionComponent _positionComponent;
 

@@ -11,6 +11,9 @@ namespace TypTop.SpaceMinigame
 {
     public class Laser : Entity
     {
+        //
+        // Vars
+        //
         private readonly PositionComponent _positionComponentPlayer;
         private readonly PositionComponent _positionComponentEnemy;
         private readonly ImageComponent _imageComponentPlayer;

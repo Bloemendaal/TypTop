@@ -9,9 +9,15 @@ namespace TypTop.SpaceMinigame
 {
     public class Level
     {
+        //
+        // Props
+        //
         public List<Enemy> EnemyList { get; private set; }
         public int AmountOfEnemies { get; private set; }
 
+        //
+        // Vars
+        //
         private readonly WordProvider _wordProvider;
 
         public Level(Game game)
