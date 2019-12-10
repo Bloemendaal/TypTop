@@ -18,7 +18,7 @@ namespace TypTop.TavernMinigame
         public int TileAmount
         {
             get => _tiles.Count;
-            set
+            private set
             {
                 if (value < 1)
                 {
@@ -74,7 +74,7 @@ namespace TypTop.TavernMinigame
         public int MaxCustomers
         {
             get => _maxCustomers;
-            set
+            private set
             {
                 if (value < 0)
                 {
@@ -86,7 +86,6 @@ namespace TypTop.TavernMinigame
         }
         private int _maxCustomers = 3;
 
-        public bool AngryCustomers { get; private set; } = false;
 
         private readonly List<Customer> _customers = new List<Customer>();
         private readonly CustomerQueue _customerQueue;
@@ -94,6 +93,36 @@ namespace TypTop.TavernMinigame
         private readonly ITimer _timer;
 
         public readonly Typeface DefaultTypeface = new Typeface("MV Boli");
+
+        // Customer Satisfaction
+        public bool ShowSatisfaction { get; private set; } = false;
+        public int StartSatisfaction
+        { 
+            get => _startSatisfaction; 
+            private set
+            {
+                if (value < 1)
+                {
+                    value = 1;
+                }
+
+                if (value > 5)
+                {
+                    value = 5;
+                }
+
+                _startSatisfaction = value;
+            } 
+        }
+        private int _startSatisfaction = 5;
+        private readonly Dictionary<int, int> _satisfactionTiming = new Dictionary<int, int>()
+        {
+            { 1, 0 },
+            { 2, 0 },
+            { 3, 0 },
+            { 4, 0 },
+            { 5, 0 }
+        };
 
 
         public TavernGame(WinCondition winCondition, List<Word> words, int secondsOrQueue = 0, int tileAmount = 3, int lives = 3) : base(winCondition)
@@ -120,7 +149,6 @@ namespace TypTop.TavernMinigame
 
             if (winCondition is LifeCondition)
             {
-                AngryCustomers = true;
                 Lives = new Lives(550, (float)Height - 60, this)
                 {
                     Amount = lives,
@@ -188,6 +216,8 @@ namespace TypTop.TavernMinigame
             UpdateWordlist();
         }
         
+
+        public int GetSatisfaction(int key) => _satisfactionTiming.ContainsKey(key) ? _satisfactionTiming[key] : 0;
 
         public void AddCustomer(Customer customer)
         {

@@ -11,12 +11,14 @@ namespace TypTop.TavernMinigame
 {
     public class Customer : Entity
     {
-        public SpeechBubble SpeechBubble;
+        private readonly SpeechBubble _speechBubble;
+        public readonly Satisfaction Satisfaction;
         public int Count => _orders.Count;
         private readonly List<Order> _orders;
 
         public enum CustomerType { GunslingerMan, GunslingerWoman, LawsMan, LawsWoman, NativeGirl, NativeMan, OutlawMan, OutlawWoman, TownsMan, TownsWoman }
         public readonly CustomerType Type;
+
 
         public Customer(TavernGame game) : base(game)
         {
@@ -35,20 +37,33 @@ namespace TypTop.TavernMinigame
                 Width = 500
             });
 
-            SpeechBubble = new SpeechBubble(this, game);
+            _speechBubble = new SpeechBubble(this, game);
+
+            if (game.ShowSatisfaction)
+            {
+                Satisfaction = new Satisfaction(this, game);
+            }
         }
 
         public void AddEntities()
         {
-            Game.AddEntity(SpeechBubble);
+            Game.AddEntity(_speechBubble);
             Game.AddEntity(this);
+            if (Satisfaction != null)
+            {
+                Game.AddEntity(Satisfaction);
+            } 
             _orders.ForEach(o => Game.AddEntity(o));
         }
         public void RemoveEntities()
         {
             _orders.ForEach(o => Game.RemoveEntity(o));
             Game.RemoveEntity(this);
-            Game.RemoveEntity(SpeechBubble);
+            Game.RemoveEntity(_speechBubble);
+            if (Satisfaction != null)
+            {
+                Game.RemoveEntity(Satisfaction);
+            }
 
             ((TavernGame)Game).Score.Amount += 100;
         }
@@ -78,13 +93,14 @@ namespace TypTop.TavernMinigame
         {
             float x = (float)Game.Width - 500 * (index + 1) - 20;
             GetComponent<PositionComponent>().X = x;
-            SpeechBubble.GetComponent<PositionComponent>().X = x;
+            _speechBubble.GetComponent<PositionComponent>().X = x;
+            Satisfaction.GetComponent<PositionComponent>().X = x + 200;
             UpdateOrderPosition();
         }
 
         public void UpdateOrderPosition()
         {
-            Vector2 position = SpeechBubble.GetComponent<PositionComponent>().Position;
+            Vector2 position = _speechBubble.GetComponent<PositionComponent>().Position;
             switch (Count)
             {
                 case 1:

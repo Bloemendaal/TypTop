@@ -7,7 +7,7 @@ namespace TypTop.GameEngine.Components
 {
     public class ImageComponent : Component, IDrawable
     {
-        private readonly BitmapImage _bitmapImage;
+        private BitmapImage _bitmapImage;
         private PositionComponent _positionComponent;
 
         public double? Width
@@ -87,6 +87,11 @@ namespace TypTop.GameEngine.Components
         public bool Hidden { get; set; }
 
         public ImageComponent(BitmapImage bitmapImage)
+        {
+            _bitmapImage = bitmapImage;
+        }
+
+        public void UpdateImage(BitmapImage bitmapImage)
         {
             _bitmapImage = bitmapImage;
         }
