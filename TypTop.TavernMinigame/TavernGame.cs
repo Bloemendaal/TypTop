@@ -215,7 +215,7 @@ namespace TypTop.TavernMinigame
 
             UpdateWordlist();
         }
-        
+
 
         public int GetSatisfaction(int key) => _satisfactionTiming.ContainsKey(key) ? _satisfactionTiming[key] : 0;
 

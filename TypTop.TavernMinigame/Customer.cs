@@ -94,7 +94,10 @@ namespace TypTop.TavernMinigame
             float x = (float)Game.Width - 500 * (index + 1) - 20;
             GetComponent<PositionComponent>().X = x;
             _speechBubble.GetComponent<PositionComponent>().X = x;
-            Satisfaction.GetComponent<PositionComponent>().X = x + 200;
+            if (Satisfaction != null)
+            {
+                Satisfaction.GetComponent<PositionComponent>().X = x + 200;
+            }
             UpdateOrderPosition();
         }
 
