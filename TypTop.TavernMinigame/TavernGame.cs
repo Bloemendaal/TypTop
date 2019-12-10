@@ -18,7 +18,8 @@ namespace TypTop.TavernMinigame
         public int TileAmount
         {
             get => _tiles.Count;
-            set {
+            set
+            {
                 if (value < 1)
                 {
                     value = 1;

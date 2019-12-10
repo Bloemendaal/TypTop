@@ -21,24 +21,21 @@ namespace TypTop.TavernMinigame
         public Customer(TavernGame game) : base(game)
         {
             ZIndex = 1;
-            if (game is TavernGame tGame)
+            _orders = game.GetOrder(Game.Rnd.Next(1, 4));
+
+            var types = Enum.GetNames(typeof(CustomerType));
+            Type = (CustomerType)game.Rnd.Next(0, types.Length);
+
+            AddComponent(new PositionComponent()
             {
-                _orders = tGame.GetOrder(Game.Rnd.Next(1, 4));
+                Y = 800
+            });
+            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/Customer/{Type.ToString().ToLower()}.png", UriKind.Relative)))
+            {
+                Width = 500
+            });
 
-                var types = Enum.GetNames(typeof(CustomerType));
-                Type = (CustomerType)tGame.Rnd.Next(0, types.Length);
-
-                AddComponent(new PositionComponent()
-                {
-                    Y = 800
-                });
-                AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/Customer/{Type.ToString().ToLower()}.png", UriKind.Relative)))
-                {
-                    Width = 500
-                });
-
-                SpeechBubble = new SpeechBubble(this, tGame);
-            }
+            SpeechBubble = new SpeechBubble(this, game);
         }
 
         public void AddEntities()
@@ -77,7 +74,7 @@ namespace TypTop.TavernMinigame
             return false;
         }
 
-        public void UpdatePosition(float index)
+        public void UpdatePosition(int index)
         {
             float x = (float)Game.Width - 500 * (index + 1) - 20;
             GetComponent<PositionComponent>().X = x;
