@@ -45,7 +45,7 @@ namespace TypTop.MinigameEngine
             string o = ShowOperator ? (diff < 0 ? "- " : "+ ") : "";
 
             _labelComponent = new LabelComponent(new FormattedText(
-                $"{o}{diff.ToString()}",
+                $"{o}{Math.Abs(diff).ToString()}",
                 CultureInfo.GetCultureInfo("en-us"),
                 FlowDirection.LeftToRight,
                 score.Typeface,

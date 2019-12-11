@@ -182,10 +182,7 @@ namespace TypTop.TavernMinigame
                 }
 
                 // TileAmount
-                if (level.Properties.ContainsKey("TileAmount") && level.Properties["TileAmount"] is int tileAmount)
-                {
-                    TileAmount = tileAmount;
-                }
+                TileAmount = level.Properties.ContainsKey("TileAmount") && level.Properties["TileAmount"] is int tileAmount ? tileAmount : 3;
 
                 // MaxCustomers
                 if (level.Properties.ContainsKey("MaxCustomers") && level.Properties["MaxCustomers"] is int maxCustomers)
