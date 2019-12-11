@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TypTop.GameGui;
+using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.Logic
 {

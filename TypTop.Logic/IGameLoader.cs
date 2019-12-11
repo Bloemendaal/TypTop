@@ -1,6 +1,6 @@
 ﻿namespace TypTop.Logic
 {
-    public interface IMinigameLoader
+    public interface IGameLoader
     {
         void LoadWorldMap();
         void LoadLevelMap(int worldId);
