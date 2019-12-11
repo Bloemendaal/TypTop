@@ -165,7 +165,7 @@ namespace TypTop.TavernMinigame
         };
 
 
-        public TavernGame(Level level) : base(level.WinCondition)
+        public TavernGame(Level level) : base(level)
         {
             if (level != null && level.Properties != null)
             {
@@ -231,12 +231,12 @@ namespace TypTop.TavernMinigame
 
 
                 // WinConditions
-                if (level.WinCondition is ScoreCondition)
+                if (level.WinCondition == WinConditionType.ScoreCondition)
                 {
                     Finish = () => Count.Seconds < 0;
                 }
 
-                if (level.WinCondition is LifeCondition)
+                if (level.WinCondition == WinConditionType.LifeCondition)
                 {
                     if (level.Properties.ContainsKey("Lives") && level.Properties["Lives"] is int lives)
                     {
@@ -256,7 +256,7 @@ namespace TypTop.TavernMinigame
                     }
                 }
 
-                if (level.WinCondition is TimeCondition)
+                if (level.WinCondition == WinConditionType.TimeCondition)
                 {
                     if (level.Properties.ContainsKey("Queue") && level.Properties["Queue"] is int queue)
                     {
