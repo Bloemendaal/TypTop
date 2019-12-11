@@ -7,6 +7,7 @@ using System.Threading.Channels;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using TypTop.MinigameEngine;
 
 namespace TypTop.GameEngine
 {
@@ -38,7 +39,7 @@ namespace TypTop.GameEngine
         private void RunTimedObjects(double deltaTime)
         {
             List<ITimed> removedTimers = null;
-            foreach (ITimed timedObject in _timedObjects)
+            foreach (ITimed timedObject in _timedObjects.ToList())
             {
                 if (timedObject.IncrementTime(deltaTime))
                 {
@@ -123,6 +124,14 @@ namespace TypTop.GameEngine
         public virtual void OnTextInput(TextCompositionEventArgs e)
         {
             TextInput?.Invoke(this, e);
+        }
+
+        public void OnMouseDown(Point point)
+        {
+            foreach (Entity entity in GetEntitiesWithComponent<ClickComponent>())
+            {
+                entity.GetComponent<ClickComponent>().CaptureClick(point);
+            }
         }
     }
 }

@@ -11,49 +11,63 @@ namespace TypTop.TavernMinigame
 {
     public class Customer : Entity
     {
-        public SpeechBubble SpeechBubble;
+        private readonly SpeechBubble _speechBubble;
+        public readonly Satisfaction Satisfaction;
         public int Count => _orders.Count;
+        public readonly int OriginalCount;
         private readonly List<Order> _orders;
 
         public enum CustomerType { GunslingerMan, GunslingerWoman, LawsMan, LawsWoman, NativeGirl, NativeMan, OutlawMan, OutlawWoman, TownsMan, TownsWoman }
         public readonly CustomerType Type;
 
+
         public Customer(TavernGame game) : base(game)
         {
             ZIndex = 1;
-            if (game is TavernGame tGame)
+            _orders = game.GetOrder(Game.Rnd.Next(1, 5));
+            OriginalCount = Count;
+
+            var types = Enum.GetNames(typeof(CustomerType));
+            Type = (CustomerType)game.Rnd.Next(0, types.Length);
+
+            AddComponent(new PositionComponent()
             {
-                _orders = tGame.GetOrder(Game.Rnd.Next(1, 4));
+                Y = 800
+            });
+            AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/Customer/{Type.ToString().ToLower()}.png", UriKind.Relative)))
+            {
+                Width = 500
+            });
 
-                var types = Enum.GetNames(typeof(CustomerType));
-                Type = (CustomerType)tGame.Rnd.Next(0, types.Length);
+            _speechBubble = new SpeechBubble(this, game);
 
-                AddComponent(new PositionComponent()
-                {
-                    Y = 800
-                });
-                AddComponent(new ImageComponent(new BitmapImage(new Uri($@"Images/Customer/{Type.ToString().ToLower()}.png", UriKind.Relative)))
-                {
-                    Width = 500
-                });
-
-                SpeechBubble = new SpeechBubble(this, tGame);
+            if (game.ShowSatisfaction)
+            {
+                Satisfaction = new Satisfaction(this, game);
             }
         }
 
         public void AddEntities()
         {
-            Game.AddEntity(SpeechBubble);
+            Game.AddEntity(_speechBubble);
             Game.AddEntity(this);
+            if (Satisfaction != null)
+            {
+                Game.AddEntity(Satisfaction);
+            } 
             _orders.ForEach(o => Game.AddEntity(o));
         }
-        public void RemoveEntities()
+        public void RemoveEntities(int score = 0)
         {
             _orders.ForEach(o => Game.RemoveEntity(o));
             Game.RemoveEntity(this);
-            Game.RemoveEntity(SpeechBubble);
+            Game.RemoveEntity(_speechBubble);
+            if (Satisfaction != null)
+            {
+                Game.RemoveEntity(Satisfaction);
+            }
 
-            ((TavernGame)Game).Score.Amount += 100;
+            ((TavernGame)Game).Score.Amount += score;
         }
 
         public bool RemoveOrder(Order order)
@@ -77,17 +91,21 @@ namespace TypTop.TavernMinigame
             return false;
         }
 
-        public void UpdatePosition(float index)
+        public void UpdatePosition(int index)
         {
             float x = (float)Game.Width - 500 * (index + 1) - 20;
             GetComponent<PositionComponent>().X = x;
-            SpeechBubble.GetComponent<PositionComponent>().X = x;
+            _speechBubble.GetComponent<PositionComponent>().X = x;
+            if (Satisfaction != null)
+            {
+                Satisfaction.GetComponent<PositionComponent>().X = x + 220;
+            }
             UpdateOrderPosition();
         }
 
         public void UpdateOrderPosition()
         {
-            Vector2 position = SpeechBubble.GetComponent<PositionComponent>().Position;
+            Vector2 position = _speechBubble.GetComponent<PositionComponent>().Position;
             switch (Count)
             {
                 case 1:

@@ -13,6 +13,7 @@ using TypTop.TavernMinigame;
 using TypTop.MinigameEngine.WinConditions;
 using TypTop.MinigameEngine;
 using TypTop.SpaceMinigame;
+using TypTop.WorldScreen;
 
 namespace TypTop.GameGui
 {
@@ -28,8 +29,9 @@ namespace TypTop.GameGui
         public MainWindow()
         {
             InitializeComponent();
-            AllocConsole();
+            //AllocConsole();
             PreviewTextInput += OnPreviewTextInput;
+            MouseDown += OnMouseDown;
 
             WordProvider wordProvider = new WordProvider()
             {
@@ -46,8 +48,14 @@ namespace TypTop.GameGui
 
             game.OnFinished += OnFinishedGame;
 
-            //GameWindow.Start(game);
-            GameWindow.Start(new SpaceMinigame.SpaceMinigame(new ScoreCondition(100)));
+            GameWindow.Start(game);
+            //GameWindow.Start(new WorldScreenGame());
+            //GameWindow.Start(new SpaceGame(new ScoreCondition(100)));
+        }
+
+        private void OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GameWindow.OnMouseDown(e.GetPosition(GameWindow));
         }
 
         private void OnFinishedGame(object sender, FinishEventArgs e)
