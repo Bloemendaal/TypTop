@@ -48,8 +48,8 @@ namespace TypTop.GameGui
 
             game.OnFinished += OnFinishedGame;
 
-            //GameWindow.Start(game);
-            GameWindow.Start(new WorldScreenGame());
+            GameWindow.Start(game);
+            //GameWindow.Start(new WorldScreenGame());
             //GameWindow.Start(new SpaceGame(new ScoreCondition(100)));
         }
 
