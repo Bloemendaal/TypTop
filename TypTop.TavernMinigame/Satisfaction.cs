@@ -16,8 +16,19 @@ namespace TypTop.TavernMinigame
             {
                 if (value < 1)
                 {
-                    _customer.RemoveEntities();
                     _timer?.Dispose();
+                    _customer?.RemoveEntities(_customer.Count * -10);
+
+                    if (_game != null)
+                    {
+                        _game?.RemoveCustomer(_customer);
+                        _game?.NextCustomer();
+                        if (_game.Lives != null)
+                        {
+                            _game.Lives.Amount--;
+                        }
+                    }
+                    
                     return;
                 }
 
@@ -57,13 +68,13 @@ namespace TypTop.TavernMinigame
 
             _imageComponent = new ImageComponent(new BitmapImage(new Uri($@"Images/Satisfaction/satisfaction_{Amount}.png", UriKind.Relative)))
             {
-                Width = 100
+                Width = 60
             };
 
             AddComponent(new PositionComponent()
             {
                 X = _customer.GetComponent<PositionComponent>().X,
-                Y = 275
+                Y = 290
             });
             AddComponent(_imageComponent);
         }

@@ -39,7 +39,7 @@ namespace TypTop.GameEngine
         private void RunTimedObjects(double deltaTime)
         {
             List<ITimed> removedTimers = null;
-            foreach (ITimed timedObject in _timedObjects)
+            foreach (ITimed timedObject in _timedObjects.ToList())
             {
                 if (timedObject.IncrementTime(deltaTime))
                 {

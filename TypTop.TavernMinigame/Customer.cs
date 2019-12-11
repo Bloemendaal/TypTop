@@ -14,6 +14,7 @@ namespace TypTop.TavernMinigame
         private readonly SpeechBubble _speechBubble;
         public readonly Satisfaction Satisfaction;
         public int Count => _orders.Count;
+        public readonly int OriginalCount;
         private readonly List<Order> _orders;
 
         public enum CustomerType { GunslingerMan, GunslingerWoman, LawsMan, LawsWoman, NativeGirl, NativeMan, OutlawMan, OutlawWoman, TownsMan, TownsWoman }
@@ -23,7 +24,8 @@ namespace TypTop.TavernMinigame
         public Customer(TavernGame game) : base(game)
         {
             ZIndex = 1;
-            _orders = game.GetOrder(Game.Rnd.Next(1, 4));
+            _orders = game.GetOrder(Game.Rnd.Next(1, 5));
+            OriginalCount = Count;
 
             var types = Enum.GetNames(typeof(CustomerType));
             Type = (CustomerType)game.Rnd.Next(0, types.Length);
@@ -55,7 +57,7 @@ namespace TypTop.TavernMinigame
             } 
             _orders.ForEach(o => Game.AddEntity(o));
         }
-        public void RemoveEntities()
+        public void RemoveEntities(int score = 0)
         {
             _orders.ForEach(o => Game.RemoveEntity(o));
             Game.RemoveEntity(this);
@@ -65,7 +67,7 @@ namespace TypTop.TavernMinigame
                 Game.RemoveEntity(Satisfaction);
             }
 
-            ((TavernGame)Game).Score.Amount += 100;
+            ((TavernGame)Game).Score.Amount += score;
         }
 
         public bool RemoveOrder(Order order)
@@ -96,7 +98,7 @@ namespace TypTop.TavernMinigame
             _speechBubble.GetComponent<PositionComponent>().X = x;
             if (Satisfaction != null)
             {
-                Satisfaction.GetComponent<PositionComponent>().X = x + 200;
+                Satisfaction.GetComponent<PositionComponent>().X = x + 220;
             }
             UpdateOrderPosition();
         }

@@ -262,6 +262,7 @@ namespace TypTop.TavernMinigame
         public void UpdateWordlist()
         {
             _inputList.Input = _tiles.Where(t => _customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList();
+            _tiles.Where(t => !_customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList().ForEach(w => w.Index = 0);
         }
 
 
@@ -300,7 +301,7 @@ namespace TypTop.TavernMinigame
                         {
                             if (customer.Count == 0)
                             {
-                                customer.RemoveEntities();
+                                customer.RemoveEntities(customer.OriginalCount * 10 + 50 + (customer.Satisfaction?.Amount ?? StartSatisfaction) * 2);
                                 RemoveCustomer(customer);
                                 NextCustomer();
                             }
