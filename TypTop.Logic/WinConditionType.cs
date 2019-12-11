@@ -1,6 +1,6 @@
 ﻿namespace TypTop.Logic
 {
-    public enum WinCondition
+    public enum WinConditionType
     {
         LifeCondition = 0,
         TimeCondition = 1,

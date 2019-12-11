@@ -6,7 +6,7 @@ namespace TypTop.Logic
     public class Level
     {
         public int Id { get; set; }
-        public WinCondition WinCondition { get; set; }
+        public WinConditionType WinConditionType { get; set; }
         public int ThresholdOneStar { get; set; }
         public int ThresholdTwoStars { get; set; }
         public int ThresholdThreeStars { get; set; }
