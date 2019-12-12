@@ -7,7 +7,8 @@ namespace TypTop.GameEngine.Components
 {
     public class ImageComponent : Component, IDrawable
     {
-        private BitmapImage _bitmapImage;
+        private BitmapSource _bitmapImage;
+        private BitmapImage _bitmapImageOriginal;
         private PositionComponent _positionComponent;
 
         public double? Width
@@ -79,7 +80,15 @@ namespace TypTop.GameEngine.Components
             get => _rotation;
             set
             {
-                _rotation = value % 360;
+                double newValue = value %= 360;
+                double oldValue = _rotation;
+
+                _rotation = newValue;
+
+                if (newValue != oldValue)
+                {
+                    RotateImage();
+                }
             }
         }
         private double _rotation = 0;
@@ -88,12 +97,13 @@ namespace TypTop.GameEngine.Components
 
         public ImageComponent(BitmapImage bitmapImage)
         {
-            _bitmapImage = bitmapImage;
+            UpdateImage(bitmapImage);
         }
 
         public void UpdateImage(BitmapImage bitmapImage)
         {
-            _bitmapImage = bitmapImage;
+            _bitmapImageOriginal = bitmapImage;
+            RotateImage();
         }
 
         public override void AddedToEntity()
@@ -104,12 +114,17 @@ namespace TypTop.GameEngine.Components
         public void Draw(DrawingContext context)
         {
             context.DrawImage(
-                Rotation == 0 ? _bitmapImage : ComposeImage(_bitmapImage, Rotation),
+                _bitmapImage,
                 new Rect(
                     new Point(_positionComponent.Position.X, _positionComponent.Position.Y),
                     new Size((double)Width, (double)Height)
                 )
             );
+        }
+
+        private void RotateImage()
+        {
+            _bitmapImage = Rotation == 0 ? _bitmapImageOriginal : ComposeImage(_bitmapImageOriginal, Rotation);
         }
 
         private BitmapSource ComposeImage(BitmapSource image, double rotationAngle)
