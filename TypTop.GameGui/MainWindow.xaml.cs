@@ -8,6 +8,7 @@ using System.Windows.Shapes;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 using Microsoft.EntityFrameworkCore;
+using TypTop.GameWindow;
 using TypTop.Logic;
 using TypTop.TavernMinigame;
 using TypTop.MinigameEngine.WinConditions;
@@ -17,6 +18,33 @@ using TypTop.WorldScreen;
 
 namespace TypTop.GameGui
 {
+    public class GameLoader : IGameLoader
+    {
+        private readonly GameWindow.GameWindow _gameWindow;
+        private readonly IList<World> _worlds;
+
+        public GameLoader(GameWindow.GameWindow gameWindow, IList<World> worlds)
+        {
+            _gameWindow = gameWindow;
+            _worlds = worlds;
+        }
+
+        public void LoadWorldMap()
+        {
+            var worldScreenGame = new WorldScreenGame(_worlds);
+        }
+
+        public void LoadLevelMap(World world)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void LoadMinigame(Level level)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -87,7 +115,7 @@ namespace TypTop.GameGui
             tGame.OnFinished += OnFinishedGame;
             sGame.OnFinished += OnFinishedGame;
 
-            GameWindow.Start(sGame);
+            GameWindow.Start(sGame, new Transition(1d));
             //GameWindow.Start(new WorldScreenGame());
         }
 

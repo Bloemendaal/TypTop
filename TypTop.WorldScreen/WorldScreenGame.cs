@@ -1,15 +1,20 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using TypTop.GameEngine;
+using TypTop.GameGui;
 using TypTop.MinigameEngine;
 
 namespace TypTop.WorldScreen
 {
     public class WorldScreenGame : Game
     {
-        public WorldScreenGame()
+        private readonly IList<World> _worlds;
+
+        public WorldScreenGame(IList<World> worlds)
         {
+            _worlds = worlds;
             AddEntity(new Background("main_background.png",this));
             
             var backButton = new Button("backButton.png", new Rect(new Point(50, 900), new Size(100,100)), this);

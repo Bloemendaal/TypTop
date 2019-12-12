@@ -4,9 +4,11 @@ namespace TypTop.GameGui
 {
     public class World
     {
-        public World()
+        string PreviewImage { get; }
+
+        public World(string previewImage)
         {
-               
+            PreviewImage = previewImage;
         }
     }
 }
