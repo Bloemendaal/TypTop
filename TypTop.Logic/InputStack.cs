@@ -28,7 +28,7 @@ namespace TypTop.Logic
                 }
                 else
                 {
-                    if (OnKeyWrong == KeyWrong.reset)
+                    if (OnKeyWrong == KeyWrong.Reset)
                     {
                         input.Input.Clear();
                         input.Index = 0;
@@ -36,19 +36,19 @@ namespace TypTop.Logic
                         input.Correct = null;
                     }
 
-                    if (OnKeyWrong == KeyWrong.remove)
+                    if (OnKeyWrong == KeyWrong.Remove)
                     {
                         Input?.Pop();
                     }
 
-                    if (OnKeyWrong == KeyWrong.add)
+                    if (OnKeyWrong == KeyWrong.Add)
                     {
                         input.Input.Push(letter);
                         input.Finished = false;
                         input.Correct = false;
                     }
 
-                    if (OnKeyWrong == KeyWrong.none)
+                    if (OnKeyWrong == KeyWrong.None)
                     {
                         input.Index = index;
                     }

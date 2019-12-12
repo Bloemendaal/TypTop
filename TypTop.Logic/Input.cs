@@ -32,8 +32,8 @@ namespace TypTop.Logic
         //       Adds the wrong character to the stack. User needs to backspace it to remove the wrong letter.
         //     none:
         //       Ignores the mistake and keeps the current typing progress of the word.
-        public enum KeyWrong { reset, remove, add, none }
-        public KeyWrong OnKeyWrong = KeyWrong.reset;
+        public enum KeyWrong { Reset, Remove, Add, None }
+        public KeyWrong OnKeyWrong = KeyWrong.Reset;
 
 
         //
@@ -143,7 +143,7 @@ namespace TypTop.Logic
                 return false;
             }
 
-            int index = input == null ? word.Index : (int)input;
+            int index = input ?? word.Index;
             char wordCharAtIndex = word.Letters[index];
 
             bool wrongChar = true;
@@ -216,7 +216,7 @@ namespace TypTop.Logic
         //     If possible the converted char, otherwise it returns the given char.
         // Parameters:
         //     ch:
-        //       The charater to convert to normal.
+        //       The character to convert to normal.
         private static char ConvertSpecialChar(char ch)
         {
             char[] from = "àèìòùÀÈÌÒÙ äëïöüÄËÏÖÜ âêîôûÂÊÎÔÛ áéíóúÁÉÍÓÚðÐýÝ ãñõÃÑÕšŠžŽçÇåÅøØ".ToCharArray();

@@ -127,7 +127,7 @@ namespace TypTop.GameEngine.Components
             _bitmapImage = Rotation == 0 ? _bitmapImageOriginal : ComposeImage(_bitmapImageOriginal, Rotation);
         }
 
-        private BitmapSource ComposeImage(BitmapSource image, double rotationAngle)
+        private static BitmapSource ComposeImage(BitmapSource image, double rotationAngle)
         {
             RotateTransform rotation = new RotateTransform(rotationAngle);
             Size size = new Size(image.PixelWidth, image.PixelHeight);
