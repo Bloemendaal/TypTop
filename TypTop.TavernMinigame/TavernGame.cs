@@ -76,15 +76,55 @@ namespace TypTop.TavernMinigame
             get => _maxCustomers;
             private set
             {
-                if (value < 0)
+                if (value < 1)
                 {
-                    value = 0;
+                    value = 1;
+                }
+
+                if (value > 3)
+                {
+                    value = 3;
                 }
 
                 _maxCustomers = value;
             }
         }
         private int _maxCustomers = 3;
+
+        public int CustomerSpawnSpeed 
+        { 
+            get => _customerSpawnSpeed; 
+            private set
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+
+                _customerSpawnSpeed = value;
+            } 
+        }
+        private int _customerSpawnSpeed = 4000;
+        public int CustomerSpawnSpeedOffset
+        {
+            get => _customerSpawnSpeedOffset;
+            private set => _customerSpawnSpeedOffset = Math.Abs(value);
+        }
+        private int _customerSpawnSpeedOffset = 1000;
+        public double CustomerSpawnSpeedMultiplier
+        {
+            get => _customerSpawnSpeedMultiplier;
+            private set
+            {
+                if (value < 0)
+                {
+                    value = 0;
+                }
+
+                _customerSpawnSpeedMultiplier = value;
+            }
+        }
+        private double _customerSpawnSpeedMultiplier = 0.1;
 
 
         private readonly List<Customer> _customers = new List<Customer>();
@@ -125,73 +165,145 @@ namespace TypTop.TavernMinigame
         };
 
 
-        public TavernGame(WinCondition winCondition, List<Word> words, int secondsOrQueue = 0, int tileAmount = 3, int lives = 3) : base(winCondition)
+        public TavernGame(Level level) : base(level)
         {
-            _words = new Queue<Word>(words);
+            if (level != null && level.Properties != null)
+            {
+                int countOffset = 360;
+
+                // Words
+                if (level.Properties.ContainsKey("Words") && level.Properties["Words"] is IEnumerable<Word> words)
+                {
+                    _words = new Queue<Word>(words);
+                }
+                else
+                {
+                    throw new ArgumentException("'Words' is missing or not valid");
+                }
+
+                // TileAmount
+                TileAmount = level.Properties.ContainsKey("TileAmount") && level.Properties["TileAmount"] is int tileAmount ? tileAmount : 3;
+
+                // MaxCustomers
+                if (level.Properties.ContainsKey("MaxCustomers") && level.Properties["MaxCustomers"] is int maxCustomers)
+                {
+                    MaxCustomers = maxCustomers;
+                }
+
+                // ShowSatisfaction
+                if (level.Properties.ContainsKey("ShowSatisfaction") && level.Properties["ShowSatisfaction"] is bool showSatisfaction)
+                {
+                    ShowSatisfaction = showSatisfaction;
+                }
+
+                // StartSatisfaction
+                if (level.Properties.ContainsKey("StartSatisfaction") && level.Properties["StartSatisfaction"] is int startSatisfaction)
+                {
+                    StartSatisfaction = startSatisfaction;
+                }
+
+                // SatisfactionTiming
+                if (level.Properties.ContainsKey("SatisfactionTiming") && level.Properties["SatisfactionTiming"] is Dictionary<int, int> satisfactionTiming)
+                {
+                    _satisfactionTiming = new Dictionary<int, int>(satisfactionTiming);
+                }
+
+                // CustomerSpawnSpeed
+                if (level.Properties.ContainsKey("CustomerSpawnSpeed") && level.Properties["CustomerSpawnSpeed"] is int customerSpawnSpeed)
+                {
+                    CustomerSpawnSpeed = customerSpawnSpeed;
+                }
+
+                // CustomerSpawnSpeedOffset
+                if (level.Properties.ContainsKey("CustomerSpawnSpeedOffset") && level.Properties["CustomerSpawnSpeedOffset"] is int customerSpawnSpeedOffset)
+                {
+                    CustomerSpawnSpeedOffset = customerSpawnSpeedOffset;
+                }
+
+                // CustomerSpawnSpeedMultiplier
+                if (level.Properties.ContainsKey("CustomerSpawnSpeedMultiplier") && level.Properties["CustomerSpawnSpeedMultiplier"] is double customerSpawnSpeedMultiplier)
+                {
+                    CustomerSpawnSpeedMultiplier = customerSpawnSpeedMultiplier;
+                }
+
+
+                // WinConditions
+                if (level.WinCondition == WinConditionType.ScoreCondition)
+                {
+                    Finish = () => Count.Seconds < 0;
+                }
+
+                if (level.WinCondition == WinConditionType.LifeCondition)
+                {
+                    if (level.Properties.ContainsKey("Lives") && level.Properties["Lives"] is int lives)
+                    {
+                        Lives = new Lives(550, (float)Height - 60, this)
+                        {
+                            Amount = lives,
+                            ZIndex = 6
+                        };
+
+                        Finish = () => Lives.Amount <= 0 || Count.Seconds < 0;
+
+                        AddEntity(Lives);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("'Lives' is missing or not valid");
+                    }
+                }
+
+                if (level.WinCondition == WinConditionType.TimeCondition)
+                {
+                    if (level.Properties.ContainsKey("Queue") && level.Properties["Queue"] is int queue)
+                    {
+                        for (int i = 0; i < queue; i++)
+                        {
+                            AddCustomer(new Customer(this));
+                        }
+
+                        Count = new Count(0, countOffset, (float)Height - 50, this);
+
+                        Finish = () => _customerQueue.Count <= 0;
+                    }
+                    else
+                    {
+                        throw new ArgumentException("'Queue' is missing or not valid");
+                    }
+                }
+                else
+                {
+                    if (level.Properties.ContainsKey("Seconds") && level.Properties["Seconds"] is int seconds)
+                    {
+                        _timer = AddTimer(() =>
+                        {
+                            AddCustomer(new Customer(this));
+                            _timer.Interval = (int)(Rnd.Next(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, CustomerSpawnSpeed + CustomerSpawnSpeedOffset) * (1 + _customerQueue.Count * CustomerSpawnSpeedMultiplier));
+                        }, Rnd.Next(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, CustomerSpawnSpeed + CustomerSpawnSpeedOffset));
+
+                        Count = new Count(seconds, countOffset, (float)Height - 50, this);
+                    }
+                    else
+                    {
+                        throw new ArgumentException("'Seconds' is missing or not valid");
+                    }
+                }
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(level));
+            }
 
             AddEntity(new Background("tavern.png", this));
-            TileAmount = tileAmount;
 
             _customerQueue = new CustomerQueue(this);
             AddEntity(_customerQueue);
 
             TextInput += OnTextInput;
-
-            int countOffset = 360;
-
-            if (winCondition is ScoreCondition)
-            {
-                Finish = delegate ()
-                {
-                    return Count.Seconds < 0;
-                };
-            }
-
-            if (winCondition is LifeCondition)
-            {
-                Lives = new Lives(550, (float)Height - 60, this)
-                {
-                    Amount = lives,
-                    ZIndex = 6
-                };
-
-                Finish = delegate ()
-                {
-                    return Lives.Amount <= 0 || Count.Seconds < 0;
-                };
-
-                AddEntity(Lives);
-            }
-
-            if (winCondition is TimeCondition)
-            {
-                for (int i = 0; i < secondsOrQueue; i++)
-                {
-                    AddCustomer(new Customer(this));
-                }
-
-                Count = new Count(0, countOffset, (float)Height - 50, this);
-
-                Finish = delegate ()
-                {
-                    return _customerQueue.Count <= 0;
-                };
-            }
-            else
-            {
-                _timer = AddTimer(() =>
-                {
-                    AddCustomer(new Customer(this));
-                    _timer.Interval = Rnd.Next(3000, 5000) * (1 + _customerQueue.Count / 10);
-                }, Rnd.Next(3000, 5000));
-
-                Count = new Count(secondsOrQueue, countOffset, (float)Height - 50, this);
-            }
-
+            
             Count.Typeface = DefaultTypeface;
             Count.ZIndex = 5;
             AddEntity(Count);
-
 
             AddEntity(new Background("tavernscore.png", this)
             {

@@ -15,7 +15,6 @@ namespace TypTop.GameEngine
     {
         public readonly Random Rnd = new Random(DateTime.Now.Millisecond);
         HashSet<Entity> _entities = new HashSet<Entity>();
-        HashSet<Entity> _removeEntities = new HashSet<Entity>();
 
         public event TextCompositionEventHandler TextInput;
 
@@ -64,16 +63,13 @@ namespace TypTop.GameEngine
             _entities = _entities.OrderBy(e => e.ZIndex).ToHashSet();
         }
 
-        public void RemoveEntity(Entity entity)
+        public bool RemoveEntity(Entity entity)
         {
-            _removeEntities.Add(entity);
+            return _entities.Remove(entity);
         }
-        public void RemoveEntity<TEntity>() where TEntity : Entity
+        public int RemoveEntity<TEntity>() where TEntity : Entity
         {
-            foreach (Entity entity in _entities.Where(e => e is TEntity))
-            {
-                _removeEntities.Add(entity);
-            }
+            return _entities.RemoveWhere(e => e is TEntity);
         }
 
         public IEnumerable<Entity> GetEntitiesWithComponent<TComponent>() where TComponent : Component
@@ -89,23 +85,17 @@ namespace TypTop.GameEngine
 
         public virtual void Update(float deltaTime)
         {
-            foreach (Entity entity in _entities)
+            foreach (Entity entity in _entities.ToList())
             {
                 entity.Update(deltaTime);
             }
-
-            foreach (Entity entity in _removeEntities)
-            {
-                _entities.Remove(entity);
-            }
-            _removeEntities.Clear();
 
             RunTimedObjects(deltaTime);
         }
 
         public void Draw(DrawingContext drawingContext)
         {
-            foreach (Entity entity in _entities)
+            foreach (Entity entity in _entities.ToList())
             {
                 entity.Draw(drawingContext);
             }

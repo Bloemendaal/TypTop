@@ -40,17 +40,55 @@ namespace TypTop.GameGui
             };
             wordProvider.LoadTestWords();
 
-            TavernGame game = new TavernGame(
-              new ScoreCondition(100, 300, 600),
-              wordProvider.Serve(),
-              60
-            );
+            TavernGame tGame = new TavernGame(new Level()
+            {
+                WinCondition = WinConditionType.LifeCondition,
+                
+                ThresholdOneStar = 1,
+                ThresholdTwoStars = 2,
+                ThresholdThreeStars = 3,
 
-            game.OnFinished += OnFinishedGame;
+                Properties = new Dictionary<string, object>()
+                {
+                    { "Words", wordProvider.Serve() },
+                    { "Lives", 6 },
+                    { "Seconds", 120 },
+                    { "ShowSatisfaction", true },
+                    { "SatisfactionTiming", new Dictionary<int, int> 
+                        {
+                            { 1, 4000 },
+                            { 2, 4000 },
+                            { 3, 4000 },
+                            { 4, 4000 },
+                            { 5, 4000 },
+                        }
+                    }
+                }
+            });
 
-            GameWindow.Start(game);
+            SpaceGame sGame = new SpaceGame(new Level()
+            {
+                WinCondition = WinConditionType.ScoreCondition,
+
+                ThresholdOneStar = 100,
+                ThresholdTwoStars = 200,
+                ThresholdThreeStars = 300,
+
+                Properties = new Dictionary<string, object>()
+                {
+                    { "Words", wordProvider.Serve() },
+                    { "Lives", 6 },
+                    { "EnemyVelocityOffset", (float)1 },
+                    { "LineHeight", (float)800 }
+                }
+            });
+
+
+            tGame.OnFinished += OnFinishedGame;
+            sGame.OnFinished += OnFinishedGame;
+
+            GameWindow.Start(sGame);
             //GameWindow.Start(new WorldScreenGame());
-            //GameWindow.Start(new SpaceGame(new ScoreCondition(100)));
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using TypTop.GameEngine;
+using TypTop.Logic;
 using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.MinigameEngine
@@ -26,9 +27,15 @@ namespace TypTop.MinigameEngine
         public delegate bool FinishCondition();
         public event EventHandler<FinishEventArgs> OnFinished;
 
-        public Minigame(WinCondition winCondition)
+        public Minigame(Level level)
         {
-            WinCondition = winCondition ?? throw new ArgumentNullException(nameof(winCondition));
+            WinCondition = level.WinCondition switch
+            {
+                WinConditionType.LifeCondition => new LifeCondition(level.ThresholdThreeStars, level.ThresholdTwoStars, level.ThresholdOneStar),
+                WinConditionType.ScoreCondition => new ScoreCondition(level.ThresholdThreeStars, level.ThresholdTwoStars, level.ThresholdOneStar),
+                WinConditionType.TimeCondition => new TimeCondition(level.ThresholdThreeStars, level.ThresholdTwoStars, level.ThresholdOneStar),
+                _ => throw new Exception("WinConditionType not recognized"),
+            };
             WinCondition.Minigame = this;
         }
 

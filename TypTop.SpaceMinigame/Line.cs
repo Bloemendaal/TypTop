@@ -10,11 +10,11 @@ namespace TypTop.SpaceMinigame
 {
     public class Line : Entity
     {
-        public Line(Game game) : base(game)
+        public Line(float height, Game game) : base(game)
         {
             AddComponent(new PositionComponent()
             {
-                Position = new Vector2(0, 950)
+                Position = new Vector2(0, height)
             });
             AddComponent(new LineComponent());
         }
