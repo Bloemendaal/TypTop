@@ -99,7 +99,7 @@ namespace TypTop.SpaceMinigame
             if (level != null && level.Properties != null)
             {
                 // Words
-                if (level.Properties.ContainsKey("Words") && level.Properties["Words"] is IEnumerable<Word> words)
+                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
                 {
                     _words = new List<Word>(words);
                 }
@@ -109,7 +109,7 @@ namespace TypTop.SpaceMinigame
                 }
 
                 //Lives
-                if (level.Properties.ContainsKey("Lives") && level.Properties["Lives"] is int lives)
+                if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
                 {
                     Lives = new Lives(250, 10, this)
                     {
@@ -119,25 +119,25 @@ namespace TypTop.SpaceMinigame
                 }
                 else
                 {
-                    throw new ArgumentException("'Words' is missing or not valid");
+                    throw new ArgumentException("'Lives' is missing or not valid");
                 }
 
                 // EnemyAmount
-                EnemyAmount = level.Properties.ContainsKey("EnemyAmount") && level.Properties["EnemyAmount"] is int enemyAmount ? enemyAmount : _words.Count;
+                EnemyAmount = level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is int enemyAmount ? enemyAmount : _words.Count;
 
                 // EnemyVelocity
-                if (level.Properties.ContainsKey("EnemyVelocity") && level.Properties["EnemyVelocity"] is float enemyVelocity)
+                if (level.Properties.TryGetValue("EnemyVelocity", out object enemyVelocityObject) && enemyVelocityObject is float enemyVelocity)
                 {
                     EnemyVelocity = enemyVelocity;
                 }
                 // EnemyVelocityOffset
-                if (level.Properties.ContainsKey("EnemyVelocityOffset") && level.Properties["EnemyVelocityOffset"] is float enemyVelocityOffset)
+                if (level.Properties.TryGetValue("EnemyVelocityOffset", out object enemyVelocityOffsetObject) && enemyVelocityOffsetObject is float enemyVelocityOffset)
                 {
                     EnemyVelocityOffset = enemyVelocityOffset;
                 }
 
                 // LineHeight
-                if (level.Properties.ContainsKey("LineHeight") && level.Properties["LineHeight"] is float lineHeight)
+                if (level.Properties.TryGetValue("LineHeight", out object lineHeightObject) && lineHeightObject is float lineHeight)
                 {
                     LineHeight = lineHeight;
                 }

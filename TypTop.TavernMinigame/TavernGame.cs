@@ -172,7 +172,7 @@ namespace TypTop.TavernMinigame
                 int countOffset = 360;
 
                 // Words
-                if (level.Properties.ContainsKey("Words") && level.Properties["Words"] is IEnumerable<Word> words)
+                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
                 {
                     _words = new Queue<Word>(words);
                 }
@@ -182,46 +182,46 @@ namespace TypTop.TavernMinigame
                 }
 
                 // TileAmount
-                TileAmount = level.Properties.ContainsKey("TileAmount") && level.Properties["TileAmount"] is int tileAmount ? tileAmount : 3;
+                TileAmount = level.Properties.TryGetValue("TileAmount", out object tileAmountObject) && tileAmountObject is int tileAmount ? tileAmount : 3;
 
                 // MaxCustomers
-                if (level.Properties.ContainsKey("MaxCustomers") && level.Properties["MaxCustomers"] is int maxCustomers)
+                if (level.Properties.TryGetValue("MaxCustomers", out object maxCustomersObject) && maxCustomersObject is int maxCustomers)
                 {
                     MaxCustomers = maxCustomers;
                 }
 
                 // ShowSatisfaction
-                if (level.Properties.ContainsKey("ShowSatisfaction") && level.Properties["ShowSatisfaction"] is bool showSatisfaction)
+                if (level.Properties.TryGetValue("ShowSatisfaction", out object showSatisfactionObject) && showSatisfactionObject is bool showSatisfaction)
                 {
                     ShowSatisfaction = showSatisfaction;
                 }
 
                 // StartSatisfaction
-                if (level.Properties.ContainsKey("StartSatisfaction") && level.Properties["StartSatisfaction"] is int startSatisfaction)
+                if (level.Properties.TryGetValue("StartSatisfaction", out object startSatisfactionObject) && startSatisfactionObject is int startSatisfaction)
                 {
                     StartSatisfaction = startSatisfaction;
                 }
 
                 // SatisfactionTiming
-                if (level.Properties.ContainsKey("SatisfactionTiming") && level.Properties["SatisfactionTiming"] is Dictionary<int, int> satisfactionTiming)
+                if (level.Properties.TryGetValue("SatisfactionTiming", out object satisfactionTimingObject) && satisfactionTimingObject is Dictionary<int, int> satisfactionTiming)
                 {
                     _satisfactionTiming = new Dictionary<int, int>(satisfactionTiming);
                 }
 
                 // CustomerSpawnSpeed
-                if (level.Properties.ContainsKey("CustomerSpawnSpeed") && level.Properties["CustomerSpawnSpeed"] is int customerSpawnSpeed)
+                if (level.Properties.TryGetValue("CustomerSpawnSpeed", out object customerSpawnSpeedObject) && customerSpawnSpeedObject is int customerSpawnSpeed)
                 {
                     CustomerSpawnSpeed = customerSpawnSpeed;
                 }
 
                 // CustomerSpawnSpeedOffset
-                if (level.Properties.ContainsKey("CustomerSpawnSpeedOffset") && level.Properties["CustomerSpawnSpeedOffset"] is int customerSpawnSpeedOffset)
+                if (level.Properties.TryGetValue("CustomerSpawnSpeedOffset", out object customerSpawnSpeedOffsetObject) && customerSpawnSpeedOffsetObject is int customerSpawnSpeedOffset)
                 {
                     CustomerSpawnSpeedOffset = customerSpawnSpeedOffset;
                 }
 
                 // CustomerSpawnSpeedMultiplier
-                if (level.Properties.ContainsKey("CustomerSpawnSpeedMultiplier") && level.Properties["CustomerSpawnSpeedMultiplier"] is double customerSpawnSpeedMultiplier)
+                if (level.Properties.TryGetValue("CustomerSpawnSpeedMultiplier", out object customerSpawnSpeedMultiplierObject) && customerSpawnSpeedMultiplierObject is double customerSpawnSpeedMultiplier)
                 {
                     CustomerSpawnSpeedMultiplier = customerSpawnSpeedMultiplier;
                 }
@@ -235,7 +235,7 @@ namespace TypTop.TavernMinigame
 
                 if (level.WinCondition == WinConditionType.LifeCondition)
                 {
-                    if (level.Properties.ContainsKey("Lives") && level.Properties["Lives"] is int lives)
+                    if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
                     {
                         Lives = new Lives(550, (float)Height - 60, this)
                         {
@@ -255,7 +255,7 @@ namespace TypTop.TavernMinigame
 
                 if (level.WinCondition == WinConditionType.TimeCondition)
                 {
-                    if (level.Properties.ContainsKey("Queue") && level.Properties["Queue"] is int queue)
+                    if (level.Properties.TryGetValue("Queue", out object queueObject) && queueObject is int queue)
                     {
                         for (int i = 0; i < queue; i++)
                         {
@@ -273,7 +273,7 @@ namespace TypTop.TavernMinigame
                 }
                 else
                 {
-                    if (level.Properties.ContainsKey("Seconds") && level.Properties["Seconds"] is int seconds)
+                    if (level.Properties.TryGetValue("Seconds", out object secondsObject) && secondsObject is int seconds)
                     {
                         _timer = AddTimer(() =>
                         {
