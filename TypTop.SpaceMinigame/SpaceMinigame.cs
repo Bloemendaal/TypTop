@@ -83,12 +83,22 @@ namespace TypTop.SpaceMinigame
             TextInput += OnTextInput;
         }
 
+        //
+        // This method is overriding from the original game engine.
+        // In this modified variant, an Enemy is already considered under the Line.
+        // If this is the case, the list of those of the enemies will be updated.
+        //
         public override void Update(float deltaTime)
         {
             _inputList.Input = EnemyList.Where(e => e.Y - 150 > 0).Select(e => e.Word).ToList();
             base.Update(deltaTime);
         }
 
+        //
+        // This method will be executed with Text input.
+        // For example, several things are done here, such as drawing a laser from killing an enemy.
+        // Remove this Enemy from the correct list.
+        //
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputList.Input = EnemyList.Where(e => e.Y + 150 > 0).Select(e => e.Word).ToList();

@@ -29,6 +29,11 @@ namespace TypTop.SpaceMinigame.Components
             _point2 = point2;
         }
 
+        //
+        // The Draw function originally comes from the IDrawable interface.
+        // This method ensures that the component is drawn.
+        // This will be done every tick of the game. In this case, a dotted line will be drawn between the Player and the relevant Enemy.
+        //
         public void Draw(DrawingContext context)
         {
             _color.Opacity -= 0.02;
