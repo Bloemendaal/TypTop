@@ -19,7 +19,7 @@ In het kort, TypTop is een applicatie om kinderen te voorzien van een typecursus
 Voor meer informatie wordt aangeraden om het [functioneel ontwerp](https://drive.google.com/open?id=1qqM9IFvPuHZJvfruBH2EnciZkMkmVayF5MyXXwGspPk) te raadplegen om een beter inzicht te geven wat de doelen zijn van deze applicatie.
 
 ### Leeswijzer
-Geschrijving voor:
+Beschrijving voor:
 - Algemene structuur
 - Minigame programmeurs
 - Level/Wereldmap programmeurs
@@ -57,7 +57,7 @@ Bovenstaand diagram bevat alle referencies tussen de projecten in de solution Ty
 ##### TypTop.GameWindow
 ##### TypTop.GameGui
 
-#### Minigame
+#### Minigames
 ##### TypTop.Minigame
 ##### TypTop.TavernMinigame
 ##### TypTop.SpaceMinigame
