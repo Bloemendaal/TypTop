@@ -5,4 +5,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
+    <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
+    <ProjectReference Include="..\TypTop.Minigame\TypTop.Minigame.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -95,6 +95,12 @@
     <None Update="Images\Order\tea.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\tavernButton.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\tavernLevelBackground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\tavernscore.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

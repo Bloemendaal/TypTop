@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
+    <ProjectReference Include="..\TypTop.LevelScreen\TypTop.LevelScreen.csproj" />
     <ProjectReference Include="..\TypTop.Minigame\TypTop.Minigame.csproj" />
   </ItemGroup>
 
