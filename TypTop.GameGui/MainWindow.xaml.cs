@@ -81,6 +81,7 @@ namespace TypTop.GameGui
                     { "Words", wordProvider.Serve() },
                     { "Lives", 6 },
                     { "Seconds", 120 },
+                    { "CustomerMaxOrderAmount", 1 },
                     { "ShowSatisfaction", true },
                     { "SatisfactionTiming", new Dictionary<int, int> 
                         {
@@ -115,7 +116,7 @@ namespace TypTop.GameGui
             tGame.OnFinished += OnFinishedGame;
             sGame.OnFinished += OnFinishedGame;
 
-            GameWindow.Start(sGame, new Transition(1d));
+            GameWindow.Start(tGame, new Transition(1d));
             //GameWindow.Start(new WorldScreenGame());
         }
 

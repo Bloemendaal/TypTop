@@ -125,6 +125,44 @@ namespace TypTop.TavernMinigame
             }
         }
         private double _customerSpawnSpeedMultiplier = 0.1;
+        public int CustomerMinOrderAmount
+        {
+            get => _customerMinOrderAmount;
+            private set
+            {
+                if (value < 1)
+                {
+                    value = 1;
+                }
+
+                if (value > CustomerMaxOrderAmount)
+                {
+                    value = CustomerMaxOrderAmount;
+                }
+
+                _customerMinOrderAmount = value;
+            }
+        }
+        private int _customerMinOrderAmount = 1;
+        public int CustomerMaxOrderAmount
+        {
+            get => _customerMaxOrderAmount;
+            private set
+            {
+                if (value > 4)
+                {
+                    value = 4;
+                }
+
+                if (value < CustomerMinOrderAmount)
+                {
+                    value = CustomerMinOrderAmount;
+                }
+
+                _customerMaxOrderAmount = value;
+            }
+        }
+        private int _customerMaxOrderAmount = 4;
 
 
         private readonly List<Customer> _customers = new List<Customer>();
@@ -224,6 +262,17 @@ namespace TypTop.TavernMinigame
                 if (level.Properties.TryGetValue("CustomerSpawnSpeedMultiplier", out object customerSpawnSpeedMultiplierObject) && customerSpawnSpeedMultiplierObject is double customerSpawnSpeedMultiplier)
                 {
                     CustomerSpawnSpeedMultiplier = customerSpawnSpeedMultiplier;
+                }
+
+                // CustomerMinOrderAmount
+                if (level.Properties.TryGetValue("CustomerMinOrderAmount", out object customerMinOrderAmountObject) && customerMinOrderAmountObject is int customerMinOrderAmount)
+                {
+                    CustomerMinOrderAmount = customerMinOrderAmount;
+                }
+                // CustomerMaxOrderAmount
+                if (level.Properties.TryGetValue("CustomerMaxOrderAmount", out object customerMaxOrderAmountObject) && customerMaxOrderAmountObject is int customerMaxOrderAmount)
+                {
+                    CustomerMaxOrderAmount = customerMaxOrderAmount;
                 }
 
 

@@ -16,19 +16,23 @@ namespace TypTop.TavernMinigame
             {
                 if (value < 1)
                 {
-                    _timer?.Dispose();
-                    _customer?.RemoveEntities(_customer.Count * -10);
-
-                    if (_game != null)
+                    if (_amount > value)
                     {
-                        _game?.RemoveCustomer(_customer);
-                        _game?.NextCustomer();
-                        if (_game.Lives != null)
+                        _timer?.Dispose();
+                        _customer?.RemoveEntities(_customer.Count * -10);
+
+                        if (_game != null)
                         {
-                            _game.Lives.Amount--;
+                            _game?.RemoveCustomer(_customer);
+                            _game?.NextCustomer();
+                            if (_game.Lives != null)
+                            {
+                                _game.Lives.Amount--;
+                            }
                         }
                     }
-                    
+
+                    _amount = 0;
                     return;
                 }
 
@@ -88,13 +92,18 @@ namespace TypTop.TavernMinigame
             }
             else
             {
-                _timer.Dispose();
+                _timer?.Dispose();
             }
         }
 
+        public void Dispose() => _timer?.Dispose();
+
         public void UpdateImage()
         {
-            _imageComponent?.UpdateImage(new BitmapImage(new Uri($@"Images/Satisfaction/satisfaction_{Amount}.png", UriKind.Relative)));
+            if (Amount > 0)
+            {
+                _imageComponent?.UpdateImage(new BitmapImage(new Uri($@"Images/Satisfaction/satisfaction_{Amount}.png", UriKind.Relative)));
+            }
         }
     }
 }

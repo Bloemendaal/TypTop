@@ -24,7 +24,7 @@ namespace TypTop.TavernMinigame
         public Customer(TavernGame game) : base(game)
         {
             ZIndex = 1;
-            _orders = game.GetOrder(Game.Rnd.Next(1, 5));
+            _orders = game.GetOrder(Game.Rnd.Next(game.CustomerMinOrderAmount, game.CustomerMaxOrderAmount + 1));
             OriginalCount = Count;
 
             var types = Enum.GetNames(typeof(CustomerType));
@@ -65,6 +65,7 @@ namespace TypTop.TavernMinigame
             if (Satisfaction != null)
             {
                 Game.RemoveEntity(Satisfaction);
+                Satisfaction.Dispose();
             }
 
             ((TavernGame)Game).Score.Amount += score;
