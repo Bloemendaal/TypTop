@@ -58,6 +58,51 @@ namespace TypTop.GameEngine.Components
         /// </returns>
         public static bool RemoveCamera(Game game) => _position.Remove(game);
 
+        /// <summary>
+        /// Get X by key.
+        /// </summary>
+        /// <param name="game">
+        /// TKey of the Dictionary.
+        /// </param>
+        /// <returns>
+        /// X coordinate.
+        /// </returns>
+        public static float GetX(Game game)
+        {
+            _position.TryGetValue(game, out Vector2 vector2);
+            return vector2.X;
+        }
+
+        /// <summary>
+        /// Get Y by key.
+        /// </summary>
+        /// <param name="game">
+        /// TKey of the Dictionary.
+        /// </param>
+        /// <returns>
+        /// Y coordinate.
+        /// </returns>
+        public static float GetY(Game game)
+        {
+            _position.TryGetValue(game, out Vector2 vector2);
+            return vector2.Y;
+        }
+
+        /// <summary>
+        /// Get Position by key.
+        /// </summary>
+        /// <param name="game">
+        /// TKey of the Dictionary.
+        /// </param>
+        /// <returns>
+        /// Vector2 coordinates.
+        /// </returns>
+        public static Vector2 GetPosition(Game game)
+        {
+            _position.TryGetValue(game, out Vector2 vector2);
+            return vector2;
+        }
+
         public override void AddedToEntity()
         {
             if (!_position.ContainsKey(Entity.Game))
