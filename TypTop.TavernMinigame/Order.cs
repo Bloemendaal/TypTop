@@ -9,6 +9,9 @@ namespace TypTop.TavernMinigame
 {
     public class Order : Entity
     {
+        /// <summary>
+        /// List of all available unique orders.
+        /// </summary>
         public enum OrderType
         {
             Salad,
@@ -24,6 +27,9 @@ namespace TypTop.TavernMinigame
             Tea
         }
 
+        /// <summary>
+        /// Type of this order.
+        /// </summary>
         public OrderType Type { get; private set; }
 
         public Order(OrderType type, Game game) : base(game)

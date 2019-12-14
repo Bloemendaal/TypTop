@@ -19,8 +19,19 @@ namespace TypTop.TavernMinigame
         }
         private Word _word;
 
+        /// <summary>
+        /// Width of the tile.
+        /// </summary>
         public const double Width = 200;
+
+        /// <summary>
+        /// Heigth offset of the Order that is drawn on top of the Tile.
+        /// </summary>
         public const double HeightOffset = 100;
+
+        /// <summary>
+        /// Width offset of the Order that is drawn on top of the Tile.
+        /// </summary>
         public const double WidthOffset = 60;
 
         public Tile(Order.OrderType orderType, float x, Game game) : base(game)

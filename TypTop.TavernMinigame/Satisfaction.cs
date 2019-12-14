@@ -9,6 +9,9 @@ namespace TypTop.TavernMinigame
 {
     public class Satisfaction : Entity
     {
+        /// <summary>
+        /// Amount of satisfaction the Customer has. Value from 0 - 5 where 0 will result in the customer leaving. 
+        /// </summary>
         public int Amount 
         {
             get => _amount;
@@ -83,6 +86,9 @@ namespace TypTop.TavernMinigame
             AddComponent(_imageComponent);
         }
 
+        /// <summary>
+        /// Reset the interval to the current amount of satisfaction.
+        /// </summary>
         private void SetInterval()
         {
             int mseconds = _game.GetSatisfaction(Amount);
@@ -96,8 +102,14 @@ namespace TypTop.TavernMinigame
             }
         }
 
+        /// <summary>
+        /// Dispose the satisfactiontimer. Do not remove a Customer or Satisfaction class from the game without disposing.
+        /// </summary>
         public void Dispose() => _timer?.Dispose();
 
+        /// <summary>
+        /// Update the satisfactionimage to match the amount.
+        /// </summary>
         public void UpdateImage()
         {
             if (Amount > 0)

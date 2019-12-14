@@ -15,6 +15,9 @@ namespace TypTop.TavernMinigame
 {
     public class TavernGame : Minigame
     {
+        /// <summary>
+        /// Minimale waarde is 1, maximale waarde is de lengte van het aantal OrderType’s. Wanneer deze property geset wordt, worden de Tiles willekeurig gegenereerd tot een lijst _tiles.
+        /// </summary>
         public int TileAmount
         {
             get => _tiles.Count;
@@ -63,14 +66,28 @@ namespace TypTop.TavernMinigame
                 }
             }
         }
+
+        /// <summary>
+        /// Lijst met alle Tile’s erin. Wordt gerenderd wanneer het TileAmount geset wordt.
+        /// </summary>
         private List<Tile> _tiles;
+
+        /// <summary>
+        /// Lijst met Word’s die gebruikt kan worden door de Tiles.
+        /// </summary>
         private readonly Queue<Word> _words;
 
+        /// <summary>
+        /// InputList uit TypTop.Logic die gebruikt wordt om de input van de gebruiker te analyseren. FocusOnHighIndex staat op true. De woordenlijst wordt pas meegegeven wanneer de method UpdateWordlist() aangeroepen wordt.
+        /// </summary>
         private readonly InputList _inputList = new InputList(null)
         {
             FocusOnHighIndex = true
         };
 
+        /// <summary>
+        /// Maximaal aantal Customer’s dat in de taverne getekend wordt voordat ze in de CustomerQueue gestopt worden. Minimaal aantal is 0, maximaal is aanbevolen 3 omdat de rest (deels) buiten het scherm gerenderd wordt.
+        /// </summary>
         public int MaxCustomers
         {
             get => _maxCustomers;
@@ -91,6 +108,9 @@ namespace TypTop.TavernMinigame
         }
         private int _maxCustomers = 3;
 
+        /// <summary>
+        /// Every amount of milliseconds a customer should spawn.
+        /// </summary>
         public int CustomerSpawnSpeed 
         { 
             get => _customerSpawnSpeed; 
@@ -105,12 +125,20 @@ namespace TypTop.TavernMinigame
             } 
         }
         private int _customerSpawnSpeed = 4000;
+
+        /// <summary>
+        /// Maximum offset that is used when generating random spawn speeds in both directions.
+        /// </summary>
         public int CustomerSpawnSpeedOffset
         {
             get => _customerSpawnSpeedOffset;
             private set => _customerSpawnSpeedOffset = Math.Abs(value);
         }
         private int _customerSpawnSpeedOffset = 1000;
+
+        /// <summary>
+        /// Multiply the spawnspeed of the customers with 1 + (x * [amount of customers in the queue])
+        /// </summary>
         public double CustomerSpawnSpeedMultiplier
         {
             get => _customerSpawnSpeedMultiplier;
@@ -125,6 +153,10 @@ namespace TypTop.TavernMinigame
             }
         }
         private double _customerSpawnSpeedMultiplier = 0.1;
+
+        /// <summary>
+        /// Minimum amount of orders a customer has to take.
+        /// </summary>
         public int CustomerMinOrderAmount
         {
             get => _customerMinOrderAmount;
@@ -144,6 +176,10 @@ namespace TypTop.TavernMinigame
             }
         }
         private int _customerMinOrderAmount = 1;
+
+        /// <summary>
+        /// Maximum amount of orders a customer has to take.
+        /// </summary>
         public int CustomerMaxOrderAmount
         {
             get => _customerMaxOrderAmount;
@@ -165,15 +201,34 @@ namespace TypTop.TavernMinigame
         private int _customerMaxOrderAmount = 4;
 
 
+        /// <summary>
+        /// Lijst met Customer’s die zichtbaar zijn in de taverne.
+        /// </summary>
         private readonly List<Customer> _customers = new List<Customer>();
+
+        /// <summary>
+        /// Visuele weergave van de CustomerQueue inclusief de Queue<Customer> zelf.
+        /// </summary>
         private readonly CustomerQueue _customerQueue;
 
+        /// <summary>
+        /// Timer die nodig is om Customer’s toe te voegen aan de rij.
+        /// </summary>
         private readonly ITimer _timer;
 
+        /// <summary>
+        /// Standaard font dat gebruikt moet worden in de hele Tavern minigame, MV Boli.
+        /// </summary>
         public readonly Typeface DefaultTypeface = new Typeface("MV Boli");
 
-        // Customer Satisfaction
+        /// <summary>
+        /// Geef de satisfaction van een Customer weer. Standaardwaarde is false.
+        /// </summary>
         public bool ShowSatisfaction { get; private set; } = false;
+
+        /// <summary>
+        /// Waarde tussen 1 en 5 waarop de Customer’s satisfaction standaard ingesteld staat. Standaardwaarde is 5. 
+        /// </summary>
         public int StartSatisfaction
         { 
             get => _startSatisfaction; 
@@ -193,6 +248,10 @@ namespace TypTop.TavernMinigame
             } 
         }
         private int _startSatisfaction = 5;
+
+        /// <summary>
+        /// Tijden in milliseconden waarin waarin de Customer’s bozer worden. Eerste int, TKey, is de satisfaction. Tweede int, TValue, is het aantal milliseconden. Standaardwaardes per satisfaction is 0 milliseconden (geen timer ingesteld, satisfaction kan dus niet verspringen).
+        /// </summary>
         private readonly Dictionary<int, int> _satisfactionTiming = new Dictionary<int, int>()
         {
             { 1, 0 },
@@ -327,8 +386,8 @@ namespace TypTop.TavernMinigame
                         _timer = AddTimer(() =>
                         {
                             AddCustomer(new Customer(this));
-                            _timer.Interval = (int)(Rnd.Next(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, CustomerSpawnSpeed + CustomerSpawnSpeedOffset) * (1 + _customerQueue.Count * CustomerSpawnSpeedMultiplier));
-                        }, Rnd.Next(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, CustomerSpawnSpeed + CustomerSpawnSpeedOffset));
+                            _timer.Interval = (int)(Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0), CustomerSpawnSpeed + CustomerSpawnSpeedOffset) * (1 + _customerQueue.Count * CustomerSpawnSpeedMultiplier));
+                        }, Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0), CustomerSpawnSpeed + CustomerSpawnSpeedOffset));
 
                         Count = new Count(seconds, countOffset, (float)Height - 50, this);
                     }
@@ -377,9 +436,23 @@ namespace TypTop.TavernMinigame
             UpdateWordlist();
         }
 
-
+        /// <summary>
+        /// Get the amount of milliseconds for a certain satisfaction.
+        /// </summary>
+        /// <param name="key">
+        /// Satisfaction (0 - 5)
+        /// </param>
+        /// <returns>
+        /// Time in milliseconds.
+        /// </returns>
         public int GetSatisfaction(int key) => _satisfactionTiming.ContainsKey(key) ? _satisfactionTiming[key] : 0;
 
+        /// <summary>
+        /// Add customer to _customers unless it exceeds MaxCustomers. In that case it is added to _customerQueue.
+        /// </summary>
+        /// <param name="customer">
+        /// Customer to be added.
+        /// </param>
         public void AddCustomer(Customer customer)
         {
             if (_customers.Count >= MaxCustomers)
@@ -394,6 +467,13 @@ namespace TypTop.TavernMinigame
                 UpdateWordlist();
             }
         }
+
+        /// <summary>
+        /// Schuift de complete rij Customer’s een plekje door.
+        /// </summary>
+        /// <returns>
+        /// Geeft terug of dit gelukt is.
+        /// </returns>
         public bool NextCustomer()
         {
             if (_customerQueue.Count > 0 && _customers.Count < MaxCustomers)
@@ -408,6 +488,16 @@ namespace TypTop.TavernMinigame
 
             return false;
         }
+
+        /// <summary>
+        /// Verwijdert een Customer uit _customers en werkt de posities van alle Customer’s in _customers daarna bij. Daarna wordt de method UpdateWordlist() aangeroepen.
+        /// </summary>
+        /// <param name="customer">
+        /// Customer to be removed.
+        /// </param>
+        /// <returns>
+        /// Geeft terug of het verwijderen gelukt is.
+        /// </returns>
         public bool RemoveCustomer(Customer customer) {
             bool result = _customers.Remove(customer);
             if (result && _customers.Count > 0)
@@ -417,16 +507,36 @@ namespace TypTop.TavernMinigame
             UpdateWordlist();
             return result;
         }
+
+        /// <summary>
+        /// Geeft de index van de Customer in _customers.
+        /// </summary>
+        /// <param name="customer">
+        /// Customer to be checked.
+        /// </param>
+        /// <returns>
+        /// Geeft de index van de Customer in _customers.
+        /// </returns>
         public int CustomerIndex(Customer customer) => _customers.IndexOf(customer);
 
-
+        /// <summary>
+        /// Werkt de woordenlijst van _inputList bij zodat deze overeenkomt met de wensen van de Customer’s. Word’s op Tile’s die niet gevraagd worden door Customer’s, worden hierdoor niet geaccepteerd als input.
+        /// </summary>
         public void UpdateWordlist()
         {
             _inputList.Input = _tiles.Where(t => _customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList();
             _tiles.Where(t => !_customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList().ForEach(w => w.Index = 0);
         }
 
-
+        /// <summary>
+        /// Geeft een lijst met amount aantal willekeurige Order’s erin.
+        /// </summary>
+        /// <param name="amount">
+        /// Aantal willekeurige Order's.
+        /// </param>
+        /// <returns>
+        /// Geeft een lijst met amount aantal willekeurige Order’s erin.
+        /// </returns>
         public List<Order> GetOrder(int amount)
         {
             List<Order> result = new List<Order>();
@@ -447,7 +557,11 @@ namespace TypTop.TavernMinigame
             return result;
         }
 
-
+        /// <summary>
+        /// Controleert de input van de leerling. Controleert voor elke Customer of een Order afgehandeld is door die input en ook of de Customer volledig geholpen is. Een Word wordt verwijdert uit _words en de method UpdateWordlist() wordt aangeroepen wanneer een Word volledig goed getypt is. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputList.TextInput(e.Text);
