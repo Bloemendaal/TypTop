@@ -8,10 +8,14 @@ namespace TypTop.Logic
     {
         public List<Word> Words;
 
-        //
-        // Summary:
-        //     The previously/currently inputted letter with the TextInput function.
+        /// <summary>
+        /// The previously inputted letter with the TextInput function.
+        /// </summary>
         public char PreviousChar;
+
+        /// <summary>
+        /// The currently inputted letter with the TextInput function.
+        /// </summary>
         public char CurrentChar;
     }
 }
