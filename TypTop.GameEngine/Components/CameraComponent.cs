@@ -48,17 +48,6 @@ namespace TypTop.GameEngine.Components
         }
 
         /// <summary>
-        /// Removes a camera from the Dictionary of running games. Do not use while running the game.
-        /// </summary>
-        /// <param name="game">
-        /// TKey of the Dictionary.
-        /// </param>
-        /// <returns>
-        /// If the removal was successfull.
-        /// </returns>
-        public static bool RemoveCamera(Game game) => _position.Remove(game);
-
-        /// <summary>
         /// Get X by key.
         /// </summary>
         /// <param name="game">
@@ -102,7 +91,6 @@ namespace TypTop.GameEngine.Components
             _position.TryGetValue(game, out Vector2 vector2);
             return vector2;
         }
-
 
         /// <summary>
         /// Set X by key.
@@ -166,6 +154,18 @@ namespace TypTop.GameEngine.Components
                 _position.Add(game, position);
             }
         }
+
+
+        /// <summary>
+        /// Removes a camera from the Dictionary of running games. Do not use while running the game.
+        /// </summary>
+        /// <param name="game">
+        /// TKey of the Dictionary.
+        /// </param>
+        /// <returns>
+        /// If the removal was successfull.
+        /// </returns>
+        public static bool RemoveCamera(Game game) => _position.Remove(game);
 
         public override void AddedToEntity()
         {
