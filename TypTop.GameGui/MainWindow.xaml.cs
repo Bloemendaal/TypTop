@@ -15,6 +15,7 @@ using TypTop.MinigameEngine.WinConditions;
 using TypTop.MinigameEngine;
 using TypTop.SpaceMinigame;
 using TypTop.WorldScreen;
+using TypTop.JumpMinigame;
 
 namespace TypTop.GameGui
 {
@@ -112,10 +113,21 @@ namespace TypTop.GameGui
             });
 
 
+            JumpGame jGame = new JumpGame(new Level()
+            {
+                WinCondition = WinConditionType.ScoreCondition,
+
+                ThresholdOneStar = 100,
+                ThresholdTwoStars = 200,
+                ThresholdThreeStars = 300
+            });
+
+
             tGame.OnFinished += OnFinishedGame;
             sGame.OnFinished += OnFinishedGame;
+            jGame.OnFinished += OnFinishedGame;
 
-            GameWindow.Start(sGame, new Transition(1d));
+            GameWindow.Start(jGame, new Transition(1d));
             //GameWindow.Start(new WorldScreenGame());
         }
 
