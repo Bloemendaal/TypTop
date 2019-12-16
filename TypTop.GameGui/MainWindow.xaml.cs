@@ -40,62 +40,58 @@ namespace TypTop.GameGui
             };
             wordProvider.LoadTestWords();
 
-            TavernGame tGame = new TavernGame(new Level()
-            {
-                WinCondition = WinConditionType.LifeCondition,
-                
-                ThresholdOneStar = 1,
-                ThresholdTwoStars = 2,
-                ThresholdThreeStars = 3,
-
-                Properties = new Dictionary<string, object>()
-                {
-                    { "Words", wordProvider.Serve() },
-                    { "Lives", 6 },
-                    { "Seconds", 120 },
-                    { "ShowSatisfaction", true },
-                    { "SatisfactionTiming", new Dictionary<int, int> 
-                        {
-                            { 1, 4000 },
-                            { 2, 4000 },
-                            { 3, 4000 },
-                            { 4, 4000 },
-                            { 5, 4000 },
-                        }
-                    }
-                }
-            });
-
-            SpaceGame sGame = new SpaceGame(new Level()
-            {
-                WinCondition = WinConditionType.ScoreCondition,
-
-                ThresholdOneStar = 100,
-                ThresholdTwoStars = 200,
-                ThresholdThreeStars = 300,
-
-                Properties = new Dictionary<string, object>()
-                {
-                    { "Words", wordProvider.Serve() },
-                    { "Lives", 6 },
-                    { "EnemyVelocityOffset", 1f },
-                    { "LineHeight", 800f }
-                }
-            });
-
-            tGame.OnFinished += OnFinishedGame;
-            sGame.OnFinished += OnFinishedGame;
+            //tGame.OnFinished += OnFinishedGame;
+            //sGame.OnFinished += OnFinishedGame;
 
             var gameLoader = new GameLoader(GameWindow, new List<World>()
             {
-                new World("tavernButton.png", "tavernLevelBackground.png", new List<Level>()
+                new World("tavernButton.png", "tavernLevelBackground.png" ,new List<Level>()
                 {
                     new Level()
-                }), 
+                    {
+                        WinCondition = WinConditionType.LifeCondition,
+                        
+                        ThresholdOneStar = 1,
+                        ThresholdTwoStars = 2,
+                        ThresholdThreeStars = 3,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Words", wordProvider.Serve()},
+                            {"Lives", 6},
+                            {"Seconds", 120},
+                            {"ShowSatisfaction", true},
+                            {
+                                "SatisfactionTiming", new Dictionary<int, int>
+                                {
+                                    {1, 4000},
+                                    {2, 4000},
+                                    {3, 4000},
+                                    {4, 4000},
+                                    {5, 4000},
+                                }
+                            }
+                        }
+                    }
+                }, WorldId.Tavern),
                 new World("spaceButton.png", "levelBackground.jpeg", new List<Level>()
                 {
                     new Level()
-                })
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+                        
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Words", wordProvider.Serve()},
+                            {"Lives", 6},
+                            {"EnemyVelocityOffset", 1f},
+                            {"LineHeight", 800f}
+                        }
+                    }
+                }, WorldId.Space)
             });
             gameLoader.LoadWorldMap();
 

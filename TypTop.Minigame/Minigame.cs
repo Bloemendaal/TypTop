@@ -39,10 +39,18 @@ namespace TypTop.MinigameEngine
             WinCondition.Minigame = this;
         }
 
+        private bool _finished = false;
+
         public override void Update(float deltaTime)
         {
             if (Finish?.Invoke() ?? false)
             {
+                if (_finished)
+                {
+                    return;
+                }
+                _finished = true;
+
                 OnFinished?.Invoke(this, new FinishEventArgs()
                 {
                     Lives = Lives?.Amount,

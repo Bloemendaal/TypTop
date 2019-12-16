@@ -21,11 +21,15 @@ namespace TypTop.WorldScreen
             _gameLoader = gameLoader;
             AddEntity(new Background("main_background.png",this));
 
+
+
             for (var index = 0; index < worlds.Count; index++)
             {
                 World world = worlds[index];
-                var gameButton = new Button(world.PreviewImage, new Rect(new Point(400 + (400 * index * 1.5) , 400), new Size(600, 500)),
-                    this);
+
+                var rect = Utils.GetRectangle(index, worlds.Count, 5, 150, 450, 350);
+
+                var gameButton = new Button(world.PreviewImage, rect, this);
                 gameButton.Data = world;
                 gameButton.Clicked += WorldButtonClicked;
                 AddEntity(gameButton);
