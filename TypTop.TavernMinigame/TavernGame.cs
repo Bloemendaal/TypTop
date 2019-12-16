@@ -1,84 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Text;
 using System.Linq;
 using System.Windows.Input;
-using TypTop.Logic;
+using System.Windows.Media;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
+using TypTop.Logic;
 using TypTop.MinigameEngine;
-using System.Windows.Media;
-using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.TavernMinigame
 {
     public class TavernGame : Minigame
     {
         /// <summary>
-        /// Minimale waarde is 1, maximale waarde is de lengte van het aantal OrderType’s. Wanneer deze property geset wordt, worden de Tiles willekeurig gegenereerd tot een lijst _tiles.
+        ///     Visuele weergave van de CustomerQueue inclusief de Queue<Customer> zelf.
         /// </summary>
-        public int TileAmount
-        {
-            get => _tiles.Count;
-            private set
-            {
-                if (value < 1)
-                {
-                    value = 1;
-                }
+        private readonly CustomerQueue _customerQueue;
 
-                int max = Enum.GetNames(typeof(Order.OrderType)).Length;
-                if (value > max)
-                {
-                    value = max;
-                }
-
-                List<int> indexes = new List<int>();
-                for (int i = 0; i < value; i++)
-                {
-                    int index = Rnd.Next(0, max - i);
-                    while (indexes.Contains(index))
-                    {
-                        index++;
-                        if (index == value)
-                        {
-                            index = 0;
-                        }
-                    }
-
-                    indexes.Add(index);
-                }
-
-                RemoveEntity<Tile>();
-                RemoveEntity<Order>();
-                _tiles = new List<Tile>();
-                for (int i = 0; i < indexes.Count; i++)
-                {
-                    Tile t = new Tile((Order.OrderType)indexes[i], (float)Width - ((i + 1) * ((float)Tile.Width + 20)), this)
-                    {
-                        Word = _words.Dequeue()
-                    };
-
-                    _tiles.Add(t);
-                    AddEntity(t);
-                    AddEntity(t.Order);
-                }
-            }
-        }
 
         /// <summary>
-        /// Lijst met alle Tile’s erin. Wordt gerenderd wanneer het TileAmount geset wordt.
+        ///     Lijst met Customer’s die zichtbaar zijn in de taverne.
         /// </summary>
-        private List<Tile> _tiles;
+        private readonly List<Customer> _customers = new List<Customer>();
 
         /// <summary>
-        /// Lijst met Word’s die gebruikt kan worden door de Tiles.
-        /// </summary>
-        private readonly Queue<Word> _words;
-
-        /// <summary>
-        /// InputList uit TypTop.Logic die gebruikt wordt om de input van de gebruiker te analyseren. FocusOnHighIndex staat op true. De woordenlijst wordt pas meegegeven wanneer de method UpdateWordlist() aangeroepen wordt.
+        ///     InputList uit TypTop.Logic die gebruikt wordt om de input van de gebruiker te analyseren. FocusOnHighIndex staat op
+        ///     true. De woordenlijst wordt pas meegegeven wanneer de method UpdateWordlist() aangeroepen wordt.
         /// </summary>
         private readonly InputList _inputList = new InputList(null)
         {
@@ -86,266 +33,119 @@ namespace TypTop.TavernMinigame
         };
 
         /// <summary>
-        /// Maximaal aantal Customer’s dat in de taverne getekend wordt voordat ze in de CustomerQueue gestopt worden. Minimaal aantal is 0, maximaal is aanbevolen 3 omdat de rest (deels) buiten het scherm gerenderd wordt.
+        ///     Tijden in milliseconden waarin waarin de Customer’s bozer worden. Eerste int, TKey, is de satisfaction. Tweede int,
+        ///     TValue, is het aantal milliseconden. Standaardwaardes per satisfaction is 0 milliseconden (geen timer ingesteld,
+        ///     satisfaction kan dus niet verspringen).
         /// </summary>
-        public int MaxCustomers
+        private readonly Dictionary<int, int> _satisfactionTiming = new Dictionary<int, int>
         {
-            get => _maxCustomers;
-            private set
-            {
-                if (value < 1)
-                {
-                    value = 1;
-                }
-
-                if (value > 3)
-                {
-                    value = 3;
-                }
-
-                _maxCustomers = value;
-            }
-        }
-        private int _maxCustomers = 3;
+            {1, 0},
+            {2, 0},
+            {3, 0},
+            {4, 0},
+            {5, 0}
+        };
 
         /// <summary>
-        /// Every amount of milliseconds a customer should spawn.
-        /// </summary>
-        public int CustomerSpawnSpeed 
-        { 
-            get => _customerSpawnSpeed; 
-            private set
-            {
-                if (value < 0)
-                {
-                    value = 0;
-                }
-
-                _customerSpawnSpeed = value;
-            } 
-        }
-        private int _customerSpawnSpeed = 4000;
-
-        /// <summary>
-        /// Maximum offset that is used when generating random spawn speeds in both directions.
-        /// </summary>
-        public int CustomerSpawnSpeedOffset
-        {
-            get => _customerSpawnSpeedOffset;
-            private set => _customerSpawnSpeedOffset = Math.Abs(value);
-        }
-        private int _customerSpawnSpeedOffset = 1000;
-
-        /// <summary>
-        /// Multiply the spawnspeed of the customers with 1 + (x * [amount of customers in the queue])
-        /// </summary>
-        public double CustomerSpawnSpeedMultiplier
-        {
-            get => _customerSpawnSpeedMultiplier;
-            private set
-            {
-                if (value < 0)
-                {
-                    value = 0;
-                }
-
-                _customerSpawnSpeedMultiplier = value;
-            }
-        }
-        private double _customerSpawnSpeedMultiplier = 0.1;
-
-        /// <summary>
-        /// Minimum amount of orders a customer has to take.
-        /// </summary>
-        public int CustomerMinOrderAmount
-        {
-            get => _customerMinOrderAmount;
-            private set
-            {
-                if (value < 1)
-                {
-                    value = 1;
-                }
-
-                if (value > CustomerMaxOrderAmount)
-                {
-                    value = CustomerMaxOrderAmount;
-                }
-
-                _customerMinOrderAmount = value;
-            }
-        }
-        private int _customerMinOrderAmount = 1;
-
-        /// <summary>
-        /// Maximum amount of orders a customer has to take.
-        /// </summary>
-        public int CustomerMaxOrderAmount
-        {
-            get => _customerMaxOrderAmount;
-            private set
-            {
-                if (value > 4)
-                {
-                    value = 4;
-                }
-
-                if (value < CustomerMinOrderAmount)
-                {
-                    value = CustomerMinOrderAmount;
-                }
-
-                _customerMaxOrderAmount = value;
-            }
-        }
-        private int _customerMaxOrderAmount = 4;
-
-
-        /// <summary>
-        /// Lijst met Customer’s die zichtbaar zijn in de taverne.
-        /// </summary>
-        private readonly List<Customer> _customers = new List<Customer>();
-
-        /// <summary>
-        /// Visuele weergave van de CustomerQueue inclusief de Queue<Customer> zelf.
-        /// </summary>
-        private readonly CustomerQueue _customerQueue;
-
-        /// <summary>
-        /// Timer die nodig is om Customer’s toe te voegen aan de rij.
+        ///     Timer die nodig is om Customer’s toe te voegen aan de rij.
         /// </summary>
         private readonly ITimer _timer;
 
         /// <summary>
-        /// Standaard font dat gebruikt moet worden in de hele Tavern minigame, MV Boli.
+        ///     Lijst met Word’s die gebruikt kan worden door de Tiles.
+        /// </summary>
+        private readonly Queue<Word> _words;
+
+        /// <summary>
+        ///     Standaard font dat gebruikt moet worden in de hele Tavern minigame, MV Boli.
         /// </summary>
         public readonly Typeface DefaultTypeface = new Typeface("MV Boli");
 
-        /// <summary>
-        /// Geef de satisfaction van een Customer weer. Standaardwaarde is false.
-        /// </summary>
-        public bool ShowSatisfaction { get; private set; } = false;
-
-        /// <summary>
-        /// Waarde tussen 1 en 5 waarop de Customer’s satisfaction standaard ingesteld staat. Standaardwaarde is 5. 
-        /// </summary>
-        public int StartSatisfaction
-        { 
-            get => _startSatisfaction; 
-            private set
-            {
-                if (value < 1)
-                {
-                    value = 1;
-                }
-
-                if (value > 5)
-                {
-                    value = 5;
-                }
-
-                _startSatisfaction = value;
-            } 
-        }
+        private int _customerMaxOrderAmount = 4;
+        private int _customerMinOrderAmount = 1;
+        private int _customerSpawnSpeed = 4000;
+        private double _customerSpawnSpeedMultiplier = 0.1;
+        private int _customerSpawnSpeedOffset = 1000;
+        private int _maxCustomers = 3;
         private int _startSatisfaction = 5;
 
         /// <summary>
-        /// Tijden in milliseconden waarin waarin de Customer’s bozer worden. Eerste int, TKey, is de satisfaction. Tweede int, TValue, is het aantal milliseconden. Standaardwaardes per satisfaction is 0 milliseconden (geen timer ingesteld, satisfaction kan dus niet verspringen).
+        ///     Lijst met alle Tile’s erin. Wordt gerenderd wanneer het TileAmount geset wordt.
         /// </summary>
-        private readonly Dictionary<int, int> _satisfactionTiming = new Dictionary<int, int>()
-        {
-            { 1, 0 },
-            { 2, 0 },
-            { 3, 0 },
-            { 4, 0 },
-            { 5, 0 }
-        };
+        private List<Tile> _tiles;
 
 
         public TavernGame(Level level) : base(level)
         {
             if (level != null && level.Properties != null)
             {
-                int countOffset = 360;
+                var countOffset = 360;
 
                 // Words
-                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
-                {
+                if (level.Properties.TryGetValue("Words", out object wordsObject) &&
+                    wordsObject is IEnumerable<Word> words)
                     _words = new Queue<Word>(words);
-                }
                 else
-                {
                     throw new ArgumentException("'Words' is missing or not valid");
-                }
 
                 // TileAmount
-                TileAmount = level.Properties.TryGetValue("TileAmount", out object tileAmountObject) && tileAmountObject is int tileAmount ? tileAmount : 3;
+                TileAmount =
+                    level.Properties.TryGetValue("TileAmount", out object tileAmountObject) &&
+                    tileAmountObject is int tileAmount
+                        ? tileAmount
+                        : 3;
 
                 // MaxCustomers
-                if (level.Properties.TryGetValue("MaxCustomers", out object maxCustomersObject) && maxCustomersObject is int maxCustomers)
-                {
-                    MaxCustomers = maxCustomers;
-                }
+                if (level.Properties.TryGetValue("MaxCustomers", out object maxCustomersObject) &&
+                    maxCustomersObject is int maxCustomers) MaxCustomers = maxCustomers;
 
                 // ShowSatisfaction
-                if (level.Properties.TryGetValue("ShowSatisfaction", out object showSatisfactionObject) && showSatisfactionObject is bool showSatisfaction)
-                {
-                    ShowSatisfaction = showSatisfaction;
-                }
+                if (level.Properties.TryGetValue("ShowSatisfaction", out object showSatisfactionObject) &&
+                    showSatisfactionObject is bool showSatisfaction) ShowSatisfaction = showSatisfaction;
 
                 // StartSatisfaction
-                if (level.Properties.TryGetValue("StartSatisfaction", out object startSatisfactionObject) && startSatisfactionObject is int startSatisfaction)
-                {
-                    StartSatisfaction = startSatisfaction;
-                }
+                if (level.Properties.TryGetValue("StartSatisfaction", out object startSatisfactionObject) &&
+                    startSatisfactionObject is int startSatisfaction) StartSatisfaction = startSatisfaction;
 
                 // SatisfactionTiming
-                if (level.Properties.TryGetValue("SatisfactionTiming", out object satisfactionTimingObject) && satisfactionTimingObject is Dictionary<int, int> satisfactionTiming)
-                {
+                if (level.Properties.TryGetValue("SatisfactionTiming", out object satisfactionTimingObject) &&
+                    satisfactionTimingObject is Dictionary<int, int> satisfactionTiming)
                     _satisfactionTiming = new Dictionary<int, int>(satisfactionTiming);
-                }
 
                 // CustomerSpawnSpeed
-                if (level.Properties.TryGetValue("CustomerSpawnSpeed", out object customerSpawnSpeedObject) && customerSpawnSpeedObject is int customerSpawnSpeed)
-                {
-                    CustomerSpawnSpeed = customerSpawnSpeed;
-                }
+                if (level.Properties.TryGetValue("CustomerSpawnSpeed", out object customerSpawnSpeedObject) &&
+                    customerSpawnSpeedObject is int customerSpawnSpeed) CustomerSpawnSpeed = customerSpawnSpeed;
 
                 // CustomerSpawnSpeedOffset
-                if (level.Properties.TryGetValue("CustomerSpawnSpeedOffset", out object customerSpawnSpeedOffsetObject) && customerSpawnSpeedOffsetObject is int customerSpawnSpeedOffset)
-                {
+                if (level.Properties.TryGetValue("CustomerSpawnSpeedOffset",
+                        out object customerSpawnSpeedOffsetObject) &&
+                    customerSpawnSpeedOffsetObject is int customerSpawnSpeedOffset)
                     CustomerSpawnSpeedOffset = customerSpawnSpeedOffset;
-                }
 
                 // CustomerSpawnSpeedMultiplier
-                if (level.Properties.TryGetValue("CustomerSpawnSpeedMultiplier", out object customerSpawnSpeedMultiplierObject) && customerSpawnSpeedMultiplierObject is double customerSpawnSpeedMultiplier)
-                {
+                if (level.Properties.TryGetValue("CustomerSpawnSpeedMultiplier",
+                        out object customerSpawnSpeedMultiplierObject) &&
+                    customerSpawnSpeedMultiplierObject is double customerSpawnSpeedMultiplier)
                     CustomerSpawnSpeedMultiplier = customerSpawnSpeedMultiplier;
-                }
 
                 // CustomerMinOrderAmount
-                if (level.Properties.TryGetValue("CustomerMinOrderAmount", out object customerMinOrderAmountObject) && customerMinOrderAmountObject is int customerMinOrderAmount)
-                {
+                if (level.Properties.TryGetValue("CustomerMinOrderAmount", out object customerMinOrderAmountObject) &&
+                    customerMinOrderAmountObject is int customerMinOrderAmount)
                     CustomerMinOrderAmount = customerMinOrderAmount;
-                }
                 // CustomerMaxOrderAmount
-                if (level.Properties.TryGetValue("CustomerMaxOrderAmount", out object customerMaxOrderAmountObject) && customerMaxOrderAmountObject is int customerMaxOrderAmount)
-                {
+                if (level.Properties.TryGetValue("CustomerMaxOrderAmount", out object customerMaxOrderAmountObject) &&
+                    customerMaxOrderAmountObject is int customerMaxOrderAmount)
                     CustomerMaxOrderAmount = customerMaxOrderAmount;
-                }
 
 
                 // WinConditions
-                if (level.WinCondition == WinConditionType.ScoreCondition)
-                {
-                    Finish = () => Count.Seconds < 0;
-                }
+                if (level.WinCondition == WinConditionType.ScoreCondition) Finish = () => Count.Seconds < 0;
 
                 if (level.WinCondition == WinConditionType.LifeCondition)
                 {
                     if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
                     {
-                        Lives = new Lives(550, (float)Height - 60, this)
+                        Lives = new Lives(550, (float) Height - 60, this)
                         {
                             Amount = lives,
                             ZIndex = 6
@@ -365,12 +165,9 @@ namespace TypTop.TavernMinigame
                 {
                     if (level.Properties.TryGetValue("Queue", out object queueObject) && queueObject is int queue)
                     {
-                        for (int i = 0; i < queue; i++)
-                        {
-                            AddCustomer(new Customer(this));
-                        }
+                        for (var i = 0; i < queue; i++) AddCustomer(new Customer(this));
 
-                        Count = new Count(0, countOffset, (float)Height - 50, this);
+                        Count = new Count(0, countOffset, (float) Height - 50, this);
 
                         Finish = () => _customerQueue.Count <= 0;
                     }
@@ -381,15 +178,21 @@ namespace TypTop.TavernMinigame
                 }
                 else
                 {
-                    if (level.Properties.TryGetValue("Seconds", out object secondsObject) && secondsObject is int seconds)
+                    if (level.Properties.TryGetValue("Seconds", out object secondsObject) &&
+                        secondsObject is int seconds)
                     {
                         _timer = AddTimer(() =>
-                        {
-                            AddCustomer(new Customer(this));
-                            _timer.Interval = (int)(Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0), CustomerSpawnSpeed + CustomerSpawnSpeedOffset) * (1 + _customerQueue.Count * CustomerSpawnSpeedMultiplier));
-                        }, Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0), CustomerSpawnSpeed + CustomerSpawnSpeedOffset));
+                            {
+                                AddCustomer(new Customer(this));
+                                _timer.Interval =
+                                    (int) (Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0),
+                                               CustomerSpawnSpeed + CustomerSpawnSpeedOffset) *
+                                           (1 + _customerQueue.Count * CustomerSpawnSpeedMultiplier));
+                            },
+                            Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0),
+                                CustomerSpawnSpeed + CustomerSpawnSpeedOffset));
 
-                        Count = new Count(seconds, countOffset, (float)Height - 50, this);
+                        Count = new Count(seconds, countOffset, (float) Height - 50, this);
                     }
                     else
                     {
@@ -408,7 +211,7 @@ namespace TypTop.TavernMinigame
             AddEntity(_customerQueue);
 
             TextInput += OnTextInput;
-            
+
             Count.Typeface = DefaultTypeface;
             Count.ZIndex = 5;
             AddEntity(Count);
@@ -416,12 +219,12 @@ namespace TypTop.TavernMinigame
             AddEntity(new Background("tavernscore.png", this)
             {
                 X = 10,
-                Y = (float)Height - 70,
+                Y = (float) Height - 70,
                 Width = 500,
                 Height = null,
                 ZIndex = 4
             });
-            Score = new Score(50, (float)Height - 50, this)
+            Score = new Score(50, (float) Height - 50, this)
             {
                 Direction = Score.FloatDirection.Up,
                 Typeface = DefaultTypeface,
@@ -437,21 +240,176 @@ namespace TypTop.TavernMinigame
         }
 
         /// <summary>
-        /// Get the amount of milliseconds for a certain satisfaction.
+        ///     Minimale waarde is 1, maximale waarde is de lengte van het aantal OrderType’s. Wanneer deze property geset wordt,
+        ///     worden de Tiles willekeurig gegenereerd tot een lijst _tiles.
         /// </summary>
-        /// <param name="key">
-        /// Satisfaction (0 - 5)
-        /// </param>
-        /// <returns>
-        /// Time in milliseconds.
-        /// </returns>
-        public int GetSatisfaction(int key) => _satisfactionTiming.ContainsKey(key) ? _satisfactionTiming[key] : 0;
+        public int TileAmount
+        {
+            get => _tiles.Count;
+            private set
+            {
+                if (value < 1) value = 1;
+
+                var max = Enum.GetNames(typeof(Order.OrderType)).Length;
+                if (value > max) value = max;
+
+                var indexes = new List<int>();
+                for (var i = 0; i < value; i++)
+                {
+                    var index = Rnd.Next(0, max - i);
+                    while (indexes.Contains(index))
+                    {
+                        index++;
+                        if (index == value) index = 0;
+                    }
+
+                    indexes.Add(index);
+                }
+
+                RemoveEntity<Tile>();
+                RemoveEntity<Order>();
+                _tiles = new List<Tile>();
+                for (var i = 0; i < indexes.Count; i++)
+                {
+                    var t = new Tile((Order.OrderType) indexes[i], (float) Width - (i + 1) * ((float) Tile.Width + 20),
+                        this)
+                    {
+                        Word = _words.Dequeue()
+                    };
+
+                    _tiles.Add(t);
+                    AddEntity(t);
+                    AddEntity(t.Order);
+                }
+            }
+        }
 
         /// <summary>
-        /// Add customer to _customers unless it exceeds MaxCustomers. In that case it is added to _customerQueue.
+        ///     Maximaal aantal Customer’s dat in de taverne getekend wordt voordat ze in de CustomerQueue gestopt worden. Minimaal
+        ///     aantal is 0, maximaal is aanbevolen 3 omdat de rest (deels) buiten het scherm gerenderd wordt.
+        /// </summary>
+        public int MaxCustomers
+        {
+            get => _maxCustomers;
+            private set
+            {
+                if (value < 1) value = 1;
+
+                if (value > 3) value = 3;
+
+                _maxCustomers = value;
+            }
+        }
+
+        /// <summary>
+        ///     Every amount of milliseconds a customer should spawn.
+        /// </summary>
+        public int CustomerSpawnSpeed
+        {
+            get => _customerSpawnSpeed;
+            private set
+            {
+                if (value < 0) value = 0;
+
+                _customerSpawnSpeed = value;
+            }
+        }
+
+        /// <summary>
+        ///     Maximum offset that is used when generating random spawn speeds in both directions.
+        /// </summary>
+        public int CustomerSpawnSpeedOffset
+        {
+            get => _customerSpawnSpeedOffset;
+            private set => _customerSpawnSpeedOffset = Math.Abs(value);
+        }
+
+        /// <summary>
+        ///     Multiply the spawnspeed of the customers with 1 + (x * [amount of customers in the queue])
+        /// </summary>
+        public double CustomerSpawnSpeedMultiplier
+        {
+            get => _customerSpawnSpeedMultiplier;
+            private set
+            {
+                if (value < 0) value = 0;
+
+                _customerSpawnSpeedMultiplier = value;
+            }
+        }
+
+        /// <summary>
+        ///     Minimum amount of orders a customer has to take.
+        /// </summary>
+        public int CustomerMinOrderAmount
+        {
+            get => _customerMinOrderAmount;
+            private set
+            {
+                if (value < 1) value = 1;
+
+                if (value > CustomerMaxOrderAmount) value = CustomerMaxOrderAmount;
+
+                _customerMinOrderAmount = value;
+            }
+        }
+
+        /// <summary>
+        ///     Maximum amount of orders a customer has to take.
+        /// </summary>
+        public int CustomerMaxOrderAmount
+        {
+            get => _customerMaxOrderAmount;
+            private set
+            {
+                if (value > 4) value = 4;
+
+                if (value < CustomerMinOrderAmount) value = CustomerMinOrderAmount;
+
+                _customerMaxOrderAmount = value;
+            }
+        }
+
+        /// <summary>
+        ///     Geef de satisfaction van een Customer weer. Standaardwaarde is false.
+        /// </summary>
+        public bool ShowSatisfaction { get; }
+
+        /// <summary>
+        ///     Waarde tussen 1 en 5 waarop de Customer’s satisfaction standaard ingesteld staat. Standaardwaarde is 5.
+        /// </summary>
+        public int StartSatisfaction
+        {
+            get => _startSatisfaction;
+            private set
+            {
+                if (value < 1) value = 1;
+
+                if (value > 5) value = 5;
+
+                _startSatisfaction = value;
+            }
+        }
+
+        /// <summary>
+        ///     Get the amount of milliseconds for a certain satisfaction.
+        /// </summary>
+        /// <param name="key">
+        ///     Satisfaction (0 - 5)
+        /// </param>
+        /// <returns>
+        ///     Time in milliseconds.
+        /// </returns>
+        public int GetSatisfaction(int key)
+        {
+            return _satisfactionTiming.ContainsKey(key) ? _satisfactionTiming[key] : 0;
+        }
+
+        /// <summary>
+        ///     Add customer to _customers unless it exceeds MaxCustomers. In that case it is added to _customerQueue.
         /// </summary>
         /// <param name="customer">
-        /// Customer to be added.
+        ///     Customer to be added.
         /// </param>
         public void AddCustomer(Customer customer)
         {
@@ -469,10 +427,10 @@ namespace TypTop.TavernMinigame
         }
 
         /// <summary>
-        /// Schuift de complete rij Customer’s een plekje door.
+        ///     Schuift de complete rij Customer’s een plekje door.
         /// </summary>
         /// <returns>
-        /// Geeft terug of dit gelukt is.
+        ///     Geeft terug of dit gelukt is.
         /// </returns>
         public bool NextCustomer()
         {
@@ -490,59 +448,63 @@ namespace TypTop.TavernMinigame
         }
 
         /// <summary>
-        /// Verwijdert een Customer uit _customers en werkt de posities van alle Customer’s in _customers daarna bij. Daarna wordt de method UpdateWordlist() aangeroepen.
+        ///     Verwijdert een Customer uit _customers en werkt de posities van alle Customer’s in _customers daarna bij. Daarna
+        ///     wordt de method UpdateWordlist() aangeroepen.
         /// </summary>
         /// <param name="customer">
-        /// Customer to be removed.
+        ///     Customer to be removed.
         /// </param>
         /// <returns>
-        /// Geeft terug of het verwijderen gelukt is.
+        ///     Geeft terug of het verwijderen gelukt is.
         /// </returns>
-        public bool RemoveCustomer(Customer customer) {
-            bool result = _customers.Remove(customer);
-            if (result && _customers.Count > 0)
-            {
-                _customers.ForEach(c => c.UpdatePosition(CustomerIndex(c)));
-            }
+        public bool RemoveCustomer(Customer customer)
+        {
+            var result = _customers.Remove(customer);
+            if (result && _customers.Count > 0) _customers.ForEach(c => c.UpdatePosition(CustomerIndex(c)));
             UpdateWordlist();
             return result;
         }
 
         /// <summary>
-        /// Geeft de index van de Customer in _customers.
+        ///     Geeft de index van de Customer in _customers.
         /// </summary>
         /// <param name="customer">
-        /// Customer to be checked.
+        ///     Customer to be checked.
         /// </param>
         /// <returns>
-        /// Geeft de index van de Customer in _customers.
+        ///     Geeft de index van de Customer in _customers.
         /// </returns>
-        public int CustomerIndex(Customer customer) => _customers.IndexOf(customer);
+        public int CustomerIndex(Customer customer)
+        {
+            return _customers.IndexOf(customer);
+        }
 
         /// <summary>
-        /// Werkt de woordenlijst van _inputList bij zodat deze overeenkomt met de wensen van de Customer’s. Word’s op Tile’s die niet gevraagd worden door Customer’s, worden hierdoor niet geaccepteerd als input.
+        ///     Werkt de woordenlijst van _inputList bij zodat deze overeenkomt met de wensen van de Customer’s. Word’s op Tile’s
+        ///     die niet gevraagd worden door Customer’s, worden hierdoor niet geaccepteerd als input.
         /// </summary>
         public void UpdateWordlist()
         {
             _inputList.Input = _tiles.Where(t => _customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList();
-            _tiles.Where(t => !_customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList().ForEach(w => w.Index = 0);
+            _tiles.Where(t => !_customers.Any(c => c.HasOrder(t.Order))).Select(t => t.Word).ToList()
+                .ForEach(w => w.Index = 0);
         }
 
         /// <summary>
-        /// Geeft een lijst met amount aantal willekeurige Order’s erin.
+        ///     Geeft een lijst met amount aantal willekeurige Order’s erin.
         /// </summary>
         /// <param name="amount">
-        /// Aantal willekeurige Order's.
+        ///     Aantal willekeurige Order's.
         /// </param>
         /// <returns>
-        /// Geeft een lijst met amount aantal willekeurige Order’s erin.
+        ///     Geeft een lijst met amount aantal willekeurige Order’s erin.
         /// </returns>
         public List<Order> GetOrder(int amount)
         {
-            List<Order> result = new List<Order>();
-            for (int i = 0; i < amount; i++)
+            var result = new List<Order>();
+            for (var i = 0; i < amount; i++)
             {
-                Order o = new Order(_tiles[Rnd.Next(0, TileAmount)].Order.Type, this);
+                var o = new Order(_tiles[Rnd.Next(0, TileAmount)].Order.Type, this);
 
                 o.GetComponent<ImageComponent>().Width = 190;
                 if (o.GetComponent<ImageComponent>().Height > 190)
@@ -558,7 +520,9 @@ namespace TypTop.TavernMinigame
         }
 
         /// <summary>
-        /// Controleert de input van de leerling. Controleert voor elke Customer of een Order afgehandeld is door die input en ook of de Customer volledig geholpen is. Een Word wordt verwijdert uit _words en de method UpdateWordlist() wordt aangeroepen wanneer een Word volledig goed getypt is. 
+        ///     Controleert de input van de leerling. Controleert voor elke Customer of een Order afgehandeld is door die input en
+        ///     ook of de Customer volledig geholpen is. Een Word wordt verwijdert uit _words en de method UpdateWordlist() wordt
+        ///     aangeroepen wanneer een Word volledig goed getypt is.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -571,18 +535,18 @@ namespace TypTop.TavernMinigame
                 {
                     c.Word = _words.Dequeue();
                     foreach (Customer customer in _customers)
-                    {
                         if (customer.RemoveOrder(c.Order))
                         {
                             if (customer.Count == 0)
                             {
-                                customer.RemoveEntities(customer.OriginalCount * 10 + 50 + (customer.Satisfaction?.Amount ?? StartSatisfaction) * 2);
+                                customer.RemoveEntities(customer.OriginalCount * 10 + 50 +
+                                                        (customer.Satisfaction?.Amount ?? StartSatisfaction) * 2);
                                 RemoveCustomer(customer);
                                 NextCustomer();
                             }
+
                             break;
                         }
-                    }
 
                     UpdateWordlist();
                 }

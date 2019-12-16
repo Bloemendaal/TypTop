@@ -7,21 +7,18 @@ namespace TypTop.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Word",
-                columns: table => new
+                "Word",
+                table => new
                 {
-                    Letters = table.Column<string>(nullable: false)
+                    Letters = table.Column<string>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Word", x => x.Letters);
-                });
+                constraints: table => { table.PrimaryKey("PK_Word", x => x.Letters); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Word");
+                "Word");
         }
     }
 }

@@ -2,10 +2,9 @@
 
 namespace TypTop.Repository
 {
-    interface IUnitOfWork : IDisposable
+    internal interface IUnitOfWork : IDisposable
     {
-
-        public IUserRepository Users { get;}
+        IUserRepository Users { get; }
 
         int Complete();
     }

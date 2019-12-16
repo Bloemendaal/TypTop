@@ -4,7 +4,7 @@ namespace TypTop.VisualKeyboard
 {
     public class ColemakKeyboardLayout : KeyboardLayout
     {
-        public ColemakKeyboardLayout() :base(new KeyFactory())
+        public ColemakKeyboardLayout() : base(new KeyFactory())
         {
             AddKey(Key.OemTilde);
 

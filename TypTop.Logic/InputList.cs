@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
     public class InputList : Input
     {
+        /// <summary>
+        ///     When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted
+        ///     as false when there is an equal typing progress.
+        /// </summary>
+        public bool FocusOnHighIndex = false;
+
         public List<Word> Input;
+
         public InputList(List<Word> input)
         {
             Input = input;
         }
 
 
-        /// <summary>
-        /// When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
-        /// </summary>
-        public bool FocusOnHighIndex = false;
-
-
         public override void TextInput(char letter)
         {
-            List<Word> wordlist = FocusOnHighIndex ? new List<Word>(Input.Where(i => i.Index >= Input.Max(j => j.Index))) : Input;
+            var wordlist = FocusOnHighIndex
+                ? new List<Word>(Input.Where(i => i.Index >= Input.Max(j => j.Index)))
+                : Input;
 
             if (wordlist?.Count > 0)
             {
                 foreach (Word input in wordlist)
                 {
-                    int index = input.Index;
+                    var index = input.Index;
 
                     if (input != null)
                     {
@@ -47,10 +48,7 @@ namespace TypTop.Logic
                                 input.Correct = null;
                             }
 
-                            if (OnKeyWrong == KeyWrong.Remove)
-                            {
-                                Input?.Remove(input);
-                            }
+                            if (OnKeyWrong == KeyWrong.Remove) Input?.Remove(input);
 
                             if (OnKeyWrong == KeyWrong.Add)
                             {
@@ -59,54 +57,45 @@ namespace TypTop.Logic
                                 input.Correct = false;
                             }
 
-                            if (OnKeyWrong == KeyWrong.None)
-                            {
-                                input.Index = index;
-                            }
+                            if (OnKeyWrong == KeyWrong.None) input.Index = index;
                         }
                     }
                 }
 
-                WordUpdate?.Invoke(this, new WordUpdateArgs()
+                WordUpdate?.Invoke(this, new WordUpdateArgs
                 {
                     Words = new List<Word>(),
                     PreviousChar = PreviousChar,
                     CurrentChar = letter
                 });
 
-                if (RemoveOnFinished)
-                {
-                    Input = Input.Where(e => !e.Finished).ToList();
-                }
+                if (RemoveOnFinished) Input = Input.Where(e => !e.Finished).ToList();
             }
 
             base.TextInput(letter);
         }
+
         public override void Backspace()
         {
-            List<Word> wordlist = FocusOnHighIndex ? Input.Where(i => i.Index >= Input.Max(j => j.Index)).ToList() : Input;
+            var wordlist = FocusOnHighIndex ? Input.Where(i => i.Index >= Input.Max(j => j.Index)).ToList() : Input;
 
             if (wordlist?.Count > 0)
-            {
                 foreach (Word input in wordlist)
                 {
                     input?.Backspace();
 
-                    bool correct = true;
-                    for (int i = 0; i < input.Input.Count; i++)
-                    {
+                    var correct = true;
+                    for (var i = 0; i < input.Input.Count; i++)
                         if (!CheckWord(input.Input.ElementAt(i), input, i))
                         {
                             correct = false;
                             break;
                         }
-                    }
 
                     input.Correct = correct;
                 }
-            }
-
         }
+
         public override event EventHandler<WordUpdateArgs> WordUpdate;
     }
 }

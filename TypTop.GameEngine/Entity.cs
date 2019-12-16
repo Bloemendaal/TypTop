@@ -19,18 +19,19 @@ namespace TypTop.GameEngine
 
         public bool TryGetComponent<TComponent>(out TComponent component) where TComponent : Component
         {
-            if (_components.TryGetValue(typeof(TComponent), out var b))
+            if (_components.TryGetValue(typeof(TComponent), out Component b))
             {
                 component = (TComponent) b;
                 return true;
             }
+
             component = (TComponent) _components[typeof(TComponent)];
             return false;
         }
 
         public TComponent GetComponent<TComponent>() where TComponent : Component
         {
-            return (TComponent)_components[typeof(TComponent)];
+            return (TComponent) _components[typeof(TComponent)];
         }
 
         public void AddComponent(Component component)
@@ -48,23 +49,15 @@ namespace TypTop.GameEngine
         public virtual void Update(float deltaTime)
         {
             foreach (Component component in _components.Values)
-            {
                 if (component is IUpdateable updateable)
-                {
                     updateable.Update(deltaTime);
-                }
-            }
         }
 
         public virtual void Draw(DrawingContext drawingContext)
         {
             foreach (Component component in _components.Values)
-            {
                 if (component is IDrawable drawable && !drawable.Hidden)
-                {
                     drawable.Draw(drawingContext);
-                }
-            }
         }
     }
 }

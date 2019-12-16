@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Drawing;
 using System.Numerics;
 using System.Windows;
-using Microsoft.VisualBasic.FileIO;
-using Point = System.Windows.Point;
-using Size = System.Windows.Size;
 
 namespace TypTop.GameEngine.Components
 {
@@ -21,17 +17,12 @@ namespace TypTop.GameEngine.Components
     {
         private PositionComponent _positionComponent;
 
+        public Rect Bounding;
+
         public CollisionComponent(Size size)
         {
             Bounding = new Rect(size);
         }
-
-        public override void AddedToEntity()
-        {
-            _positionComponent = Entity.GetComponent<PositionComponent>();
-        }
-
-        public Rect Bounding;
 
         public void Update(float deltaTime)
         {
@@ -42,7 +33,7 @@ namespace TypTop.GameEngine.Components
             foreach (Entity otherEntity in Entity.Game.GetEntitiesWithComponent<CollisionComponent>())
             {
                 //Skip self
-                if(otherEntity == Entity)
+                if (otherEntity == Entity)
                     continue;
 
                 var otherCollisionComponent = otherEntity.GetComponent<CollisionComponent>();
@@ -59,14 +50,14 @@ namespace TypTop.GameEngine.Components
 
                     if (intersectingRectangle.Width < intersectingRectangle.Height)
                     {
-                        double d = ownBounding.Center().X < otherBounding.Center().X
+                        var d = ownBounding.Center().X < otherBounding.Center().X
                             ? intersectingRectangle.Width
                             : -intersectingRectangle.Width;
                         penetration = new Vector2((float) d, 0);
                     }
                     else
                     {
-                        double d = ownBounding.Center().Y < otherBounding.Center().Y
+                        var d = ownBounding.Center().Y < otherBounding.Center().Y
                             ? intersectingRectangle.Height
                             : -intersectingRectangle.Height;
                         penetration = new Vector2(0, (float) d);
@@ -77,7 +68,10 @@ namespace TypTop.GameEngine.Components
             }
         }
 
-        
+        public override void AddedToEntity()
+        {
+            _positionComponent = Entity.GetComponent<PositionComponent>();
+        }
 
 
         public event EventHandler<CollisionEventArgs> Collision;

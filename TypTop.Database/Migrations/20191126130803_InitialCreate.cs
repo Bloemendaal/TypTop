@@ -8,28 +8,25 @@ namespace TypTop.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "User",
-                columns: table => new
+                "User",
+                table => new
                 {
-                    UserId = table.Column<int>(nullable: false)
+                    UserId = table.Column<int>()
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
                     Salt = table.Column<string>(nullable: true),
-                    LastLogin = table.Column<DateTime>(nullable: false),
-                    Teacher = table.Column<bool>(nullable: false),
-                    TeacherId = table.Column<int>(nullable: false)
+                    LastLogin = table.Column<DateTime>(),
+                    Teacher = table.Column<bool>(),
+                    TeacherId = table.Column<int>()
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_User", x => x.UserId);
-                });
+                constraints: table => { table.PrimaryKey("PK_User", x => x.UserId); });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "User");
+                "User");
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Numerics;
-using System.Text;
-using System.Windows;
 using System.Windows.Media.Imaging;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
@@ -15,7 +12,7 @@ namespace TypTop.SpaceMinigame
         {
             ZIndex = 1;
 
-            AddComponent(new PositionComponent()
+            AddComponent(new PositionComponent
             {
                 Position = new Vector2(885, 975)
             });

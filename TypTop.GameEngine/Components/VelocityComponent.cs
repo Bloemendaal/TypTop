@@ -8,15 +8,15 @@ namespace TypTop.GameEngine.Components
         public Vector2 Velocity { get; set; }
         public float Speed { get; set; } = 25f;
 
-        public override void AddedToEntity()
-        {
-            _positionComponent = Entity.GetComponent<PositionComponent>();
-        }
-
         public void Update(float deltaTime)
         {
             // Update position
             _positionComponent.Position += Velocity * deltaTime * Speed;
+        }
+
+        public override void AddedToEntity()
+        {
+            _positionComponent = Entity.GetComponent<PositionComponent>();
         }
     }
 }

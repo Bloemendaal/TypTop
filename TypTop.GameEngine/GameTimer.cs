@@ -2,12 +2,11 @@
 
 namespace TypTop.GameEngine
 {
-    class GameTimer : ITimed, ITimer
+    internal class GameTimer : ITimed, ITimer
     {
-        public int Interval { get; set; }
         private readonly Action _callback;
-        private double _passedMilliseconds;
         private bool _disposed;
+        private double _passedMilliseconds;
 
         public GameTimer(Action callback, int interval)
         {
@@ -16,7 +15,6 @@ namespace TypTop.GameEngine
         }
 
         /// <summary>
-        /// 
         /// </summary>
         /// <param name="deltaTime"></param>
         /// <returns>True if timer is done</returns>
@@ -31,8 +29,11 @@ namespace TypTop.GameEngine
                 _callback();
                 _passedMilliseconds = 0;
             }
+
             return false;
         }
+
+        public int Interval { get; set; }
 
         public void Dispose()
         {

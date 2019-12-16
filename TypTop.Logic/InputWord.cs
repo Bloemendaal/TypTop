@@ -1,23 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
     public class InputWord : Input
     {
         public Word Input;
+
         public InputWord(Word input)
         {
             Input = input;
         }
 
-        
+
         public override void TextInput(char letter)
         {
-            int index = Input.Index;
+            var index = Input.Index;
 
             if (CheckWord(letter, Input))
             {
@@ -33,10 +32,7 @@ namespace TypTop.Logic
                     Input.Correct = null;
                 }
 
-                if (OnKeyWrong == KeyWrong.Remove)
-                {
-                    Input = null;
-                }
+                if (OnKeyWrong == KeyWrong.Remove) Input = null;
 
                 if (OnKeyWrong == KeyWrong.Add)
                 {
@@ -45,44 +41,36 @@ namespace TypTop.Logic
                     Input.Correct = false;
                 }
 
-                if (OnKeyWrong == KeyWrong.None)
-                {
-                    Input.Index = index;
-                }
+                if (OnKeyWrong == KeyWrong.None) Input.Index = index;
             }
 
-            WordUpdate?.Invoke(this, new WordUpdateArgs()
+            WordUpdate?.Invoke(this, new WordUpdateArgs
             {
                 Words = new List<Word>(),
                 PreviousChar = PreviousChar,
                 CurrentChar = letter
             });
 
-            if (RemoveOnFinished && Input.Finished)
-            {
-                Input = null;
-            }
+            if (RemoveOnFinished && Input.Finished) Input = null;
 
             base.TextInput(letter);
         }
+
         public override void Backspace()
         {
             Input?.Backspace();
 
-            bool correct = true;
-            for (int i = 0; i < Input.Input.Count; i++)
-            {
+            var correct = true;
+            for (var i = 0; i < Input.Input.Count; i++)
                 if (!CheckWord(Input.Input.ElementAt(i), Input, i))
                 {
                     correct = false;
                     break;
                 }
-            }
 
             Input.Correct = correct;
         }
+
         public override event EventHandler<WordUpdateArgs> WordUpdate;
-
-
     }
 }

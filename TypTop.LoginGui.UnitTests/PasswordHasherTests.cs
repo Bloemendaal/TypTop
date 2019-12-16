@@ -1,5 +1,5 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
+using NUnit.Framework;
 
 namespace TypTop.LoginGui.UnitTests
 {
@@ -33,6 +33,20 @@ namespace TypTop.LoginGui.UnitTests
             });
         }
 
+        [Test]
+        public void HashPassword_StringOfLength10AndDifferentSalt_DifferentResult()
+        {
+            var password = "MyPassword";
+
+            var hash1 = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
+            var hash2 = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
+            var hash3 = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
+
+            Assert.AreNotEqual(hash1, hash2);
+            Assert.AreNotEqual(hash1, hash3);
+            Assert.AreNotEqual(hash2, hash3);
+        }
+
 
         [Test]
         public void HashPassword_StringOfLength10AndSameSalt_AlwaysHasSameResult()
@@ -47,18 +61,16 @@ namespace TypTop.LoginGui.UnitTests
             Assert.AreEqual(hash1, hash2);
             Assert.AreEqual(hash1, hash3);
         }
+
         [Test]
-        public void HashPassword_StringOfLength10AndDifferentSalt_DifferentResult()
+        public void VerifyHash_CorrectPasswordDifferentSalt_ReturnsFalse()
         {
             var password = "MyPassword";
+            var passwordHash = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
 
-            var hash1 = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
-            var hash2 = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
-            var hash3 = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
+            var result = PasswordHasher.VerifyHash(password, PasswordHasher.CreateSalt(), passwordHash);
 
-            Assert.AreNotEqual(hash1, hash2);
-            Assert.AreNotEqual(hash1, hash3);
-            Assert.AreNotEqual(hash2, hash3);
+            Assert.IsFalse(result);
         }
 
         [Test]
@@ -74,15 +86,18 @@ namespace TypTop.LoginGui.UnitTests
         }
 
         [Test]
-        public void VerifyHash_CorrectPasswordDifferentSalt_ReturnsFalse()
+        public void VerifyHash_WrongPasswordDifferentSalt_ReturnsFalse()
         {
             var password = "MyPassword";
-            var passwordHash = PasswordHasher.HashPassword(password, PasswordHasher.CreateSalt());
+            var salt1 = PasswordHasher.CreateSalt();
+            var passwordHash = PasswordHasher.HashPassword(password, salt1);
+            var salt2 = PasswordHasher.CreateSalt();
+            var wrongPassword = "NotMyPassword";
 
-            var result = PasswordHasher.VerifyHash(password, PasswordHasher.CreateSalt(), passwordHash);
+            var result = PasswordHasher.VerifyHash(wrongPassword, salt2, passwordHash);
 
             Assert.IsFalse(result);
-         }
+        }
 
         [Test]
         public void VerifyHash_WrongPasswordSameSalt_ReturnsFalse()
@@ -93,20 +108,6 @@ namespace TypTop.LoginGui.UnitTests
             var wrongPassword = "NotMyPassword";
 
             var result = PasswordHasher.VerifyHash(wrongPassword, salt, passwordHash);
-
-            Assert.IsFalse(result);
-        }
-
-        [Test]
-        public void VerifyHash_WrongPasswordDifferentSalt_ReturnsFalse()
-        {
-            var password = "MyPassword";
-            var salt1 = PasswordHasher.CreateSalt();
-            var passwordHash = PasswordHasher.HashPassword(password, salt1);
-            var salt2 = PasswordHasher.CreateSalt();
-            var wrongPassword = "NotMyPassword";
-
-            var result = PasswordHasher.VerifyHash(wrongPassword, salt2, passwordHash);
 
             Assert.IsFalse(result);
         }

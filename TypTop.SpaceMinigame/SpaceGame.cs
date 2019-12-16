@@ -1,156 +1,79 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
-using TypTop.GameEngine;
-using TypTop.GameEngine.Components;
-using TypTop.SpaceMinigame;
 using TypTop.Logic;
 using TypTop.MinigameEngine;
-using TypTop.MinigameEngine.WinConditions;
 
 namespace TypTop.SpaceMinigame
 {
     public class SpaceGame : Minigame
     {
-        //
-        // Props
-        //
-        public Player Player { get; private set; }
-        public Line Line { get; private set; }
-        public int EnemyAmount 
-        { 
-            get => _enemyAmount; 
-            private set
-            {
-                if (value < 1)
-                {
-                    value = 1;
-                }
+        private readonly List<Enemy> _enemyList = new List<Enemy>();
 
-                _enemyAmount = value;
-            }
-        }
-        private int _enemyAmount;
-        public float EnemyVelocity
+        private readonly InputList _inputList = new InputList(null)
         {
-            get => _enemyVelocity;
-            private set
-            {
-                if (value < 1)
-                {
-                    value = 1;
-                }
-
-                _enemyVelocity = value;
-            }
-        }
-        private float _enemyVelocity = 1;
-        public float EnemyVelocityOffset
-        {
-            get => _enemyVelocityOffset;
-            private set
-            {
-                if (value < 1)
-                {
-                    value = 1;
-                }
-
-                _enemyVelocityOffset = value;
-            }
-        }
-        private float _enemyVelocityOffset = 0;
-        public float LineHeight
-        {
-            get => _lineHeight;
-            private set
-            {
-                if (value < 0)
-                {
-                    value = 0;
-                }
-
-                if (value > Height)
-                {
-                    value = (float)Height;
-                }
-
-                _lineHeight = value;
-            }
-        }
-        private float _lineHeight = 950;
+            FocusOnHighIndex = true
+        };
 
         //
         // Vars
         //
         private readonly List<Word> _words;
-        private readonly List<Enemy> _enemyList = new List<Enemy>();
-        private readonly InputList _inputList = new InputList(null)
-        {
-            FocusOnHighIndex = true
-        };
+        private int _enemyAmount;
+        private float _enemyVelocity = 1;
+        private float _enemyVelocityOffset;
+        private float _lineHeight = 950;
 
         public SpaceGame(Level level) : base(level)
         {
             if (level != null && level.Properties != null)
             {
                 // Words
-                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
-                {
+                if (level.Properties.TryGetValue("Words", out object wordsObject) &&
+                    wordsObject is IEnumerable<Word> words)
                     _words = new List<Word>(words);
-                }
                 else
-                {
                     throw new ArgumentException("'Words' is missing or not valid");
-                }
 
                 //Lives
                 if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
-                {
                     Lives = new Lives(250, 10, this)
                     {
                         Amount = lives,
                         ZIndex = 5
                     };
-                }
                 else
-                {
                     throw new ArgumentException("'Lives' is missing or not valid");
-                }
 
                 // EnemyAmount
-                EnemyAmount = level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is int enemyAmount ? enemyAmount : _words.Count;
+                EnemyAmount =
+                    level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) &&
+                    enemyAmountObject is int enemyAmount
+                        ? enemyAmount
+                        : _words.Count;
 
                 // EnemyVelocity
-                if (level.Properties.TryGetValue("EnemyVelocity", out object enemyVelocityObject) && enemyVelocityObject is float enemyVelocity)
-                {
-                    EnemyVelocity = enemyVelocity;
-                }
+                if (level.Properties.TryGetValue("EnemyVelocity", out object enemyVelocityObject) &&
+                    enemyVelocityObject is float enemyVelocity) EnemyVelocity = enemyVelocity;
                 // EnemyVelocityOffset
-                if (level.Properties.TryGetValue("EnemyVelocityOffset", out object enemyVelocityOffsetObject) && enemyVelocityOffsetObject is float enemyVelocityOffset)
-                {
-                    EnemyVelocityOffset = enemyVelocityOffset;
-                }
+                if (level.Properties.TryGetValue("EnemyVelocityOffset", out object enemyVelocityOffsetObject) &&
+                    enemyVelocityOffsetObject is float enemyVelocityOffset) EnemyVelocityOffset = enemyVelocityOffset;
 
                 // LineHeight
-                if (level.Properties.TryGetValue("LineHeight", out object lineHeightObject) && lineHeightObject is float lineHeight)
-                {
-                    LineHeight = lineHeight;
-                }
+                if (level.Properties.TryGetValue("LineHeight", out object lineHeightObject) &&
+                    lineHeightObject is float lineHeight) LineHeight = lineHeight;
             }
             else
             {
                 throw new ArgumentNullException(nameof(level));
             }
 
-            for (int i = 0; i < EnemyAmount; i++)
-            {
-                _enemyList.Add(new Enemy(EnemyVelocity + (float)Rnd.Next((int)(-EnemyVelocityOffset * 1000000), (int)(EnemyVelocityOffset * 1000000)) / 1000000, _words[i % _words.Count], this));
-            }
+            for (var i = 0; i < EnemyAmount; i++)
+                _enemyList.Add(new Enemy(
+                    EnemyVelocity + (float) Rnd.Next((int) (-EnemyVelocityOffset * 1000000),
+                        (int) (EnemyVelocityOffset * 1000000)) / 1000000, _words[i % _words.Count], this));
 
 
             Score = new Score(10, 10, this)
@@ -170,7 +93,7 @@ namespace TypTop.SpaceMinigame
 
             Player = new Player(this);
             Line = new Line(LineHeight, this);
-            
+
 
             // 
             // Adding entities 
@@ -193,9 +116,61 @@ namespace TypTop.SpaceMinigame
             TextInput += OnTextInput;
         }
 
+        //
+        // Props
+        //
+        public Player Player { get; }
+        public Line Line { get; }
+
+        public int EnemyAmount
+        {
+            get => _enemyAmount;
+            private set
+            {
+                if (value < 1) value = 1;
+
+                _enemyAmount = value;
+            }
+        }
+
+        public float EnemyVelocity
+        {
+            get => _enemyVelocity;
+            private set
+            {
+                if (value < 1) value = 1;
+
+                _enemyVelocity = value;
+            }
+        }
+
+        public float EnemyVelocityOffset
+        {
+            get => _enemyVelocityOffset;
+            private set
+            {
+                if (value < 1) value = 1;
+
+                _enemyVelocityOffset = value;
+            }
+        }
+
+        public float LineHeight
+        {
+            get => _lineHeight;
+            private set
+            {
+                if (value < 0) value = 0;
+
+                if (value > Height) value = (float) Height;
+
+                _lineHeight = value;
+            }
+        }
+
         public bool RemoveEnemy(Enemy enemy)
         {
-            bool result = _enemyList.Remove(enemy);
+            var result = _enemyList.Remove(enemy);
             RemoveEntity(enemy);
             return result;
         }
@@ -206,7 +181,8 @@ namespace TypTop.SpaceMinigame
             _inputList.TextInput(e.Text);
             RemoveEntity<Laser>();
 
-            _enemyList.Where(e => e.Word.Finished).ToList().ForEach(e => {
+            _enemyList.Where(e => e.Word.Finished).ToList().ForEach(e =>
+            {
                 AddEntity(new Laser(e, this));
                 RemoveEnemy(e);
                 Score.Amount += e.Score;

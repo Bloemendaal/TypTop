@@ -5,10 +5,10 @@ namespace TypTop.GameEngine
 {
     internal class DelayedAction : ITimed
     {
-        private double _passedMilliseconds;
         private readonly Action _callback;
-        private readonly int _millisecondsDelay;
         private readonly CancellationToken _cancellationToken;
+        private readonly int _millisecondsDelay;
+        private double _passedMilliseconds;
 
         public DelayedAction(Action callback, int millisecondsDelay, CancellationToken cancellationToken)
         {
@@ -28,6 +28,7 @@ namespace TypTop.GameEngine
                 _callback();
                 return true;
             }
+
             return false;
         }
     }

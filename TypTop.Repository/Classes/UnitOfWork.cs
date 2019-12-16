@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using TypTop.Database;
-
+﻿using TypTop.Database;
 
 namespace TypTop.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly Context _context;
-        public IUserRepository Users { get; private set; }
-        public IWordRepository Words { get; private set; }
 
         public UnitOfWork(Context context)
         {
@@ -18,6 +12,9 @@ namespace TypTop.Repository
             Users = new UserRepository(_context);
             Words = new WordRepository(_context);
         }
+
+        public IWordRepository Words { get; }
+        public IUserRepository Users { get; }
 
         public int Complete()
         {
