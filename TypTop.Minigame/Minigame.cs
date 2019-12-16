@@ -66,6 +66,8 @@ namespace TypTop.MinigameEngine
             WinCondition.Minigame = this;
         }
 
+        private bool _finished = false;
+
         /// <summary>
         /// Deze method is hetzelfde als die van Game uit project GameEngine, het voegt alleen de controle toe of het spel beëindigd moet worden.
         /// </summary>
@@ -76,6 +78,12 @@ namespace TypTop.MinigameEngine
         {
             if (Finish?.Invoke() ?? false)
             {
+                if (_finished)
+                {
+                    return;
+                }
+                _finished = true;
+
                 OnFinished?.Invoke(this, new FinishEventArgs()
                 {
                     Lives = Lives?.Amount,
