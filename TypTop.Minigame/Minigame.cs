@@ -7,9 +7,24 @@ namespace TypTop.MinigameEngine
 {
     public abstract class Minigame : Game
     {
+        /// <summary>
+        /// Een instantie van Score. Wordt alleen geset indien het level score bij moet houden. Voor meer informatie, zie Class Score.
+        /// </summary>
         public Score Score { get; protected set; }
+
+        /// <summary>
+        /// Een instantie van Lives. Wordt alleen geset indien het level levens bij moet houden. Voor meer informatie, zie Class Lives.
+        /// </summary>
         public Lives Lives { get; protected set; }
+
+        /// <summary>
+        /// Een instantie van Count. Wordt alleen geset indien het level tijd bij moet houden of een countdown gebruikt. Voor meer informatie, zie Class Count.
+        /// </summary>
         public Count Count { get; protected set; }
+
+        /// <summary>
+        /// Geeft het aantal sterren dat op dat moment door de speler behaald is. Wordt berekend aan de hand van de WinCondition.
+        /// </summary>
         public int Stars
         {
             get
@@ -22,9 +37,21 @@ namespace TypTop.MinigameEngine
             }
         }
 
-        public WinCondition WinCondition { get; private set; }
+
+        /// <summary>
+        /// Een instantie van een WinCondition, gezien WinCondition abstract is. WinCondition kan niet NULL zijn.
+        /// </summary>
+        public readonly WinCondition WinCondition;
+
+        /// <summary>
+        /// Een instantie van delegate FinishCondition, wordt elke update uitgevoerd om te controleren of het spel afgesloten moet worden. Als deze NULL is, zal de minigame nooit uit zichzelf stoppen en moet dan altijd van buitenaf gestopt worden.
+        /// </summary>
         public FinishCondition Finish { get; protected set; }
         public delegate bool FinishCondition();
+
+        /// <summary>
+        /// Wordt afgevuurd wanneer het spel beëindigd is door de minigame zelf via de Finish. Geeft FinishEventArgs mee, hierover meer onder FinishEventArgs.
+        /// </summary>
         public event EventHandler<FinishEventArgs> OnFinished;
 
         public Minigame(Level level)
@@ -39,6 +66,12 @@ namespace TypTop.MinigameEngine
             WinCondition.Minigame = this;
         }
 
+        /// <summary>
+        /// Deze method is hetzelfde als die van Game uit project GameEngine, het voegt alleen de controle toe of het spel beëindigd moet worden.
+        /// </summary>
+        /// <param name="deltaTime">
+        /// Verschil in tijd.
+        /// </param>
         public override void Update(float deltaTime)
         {
             if (Finish?.Invoke() ?? false)

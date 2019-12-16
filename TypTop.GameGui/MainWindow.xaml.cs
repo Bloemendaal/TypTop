@@ -72,7 +72,7 @@ namespace TypTop.GameGui
             TavernGame tGame = new TavernGame(new Level()
             {
                 WinCondition = WinConditionType.LifeCondition,
-                
+
                 ThresholdOneStar = 1,
                 ThresholdTwoStars = 2,
                 ThresholdThreeStars = 3,
@@ -82,8 +82,9 @@ namespace TypTop.GameGui
                     { "Words", wordProvider.Serve() },
                     { "Lives", 6 },
                     { "Seconds", 120 },
+                    { "CustomerMaxOrderAmount", 1 },
                     { "ShowSatisfaction", true },
-                    { "SatisfactionTiming", new Dictionary<int, int> 
+                    { "SatisfactionTiming", new Dictionary<int, int>
                         {
                             { 1, 4000 },
                             { 2, 4000 },

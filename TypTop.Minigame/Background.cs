@@ -10,21 +10,36 @@ namespace TypTop.MinigameEngine
 {
     public class Background : Entity
     {
+        /// <summary>
+        /// Geeft de breedte van de afbeelding, wanneer de waarde NULL wordt geset, wordt de get berekent aan de hand van de afbeelding proporties. De standaardwaarde is de breedte van het scherm.
+        /// </summary>
         public double? Width
         {
             get => _imageComponent.Width;
             set => _imageComponent.Width = value;
         }
+
+        /// <summary>
+        /// Geeft de hoogte van de afbeelding, wanneer de waarde NULL wordt geset, wordt de get berekent aan de hand van de afbeelding proporties. De standaardwaarde is de hoogte van het scherm.
+        /// </summary>
         public double? Height
         {
             get => _imageComponent.Height;
             set => _imageComponent.Height = value;
         }
+
+        /// <summary>
+        /// De x-positie van de achtergrond. Standaardwaarde is 0.
+        /// </summary>
         public float X
         {
             get => _positionComponent.X;
             set => _positionComponent.X = value;
         }
+
+        /// <summary>
+        /// De y-positie van de achtergrond. Standaardwaarde is 0.
+        /// </summary>
         public float Y
         {
             get => _positionComponent.Y;

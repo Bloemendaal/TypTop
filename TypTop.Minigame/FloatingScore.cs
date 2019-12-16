@@ -14,17 +14,27 @@ namespace TypTop.MinigameEngine
     {
         private readonly SolidColorBrush _color;
 
+        /// <summary>
+        /// Het aantal dat moet toegevoegd worden aan de x van de label. Standaardwaarde is de TransformX van de LabelComponent.
+        /// </summary>
         public float LabelTransformX
         {
             get => _labelComponent.TransformX;
             set => _labelComponent.TransformX = value;
         }
+
+        /// <summary>
+        /// Het aantal dat moet toegevoegd worden aan de y van de label. Standaardwaarde is de TransformY van de LabelComponent.
+        /// </summary>
         public float LabelTransformY
         {
             get => _labelComponent.TransformY;
             set => _labelComponent.TransformY = value;
         }
 
+        /// <summary>
+        /// Geeft aan of de FloatingScore de + / - voor het verschil moet weergeven. Standaardwaarde is true.
+        /// </summary>
         public bool ShowOperator = true;
 
         private readonly LabelComponent _labelComponent;
@@ -55,6 +65,10 @@ namespace TypTop.MinigameEngine
             AddComponent(_labelComponent);
         }
 
+        /// <summary>
+        /// Voegt een vermindering van de Opacity toe per update en verwijdert zichzelf wanneer de Opacity 0 is.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public override void Update(float deltaTime)
         {
             _color.Opacity -= 0.01;
