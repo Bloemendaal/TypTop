@@ -10,6 +10,9 @@ namespace TypTop.MinigameEngine
 {
     public class Lives : Entity
     {
+        /// <summary>
+        /// Wanneer het aantal levens kleiner is dan 0, wordt deze op 0 gezet.
+        /// </summary>
         public int Amount
         {
             get => _amount;
