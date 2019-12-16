@@ -9,6 +9,7 @@ namespace TypTop.JumpMinigame
     {
         private readonly Player _player;
         private List<Lane> _lanes = new List<Lane>();
+        private readonly List<Word> _words;
 
         /// <summary>
         /// Amount of lanes that should be used for this level. Minimum amount of unique words must be equal to this value.
@@ -44,7 +45,7 @@ namespace TypTop.JumpMinigame
                 }
             }
         }
-        private int _laneAmount = 5;
+        private int _laneAmount;
 
         /// <summary>
         /// Width that the lanes should have.
@@ -163,9 +164,85 @@ namespace TypTop.JumpMinigame
         }
         private double _platformSolidRatio = 1;
 
+        /// <summary>
+        /// Switch words when the word was typed correctly.
+        /// </summary>
+        public bool SwitchWords = false;
+
 
         public JumpGame(Level level) : base(level)
         {
+            if (level != null && level.Properties != null)
+            {
+                // LaneAmount
+                LaneAmount = level.Properties.TryGetValue("LaneAmount", out object laneAmountObject) && laneAmountObject is int laneAmount ? laneAmount : 5;
+
+                // Words
+                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
+                {
+                    _words = new List<Word>(words);
+                    if (_words.Count < LaneAmount)
+                    {
+                        throw new ArgumentException("'Words' amount is less than the amount of lanes");
+                    }
+                }
+                else
+                {
+                    throw new ArgumentException("'Words' is missing, not valid or not valid");
+                }
+
+                // EnemySpawnHeight
+                if (level.Properties.TryGetValue("EnemySpawnHeight", out object enemySpawnHeightObject) && enemySpawnHeightObject is double enemySpawnHeight)
+                {
+                    EnemySpawnHeight = enemySpawnHeight;
+                }
+
+                // EnemyAmount
+                if (level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is int enemyAmount)
+                {
+                    EnemyAmount = enemyAmount;
+                }
+
+                // EnemyMovement
+                if (level.Properties.TryGetValue("EnemyMovement", out object enemyMovementObject))
+                {
+                    EnemyMovement = enemyMovementObject switch
+                    {
+                        EnemyType enemyMovement => enemyMovement,
+                        int enemyMovement when enemyMovement >= 0 && enemyMovement < Enum.GetNames(typeof(EnemyType)).Length => (EnemyType) enemyMovement,
+                        _ => throw new ArgumentException("'EnemyMovement' is not valid")
+                    };
+                }
+
+                // PlatformBreakAmount
+                if (level.Properties.TryGetValue("PlatformBreakAmount", out object platformBreakAmountObject) && platformBreakAmountObject is int platformBreakAmount)
+                {
+                    PlatformBreakAmount = platformBreakAmount;
+                }
+
+                // PlatformBreakOffset
+                if (level.Properties.TryGetValue("PlatformBreakOffset", out object platformBreakOffsetObject) && platformBreakOffsetObject is int platformBreakOffset)
+                {
+                    PlatformBreakOffset = platformBreakOffset;
+                }
+
+                // PlatformSolidRatio
+                if (level.Properties.TryGetValue("PlatformSolidRatio", out object platformSolidRatioObject) && platformSolidRatioObject is double platformSolidRatio)
+                {
+                    PlatformSolidRatio = platformSolidRatio;
+                }
+
+                // SwitchWords
+                if (level.Properties.TryGetValue("SwitchWords", out object switchWordsObject) && switchWordsObject is bool switchWords)
+                {
+                    SwitchWords = switchWords;
+                }
+
+            }
+            else
+            {
+                throw new ArgumentNullException(nameof(level));
+            }
             _player = new Player(this);
             Score = new Score(0, 0, this);
             Lives = new Lives(0, 0, this);
