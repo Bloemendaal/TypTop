@@ -9,6 +9,9 @@ namespace TypTop.TavernMinigame
 {
     public class Satisfaction : Entity
     {
+        /// <summary>
+        /// Amount of satisfaction the Customer has. Value from 0 - 5 where 0 will result in the customer leaving. 
+        /// </summary>
         public int Amount 
         {
             get => _amount;
@@ -16,19 +19,23 @@ namespace TypTop.TavernMinigame
             {
                 if (value < 1)
                 {
-                    _timer?.Dispose();
-                    _customer?.RemoveEntities(_customer.Count * -10);
-
-                    if (_game != null)
+                    if (_amount > value)
                     {
-                        _game?.RemoveCustomer(_customer);
-                        _game?.NextCustomer();
-                        if (_game.Lives != null)
+                        _timer?.Dispose();
+                        _customer?.RemoveEntities(_customer.Count * -10);
+
+                        if (_game != null)
                         {
-                            _game.Lives.Amount--;
+                            _game?.RemoveCustomer(_customer);
+                            _game?.NextCustomer();
+                            if (_game.Lives != null)
+                            {
+                                _game.Lives.Amount--;
+                            }
                         }
                     }
-                    
+
+                    _amount = 0;
                     return;
                 }
 
@@ -79,6 +86,9 @@ namespace TypTop.TavernMinigame
             AddComponent(_imageComponent);
         }
 
+        /// <summary>
+        /// Reset the interval to the current amount of satisfaction.
+        /// </summary>
         private void SetInterval()
         {
             int mseconds = _game.GetSatisfaction(Amount);
@@ -88,13 +98,24 @@ namespace TypTop.TavernMinigame
             }
             else
             {
-                _timer.Dispose();
+                _timer?.Dispose();
             }
         }
 
+        /// <summary>
+        /// Dispose the satisfactiontimer. Do not remove a Customer or Satisfaction class from the game without disposing.
+        /// </summary>
+        public void Dispose() => _timer?.Dispose();
+
+        /// <summary>
+        /// Update the satisfactionimage to match the amount.
+        /// </summary>
         public void UpdateImage()
         {
-            _imageComponent?.UpdateImage(new BitmapImage(new Uri($@"Images/Satisfaction/satisfaction_{Amount}.png", UriKind.Relative)));
+            if (Amount > 0)
+            {
+                _imageComponent?.UpdateImage(new BitmapImage(new Uri($@"Images/Satisfaction/satisfaction_{Amount}.png", UriKind.Relative)));
+            }
         }
     }
 }

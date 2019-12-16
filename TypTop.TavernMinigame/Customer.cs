@@ -13,10 +13,25 @@ namespace TypTop.TavernMinigame
     {
         private readonly SpeechBubble _speechBubble;
         public readonly Satisfaction Satisfaction;
+
+        /// <summary>
+        /// The amount of orders left to be served.
+        /// </summary>
         public int Count => _orders.Count;
+
+        /// <summary>
+        /// Original amount of orders the customer had.
+        /// </summary>
         public readonly int OriginalCount;
+
+        /// <summary>
+        /// Customer's orders
+        /// </summary>
         private readonly List<Order> _orders;
 
+        /// <summary>
+        /// List of all available unique customers.
+        /// </summary>
         public enum CustomerType { GunslingerMan, GunslingerWoman, LawsMan, LawsWoman, NativeGirl, NativeMan, OutlawMan, OutlawWoman, TownsMan, TownsWoman }
         public readonly CustomerType Type;
 
@@ -24,7 +39,7 @@ namespace TypTop.TavernMinigame
         public Customer(TavernGame game) : base(game)
         {
             ZIndex = 1;
-            _orders = game.GetOrder(Game.Rnd.Next(1, 5));
+            _orders = game.GetOrder(Game.Rnd.Next(game.CustomerMinOrderAmount, game.CustomerMaxOrderAmount + 1));
             OriginalCount = Count;
 
             var types = Enum.GetNames(typeof(CustomerType));
@@ -47,6 +62,9 @@ namespace TypTop.TavernMinigame
             }
         }
 
+        /// <summary>
+        /// Voegt alle benodigde entities (Order’s, SpeechBubble, this) aan game toe.
+        /// </summary>
         public void AddEntities()
         {
             Game.AddEntity(_speechBubble);
@@ -57,6 +75,13 @@ namespace TypTop.TavernMinigame
             } 
             _orders.ForEach(o => Game.AddEntity(o));
         }
+
+        /// <summary>
+        /// Verwijdert alle entities die verwant zijn aan de Customer.
+        /// </summary>
+        /// <param name="score">
+        /// Voegt deze score toe aan de huidige score.
+        /// </param>
         public void RemoveEntities(int score = 0)
         {
             _orders.ForEach(o => Game.RemoveEntity(o));
@@ -65,11 +90,21 @@ namespace TypTop.TavernMinigame
             if (Satisfaction != null)
             {
                 Game.RemoveEntity(Satisfaction);
+                Satisfaction.Dispose();
             }
 
             ((TavernGame)Game).Score.Amount += score;
         }
 
+        /// <summary>
+        /// Verwijdert een specifieke Order uit _orders. Roept UpdateOrderPosition() aan.
+        /// </summary>
+        /// <param name="order">
+        /// Order dat verwijdert moet worden.
+        /// </param>
+        /// <returns>
+        /// Geeft terug of het verwijderen succesvol was.
+        /// </returns>
         public bool RemoveOrder(Order order)
         {
             List<Order> orders = _orders.Where(o => o.Type == order.Type).ToList();
@@ -91,6 +126,12 @@ namespace TypTop.TavernMinigame
             return false;
         }
 
+        /// <summary>
+        /// Werkt de posities van de Customer en de SpeechBubble bij. Roept daarna de UpdateOrderPosition() method aan.
+        /// </summary>
+        /// <param name="index">
+        /// Index van de rij waarin de Customer staat.
+        /// </param>
         public void UpdatePosition(int index)
         {
             float x = (float)Game.Width - 500 * (index + 1) - 20;
@@ -103,6 +144,9 @@ namespace TypTop.TavernMinigame
             UpdateOrderPosition();
         }
 
+        /// <summary>
+        /// Werkt de posities van de Order’s in _orders bij.
+        /// </summary>
         public void UpdateOrderPosition()
         {
             Vector2 position = _speechBubble.GetComponent<PositionComponent>().Position;
@@ -129,9 +173,37 @@ namespace TypTop.TavernMinigame
             }
         }
 
+        /// <summary>
+        /// Geeft terug of de Customer de specifieke Order heeft.
+        /// </summary>
+        /// <param name="order">
+        /// Order dat gecontroleerd moet worden.
+        /// </param>
+        /// <returns>
+        /// Geeft terug of de Customer de specifieke Order heeft.
+        /// </returns>
         public bool HasOrder(Order order) => _orders.Any(o => o.Type == order.Type);
+
+        /// <summary>
+        /// Geeft terug of de Customer de specifieke Order heeft.
+        /// </summary>
+        /// <param name="order">
+        /// Order dat gecontroleerd moet worden.
+        /// </param>
+        /// <returns>
+        /// Geeft terug of de Customer de specifieke Order heeft.
+        /// </returns>
         public bool HasOrder(Order.OrderType order) => _orders.Any(o => o.Type == order);
 
+        /// <summary>
+        /// Geeft een Order terug wanneer de OrderType overeenkomt. Pakt altijd de eerste van de lijst _orders als er meerdere zijn.
+        /// </summary>
+        /// <param name="orderType">
+        /// OrderType dat gecontroleerd moet worden.
+        /// </param>
+        /// <returns>
+        /// Geeft een Order terug wanneer de OrderType overeenkomt.
+        /// </returns>
         public Order GetOrder(Order.OrderType orderType) => _orders.Where(o => o.Type == orderType).First();
     }
 }
