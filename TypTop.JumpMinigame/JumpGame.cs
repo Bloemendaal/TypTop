@@ -11,6 +11,8 @@ namespace TypTop.JumpMinigame
         private List<Lane> _lanes = new List<Lane>();
         private readonly List<Word> _words;
 
+        public const int JumpHeight = 500;
+
         /// <summary>
         /// Amount of lanes that should be used for this level. Minimum amount of unique words must be equal to this value.
         /// </summary>
@@ -37,11 +39,14 @@ namespace TypTop.JumpMinigame
                     {
                         RemoveEntity(lane);
                     }
-                    _lanes = new List<Lane>();
+
+                    _lanes.Clear();
                 }
                 for (int i = 0; i < _laneAmount; i++)
                 {
-                    _lanes.Add(new Lane(i, this));
+                    Lane l = new Lane(i, this);
+                    _lanes.Add(l);
+                    AddEntity(l);
                 }
             }
         }
@@ -238,15 +243,81 @@ namespace TypTop.JumpMinigame
                     SwitchWords = switchWords;
                 }
 
+                // Seconds
+                if (level.Properties.TryGetValue("Seconds", out object secondsObject) && secondsObject is int seconds)
+                {
+                    Count = new Count(seconds, 0, 0, this);
+                    Finish = () => _player.Y > Height || Count.Seconds <= 0;
+                }
+                else
+                {
+                    Finish = () => _player.Y > Height;
+                }
+
+                // Lives
+                if (EnemyAmount > 0 && level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
+                {
+                    Lives = new Lives(0, 0, this)
+                    {
+                        Amount = lives,
+                        ZIndex = 10
+                    };
+
+                    AddEntity(Lives);
+                }
             }
             else
             {
                 throw new ArgumentNullException(nameof(level));
             }
+
+
+
             _player = new Player(this);
             Score = new Score(0, 0, this);
-            Lives = new Lives(0, 0, this);
-            Count = new Count(0, 0, 0, this);
+
+            AddEntity(_player);
+            GeneratePlatforms();
+        }
+
+
+        public void GeneratePlatforms(float start = 0, float diff = 5000)
+        {
+            List<float> coordinates = new List<float>();
+            for (int i = 0; i < LaneAmount * 20; i++)
+            {
+                coordinates.Add(Rnd.Next((int)((start - diff) * 1000000), (int)(start * 1000000)) / 1000000f);
+            }
+
+            coordinates.Sort();
+
+            float remove = 0;
+            for (int i = 0; i < coordinates.Count - 1; i++)
+            {
+                float tdiff = Math.Abs(coordinates[i + 1] - coordinates[i]);
+                if (tdiff > JumpHeight)
+                {
+                    remove += tdiff;
+                }
+
+                coordinates[i] -= remove;
+            }
+
+            // Shuffle
+            List<float> randomList = new List<float>();
+            while (coordinates.Count > 0)
+            {
+                int randomIndex = Rnd.Next(0, coordinates.Count);
+                randomList.Add(coordinates[randomIndex]);
+                coordinates.RemoveAt(randomIndex);
+            }
+
+            int laneIndex = 0;
+            foreach (float coordinate in randomList)
+            {
+                _lanes[laneIndex % LaneAmount].AddPlatform(coordinate);
+                laneIndex++;
+            }
         }
     }
 }

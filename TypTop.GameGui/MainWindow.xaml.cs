@@ -120,7 +120,13 @@ namespace TypTop.GameGui
 
                 ThresholdOneStar = 100,
                 ThresholdTwoStars = 200,
-                ThresholdThreeStars = 300
+                ThresholdThreeStars = 300,
+
+                Properties = new Dictionary<string, object>()
+                {
+                    { "Words", wordProvider.Serve() },
+                    { "Lives", 6 }
+                }
             });
 
 

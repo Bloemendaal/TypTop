@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Media;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
+using TypTop.JumpMinigame.Components;
 
 namespace TypTop.JumpMinigame
 {
@@ -44,6 +46,23 @@ namespace TypTop.JumpMinigame
 
             AddComponent(new CameraComponent());
             AddComponent(_positionComponent);
+
+            AddComponent(new RectangleComponent()
+            {
+                Fill = Brushes.Black,
+                Width = minigame.LaneWidth,
+                Height = 20
+            });
+        }
+
+        public override void Update(float deltaTime)
+        {
+            if (Y > Game.Height)
+            {
+                Lane.RemovePlatform(this);
+            }
+
+            base.Update(deltaTime);
         }
 
         public void Jump()

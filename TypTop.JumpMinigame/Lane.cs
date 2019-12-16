@@ -10,7 +10,7 @@ namespace TypTop.JumpMinigame
 {
     public class Lane : Entity
     {
-        private readonly List<Platform> _platforms;
+        private readonly List<Platform> _platforms = new List<Platform>();
 
         public int Index { get; private set; }
 
@@ -27,13 +27,29 @@ namespace TypTop.JumpMinigame
 
         private readonly PositionComponent _positionComponent;
 
+        public new readonly JumpGame Game;
+
+
         public Lane(int index, JumpGame minigame) : base(minigame)
         {
             Index = index;
+            Game = minigame;
 
-            _positionComponent = new PositionComponent(Index * minigame.LaneWidth,0);
+            _positionComponent = new PositionComponent(Index * minigame.LaneWidth, 0);
         }
 
-        public List<float> Coordinates() => _platforms.Select(e => e.Y).ToList();
+
+        public List<Platform> GetPlatforms()
+        {
+            return _platforms.Where(e => e.Y > 0).OrderBy(e => e.Y).ToList();
+        }
+
+        public void AddPlatform(float y)
+        {
+            Platform platform = new Platform(y, this, Game);
+            _platforms.Add(platform);
+            Game.AddEntity(platform);
+        }
+        public bool RemovePlatform(Platform platform) => Game.RemoveEntity(platform) && _platforms.Remove(platform);
     }
 }
