@@ -12,9 +12,19 @@ namespace TypTop.MinigameEngine.Components
 {
     public class LivesComponent : Component, IDrawable
     {
+        /// <summary>
+        /// Geeft aan of de hartjes verborgen moeten zijn of niet.
+        /// </summary>
         public bool Hidden { get; set; }
+
         private PositionComponent _positionComponent;
 
+        /// <summary>
+        /// Tekent de hartjes.
+        /// </summary>
+        /// <param name="context">
+        /// DrawingContext.
+        /// </param>
         public void Draw(DrawingContext context)
         {
             if (Entity is Lives lives)
@@ -34,6 +44,10 @@ namespace TypTop.MinigameEngine.Components
                 }
             }
         }
+
+        /// <summary>
+        /// Stelt de _positionComponent voor het tekenen in.
+        /// </summary>
         public override void AddedToEntity()
         {
             _positionComponent = Entity.GetComponent<PositionComponent>();

@@ -8,9 +8,9 @@ namespace TypTop.Logic
 {
     public class Word
     {
-        //
-        // Summary:
-        //     Index of the character that is currently being checked by the program.
+        /// <summary>
+        /// Index of the character that is currently being checked by the program.
+        /// </summary>
         public int Index
         {
             get => _index;
@@ -30,9 +30,9 @@ namespace TypTop.Logic
         private int _index = 0;
 
 
-        //
-        // Summary:
-        //     The word saved as a string.
+        /// <summary>
+        /// The word saved as a string.
+        /// </summary>
         public string Letters { 
             get => _letters; 
             set => _letters = value.Trim(); 
@@ -40,25 +40,21 @@ namespace TypTop.Logic
         private string _letters;
 
 
-        //
-        // Summary:
-        //     Gives the input given by the user for this word.
+        /// <summary>
+        /// Gives the input given by the user for this word.
+        /// </summary>
         public Stack<char> Input { get; private set; } = new Stack<char>();
 
 
-        //
-        // Summary:
-        //     Gives if the word was correctly typed until the current index.
-        // Returns:
-        //     If the word was typed correctly unless the typing has not yet started.
+        /// <summary>
+        /// Gives if the word was correctly typed until the current index. Returns if the word was typed correctly unless the typing has not yet started.
+        /// </summary>
         public bool? Correct = null;
 
 
-        //
-        // Summary:
-        //     Gives if the word was completely correctly typed.
-        // Returns:
-        //     If the word was correctly typed.
+        /// <summary>
+        /// Gives if the word was completely correctly typed. Returns if the word was correctly typed.
+        /// </summary>
         public bool Finished = false;
 
 
@@ -68,20 +64,24 @@ namespace TypTop.Logic
         }
 
 
-        //
-        // Summary:
-        //     Checks if the given index is valid for this word.
-        // Returns:
-        //     True if valid.
+        /// <summary>
+        /// Checks if the given index is valid for this word.
+        /// </summary>
+        /// <param name="index">
+        /// Index of the letter in this word.
+        /// </param>
+        /// <returns>
+        /// True if valid.
+        /// </returns>
         public bool ValidIndex(int index)
         {
             return index >= 0 && index < Letters.Length;
         }
 
 
-        //
-        // Summary:
-        //     Removes the last character from the Input and lowers the input by one
+        /// <summary>
+        /// Removes the last character from the Input and lowers the input by one
+        /// </summary>
         public void Backspace()
         {
             Input.Pop();
