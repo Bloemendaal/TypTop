@@ -73,7 +73,7 @@ namespace TypTop.GameGui
                         {
                             {"Words", wordProvider.Serve()},
                             {"Lives", 6},
-                            {"EnemyVelocityOffset", 1f},
+                            {"EnemyVelocityOffset", 3f},
                             {"LineHeight", 800f}
                         }
                     }

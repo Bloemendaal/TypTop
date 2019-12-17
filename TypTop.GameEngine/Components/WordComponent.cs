@@ -71,6 +71,13 @@ namespace TypTop.GameEngine.Components
                 if (Typeface != null) _formattedText.SetFontTypeface(Typeface);
                 _formattedText.SetFontSize(FontSize);
 
+                if (Y + _formattedText.Height < 0 ||
+                    Y > 1080 ||
+                    X + _formattedText.WidthIncludingTrailingWhitespace < 0 ||
+                    X > 1920
+                )
+                    return;
+
                 context.DrawText(_formattedText, new Point(X, Y));
             }
         }
