@@ -19,7 +19,6 @@ namespace TypTop.Logic
             Input = input;
         }
 
-
         public override void TextInput(char letter)
         {
             var wordlist = FocusOnHighIndex
