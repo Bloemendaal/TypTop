@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Input;
 using TypTop.Logic;
 using TypTop.MinigameEngine;
 
@@ -9,7 +11,11 @@ namespace TypTop.JumpMinigame
     {
         private readonly Player _player;
         private readonly List<Lane> _lanes = new List<Lane>();
-        private readonly List<Word> _words;
+        private readonly Queue<Word> _words = new Queue<Word>();
+        private readonly InputList _inputList = new InputList(null) 
+        { 
+            FocusOnHighIndex = true
+        };
 
         public const int JumpHeight = 400;
 
@@ -44,7 +50,10 @@ namespace TypTop.JumpMinigame
                 }
                 for (int i = 0; i < _laneAmount; i++)
                 {
-                    Lane l = new Lane(i, this);
+                    Lane l = new Lane(i, this)
+                    {
+                        Word = _words.Dequeue()
+                    };
                     _lanes.Add(l);
                     AddEntity(l);
                 }
@@ -172,28 +181,29 @@ namespace TypTop.JumpMinigame
         /// <summary>
         /// Switch words when the word was typed correctly.
         /// </summary>
-        public bool SwitchWords = false;
+        public bool SwitchWords = true;
 
 
         public JumpGame(Level level) : base(level)
         {
             if (level != null && level.Properties != null)
             {
-                // LaneAmount
-                LaneAmount = level.Properties.TryGetValue("LaneAmount", out object laneAmountObject) && laneAmountObject is int laneAmount ? laneAmount : 5;
-
                 // Words
                 if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
                 {
-                    _words = new List<Word>(words);
-                    if (_words.Count < LaneAmount)
-                    {
-                        throw new ArgumentException("'Words' amount is less than the amount of lanes");
-                    }
+                    _words = new Queue<Word>(words);
                 }
                 else
                 {
                     throw new ArgumentException("'Words' is missing, not valid or not valid");
+                }
+
+                // LaneAmount
+                LaneAmount = level.Properties.TryGetValue("LaneAmount", out object laneAmountObject) && laneAmountObject is int laneAmount ? laneAmount : 5;
+
+                if (_words.Count < LaneAmount)
+                {
+                    throw new ArgumentException("'Words' amount is less than the amount of lanes");
                 }
 
                 // EnemySpawnHeight
@@ -274,7 +284,7 @@ namespace TypTop.JumpMinigame
             AddEntity(new Background("jumpLevelBackground.png", this));
             AddEntity(new Background("scoreline.png", this)
             {
-                ZIndex = 3,
+                ZIndex = 4,
                 Height = null,
                 Y = -20
             });
@@ -285,6 +295,8 @@ namespace TypTop.JumpMinigame
 
             AddEntity(_player);
             GeneratePlatforms((float)Height, solidBase: true);
+
+            TextInput += OnTextInput;
         }
 
 
@@ -331,6 +343,32 @@ namespace TypTop.JumpMinigame
             }
 
             _lanes[LaneAmount / 2].AddPlatform(start - Platform.Height, solidBase ? -1 : new int?());
+        }
+
+        private void OnTextInput(object sender, TextCompositionEventArgs e)
+        {
+            _inputList.Input = _lanes.Where(l => !l.Equals(_player.Lane)).Select(l => l.Word).ToList();
+            _inputList.TextInput(e.Text);
+
+            foreach (Lane lois in _lanes)
+            {
+                if (lois.Word.Finished)
+                {
+                    if (SwitchWords)
+                    {
+                        lois.Word = _words.Dequeue();
+                    }
+                    else
+                    {
+                        lois.Word.Finished = false;
+                        lois.Word.Index = 0;
+                        lois.Word.Correct = null;
+                    }
+
+                    _player.SwitchLane(lois);
+                    break;
+                }
+            }
         }
     }
 }

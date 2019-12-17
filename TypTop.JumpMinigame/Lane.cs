@@ -4,13 +4,18 @@ using System.Linq;
 using System.Text;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
+using TypTop.Logic;
 using TypTop.MinigameEngine;
 
 namespace TypTop.JumpMinigame
 {
     public class Lane : Entity
     {
+        private readonly PositionComponent _positionComponent;
+        private readonly WordComponent _wordComponent;
         private readonly List<Platform> _platforms = new List<Platform>();
+
+        public new readonly JumpGame Game;
 
         public int Index { get; private set; }
 
@@ -25,17 +30,29 @@ namespace TypTop.JumpMinigame
             set => _positionComponent.Y = value;
         }
 
-        private readonly PositionComponent _positionComponent;
-
-        public new readonly JumpGame Game;
+        public Word Word
+        {
+            get => _wordComponent.Word;
+            set => _wordComponent.Word = value;
+        }
 
 
         public Lane(int index, JumpGame minigame) : base(minigame)
         {
+            ZIndex = 5;
             Index = index;
             Game = minigame;
 
             _positionComponent = new PositionComponent(Index * minigame.LaneWidth, 0);
+            _wordComponent = new WordComponent()
+            {
+                Center = true,
+                TransformX = minigame.LaneWidth / 2,
+                TransformY = 20
+            };
+
+            AddComponent(_positionComponent);
+            AddComponent(_wordComponent);
         }
 
 
