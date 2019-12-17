@@ -10,7 +10,7 @@ namespace TypTop.JumpMinigame
 {
     public class Platform : Entity
     {
-        public int BreakAmount { get; private set; }
+        public int BreakAmount { get; private set; } = -1;
         public Lane Lane { get; private set; }
 
         public new readonly JumpGame Game;
@@ -28,6 +28,8 @@ namespace TypTop.JumpMinigame
 
         public const int Height = 20;
 
+        private double Opacity => BreakAmount == -1 ? 1 : (BreakAmount + 1d) / (Game.PlatformBreakAmount + Game.PlatformBreakOffset + 1d);
+
         private readonly PositionComponent _positionComponent;
         private readonly RectangleComponent _rectangleComponent;
 
@@ -44,7 +46,7 @@ namespace TypTop.JumpMinigame
             {
                 Fill = BreakAmount == -1 ? Brushes.Black : new SolidColorBrush(Brushes.DarkGreen.Color)
                 {
-                    Opacity = (BreakAmount + 1) / (minigame.PlatformBreakAmount + minigame.PlatformBreakOffset + 1)
+                    Opacity = Opacity
                 },
                 Width = minigame.LaneWidth,
                 Height = Height
@@ -90,7 +92,7 @@ namespace TypTop.JumpMinigame
                     break;
                 default:
                     BreakAmount--;
-                    _rectangleComponent.Fill.Opacity = (BreakAmount + 1) / (Game.PlatformBreakAmount + Game.PlatformBreakOffset + 1);
+                    _rectangleComponent.Fill.Opacity = Opacity;
                     break;
             }
         }
