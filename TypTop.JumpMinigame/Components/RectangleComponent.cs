@@ -32,6 +32,12 @@ namespace TypTop.JumpMinigame.Components
 
         public void Draw(DrawingContext context)
         {
+            if (_positionComponent.Y + Height < 0 ||
+            _positionComponent.Y > Game.Height ||
+            _positionComponent.X + Width < 0 ||
+            _positionComponent.X > Game.Width
+            ) return;
+
             _rectangle.X = _positionComponent.X;
             _rectangle.Y = _positionComponent.Y;
             context.DrawRectangle(Fill, Pen, _rectangle);

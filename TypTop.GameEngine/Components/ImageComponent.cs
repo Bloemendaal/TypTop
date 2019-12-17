@@ -114,9 +114,9 @@ namespace TypTop.GameEngine.Components
         public void Draw(DrawingContext context)
         {
             if (_positionComponent.Y + Height < 0 ||
-            _positionComponent.Y > 1080 ||
+            _positionComponent.Y > Game.Height ||
             _positionComponent.X + Width < 0 ||
-            _positionComponent.X > 1920
+            _positionComponent.X > Game.Width
             ) return;
 
             context.DrawImage(
