@@ -19,33 +19,6 @@ using TypTop.JumpMinigame;
 
 namespace TypTop.GameGui
 {
-    public class GameLoader : IGameLoader
-    {
-        private readonly GameWindow.GameWindow _gameWindow;
-        private readonly IList<World> _worlds;
-
-        public GameLoader(GameWindow.GameWindow gameWindow, IList<World> worlds)
-        {
-            _gameWindow = gameWindow;
-            _worlds = worlds;
-        }
-
-        public void LoadWorldMap()
-        {
-            var worldScreenGame = new WorldScreenGame(_worlds);
-        }
-
-        public void LoadLevelMap(World world)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void LoadMinigame(Level level)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -69,72 +42,62 @@ namespace TypTop.GameGui
             };
             wordProvider.LoadTestWords();
 
-            TavernGame tGame = new TavernGame(new Level()
+            //tGame.OnFinished += OnFinishedGame;
+            //sGame.OnFinished += OnFinishedGame;
+
+            var gameLoader = new GameLoader(GameWindow, new List<World>()
             {
-                WinCondition = WinConditionType.LifeCondition,
-
-                ThresholdOneStar = 1,
-                ThresholdTwoStars = 2,
-                ThresholdThreeStars = 3,
-
-                Properties = new Dictionary<string, object>()
+                new World("tavernButton.png", "tavernLevelBackground.png" ,new List<Level>()
                 {
-                    { "Words", wordProvider.Serve() },
-                    { "Lives", 6 },
-                    { "Seconds", 120 },
-                    { "CustomerMaxOrderAmount", 1 },
-                    { "ShowSatisfaction", true },
-                    { "SatisfactionTiming", new Dictionary<int, int>
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.LifeCondition,
+
+                        ThresholdOneStar = 1,
+                        ThresholdTwoStars = 2,
+                        ThresholdThreeStars = 3,
+
+                        Properties = new Dictionary<string, object>()
                         {
-                            { 1, 4000 },
-                            { 2, 4000 },
-                            { 3, 4000 },
-                            { 4, 4000 },
-                            { 5, 4000 },
+                            {"Words", wordProvider.Serve()},
+                            {"Lives", 6},
+                            {"Seconds", 120},
+                            {"ShowSatisfaction", true},
+                            {
+                                "SatisfactionTiming", new Dictionary<int, int>
+                                {
+                                    {1, 4000},
+                                    {2, 4000},
+                                    {3, 4000},
+                                    {4, 4000},
+                                    {5, 4000},
+                                }
+                            }
                         }
                     }
-                }
-            });
-
-            SpaceGame sGame = new SpaceGame(new Level()
-            {
-                WinCondition = WinConditionType.ScoreCondition,
-
-                ThresholdOneStar = 100,
-                ThresholdTwoStars = 200,
-                ThresholdThreeStars = 300,
-
-                Properties = new Dictionary<string, object>()
+                }, WorldId.Tavern),
+                new World("spaceButton.png", "levelBackground.jpeg", new List<Level>()
                 {
-                    { "Words", wordProvider.Serve() },
-                    { "Lives", 6 },
-                    { "EnemyVelocityOffset", 1f },
-                    { "LineHeight", 800f }
-                }
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Words", wordProvider.Serve()},
+                            {"Lives", 6},
+                            {"EnemyVelocityOffset", 1f},
+                            {"LineHeight", 800f}
+                        }
+                    }
+                }, WorldId.Space)
             });
+            gameLoader.LoadWorldMap();
 
-
-            JumpGame jGame = new JumpGame(new Level()
-            {
-                WinCondition = WinConditionType.ScoreCondition,
-
-                ThresholdOneStar = 100,
-                ThresholdTwoStars = 200,
-                ThresholdThreeStars = 300,
-
-                Properties = new Dictionary<string, object>()
-                {
-                    { "Words", wordProvider.Serve() },
-                    { "Lives", 6 }
-                }
-            });
-
-
-            tGame.OnFinished += OnFinishedGame;
-            sGame.OnFinished += OnFinishedGame;
-            jGame.OnFinished += OnFinishedGame;
-
-            GameWindow.Start(jGame, new Transition(1d));
+            //GameWindow.Start(sGame, new Transition(1d));
             //GameWindow.Start(new WorldScreenGame());
         }
 
