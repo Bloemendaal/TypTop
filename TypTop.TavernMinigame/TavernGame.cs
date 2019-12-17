@@ -267,6 +267,7 @@ namespace TypTop.TavernMinigame
             if (level != null && level.Properties != null)
             {
                 int countOffset = 360;
+                _customerQueue = new CustomerQueue(this);
 
                 // Words
                 if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
@@ -372,7 +373,7 @@ namespace TypTop.TavernMinigame
 
                         Count = new Count(0, countOffset, (float)Height - 50, this);
 
-                        Finish = () => _customerQueue.Count <= 0;
+                        Finish = () => _customerQueue.Count <= 0 && _customers.Count <= 0;
                     }
                     else
                     {
@@ -404,7 +405,6 @@ namespace TypTop.TavernMinigame
 
             AddEntity(new Background("tavern.png", this));
 
-            _customerQueue = new CustomerQueue(this);
             AddEntity(_customerQueue);
 
             TextInput += OnTextInput;

@@ -48,6 +48,34 @@ namespace TypTop.GameGui
                 {
                     new Level()
                     {
+                        WinCondition = WinConditionType.ScoreCondition,
+
+                        ThresholdOneStar = 250,
+                        ThresholdTwoStars = 500,
+                        ThresholdThreeStars = 750,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Words", wordProvider.Serve()},
+                            {"Seconds", 120}
+                        }
+                    },
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.TimeCondition,
+
+                        ThresholdOneStar = 300,
+                        ThresholdTwoStars = 180,
+                        ThresholdThreeStars = 120,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Words", wordProvider.Serve()},
+                            {"Queue", 30}
+                        }
+                    },
+                    new Level()
+                    {
                         WinCondition = WinConditionType.LifeCondition,
 
                         ThresholdOneStar = 1,
