@@ -11,7 +11,7 @@ namespace TypTop.JumpMinigame
         private readonly List<Lane> _lanes = new List<Lane>();
         private readonly List<Word> _words;
 
-        public const int JumpHeight = 500;
+        public const int JumpHeight = 400;
 
         /// <summary>
         /// Amount of lanes that should be used for this level. Minimum amount of unique words must be equal to this value.
@@ -272,17 +272,23 @@ namespace TypTop.JumpMinigame
             }
 
             AddEntity(new Background("jumpLevelBackground.png", this));
+            AddEntity(new Background("scoreline.png", this)
+            {
+                ZIndex = 3,
+                Height = null,
+                Y = -20
+            });
 
             _player = new Player(this);
             _player.SwitchLane(_lanes[LaneAmount / 2]);
             Score = new Score(0, 0, this);
 
             AddEntity(_player);
-            GeneratePlatforms((float)Height);
+            GeneratePlatforms((float)Height, solidBase: true);
         }
 
 
-        public void GeneratePlatforms(float start = 0, float diff = 10000)
+        public void GeneratePlatforms(float start = 0, float diff = 10000, bool solidBase = false)
         {
             diff = Math.Abs(diff);
 
@@ -324,7 +330,7 @@ namespace TypTop.JumpMinigame
                 laneIndex++;
             }
 
-            _lanes[LaneAmount / 2].AddPlatform(start - Platform.Height);
+            _lanes[LaneAmount / 2].AddPlatform(start - Platform.Height, solidBase ? -1 : new int?());
         }
     }
 }

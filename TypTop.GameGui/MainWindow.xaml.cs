@@ -103,7 +103,10 @@ namespace TypTop.GameGui
                         Properties = new Dictionary<string, object>()
                         {
                             { "Words", wordProvider.Serve() },
-                            { "Lives", 6 }
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.5 }
                         }
                     }
                 }, WorldId.Jump)

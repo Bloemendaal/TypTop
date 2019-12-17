@@ -50,7 +50,7 @@ namespace TypTop.JumpMinigame
 
         public Player(JumpGame game) : base(game)
         {
-            ZIndex = 10;
+            ZIndex = 2;
             Game = game;
             _positionComponent = new PositionComponent
             {
@@ -87,10 +87,16 @@ namespace TypTop.JumpMinigame
         {
             if (_velocityComponent.Velocity.Y > 0)
             {
-                if (Lane?.GetPlatforms(_maxHeight).Any(platform => platform.Y < _positionComponent.Y + _imageComponent.Height) ?? false)
+                foreach (Platform platform in Lane?.GetPlatforms(_maxHeight))
                 {
-                    _maxHeight = 0;
-                    _velocityComponent.Velocity = new Vector2(0, -30f);
+                    if (platform.Y < _positionComponent.Y + _imageComponent.Height)
+                    {
+                        _maxHeight = 0;
+                        _velocityComponent.Velocity = new Vector2(0, -30f);
+
+                        platform.Jump();
+                        break;
+                    }
                 }
             }
             else if (Y > _maxHeight)
