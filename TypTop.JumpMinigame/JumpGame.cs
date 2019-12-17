@@ -271,6 +271,7 @@ namespace TypTop.JumpMinigame
                 throw new ArgumentNullException(nameof(level));
             }
 
+            AddEntity(new Background("jumpLevelBackground.png", this));
 
             _player = new Player(this);
             _player.SwitchLane(_lanes[LaneAmount / 2]);

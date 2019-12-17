@@ -39,9 +39,9 @@ namespace TypTop.JumpMinigame
         }
 
 
-        public List<Platform> GetPlatforms()
+        public List<Platform> GetPlatforms(float maxHeight = 0)
         {
-            return _platforms.Where(e => e.Y > 0).OrderBy(e => e.Y).ToList();
+            return _platforms.Where(e => e.Y >= maxHeight).OrderBy(e => e.Y).ToList();
         }
 
         public void AddPlatform(float y)
