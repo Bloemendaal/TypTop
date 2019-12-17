@@ -29,7 +29,7 @@ namespace TypTop.JumpMinigame
             set => _positionComponent.Y = value;
         }
 
-        private float _maxHeight = 500;
+        private float _minHeight = 500;
 
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace TypTop.JumpMinigame
             Game = game;
             _positionComponent = new PositionComponent
             {
-                Y = _maxHeight
+                Y = _minHeight
             };
             _velocityComponent = new VelocityComponent();
 
@@ -87,11 +87,11 @@ namespace TypTop.JumpMinigame
         {
             if (_velocityComponent.Velocity.Y > 0)
             {
-                foreach (Platform platform in Lane?.GetPlatforms(_maxHeight))
+                foreach (Platform platform in Lane?.GetPlatforms(_minHeight))
                 {
                     if (platform.Y < _positionComponent.Y + _imageComponent.Height)
                     {
-                        _maxHeight = 0;
+                        _minHeight = (float)JumpGame.Height;
                         _velocityComponent.Velocity = new Vector2(0, -30f);
 
                         platform.Jump();
@@ -99,14 +99,13 @@ namespace TypTop.JumpMinigame
                     }
                 }
             }
-            else if (Y > _maxHeight)
+            else if (Y < _minHeight)
             {
-                _maxHeight = Y;
-
-                float diff = (float)JumpGame.Height - _maxHeight;
+                _minHeight = Y;
+                float diff = (float)JumpGame.Height - _minHeight;
                 if (diff > JumpGame.JumpHeight)
                 {
-                    CameraComponent.SetY(CameraComponent.GetY(Game) + diff, Game);
+                    CameraComponent.SetY(CameraComponent.GetY(Game) - diff + JumpGame.JumpHeight, Game);
                 }
             }
 

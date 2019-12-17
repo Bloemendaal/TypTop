@@ -56,9 +56,9 @@ namespace TypTop.JumpMinigame
         }
 
 
-        public List<Platform> GetPlatforms(float maxHeight = 0)
+        public List<Platform> GetPlatforms(float minHeight = 0)
         {
-            return _platforms.Where(e => e.Y >= maxHeight).OrderBy(e => e.Y).ToList();
+            return _platforms.Where(e => e.Y >= minHeight).OrderBy(e => e.Y).ToList();
         }
 
         public void AddPlatform(float y, int? breakIndex = null)
@@ -67,6 +67,6 @@ namespace TypTop.JumpMinigame
             _platforms.Add(platform);
             Game.AddEntity(platform);
         }
-        public bool RemovePlatform(Platform platform) => Game.RemoveEntity(platform) && _platforms.Remove(platform);
+        public bool RemovePlatform(Platform platform) => _platforms.Remove(platform) && Game.RemoveEntity(platform);
     }
 }

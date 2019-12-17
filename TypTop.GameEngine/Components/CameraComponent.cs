@@ -29,8 +29,14 @@ namespace TypTop.GameEngine.Components
             get => _position.TryGetValue(Entity.Game, out Vector2 result) ? result.X : 0;
             set
             {
-                _position.TryGetValue(Entity.Game, out Vector2 result);
-                result.X = value;
+                if (_position.ContainsKey(Entity.Game))
+                {
+                    _position[Entity.Game] = new Vector2(value, _position[Entity.Game].Y);
+                }
+                else
+                {
+                    _position.Add(Entity.Game, new Vector2(value, 0));
+                }
             }
         }
 
@@ -42,8 +48,14 @@ namespace TypTop.GameEngine.Components
             get => _position.TryGetValue(Entity.Game, out Vector2 result) ? result.Y : 0;
             set
             {
-                _position.TryGetValue(Entity.Game, out Vector2 result);
-                result.Y = value;
+                if (_position.ContainsKey(Entity.Game))
+                {
+                    _position[Entity.Game] = new Vector2(_position[Entity.Game].X, value);
+                }
+                else
+                {
+                    _position.Add(Entity.Game, new Vector2(0, value));
+                }
             }
         }
 
@@ -103,9 +115,9 @@ namespace TypTop.GameEngine.Components
         /// </param>
         public static void SetX(float x, Game game)
         {
-            if (_position.TryGetValue(game, out Vector2 vector2))
+            if (_position.ContainsKey(game))
             {
-                vector2.X = x;
+                _position[game] = new Vector2(x, _position[game].Y);
             }
             else
             {
@@ -124,9 +136,9 @@ namespace TypTop.GameEngine.Components
         /// </param>
         public static void SetY(float y, Game game)
         {
-            if (_position.TryGetValue(game, out Vector2 vector2))
+            if (_position.ContainsKey(game))
             {
-                vector2.Y = y;
+                _position[game] = new Vector2(_position[game].X, y);
             }
             else
             {
