@@ -22,9 +22,9 @@ namespace TypTop.SpaceMinigame
         //
         public Player Player { get; private set; }
         public Line Line { get; private set; }
-        public int EnemyAmount 
-        { 
-            get => _enemyAmount; 
+        public int EnemyAmount
+        {
+            get => _enemyAmount;
             private set
             {
                 if (value < 1)
@@ -170,10 +170,10 @@ namespace TypTop.SpaceMinigame
 
             Player = new Player(this);
             Line = new Line(LineHeight, this);
-            
 
-            // 
-            // Adding entities 
+
+            //
+            // Adding entities
             //
 
             AddEntity(new Background("space.jpg", this));
