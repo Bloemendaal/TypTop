@@ -30,6 +30,7 @@ namespace TypTop.JumpMinigame
         }
 
         private float _minHeight = 500;
+        private float _absMinHeight;
 
 
         /// <summary>
@@ -99,15 +100,18 @@ namespace TypTop.JumpMinigame
                     }
                 }
             }
-            else if (Y < _minHeight)
+            else
             {
-                _minHeight = Y;
-                float diff = (float)JumpGame.Height - _minHeight;
-                if (diff > JumpGame.JumpHeight)
+                if (Y < _minHeight)
                 {
-                    CameraComponent.SetY(CameraComponent.GetY(Game) - diff + JumpGame.JumpHeight, Game);
+                    _minHeight = Y;
                 }
+
+                _absMinHeight = Math.Min(_absMinHeight, _positionComponent.AbsoluteY - (float)JumpGame.Height / 2);
+
+                CameraComponent.SetY(_absMinHeight, Game);
             }
+
 
             base.Update(deltaTime);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 using TypTop.Logic;
 using TypTop.MinigameEngine.WinConditions;
 
@@ -56,6 +57,7 @@ namespace TypTop.MinigameEngine
 
         public Minigame(Level level)
         {
+            CameraComponent.RemoveCamera(this);
             WinCondition = level.WinCondition switch
             {
                 WinConditionType.LifeCondition => new LifeCondition(level.ThresholdThreeStars, level.ThresholdTwoStars, level.ThresholdOneStar),
@@ -91,6 +93,7 @@ namespace TypTop.MinigameEngine
                     Score = Score?.Amount,
                     Stars = Stars
                 });
+
                 return;
             }
 

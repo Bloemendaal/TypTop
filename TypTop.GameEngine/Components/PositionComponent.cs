@@ -8,14 +8,14 @@ namespace TypTop.GameEngine.Components
 
         public Vector2 Position
         {
-            get => _position - (_camera?.Position ?? new Vector2(0, 0));
+            get => AbsolutePosition - (_camera?.Position ?? new Vector2(0, 0));
             set => _position = value;
         }
         private Vector2 _position;
 
         public float X
         {
-            get => (Position == null ? 0 : Position.X) - (_camera?.X ?? 0);
+            get => AbsoluteX + (_camera?.X ?? 0);
             set
             {
                 if (_position == null)
@@ -31,7 +31,46 @@ namespace TypTop.GameEngine.Components
         }
         public float Y
         {
-            get => (Position == null ? 0 : Position.Y) - (_camera?.Y ?? 0);
+            get => AbsoluteY - (_camera?.Y ?? 0);
+            set
+            {
+                if (_position == null)
+                {
+                    _position = new Vector2(0, value);
+                }
+                else
+                {
+                    _position.Y = value;
+                }
+
+            }
+        }
+
+        public Vector2 AbsolutePosition
+        {
+            get => _position;
+            set => _position = value;
+        }
+
+        public float AbsoluteX
+        {
+            get => Position == null ? 0 : Position.X;
+            set
+            {
+                if (_position == null)
+                {
+                    _position = new Vector2(value, 0);
+                }
+                else
+                {
+                    _position.X = value;
+                }
+
+            }
+        }
+        public float AbsoluteY
+        {
+            get => Position == null ? 0 : Position.Y;
             set
             {
                 if (_position == null)

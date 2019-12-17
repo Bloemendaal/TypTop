@@ -116,7 +116,7 @@ namespace TypTop.GameEngine.Components
             context.DrawImage(
                 _bitmapImage,
                 new Rect(
-                    new Point(_positionComponent.Position.X, _positionComponent.Position.Y),
+                    new Point(_positionComponent.X, _positionComponent.Y),
                     new Size((double)Width, (double)Height)
                 )
             );

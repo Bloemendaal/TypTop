@@ -85,6 +85,7 @@ namespace TypTop.JumpMinigame
                 case -1:
                     return;
                 case 0:
+                    Lane.RemovePlatform(this);
                     Game.RemoveEntity(this);
                     break;
                 default:
