@@ -42,9 +42,6 @@ namespace TypTop.GameGui
             };
             wordProvider.LoadTestWords();
 
-            //tGame.OnFinished += OnFinishedGame;
-            //sGame.OnFinished += OnFinishedGame;
-
             var gameLoader = new GameLoader(GameWindow, new List<World>()
             {
                 new World("tavernButton.png", "tavernLevelBackground.png" ,new List<Level>()
@@ -76,7 +73,7 @@ namespace TypTop.GameGui
                         }
                     }
                 }, WorldId.Tavern),
-                new World("spaceButton.png", "levelBackground.jpeg", new List<Level>()
+                new World("spaceButton.png", "spaceLevelBackground.jpeg", new List<Level>()
                 {
                     new Level()
                     {
@@ -93,12 +90,25 @@ namespace TypTop.GameGui
                             {"LineHeight", 800f}
                         }
                     }
-                }, WorldId.Space)
+                }, WorldId.Space),
+                new World("jumpButton.png", "jumpLevelBackground.png", new List<Level>()
+                {
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Words", wordProvider.Serve() },
+                            { "Lives", 6 }
+                        }
+                    }
+                }, WorldId.Jump)
             });
             gameLoader.LoadWorldMap();
-
-            //GameWindow.Start(sGame, new Transition(1d));
-            //GameWindow.Start(new WorldScreenGame());
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
