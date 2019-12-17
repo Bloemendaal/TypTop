@@ -6,17 +6,19 @@ namespace TypTop.GameGui
 {
     public class Settings
     {
+        public static Settings Instance => LazySettings.Value;
+
         private static readonly Lazy<Settings> LazySettings = new Lazy<Settings>(() =>
         {
             var devEnvironmentVariable = Environment.GetEnvironmentVariable("NETCORE_ENVIRONMENT");
             var isDevelopment = string.IsNullOrEmpty(devEnvironmentVariable) ||
                                 devEnvironmentVariable.ToLower() == "development";
 
-            IConfigurationBuilder builder = new ConfigurationBuilder()
+            var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json",
-                    false,
-                    true)
+                    optional: false,
+                    reloadOnChange: true)
                 .AddUserSecrets<MainWindow>();
             IConfigurationRoot configurationRoot = builder.Build();
             return new Settings(configurationRoot);
@@ -28,8 +30,6 @@ namespace TypTop.GameGui
         {
             _configurationRoot = configurationRoot;
         }
-
-        public static Settings Instance => LazySettings.Value;
 
         public string DatabaseConnectionString =>
             _configurationRoot.GetSection("Database").GetValue<string>("ConnectionString");

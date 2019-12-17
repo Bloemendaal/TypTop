@@ -8,8 +8,7 @@ namespace TypTop.VisualKeyboard
     {
         private readonly IKeyPrintDrawer[] _keyPrints;
 
-        public PrintedKey(Key key, Size size, KeyStyle style, params IKeyPrintDrawer[] keyPrints) : base(key, size,
-            style)
+        public PrintedKey(Key key, Size size, KeyStyle style, params IKeyPrintDrawer[] keyPrints) : base(key, size,style)
         {
             _keyPrints = keyPrints;
             Style = style;
@@ -17,7 +16,10 @@ namespace TypTop.VisualKeyboard
 
         public override void DrawSymbols(DrawingContext drawingContext)
         {
-            foreach (IKeyPrintDrawer keyPrintDrawer in _keyPrints) keyPrintDrawer.Draw(Rectangle, drawingContext);
+            foreach (IKeyPrintDrawer keyPrintDrawer in _keyPrints)
+            {
+                keyPrintDrawer.Draw(Rectangle, drawingContext);
+            }
         }
     }
 }

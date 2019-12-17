@@ -1,6 +1,6 @@
 ﻿namespace TypTop.GameEngine
 {
-    internal interface ITimed
+    interface ITimed
     {
         bool IncrementTime(double deltaTime);
     }

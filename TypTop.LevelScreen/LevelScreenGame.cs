@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using TypTop.GameEngine;
 using TypTop.GameGui;
@@ -9,8 +10,8 @@ namespace TypTop.LevelScreen
 {
     public class LevelScreenGame : Game
     {
-        private readonly IGameLoader _gameLoader;
         private readonly World _world;
+        private readonly IGameLoader _gameLoader;
 
         public LevelScreenGame(World world, IGameLoader gameLoader)
         {

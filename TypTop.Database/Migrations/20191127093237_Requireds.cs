@@ -7,24 +7,24 @@ namespace TypTop.Database.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                "Username",
-                "User",
+                name: "Username",
+                table: "User",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                "Salt",
-                "User",
+                name: "Salt",
+                table: "User",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(
-                "Password",
-                "User",
+                name: "Password",
+                table: "User",
                 nullable: false,
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)",
@@ -34,23 +34,23 @@ namespace TypTop.Database.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<string>(
-                "Username",
-                "User",
-                "nvarchar(max)",
+                name: "Username",
+                table: "User",
+                type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string));
 
             migrationBuilder.AlterColumn<string>(
-                "Salt",
-                "User",
-                "nvarchar(max)",
+                name: "Salt",
+                table: "User",
+                type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string));
 
             migrationBuilder.AlterColumn<string>(
-                "Password",
-                "User",
-                "nvarchar(max)",
+                name: "Password",
+                table: "User",
+                type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string));
         }

@@ -1,4 +1,5 @@
-﻿using TypTop.GameGui;
+﻿using System.Collections.Generic;
+using TypTop.GameGui;
 
 namespace TypTop.Logic
 {

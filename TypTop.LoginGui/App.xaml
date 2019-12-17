@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:TypTop.LoginGui"
              StartupUri="LoginWindow.xaml">
     <Application.Resources>
-
+         
     </Application.Resources>
 </Application>

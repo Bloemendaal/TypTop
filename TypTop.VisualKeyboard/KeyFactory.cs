@@ -9,15 +9,18 @@ namespace TypTop.VisualKeyboard
     {
         public KeyboardKey CreateKey(Key key, KeyStyle style)
         {
-            var normalKeySize = new Size(50, 50); //A key
-            var ctrlKeySize = new Size(62.5D, 50); //A key
-            var tabSize = new Size(75, 50); //Caps key
+            var normalKeySize = new Size(50, 50);//A key
+            var ctrlKeySize = new Size(62.5D, 50);//A key
+            var tabSize = new Size(75, 50);//Caps key
             var capsSize = new Size(90, 50); //Enter and shift key
             var enterSize = new Size(115, 50); //Enter and shift key
             var shiftSize = new Size(100, 50); // Left Shift
             var rightShiftSize = new Size(160, 50); // Right Shift
             var spaceSize = new Size(312.5D, 50);
-            if (key >= Key.A && key <= Key.Z) return CreateSingleSymbolKey(key, normalKeySize, style);
+            if (key >= Key.A && key <= Key.Z)
+            {
+                return CreateSingleSymbolKey(key, normalKeySize, style);
+            }
 
             switch (key)
             {
@@ -67,36 +70,29 @@ namespace TypTop.VisualKeyboard
 
                 case Key.LeftCtrl:
                 case Key.RightCtrl:
-                    return CreateTextKey(key, "Ctrl", normalKeySize, style, HorizontalAlignment.Center,
-                        VerticalAlignment.Center);
+                    return CreateTextKey(key, "Ctrl", normalKeySize, style, HorizontalAlignment.Center, VerticalAlignment.Center);
 
                 case Key.LeftAlt:
                 case Key.RightAlt:
-                    return CreateTextKey(key, "Alt", normalKeySize, style, HorizontalAlignment.Center,
-                        VerticalAlignment.Center);
+                    return CreateTextKey(key, "Alt", normalKeySize, style, HorizontalAlignment.Center, VerticalAlignment.Center);
 
 
                 case Key.LWin:
                 case Key.RWin:
-                    return CreateTextKey(key, "⊞", normalKeySize, style, HorizontalAlignment.Center,
-                        VerticalAlignment.Center);
+                    return CreateTextKey(key, "⊞", normalKeySize, style, HorizontalAlignment.Center, VerticalAlignment.Center);
 
                 case Key.Enter:
-                    return CreateTextKey(key, "↵ Enter", enterSize, style, HorizontalAlignment.Right,
-                        VerticalAlignment.Center, new Vector2(-5, 0));
+                    return CreateTextKey(key, "↵ Enter", enterSize, style, HorizontalAlignment.Right, VerticalAlignment.Center, new Vector2(-5, 0));
                 case Key.Back:
-                    return CreateTextKey(key, "⌫", shiftSize, style, HorizontalAlignment.Right,
-                        VerticalAlignment.Center, new Vector2(-5, 0));
+                    return CreateTextKey(key, "⌫", shiftSize, style, HorizontalAlignment.Right, VerticalAlignment.Center, new Vector2(-5,0));
                 case Key.RightShift:
                     return CreateTextKey(key, "Shift", rightShiftSize, style, HorizontalAlignment.Right,
                         VerticalAlignment.Center, new Vector2(-5, 0));
 
                 case Key.Tab:
-                    return CreateTextKey(key, "Tab", tabSize, style, HorizontalAlignment.Left, VerticalAlignment.Center,
-                        new Vector2(5, 0));
+                    return CreateTextKey(key, "Tab", tabSize, style, HorizontalAlignment.Left, VerticalAlignment.Center, new Vector2(5, 0));
                 case Key.CapsLock:
-                    return CreateTextKey(key, "Caps", capsSize, style, HorizontalAlignment.Left,
-                        VerticalAlignment.Center, new Vector2(5, 0));
+                    return CreateTextKey(key, "Caps", capsSize, style, HorizontalAlignment.Left, VerticalAlignment.Center, new Vector2(5, 0));
                 case Key.LeftShift:
                     return CreateTextKey(key, "Shift", shiftSize, style, HorizontalAlignment.Left,
                         VerticalAlignment.Center, new Vector2(5, 0));
@@ -113,7 +109,7 @@ namespace TypTop.VisualKeyboard
             HorizontalAlignment horizontalAlignment = default,
             VerticalAlignment verticalAlignment = default,
             Vector2 offset = default
-        )
+            )
         {
             var textPrintDrawer = new TextPrintDrawer(text, style)
             {
@@ -126,13 +122,12 @@ namespace TypTop.VisualKeyboard
             return keyboardKey;
         }
 
-        private KeyboardKey CreateSingleSymbolKey(Key key, Size size, KeyStyle style)
+        private KeyboardKey CreateSingleSymbolKey(Key key,Size size, KeyStyle style)
         {
-            return CreateTextKey(key, key.ToString(), size, style, offset: new Vector2(3, 3));
+            return CreateTextKey(key,key.ToString(), size,style, offset: new Vector2(3,3));
         }
 
-        private KeyboardKey CreateDualSymbolKey(Key key, string firstSymbol, string secondSymbol, Size size,
-            KeyStyle style)
+        private KeyboardKey CreateDualSymbolKey(Key key,string firstSymbol, string secondSymbol, Size size, KeyStyle style)
         {
             var firstSymbolPrinter = new TextPrintDrawer(firstSymbol, style)
             {

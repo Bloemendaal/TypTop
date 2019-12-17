@@ -1,11 +1,21 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Windows;
 using System.Windows.Media;
 using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 
 namespace TypTop.SpaceMinigame.Components
 {
     public class LaserComponent : Component, IDrawable
     {
+        //
+        // Props
+        // 
+        public bool Hidden { get; set; }
+
         //
         // Props
         //
@@ -19,11 +29,6 @@ namespace TypTop.SpaceMinigame.Components
             _point2 = point2;
         }
 
-        //
-        // Props
-        // 
-        public bool Hidden { get; set; }
-
         public void Draw(DrawingContext context)
         {
             _color.Opacity -= 0.02;
@@ -36,7 +41,7 @@ namespace TypTop.SpaceMinigame.Components
             var pen = new Pen(_color, 5);
 
             var dashStyle = new DashStyle(
-                new double[] {5, 5}, 0);
+                new double[] { 5, 5 }, 0);
             pen.DashStyle = dashStyle;
 
             context.DrawLine(pen, _point1, _point2);

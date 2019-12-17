@@ -4,7 +4,7 @@ using TypTop.Database;
 namespace TypTop.GameGui
 {
     /// <summary>
-    ///     Wordt gebruikt voor ef migrations
+    /// Wordt gebruikt voor ef migrations
     /// </summary>
     public class ContextFactory : IDesignTimeDbContextFactory<Context>
     {

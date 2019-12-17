@@ -16,29 +16,28 @@ namespace TypTop.GameEngine
             return new Vector2((float) point.X, (float) point.Y);
         }
 
-        public static Rect GetRectangle(int index, int total, int columns, float spacing, float columnWidth,
-            float columnHeight)
+        public static Rect GetRectangle(int index, int total, int columns, float spacing, float columnWidth, float columnHeight)
         {
             columns = Math.Min(columns, total);
 
-            var totalWidth = 1920f;
-            var totalHeight = 1080f;
+            float totalWidth = 1920f;
+            float totalHeight = 1080f;
 
-            var totalRows = (int) (total / (float) columns + 0.5f);
-            var currentRowIndex = index / columns;
-            var currentColumnIndex = index % columns;
+            int totalRows = (int)(total / (float)columns + 0.5f);
+            int currentRowIndex = index / columns;
+            int currentColumnIndex = index % columns;
 
-            var totalColumnSpacerCount = columns - 1;
-            var totalRowSpacerCount = totalRows - 1;
+            int totalColumnSpacerCount = columns - 1;
+            int totalRowSpacerCount = totalRows - 1;
 
-            var horizontalColumnOffset =
+            float horizontalColumnOffset =
                 (totalWidth - (columnWidth * columns + totalColumnSpacerCount * spacing)) / 2f;
 
-            var verticalColumnOffset =
+            float verticalColumnOffset =
                 (totalHeight - (columnHeight * totalRows + totalRowSpacerCount * spacing)) / 2f;
 
-            var x = horizontalColumnOffset + (columnWidth * currentColumnIndex + spacing * currentColumnIndex);
-            var y = verticalColumnOffset + (columnHeight * currentRowIndex + spacing * currentRowIndex);
+            float x = horizontalColumnOffset + (columnWidth * currentColumnIndex + spacing * currentColumnIndex);
+            float y = verticalColumnOffset + (columnHeight * currentRowIndex + spacing * currentRowIndex);
 
             return new Rect(new Point(x, y), new Size(columnWidth, columnHeight));
         }

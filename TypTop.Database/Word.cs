@@ -4,6 +4,7 @@ namespace TypTop.Database
 {
     public class Word
     {
-        [Key] public string Letters { get; set; }
+        [Key]
+        public string Letters { get; set; }
     }
 }

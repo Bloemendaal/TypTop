@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using TypTop.Database;
 
 namespace TypTop.Repository
 {
     public interface IUserRepository : IRepository<User>
     {
-        int GetId(string username);
+
+        public int GetId(string username);
         byte[] GetPasswordHash(string username);
         byte[] GetSalt(string username);
         DateTime GetLastLogin(int userId);

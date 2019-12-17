@@ -2,6 +2,7 @@
 using TypTop.GameWindow;
 using TypTop.LevelScreen;
 using TypTop.Logic;
+using TypTop.MinigameEngine;
 using TypTop.SpaceMinigame;
 using TypTop.TavernMinigame;
 using TypTop.WorldScreen;
@@ -38,18 +39,26 @@ namespace TypTop.GameGui
                 case WorldId.Space:
                 {
                     var spaceGame = new SpaceGame(level);
-                    spaceGame.OnFinished += (sender, args) => { LoadLevelMap(level.World); };
+                    spaceGame.OnFinished += (sender, args) =>
+                    {
+                        LoadLevelMap(level.World);
+                    };
                     _gameWindow.Start(spaceGame, new Transition(1));
                     break;
                 }
                 case WorldId.Tavern:
                 {
                     var tavernGame = new TavernGame(level);
-                    tavernGame.OnFinished += (sender, args) => { LoadLevelMap(level.World); };
+                    tavernGame.OnFinished += (sender, args) =>
+                    {
+                        LoadLevelMap(level.World);
+                    };
                     _gameWindow.Start(tavernGame, new Transition(1));
                     break;
                 }
             }
         }
+
+       
     }
 }

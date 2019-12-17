@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TypTop.Logic
 {
     public class InputQueue : Input
     {
         public Queue<Word> Input;
-
         public InputQueue(Queue<Word> input)
         {
             Input = input;
@@ -17,7 +18,7 @@ namespace TypTop.Logic
         public override void TextInput(char letter)
         {
             Word input = Input?.Peek();
-            var index = input.Index;
+            int index = input.Index;
 
             if (input != null)
             {
@@ -35,7 +36,10 @@ namespace TypTop.Logic
                         input.Correct = null;
                     }
 
-                    if (OnKeyWrong == KeyWrong.Remove) Input?.Dequeue();
+                    if (OnKeyWrong == KeyWrong.Remove)
+                    {
+                        Input?.Dequeue();
+                    }
 
                     if (OnKeyWrong == KeyWrong.Add)
                     {
@@ -44,38 +48,44 @@ namespace TypTop.Logic
                         input.Correct = false;
                     }
 
-                    if (OnKeyWrong == KeyWrong.None) input.Index = index;
+                    if (OnKeyWrong == KeyWrong.None)
+                    {
+                        input.Index = index;
+                    }
                 }
             }
 
-            WordUpdate?.Invoke(this, new WordUpdateArgs
+            WordUpdate?.Invoke(this, new WordUpdateArgs()
             {
                 Words = new List<Word>(),
                 PreviousChar = PreviousChar,
                 CurrentChar = letter
             });
 
-            if (RemoveOnFinished) Input = new Queue<Word>(Input.Where(e => !e.Finished));
+            if (RemoveOnFinished)
+            {
+                Input = new Queue<Word>(Input.Where(e => !e.Finished));
+            }
 
             base.TextInput(letter);
         }
-
         public override void Backspace()
         {
             Word input = Input?.Peek();
             input?.Backspace();
 
-            var correct = true;
-            for (var i = 0; i < input.Input.Count; i++)
+            bool correct = true;
+            for (int i = 0; i < input.Input.Count; i++)
+            {
                 if (!CheckWord(input.Input.ElementAt(i), input, i))
                 {
                     correct = false;
                     break;
                 }
+            }
 
             input.Correct = correct;
         }
-
         public override event EventHandler<WordUpdateArgs> WordUpdate;
     }
 }

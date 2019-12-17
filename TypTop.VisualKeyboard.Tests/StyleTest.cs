@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 
 namespace TypTop.VisualKeyboard.Tests
@@ -7,6 +8,7 @@ namespace TypTop.VisualKeyboard.Tests
         [Fact]
         public void TestDefaultStyle()
         {
+
         }
     }
 }

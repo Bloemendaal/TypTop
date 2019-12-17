@@ -1,16 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
 
 namespace TypTop.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        private readonly DbSet<TEntity> _entities;
         protected readonly DbContext DbContext;
-
+        private readonly DbSet<TEntity> _entities;
         public Repository(DbContext context)
         {
             DbContext = context;
@@ -24,7 +23,7 @@ namespace TypTop.Repository
 
         public TEntity Get(int id)
         {
-            return _entities.Find(id);
+           return _entities.Find(id);
         }
 
         public IEnumerable<TEntity> GetAll()

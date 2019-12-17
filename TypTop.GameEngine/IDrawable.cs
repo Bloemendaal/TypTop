@@ -4,7 +4,7 @@ namespace TypTop.GameEngine
 {
     public interface IDrawable
     {
-        bool Hidden { get; set; }
+        public bool Hidden { get; set; }
         void Draw(DrawingContext context);
     }
 }

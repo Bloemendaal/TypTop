@@ -5,9 +5,10 @@ namespace TypTop.VisualKeyboard
 {
     public class RowBox
     {
-        private double _rowHeight;
         private double _x;
         private double _y;
+
+        private double _rowHeight;
 
         public double Spacing { get; set; } = 5;
 
@@ -20,7 +21,7 @@ namespace TypTop.VisualKeyboard
         public Point GetPosition(Size box)
         {
             _rowHeight = Math.Max(box.Height, _rowHeight);
-            var x = _x;
+            double x = _x;
             _x += box.Width + Spacing;
             return new Point(x, _y);
         }

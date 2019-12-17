@@ -14,8 +14,6 @@
             }
         }
 
-        public virtual void AddedToEntity()
-        {
-        }
+        public virtual void AddedToEntity() { }
     }
 }
