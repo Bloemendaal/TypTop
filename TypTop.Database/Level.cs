@@ -22,10 +22,12 @@ namespace TypTop.Database
         public int Index { get; set; }
 
         [Required]
-        public double X { get; set; }
+        public string Variables { get; set; }
 
         [Required]
-        public double Y { get; set; }
+        public int RequiredLevelId { get; set; }
+
+        public virtual Level RequiredLevel { get; set; }
 
     }
 }

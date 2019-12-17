@@ -21,6 +21,7 @@ namespace TypTop.Database
         [Required]
         public int Stars { get; set; }
 
-        //background
+        public string Background { get; set; }
+
     }
 }

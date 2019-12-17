@@ -13,7 +13,6 @@ namespace TypTop.Database
         public DbSet<User> User { get; set; }
         public DbSet<UserLevel> UserLevel { get; set; }
         public DbSet<Level> Level { get; set; }
-        public DbSet<LevelUnlock> LevelUnlock { get; set; }
         public DbSet<World> World { get; set; }
         public DbSet<Word> Word { get; set; }
 
@@ -32,10 +31,6 @@ namespace TypTop.Database
             //set UserId and LevelId as composite primary key
             builder.Entity<UserLevel>()
                 .HasKey(l => new { l.UserId, l.LevelId });
-
-            //set LevelId and RequiredId as composite primary key
-            builder.Entity<LevelUnlock>()
-                .HasKey(l => new { l.LevelId, l.RequiredId });
 
         }
 
