@@ -55,7 +55,7 @@ namespace TypTop.JumpMinigame
         /// <summary>
         /// Width that the lanes should have.
         /// </summary>
-        public float LaneWidth => LaneAmount / (float)Height;
+        public float LaneWidth => (float)Width / LaneAmount;
 
         /// <summary>
         /// Minimal height of an enemy to spawn. Default is after one screen height.
@@ -277,31 +277,35 @@ namespace TypTop.JumpMinigame
             Score = new Score(0, 0, this);
 
             AddEntity(_player);
-            GeneratePlatforms();
+            GeneratePlatforms((float)Height);
         }
 
 
-        public void GeneratePlatforms(float start = 0, float diff = 5000)
+        public void GeneratePlatforms(float start = 0, float diff = 10000)
         {
+            diff = Math.Abs(diff);
+
             List<float> coordinates = new List<float>();
-            for (int i = 0; i < LaneAmount * 20; i++)
+            for (int i = 0; i < LaneAmount * diff / JumpHeight; i++)
             {
-                coordinates.Add(Rnd.Next((int)((start - diff) * 1000000), (int)(start * 1000000)) / 1000000f);
+                coordinates.Add(Rnd.Next((int)((start - diff) * 1000), (int)(start * 1000)) / 1000f);
             }
 
+            coordinates.Add(start - Platform.Height);
             coordinates.Sort();
+            coordinates.Reverse();
 
-            float remove = 0;
             for (int i = 0; i < coordinates.Count - 1; i++)
             {
                 float tdiff = Math.Abs(coordinates[i + 1] - coordinates[i]);
                 if (tdiff > JumpHeight)
                 {
-                    remove += tdiff;
+                    coordinates[i + 1] -= tdiff;
                 }
-
-                coordinates[i] -= remove;
             }
+
+            coordinates.RemoveAt(0);
+
 
             // Shuffle
             List<float> randomList = new List<float>();
@@ -318,6 +322,8 @@ namespace TypTop.JumpMinigame
                 _lanes[laneIndex % LaneAmount].AddPlatform(coordinate);
                 laneIndex++;
             }
+
+            _lanes[_lanes.Count / 2].AddPlatform(start - Platform.Height);
         }
     }
 }

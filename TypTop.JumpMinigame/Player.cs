@@ -47,6 +47,7 @@ namespace TypTop.JumpMinigame
 
         public Player(JumpGame game) : base(game)
         {
+            ZIndex = 10;
             Game = game;
             _positionComponent = new PositionComponent
             {

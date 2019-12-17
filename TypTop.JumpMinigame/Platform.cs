@@ -24,6 +24,8 @@ namespace TypTop.JumpMinigame
             set => _positionComponent.Y = value;
         }
 
+        public const int Height = 20;
+
         private readonly PositionComponent _positionComponent;
 
         public Platform(float y, Lane lane, JumpGame minigame) : base(minigame)
@@ -51,7 +53,7 @@ namespace TypTop.JumpMinigame
             {
                 Fill = Brushes.Black,
                 Width = minigame.LaneWidth,
-                Height = 20
+                Height = Height
             });
         }
 
