@@ -107,7 +107,7 @@ namespace TypTop.JumpMinigame
                     _minHeight = Y;
                 }
 
-                _absMinHeight = Math.Min(_absMinHeight, _positionComponent.AbsoluteY - (float)JumpGame.Height / 2);
+                _absMinHeight = Math.Min(_absMinHeight, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
 
                 CameraComponent.SetY(_absMinHeight, Game);
             }
