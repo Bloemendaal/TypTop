@@ -8,7 +8,7 @@ namespace TypTop.JumpMinigame
     public class JumpGame : Minigame
     {
         private readonly Player _player;
-        private List<Lane> _lanes = new List<Lane>();
+        private readonly List<Lane> _lanes = new List<Lane>();
         private readonly List<Word> _words;
 
         public const int JumpHeight = 500;
@@ -272,8 +272,8 @@ namespace TypTop.JumpMinigame
             }
 
 
-
             _player = new Player(this);
+            _player.SwitchLane(_lanes[LaneAmount / 2]);
             Score = new Score(0, 0, this);
 
             AddEntity(_player);
@@ -323,7 +323,7 @@ namespace TypTop.JumpMinigame
                 laneIndex++;
             }
 
-            _lanes[_lanes.Count / 2].AddPlatform(start - Platform.Height);
+            _lanes[LaneAmount / 2].AddPlatform(start - Platform.Height);
         }
     }
 }

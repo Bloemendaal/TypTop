@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Windows;
@@ -19,14 +20,16 @@ namespace TypTop.JumpMinigame
 
         public float X
         {
-            get => _positionComponent.X;
-            set => _positionComponent.X = value;
+            get => _positionComponent.X - (float)_imageComponent.Width / 2;
+            set => _positionComponent.X = value - (float)_imageComponent.Width / 2;
         }
         public float Y
         {
             get => _positionComponent.Y;
             set => _positionComponent.Y = value;
         }
+
+        private float _maxHeight = 0;
 
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace TypTop.JumpMinigame
             get => _lane;
             set
             {
-                if (value != null && Lane.Game.Equals(Game))
+                if (value != null && (Lane?.Game.Equals(Game) ?? true))
                 {
                     _lane = value;
                 }
@@ -51,7 +54,7 @@ namespace TypTop.JumpMinigame
             Game = game;
             _positionComponent = new PositionComponent
             {
-                Position = new Vector2(885, 100)
+                Y = _maxHeight
             };
             _velocityComponent = new VelocityComponent();
 
@@ -71,22 +74,28 @@ namespace TypTop.JumpMinigame
             AddComponent(_imageComponent);
         }
 
+        public void SwitchLane(Lane lane)
+        {
+            if (!lane.Equals(Lane) && lane != null)
+            {
+                Lane = lane;
+                X = Lane.X + Game.LaneWidth / 2;
+            }
+        }
+
         public override void Update(float deltaTime)
         {
             if (_velocityComponent.Velocity.Y > 0)
             {
-                if (_positionComponent.Y > 980)
-                    _velocityComponent.Velocity = new Vector2(0, -30f);
-
-                /*
-                Lane.GetPlatforms().ForEach(platform =>
+                if (Lane?.GetPlatforms().Where(platform => platform.Y > _maxHeight).Any(platform => platform.Y < _positionComponent.Y + _imageComponent.Height) ?? false)
                 {
-                    if (platform.Y > _positionComponent.Y)
-                    {
-                        _velocityComponent.Velocity = new Vector2(0, 30f);
-                    }
-                });
-                */
+                    _maxHeight = 0;
+                    _velocityComponent.Velocity = new Vector2(0, 30f);
+                }
+            }
+            else if (Y > _maxHeight)
+            {
+                _maxHeight = Y;
             }
 
             base.Update(deltaTime);
