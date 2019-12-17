@@ -203,14 +203,17 @@ namespace TypTop.SpaceMinigame
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputList.Input = _enemyList.Where(e => e.Y + 150 > 0).Select(e => e.Word).ToList();
-            _inputList.TextInput(e.Text);
-            RemoveEntity<Laser>();
+            if (_inputList.Input.Count > 0)
+            {
+                _inputList.TextInput(e.Text);
+                RemoveEntity<Laser>();
 
-            _enemyList.Where(e => e.Word.Finished).ToList().ForEach(e => {
-                AddEntity(new Laser(e, this));
-                RemoveEnemy(e);
-                Score.Amount += e.Score;
-            });
+                _enemyList.Where(e => e.Word.Finished).ToList().ForEach(e => {
+                    AddEntity(new Laser(e, this));
+                    RemoveEnemy(e);
+                    Score.Amount += e.Score;
+                });
+            }
         }
     }
 }
