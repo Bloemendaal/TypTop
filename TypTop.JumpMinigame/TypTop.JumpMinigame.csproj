@@ -17,6 +17,9 @@
     <None Update="Images\jumpLevelBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\jumpPlayer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\scoreline.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
