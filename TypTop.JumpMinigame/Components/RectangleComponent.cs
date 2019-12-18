@@ -29,6 +29,9 @@ namespace TypTop.JumpMinigame.Components
             set => _rectangle.Width = value;
         }
 
+        public double RadiusX;
+        public double RadiusY;
+
 
         public void Draw(DrawingContext context)
         {
@@ -40,7 +43,7 @@ namespace TypTop.JumpMinigame.Components
 
             _rectangle.X = _positionComponent.X;
             _rectangle.Y = _positionComponent.Y;
-            context.DrawRectangle(Fill, Pen, _rectangle);
+            context.DrawRoundedRectangle(Fill, Pen, _rectangle, RadiusX, RadiusY);
         }
 
         public override void AddedToEntity()

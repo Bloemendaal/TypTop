@@ -41,15 +41,17 @@ namespace TypTop.JumpMinigame
             Lane = lane;
             BreakAmount = breakAmount == null ? GetBreakAmount(minigame) : (int)breakAmount;
 
-            _positionComponent = new PositionComponent(Lane.X, y);
+            _positionComponent = new PositionComponent(Lane.X + minigame.LaneWidth * 0.05f, y);
             _rectangleComponent = new RectangleComponent()
             {
                 Fill = BreakAmount == -1 ? Brushes.Black : new SolidColorBrush(Brushes.DarkGreen.Color)
                 {
                     Opacity = Opacity
                 },
-                Width = minigame.LaneWidth,
-                Height = Height
+                Width = minigame.LaneWidth * 0.9,
+                Height = Height,
+                RadiusX = 10,
+                RadiusY = 10
             };
 
             AddComponent(new CameraComponent());
