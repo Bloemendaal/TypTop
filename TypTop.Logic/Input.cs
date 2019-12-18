@@ -145,8 +145,7 @@ namespace TypTop.Logic
         /// </returns>
         public bool CheckWord(char letter, Word word, int? input = null)
         {
-            int index = input == null ? word.Index : (int)input;
-
+            int index = input ?? word.Index;
             if (CheckIgnoredChars(letter))
             {
                 if (input == null)
@@ -157,7 +156,8 @@ namespace TypTop.Logic
                         if (CheckIgnoredChars(word.Letters[index]))
                         {
                             index++;
-                        } else
+                        }
+                        else
                         {
                             ignoring = false;
                         }
@@ -177,7 +177,6 @@ namespace TypTop.Logic
                 return false;
             }
 
-            int index = input ?? word.Index;
             char wordCharAtIndex = word.Letters[index];
 
             bool wrongChar = true;
@@ -205,7 +204,6 @@ namespace TypTop.Logic
                 return true;
             }
 
-            index++;
             bool result = letter == wordCharAtIndex;
 
             if (char.IsLetter(letter))
