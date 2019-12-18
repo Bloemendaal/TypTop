@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows.Input;
 using TypTop.GameEngine;
+using TypTop.GameEngine.Components;
 using TypTop.Logic;
 using TypTop.MinigameEngine.WinConditions;
 
@@ -54,8 +56,11 @@ namespace TypTop.MinigameEngine
         /// </summary>
         public event EventHandler<FinishEventArgs> OnFinished;
 
+        protected readonly WordProvider WordProvider;
+
         public Minigame(Level level)
         {
+            CameraComponent.RemoveCamera(this);
             WinCondition = level.WinCondition switch
             {
                 WinConditionType.LifeCondition => new LifeCondition(level.ThresholdThreeStars, level.ThresholdTwoStars, level.ThresholdOneStar),
@@ -64,9 +69,19 @@ namespace TypTop.MinigameEngine
                 _ => throw new Exception("WinConditionType not recognized"),
             };
             WinCondition.Minigame = this;
+
+            if (level.WordProvider == null) throw new ArgumentNullException(nameof(level.WordProvider));
+            WordProvider = level.WordProvider;
+
+            TextInput += EscListener;
         }
 
         private bool _finished = false;
+
+        /// <summary>
+        /// Checks if ESC was pressed when finished.
+        /// </summary>
+        public bool ESCPressed { get; private set; }
 
         /// <summary>
         /// Deze method is hetzelfde als die van Game uit project GameEngine, het voegt alleen de controle toe of het spel beëindigd moet worden.
@@ -76,7 +91,7 @@ namespace TypTop.MinigameEngine
         /// </param>
         public override void Update(float deltaTime)
         {
-            if (Finish?.Invoke() ?? false)
+            if ((Finish?.Invoke() ?? false) || ESCPressed)
             {
                 if (_finished)
                 {
@@ -89,12 +104,22 @@ namespace TypTop.MinigameEngine
                     Lives = Lives?.Amount,
                     Count = Count?.SecondsSpent,
                     Score = Score?.Amount,
-                    Stars = Stars
+                    Stars = Stars,
+                    ESCPressed = ESCPressed
                 });
+
                 return;
             }
 
             base.Update(deltaTime);
+        }
+
+        private void EscListener(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text == "\u001b")
+            {
+                ESCPressed = true;
+            }
         }
     }
 }

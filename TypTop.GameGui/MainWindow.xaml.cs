@@ -14,6 +14,8 @@ using TypTop.TavernMinigame;
 using TypTop.MinigameEngine.WinConditions;
 using TypTop.MinigameEngine;
 using TypTop.SpaceMinigame;
+using TypTop.WorldScreen;
+using TypTop.JumpMinigame;
 
 namespace TypTop.GameGui
 {
@@ -40,24 +42,52 @@ namespace TypTop.GameGui
             };
             wordProvider.LoadTestWords();
 
-            //tGame.OnFinished += OnFinishedGame;
-            //sGame.OnFinished += OnFinishedGame;
-
             var gameLoader = new GameLoader(GameWindow, new List<World>()
             {
                 new World("tavernButton.png", "tavernLevelBackground.png" ,new List<Level>()
                 {
                     new Level()
                     {
+                        WinCondition = WinConditionType.ScoreCondition,
+
+                        ThresholdOneStar = 250,
+                        ThresholdTwoStars = 500,
+                        ThresholdThreeStars = 750,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Seconds", 120}
+                        }
+                    },
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.TimeCondition,
+
+                        ThresholdOneStar = 300,
+                        ThresholdTwoStars = 180,
+                        ThresholdThreeStars = 120,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Queue", 30}
+                        }
+                    },
+                    new Level()
+                    {
                         WinCondition = WinConditionType.LifeCondition,
-                        
+
                         ThresholdOneStar = 1,
                         ThresholdTwoStars = 2,
                         ThresholdThreeStars = 3,
 
+                        WordProvider = wordProvider,
+
                         Properties = new Dictionary<string, object>()
                         {
-                            {"Words", wordProvider.Serve()},
                             {"Lives", 6},
                             {"Seconds", 120},
                             {"ShowSatisfaction", true},
@@ -74,7 +104,7 @@ namespace TypTop.GameGui
                         }
                     }
                 }, WorldId.Tavern),
-                new World("spaceButton.png", "levelBackground.jpeg", new List<Level>()
+                new World("spaceButton.png", "spaceLevelBackground.jpeg", new List<Level>()
                 {
                     new Level()
                     {
@@ -82,21 +112,39 @@ namespace TypTop.GameGui
                         ThresholdOneStar = 100,
                         ThresholdTwoStars = 200,
                         ThresholdThreeStars = 300,
-                        
+
+                        WordProvider = wordProvider,
+
                         Properties = new Dictionary<string, object>()
                         {
-                            {"Words", wordProvider.Serve()},
                             {"Lives", 6},
                             {"EnemyVelocityOffset", 3f},
                             {"LineHeight", 800f}
                         }
                     }
-                }, WorldId.Space)
+                }, WorldId.Space),
+                new World("jumpButton.png", "jumpLevelBackground.png", new List<Level>()
+                {
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.5 }
+                        }
+                    }
+                }, WorldId.Jump)
             });
             gameLoader.LoadWorldMap();
-
-            //GameWindow.Start(sGame, new Transition(1d));
-            //GameWindow.Start(new WorldScreenGame());
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)

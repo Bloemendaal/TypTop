@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using TypTop.GameWindow;
+using TypTop.JumpMinigame;
 using TypTop.LevelScreen;
 using TypTop.Logic;
 using TypTop.MinigameEngine;
@@ -54,6 +55,16 @@ namespace TypTop.GameGui
                         LoadLevelMap(level.World);
                     };
                     _gameWindow.Start(tavernGame, new Transition(1));
+                    break;
+                }
+                case WorldId.Jump:
+                {
+                    var jumpGame = new JumpGame(level);
+                    jumpGame.OnFinished += (sender, args) =>
+                    {
+                        LoadLevelMap(level.World);
+                    };
+                    _gameWindow.Start(jumpGame, new Transition(1));
                     break;
                 }
             }
