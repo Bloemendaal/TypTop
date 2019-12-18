@@ -142,7 +142,7 @@ namespace TypTop.Logic
 
 
         // Reset words to initial
-        public void ResetToEmpty() => _wordsToServe = new List<Word>();
+        public void ResetToEmpty() => _wordsToServe.Clear();
 
 
         // return filtered words
@@ -175,7 +175,7 @@ namespace TypTop.Logic
                 serve = serve.Take((int)WordCount);
             }
 
-            return serve.ToList();
+            return serve.Select(w => new Word(w.Letters)).ToList();
          }
     }
 }
