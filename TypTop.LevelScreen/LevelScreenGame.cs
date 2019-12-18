@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using TypTop.GameEngine;
 using TypTop.GameGui;
@@ -10,8 +9,9 @@ namespace TypTop.LevelScreen
 {
     public class LevelScreenGame : Game
     {
-        private readonly World _world;
         private readonly IGameLoader _gameLoader;
+        private readonly World _world;
+        private readonly InfoPanel _infoPanel;
 
         public LevelScreenGame(World world, IGameLoader gameLoader)
         {
@@ -19,6 +19,21 @@ namespace TypTop.LevelScreen
             _gameLoader = gameLoader;
 
             AddEntity(new Background(world.Background, this));
+
+
+            _infoPanel = new InfoPanel(this)
+            {
+                Text = "Lorem Ipsum is slechts een proeftekst uit het drukkerij- en" +
+                                                    " zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze b" +
+                                                    "edrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letter" +
+                                                    "s nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet allee" +
+                                                    "n vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische" +
+                                                    " letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letra" +
+                                                    "set vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing softwa" +
+                                                    "re zoals Aldus PageMaker die versies van Lorem Ipsum bevatten."
+            };
+
+            AddEntity(_infoPanel);
 
             for (var index = 0; index < world.Levels.Count; index++)
             {
@@ -31,14 +46,25 @@ namespace TypTop.LevelScreen
                 AddEntity(button);
             }
 
+            var infoButton = new Button("vraagTeken.png",
+                new Rect(new Point(1800, 950), new Size(100f, 100f)),
+                this);
+            infoButton.Clicked += InfoButtonOnClicked;
+            AddEntity(infoButton);
+
             var backButton = new Button("backButton.png", new Rect(new Point(50, 900), new Size(100, 100)), this);
             backButton.Clicked += BackButtonOnClicked;
             AddEntity(backButton);
         }
 
+        private void InfoButtonOnClicked(object sender, EventArgs e)
+        {
+            _infoPanel.Visible = !_infoPanel.Visible;
+        }
+
         private void ButtonOnClicked(object sender, EventArgs e)
         {
-            _gameLoader.LoadMinigame(((Button) sender).Data as Level);
+            _gameLoader.LoadMinigame(((Button)sender).Data as Level);
         }
 
         private void BackButtonOnClicked(object sender, EventArgs e)
