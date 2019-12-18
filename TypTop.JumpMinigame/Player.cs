@@ -5,6 +5,7 @@ using System.Numerics;
 using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using Microsoft.Extensions.Logging;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 
@@ -107,10 +108,17 @@ namespace TypTop.JumpMinigame
                     _minHeight = Y + (float)_imageComponent.Height;
                 }
 
-                _absMinHeight = Math.Min(_absMinHeight, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
-                Game.Score.Amount = (int)(Math.Abs(Math.Min(_absMinHeight, 0)) / 10);
+                var targetY = Math.Min(_absMinHeight, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
+                _absMinHeight = Lerp(_absMinHeight, targetY, 0.10f);
 
+                Game.Score.Amount = (int)(Math.Abs(Math.Min(_absMinHeight, 0)) / 10);
+                
                 CameraComponent.SetY(_absMinHeight, Game);
+            }
+
+            float Lerp(float firstFloat, float secondFloat, float by)
+            {
+                return firstFloat * (1 - by) + secondFloat * by;
             }
 
 
