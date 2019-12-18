@@ -59,7 +59,7 @@ namespace TypTop.JumpMinigame
             };
             _velocityComponent = new VelocityComponent();
 
-            _imageComponent = new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative)))
+            _imageComponent = new ImageComponent(new BitmapImage(new Uri(@"Images/jumpPlayer.png", UriKind.Relative)))
             {
                 Width = 100
             };

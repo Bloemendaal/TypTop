@@ -399,7 +399,7 @@ namespace TypTop.JumpMinigame
 
         public override void Update(float deltaTime)
         {
-            if (_player.AbsoluteMinimalY <  _highestPlatform + Height)
+            if (_player.AbsoluteMinimalY < _highestPlatform + Height * 2)
             {
                 GeneratePlatforms();
             }
