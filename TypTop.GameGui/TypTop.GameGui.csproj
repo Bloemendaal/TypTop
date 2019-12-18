@@ -21,6 +21,7 @@
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
     <ProjectReference Include="..\TypTop.JumpMinigame\TypTop.JumpMinigame.csproj" />
     <ProjectReference Include="..\TypTop.LevelScreen\TypTop.LevelScreen.csproj" />
+    <ProjectReference Include="..\TypTop.ScoreScreen\TypTop.ScoreScreen.csproj" />
     <ProjectReference Include="..\TypTop.SpaceMinigame\TypTop.SpaceMinigame.csproj" />
     <ProjectReference Include="..\TypTop.TavernMinigame\TypTop.TavernMinigame.csproj" />
     <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />

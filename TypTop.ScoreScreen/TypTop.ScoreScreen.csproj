@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -7,27 +7,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
-    <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
     <ProjectReference Include="..\TypTop.Minigame\TypTop.Minigame.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Images\background.jpg">
+    <None Update="Images\back_button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Images\gehaald.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\info.png">
+    <None Update="Images\score_background.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Images\levelClosed.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\levelOpen.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\vraagteken.png">
+    <None Update="Images\star.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

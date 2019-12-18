@@ -188,6 +188,5 @@ namespace TypTop.GameEngine.Components
 
             base.AddedToEntity();
         }
-
     }
 }
