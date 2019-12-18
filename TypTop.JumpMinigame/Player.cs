@@ -102,12 +102,13 @@ namespace TypTop.JumpMinigame
             }
             else
             {
-                if (Y < _minHeight)
+                if (Y + (float)_imageComponent.Height < _minHeight)
                 {
-                    _minHeight = Y;
+                    _minHeight = Y + (float)_imageComponent.Height;
                 }
 
                 _absMinHeight = Math.Min(_absMinHeight, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
+                Game.Score.Amount = (int)(Math.Abs(Math.Min(_absMinHeight, 0)) / 10);
 
                 CameraComponent.SetY(_absMinHeight, Game);
             }

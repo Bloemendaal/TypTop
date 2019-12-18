@@ -217,7 +217,7 @@ namespace TypTop.JumpMinigame
                     EnemyMovement = enemyMovementObject switch
                     {
                         EnemyType enemyMovement => enemyMovement,
-                        int enemyMovement when enemyMovement >= 0 && enemyMovement < Enum.GetNames(typeof(EnemyType)).Length => (EnemyType) enemyMovement,
+                        int enemyMovement when enemyMovement >= 0 && enemyMovement < Enum.GetNames(typeof(EnemyType)).Length => (EnemyType)enemyMovement,
                         _ => throw new ArgumentException("'EnemyMovement' is not valid")
                     };
                 }
@@ -274,19 +274,29 @@ namespace TypTop.JumpMinigame
                 throw new ArgumentNullException(nameof(level));
             }
 
+            // Background
             AddEntity(new Background("jumpLevelBackground.png", this));
             AddEntity(new Background("scoreline.png", this)
             {
                 ZIndex = 4,
                 Height = null,
-                Y = -20
+                Y = -40
             });
 
+            // Score
+            Score = new Score(50, (float)Height - 50, this)
+            {
+                ZIndex = 10,
+                Suffix = " meter hoog",
+            };
+            Score.UpdateText();
+            AddEntity(Score);
+
+            // Player
             _player = new Player(this);
             _player.SwitchLane(_lanes[LaneAmount / 2]);
-            Score = new Score(0, 0, this);
-
             AddEntity(_player);
+
             GeneratePlatforms((float)Height, solidBase: true);
 
             TextInput += OnTextInput;
