@@ -30,7 +30,7 @@ namespace TypTop.JumpMinigame
         }
 
         private float _minHeight = 500;
-        private float _absMinHeight;
+        public float AbsoluteMinimalY { get; private set; }
 
 
         /// <summary>
@@ -107,10 +107,10 @@ namespace TypTop.JumpMinigame
                     _minHeight = Y + (float)_imageComponent.Height;
                 }
 
-                _absMinHeight = Math.Min(_absMinHeight, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
-                Game.Score.Amount = (int)(Math.Abs(Math.Min(_absMinHeight, 0)) / 10);
+                AbsoluteMinimalY = Math.Min(AbsoluteMinimalY, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
+                Game.Score.Amount = (int)(Math.Abs(Math.Min(AbsoluteMinimalY, 0)) / 10);
 
-                CameraComponent.SetY(_absMinHeight, Game);
+                CameraComponent.SetY(AbsoluteMinimalY, Game);
             }
 
 
