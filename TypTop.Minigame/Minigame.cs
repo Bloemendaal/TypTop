@@ -2,6 +2,7 @@
 using TypTop.GameEngine;
 using TypTop.Logic;
 using TypTop.MinigameEngine.WinConditions;
+using TypTop.Shared;
 
 namespace TypTop.MinigameEngine
 {

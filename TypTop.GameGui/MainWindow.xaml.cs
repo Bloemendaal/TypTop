@@ -14,6 +14,7 @@ using TypTop.TavernMinigame;
 using TypTop.MinigameEngine.WinConditions;
 using TypTop.MinigameEngine;
 using TypTop.SpaceMinigame;
+using TypTop.Shared;
 
 namespace TypTop.GameGui
 {
