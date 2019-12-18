@@ -76,11 +76,10 @@ namespace TypTop.GameEngine.Components
                 _formattedText.SetFontSize(FontSize);
 
                 if (Y + _formattedText.Height < 0 ||
-                    Y > 1080 ||
+                    Y > Game.Height ||
                     X + _formattedText.WidthIncludingTrailingWhitespace < 0 ||
-                    X > 1920
-                )
-                    return;
+                    X > Game.Width
+                ) return;
 
                 context.DrawText(_formattedText, new Point(X, Y));
             }

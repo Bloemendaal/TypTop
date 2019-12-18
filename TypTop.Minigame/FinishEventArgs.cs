@@ -25,5 +25,10 @@ namespace TypTop.MinigameEngine
         /// Het aantal behaalde sterren in het level. Standaardwaarde is 0.
         /// </summary>
         public int Stars = 0;
+
+        /// <summary>
+        /// Checks if ESC was pressed when finished.
+        /// </summary>
+        public bool ESCPressed = false;
     }
 }

@@ -16,7 +16,7 @@ namespace TypTop.GameEngine.Components
         public void Update(float deltaTime)
         {
             // Update position
-            _positionComponent.Position += Velocity * deltaTime * Speed;
+            _positionComponent.AbsolutePosition += Velocity * deltaTime * Speed;
         }
     }
 }
