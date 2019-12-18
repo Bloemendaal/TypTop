@@ -17,6 +17,55 @@ namespace TypTop.JumpMinigame
             FocusOnHighIndex = true
         };
 
+        private float _highestPlatform = (float)Height - Platform.Height;
+
+        /// <summary>
+        /// Minimal distance between the platforms.
+        /// </summary>
+        public int MinimalDistance 
+        { 
+            get => _minimalDistance; 
+            private set
+            {
+                if (value < Platform.Height + 5)
+                {
+                    value = Platform.Height + 5;
+                }
+                if (value > MaximumDistance)
+                {
+                    value = MaximumDistance;
+                }
+
+                _minimalDistance = value;
+            } 
+        }
+        private int _minimalDistance = Platform.Height + 5;
+
+        /// <summary>
+        /// Maximum distance between the platforms.
+        /// </summary>
+        public int MaximumDistance
+        {
+            get => _maximumDistance;
+            private set
+            {
+                if (value < MinimalDistance)
+                {
+                    value = MinimalDistance;
+                }
+                if (value > JumpHeight)
+                {
+                    value = JumpHeight;
+                }
+
+                _maximumDistance = value;
+            }
+        }
+        private int _maximumDistance = JumpHeight;
+
+        /// <summary>
+        /// Maximum height the player can jump.
+        /// </summary>
         public const int JumpHeight = 400;
 
         /// <summary>
@@ -222,6 +271,18 @@ namespace TypTop.JumpMinigame
                     };
                 }
 
+                // MinimalDistance
+                if (level.Properties.TryGetValue("MinimalDistance", out object minimalDistanceObject) && minimalDistanceObject is int minimalDistance)
+                {
+                    MinimalDistance = minimalDistance;
+                }
+
+                // MaximumDistance
+                if (level.Properties.TryGetValue("MaximumDistance", out object maximumDistanceObject) && maximumDistanceObject is int maximumDistance)
+                {
+                    MaximumDistance = maximumDistance;
+                }
+
                 // PlatformBreakAmount
                 if (level.Properties.TryGetValue("PlatformBreakAmount", out object platformBreakAmountObject) && platformBreakAmountObject is int platformBreakAmount)
                 {
@@ -297,37 +358,22 @@ namespace TypTop.JumpMinigame
             _player.SwitchLane(_lanes[LaneAmount / 2]);
             AddEntity(_player);
 
-            GeneratePlatforms((float)Height, solidBase: true);
+            GeneratePlatforms(true);
 
             TextInput += OnTextInput;
         }
 
 
-        public void GeneratePlatforms(float start = 0, float diff = 10000, bool solidBase = false)
+        public void GeneratePlatforms(bool init = false, float diff = 10000)
         {
             diff = Math.Abs(diff);
 
             List<float> coordinates = new List<float>();
             for (int i = 0; i < LaneAmount * diff / JumpHeight; i++)
             {
-                coordinates.Add(Rnd.Next((int)((start - diff) * 1000), (int)(start * 1000)) / 1000f);
+                _highestPlatform -= Rnd.Next(MinimalDistance, MaximumDistance);
+                coordinates.Add(_highestPlatform);
             }
-
-            coordinates.Add(start - Platform.Height);
-            coordinates.Sort();
-            coordinates.Reverse();
-
-            for (int i = 0; i < coordinates.Count - 1; i++)
-            {
-                float tdiff = Math.Abs(coordinates[i + 1] - coordinates[i]);
-                if (tdiff > JumpHeight)
-                {
-                    coordinates[i + 1] -= tdiff;
-                }
-            }
-
-            coordinates.RemoveAt(0);
-
 
             // Shuffle
             List<float> randomList = new List<float>();
@@ -345,7 +391,20 @@ namespace TypTop.JumpMinigame
                 laneIndex++;
             }
 
-            _lanes[LaneAmount / 2].AddPlatform(start - Platform.Height, solidBase ? -1 : new int?());
+            if (init)
+            {
+                _lanes[LaneAmount / 2].AddPlatform((float)Height - Platform.Height, -1);
+            }
+        }
+
+        public override void Update(float deltaTime)
+        {
+            if (_player.AbsoluteMinimalY <  _highestPlatform + Height)
+            {
+                GeneratePlatforms();
+            }
+
+            base.Update(deltaTime);
         }
 
         private void OnTextInput(object sender, TextCompositionEventArgs e)
