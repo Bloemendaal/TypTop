@@ -107,7 +107,9 @@ namespace TypTop.JumpMinigame
                     _minHeight = Y + (float)_imageComponent.Height;
                 }
 
-                AbsoluteMinimalY = Math.Min(AbsoluteMinimalY, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
+                var targetY = Math.Min(AbsoluteMinimalY, _positionComponent.AbsoluteY - JumpGame.JumpHeight);
+
+                AbsoluteMinimalY = Lerp(AbsoluteMinimalY, targetY, 0.1f);
                 Game.Score.Amount = (int)(Math.Abs(Math.Min(AbsoluteMinimalY, 0)) / 10);
 
                 CameraComponent.SetY(AbsoluteMinimalY, Game);
@@ -115,6 +117,11 @@ namespace TypTop.JumpMinigame
 
 
             base.Update(deltaTime);
+        }
+
+        float Lerp(float firstFloat, float secondFloat, float by)
+        {
+            return firstFloat * (1 - by) + secondFloat * by;
         }
     }
 }
