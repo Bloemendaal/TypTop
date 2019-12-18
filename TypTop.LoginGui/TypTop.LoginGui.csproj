@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="LoginBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Konscious.Security.Cryptography.Argon2" Version="1.2.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TypTop.GameGui\TypTop.GameGui.csproj" />
+    <ProjectReference Include="..\TypTop.Repository\TypTop.Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="LoginBackground.png" />
+  </ItemGroup>
+
+</Project>

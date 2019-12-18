@@ -19,12 +19,6 @@ namespace TypTop.Logic
         {
             int index = Input.Index;
 
-            if (char.IsWhiteSpace(letter))
-            {
-                Input = null;
-                return;
-            }
-
             if (CheckWord(letter, Input))
             {
                 Input.Input.Push(letter);
@@ -35,7 +29,7 @@ namespace TypTop.Logic
             }
             else
             {
-                if (OnKeyWrong == KeyWrong.reset)
+                if (OnKeyWrong == KeyWrong.Reset)
                 {
                     Input.Input.Clear();
                     Input.Index = 0;
@@ -43,19 +37,19 @@ namespace TypTop.Logic
                     Input.Correct = null;
                 }
 
-                if (OnKeyWrong == KeyWrong.remove)
+                if (OnKeyWrong == KeyWrong.Remove)
                 {
                     Input = null;
                 }
 
-                if (OnKeyWrong == KeyWrong.add)
+                if (OnKeyWrong == KeyWrong.Add)
                 {
                     Input.Input.Push(letter);
                     Input.Finished = false;
                     Input.Correct = false;
                 }
 
-                if (OnKeyWrong == KeyWrong.none)
+                if (OnKeyWrong == KeyWrong.None)
                 {
                     Input.Index = index;
                 }
@@ -67,6 +61,11 @@ namespace TypTop.Logic
                 PreviousChar = PreviousChar,
                 CurrentChar = letter
             });
+
+            if (RemoveOnFinished && Input.Finished)
+            {
+                Input = null;
+            }
 
             base.TextInput(letter);
         }

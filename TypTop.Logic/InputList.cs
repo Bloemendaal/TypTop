@@ -14,28 +14,21 @@ namespace TypTop.Logic
             Input = input;
         }
 
-
-        //
-        // Summary:
-        //     When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
+        /// <summary>
+        /// When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
+        /// </summary>
         public bool FocusOnHighIndex = false;
 
 
         public override void TextInput(char letter)
         {
-            List<Word> wordlist = FocusOnHighIndex ? Input.Where(i => i.Index >= Input.Max(j => j.Index)).ToList() : Input;
+            List<Word> wordlist = FocusOnHighIndex ? new List<Word>(Input.Where(i => i.Index >= Input.Max(j => j.Index))) : Input;
 
             if (wordlist?.Count > 0)
             {
                 foreach (Word input in wordlist)
                 {
                     int index = input.Index;
-
-                    if (char.IsWhiteSpace(letter))
-                    {
-                        Input?.Remove(input);
-                        return;
-                    }
 
                     if (input != null)
                     {
@@ -45,7 +38,7 @@ namespace TypTop.Logic
                         }
                         else
                         {
-                            if (OnKeyWrong == KeyWrong.reset)
+                            if (OnKeyWrong == KeyWrong.Reset)
                             {
                                 input.Input.Clear();
                                 input.Index = 0;
@@ -53,19 +46,19 @@ namespace TypTop.Logic
                                 input.Correct = null;
                             }
 
-                            if (OnKeyWrong == KeyWrong.remove)
+                            if (OnKeyWrong == KeyWrong.Remove)
                             {
                                 Input?.Remove(input);
                             }
 
-                            if (OnKeyWrong == KeyWrong.add)
+                            if (OnKeyWrong == KeyWrong.Add)
                             {
                                 input.Input.Push(letter);
                                 input.Finished = false;
                                 input.Correct = false;
                             }
 
-                            if (OnKeyWrong == KeyWrong.none)
+                            if (OnKeyWrong == KeyWrong.None)
                             {
                                 input.Index = index;
                             }
@@ -79,6 +72,11 @@ namespace TypTop.Logic
                     PreviousChar = PreviousChar,
                     CurrentChar = letter
                 });
+
+                if (RemoveOnFinished)
+                {
+                    Input = Input.Where(e => !e.Finished).ToList();
+                }
             }
 
             base.TextInput(letter);

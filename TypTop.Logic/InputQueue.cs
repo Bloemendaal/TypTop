@@ -20,12 +20,6 @@ namespace TypTop.Logic
             Word input = Input?.Peek();
             int index = input.Index;
 
-            if (char.IsWhiteSpace(letter))
-            {
-                Input?.Dequeue();
-                return;
-            }
-
             if (input != null)
             {
                 if (CheckWord(letter, input))
@@ -34,7 +28,7 @@ namespace TypTop.Logic
                 }
                 else
                 {
-                    if (OnKeyWrong == KeyWrong.reset)
+                    if (OnKeyWrong == KeyWrong.Reset)
                     {
                         input.Input.Clear();
                         input.Index = 0;
@@ -42,19 +36,19 @@ namespace TypTop.Logic
                         input.Correct = null;
                     }
 
-                    if (OnKeyWrong == KeyWrong.remove)
+                    if (OnKeyWrong == KeyWrong.Remove)
                     {
                         Input?.Dequeue();
                     }
 
-                    if (OnKeyWrong == KeyWrong.add)
+                    if (OnKeyWrong == KeyWrong.Add)
                     {
                         input.Input.Push(letter);
                         input.Finished = false;
                         input.Correct = false;
                     }
 
-                    if (OnKeyWrong == KeyWrong.none)
+                    if (OnKeyWrong == KeyWrong.None)
                     {
                         input.Index = index;
                     }
@@ -67,6 +61,11 @@ namespace TypTop.Logic
                 PreviousChar = PreviousChar,
                 CurrentChar = letter
             });
+
+            if (RemoveOnFinished)
+            {
+                Input = new Queue<Word>(Input.Where(e => !e.Finished));
+            }
 
             base.TextInput(letter);
         }

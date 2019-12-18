@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>TypTop.MinigameEngine</AssemblyName>
+    <RootNamespace>TypTop.MinigameEngine</RootNamespace>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Update="Images\heart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
