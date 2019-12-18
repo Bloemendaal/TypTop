@@ -56,6 +56,8 @@ namespace TypTop.MinigameEngine
         /// </summary>
         public event EventHandler<FinishEventArgs> OnFinished;
 
+        protected readonly WordProvider WordProvider;
+
         public Minigame(Level level)
         {
             CameraComponent.RemoveCamera(this);
@@ -67,6 +69,9 @@ namespace TypTop.MinigameEngine
                 _ => throw new Exception("WinConditionType not recognized"),
             };
             WinCondition.Minigame = this;
+
+            if (level.WordProvider == null) throw new ArgumentNullException(nameof(level.WordProvider));
+            WordProvider = level.WordProvider;
 
             TextInput += EscListener;
         }

@@ -54,9 +54,10 @@ namespace TypTop.GameGui
                         ThresholdTwoStars = 500,
                         ThresholdThreeStars = 750,
 
+                        WordProvider = wordProvider,
+
                         Properties = new Dictionary<string, object>()
                         {
-                            {"Words", wordProvider.Serve()},
                             {"Seconds", 120}
                         }
                     },
@@ -68,9 +69,10 @@ namespace TypTop.GameGui
                         ThresholdTwoStars = 180,
                         ThresholdThreeStars = 120,
 
+                        WordProvider = wordProvider,
+
                         Properties = new Dictionary<string, object>()
                         {
-                            {"Words", wordProvider.Serve()},
                             {"Queue", 30}
                         }
                     },
@@ -82,9 +84,10 @@ namespace TypTop.GameGui
                         ThresholdTwoStars = 2,
                         ThresholdThreeStars = 3,
 
+                        WordProvider = wordProvider,
+
                         Properties = new Dictionary<string, object>()
                         {
-                            {"Words", wordProvider.Serve()},
                             {"Lives", 6},
                             {"Seconds", 120},
                             {"ShowSatisfaction", true},
@@ -110,9 +113,10 @@ namespace TypTop.GameGui
                         ThresholdTwoStars = 200,
                         ThresholdThreeStars = 300,
 
+                        WordProvider = wordProvider,
+
                         Properties = new Dictionary<string, object>()
                         {
-                            {"Words", wordProvider.Serve()},
                             {"Lives", 6},
                             {"EnemyVelocityOffset", 3f},
                             {"LineHeight", 800f}
@@ -128,9 +132,10 @@ namespace TypTop.GameGui
                         ThresholdTwoStars = 200,
                         ThresholdThreeStars = 300,
 
+                        WordProvider = wordProvider,
+
                         Properties = new Dictionary<string, object>()
                         {
-                            { "Words", wordProvider.Serve() },
                             { "Lives", 6 },
                             { "PlatformBreakAmount", 3 },
                             { "PlatformBreakOffset", 1 },

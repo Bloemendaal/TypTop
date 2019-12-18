@@ -189,14 +189,7 @@ namespace TypTop.JumpMinigame
             if (level != null && level.Properties != null)
             {
                 // Words
-                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
-                {
-                    _words = new Queue<Word>(words);
-                }
-                else
-                {
-                    throw new ArgumentException("'Words' is missing, not valid or not valid");
-                }
+                _words = new Queue<Word>(WordProvider.Serve());
 
                 // LaneAmount
                 LaneAmount = level.Properties.TryGetValue("LaneAmount", out object laneAmountObject) && laneAmountObject is int laneAmount ? laneAmount : 5;

@@ -99,14 +99,8 @@ namespace TypTop.SpaceMinigame
             if (level != null && level.Properties != null)
             {
                 // Words
-                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
-                {
-                    _words = new List<Word>(words);
-                }
-                else
-                {
-                    throw new ArgumentException("'Words' is missing or not valid");
-                }
+                _words = new List<Word>(WordProvider.Serve());
+                if (_words.Count <= 0) throw new ArgumentException("'WordProvider' does not serve any words.");
 
                 //Lives
                 if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)

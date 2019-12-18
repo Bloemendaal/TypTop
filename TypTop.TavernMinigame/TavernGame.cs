@@ -270,17 +270,15 @@ namespace TypTop.TavernMinigame
                 _customerQueue = new CustomerQueue(this);
 
                 // Words
-                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
-                {
-                    _words = new Queue<Word>(words);
-                }
-                else
-                {
-                    throw new ArgumentException("'Words' is missing or not valid");
-                }
+                _words = new Queue<Word>(WordProvider.Serve());
 
                 // TileAmount
                 TileAmount = level.Properties.TryGetValue("TileAmount", out object tileAmountObject) && tileAmountObject is int tileAmount ? tileAmount : 3;
+
+                if (_words.Count < TileAmount)
+                {
+                    throw new ArgumentException("'Words' amount is less than the amount of tiles");
+                }
 
                 // MaxCustomers
                 if (level.Properties.TryGetValue("MaxCustomers", out object maxCustomersObject) && maxCustomersObject is int maxCustomers)
