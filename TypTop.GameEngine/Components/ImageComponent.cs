@@ -11,6 +11,7 @@ namespace TypTop.GameEngine.Components
         private BitmapImage _bitmapImageOriginal;
         private PositionComponent _positionComponent;
 
+       
         public double? Width
         {
             get {

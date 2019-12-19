@@ -105,6 +105,11 @@ namespace TypTop.GameWindow
             _game?.OnTextInput(e);
         }
 
+        public void OnMouseHover(Point point)
+        {
+            _game?.OnMouseHover(point);
+        }
+
         public void OnMouseDown(Point point)
         {
             _game?.OnMouseDown(point);
@@ -141,6 +146,8 @@ namespace TypTop.GameWindow
         private DateTime? previouseFpsSnapShot = null;
         private int _framesSinceFpsSnapShot = 0;
         private int fps;
+        private bool showFps = false;
+
         protected override void OnRender(DrawingContext drawingContext)
         {
             _framesSinceFpsSnapShot++;
@@ -156,19 +163,25 @@ namespace TypTop.GameWindow
                 _framesSinceFpsSnapShot = 0;
             }
 
-           var formattedText = new FormattedText(
-#pragma warning restore 618
-                fps.ToString(),
-                CultureInfo.GetCultureInfo("en-us"),
-                FlowDirection.LeftToRight,
-                new Typeface("Veranda"),
-                25,
-                Brushes.Black);
-           
+
             _game?.Draw(drawingContext);
             _transition?.Draw(drawingContext);
 
-            drawingContext.DrawText(formattedText, new Point(50, 50));
+
+            if (showFps)
+            {
+                var formattedText = new FormattedText(
+#pragma warning restore 618
+                    fps.ToString(),
+                    CultureInfo.GetCultureInfo("en-us"),
+                    FlowDirection.LeftToRight,
+                    new Typeface("Veranda"),
+                    25,
+                    Brushes.Black);
+
+                drawingContext.DrawText(formattedText, new Point(50, 50));
+            }
+          
         }
 
         public void Stop()

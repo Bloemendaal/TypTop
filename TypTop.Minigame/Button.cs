@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using TypTop.GameEngine;
@@ -32,20 +33,25 @@ namespace TypTop.MinigameEngine
         private readonly ImageComponent _imageComponent;
         private readonly PositionComponent _positionComponent;
         private readonly ClickComponent _clickComponent;
+        private HoverComponent _hoverComponent;
+        private BitmapImage defaultImage;
+        private BitmapImage hoverImage;
 
         public event EventHandler Clicked;
 
         public object Data { get; set; }
 
-        public Button(string background, Rect bounds, Game game) : base(game)
+        public Button(Rect bounds, Game game, string background, string hoverBackground = null) : base(game)
         {
             ZIndex = -1;
-
             _positionComponent = new PositionComponent()
             {
                 Position = bounds.Location.ToVector2()
             };
-            _imageComponent = new ImageComponent(new BitmapImage(new Uri($@"Images/{background}", UriKind.Relative)))
+            defaultImage = new BitmapImage(new Uri($@"Images/{background}", UriKind.Relative));
+            if(hoverBackground != null)
+                hoverImage = new BitmapImage(new Uri($@"Images/{hoverBackground}", UriKind.Relative));
+            _imageComponent = new ImageComponent(defaultImage)
             {
                 Width = bounds.Width,
                 Height = bounds.Height
@@ -53,9 +59,29 @@ namespace TypTop.MinigameEngine
             
             _clickComponent = new ClickComponent(bounds);
             _clickComponent.Clicked += ClickComponentOnClicked;
+
+            if (hoverBackground != null)
+            {
+                _hoverComponent = new HoverComponent(bounds);
+                _hoverComponent.Hover += HoverComponentOnHover;
+                AddComponent(_hoverComponent);
+            }
+
             AddComponent(_clickComponent);
             AddComponent(_positionComponent);
             AddComponent(_imageComponent);
+        }
+
+        private void HoverComponentOnHover(object? sender, HoverState e)
+        {
+            if (e == HoverState.Enter)
+            {
+                _imageComponent.UpdateImage(hoverImage);
+            }
+            else
+            {
+                _imageComponent.UpdateImage(defaultImage);
+            }
         }
 
         private void ClickComponentOnClicked(object sender, EventArgs e)

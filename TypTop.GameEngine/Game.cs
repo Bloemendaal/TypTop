@@ -101,6 +101,12 @@ namespace TypTop.GameEngine
             TextInput?.Invoke(this, e);
         }
 
+        public void OnMouseHover(Point point)
+        {
+            foreach (Entity entity in GetEntitiesWithComponent<HoverComponent>())
+                entity.GetComponent<HoverComponent>().CaptureHover(point);
+        }
+
         public void OnMouseDown(Point point)
         {
             foreach (Entity entity in GetEntitiesWithComponent<ClickComponent>())

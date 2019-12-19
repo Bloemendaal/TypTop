@@ -60,7 +60,12 @@ namespace TypTop.GameGui
 
             game.OnFinished += (sender, args) =>
             {
-                var scoreScreenGame = new ScoreScreenGame();
+                if (args.ESCPressed)
+                {
+                    LoadLevelMap(level.World);
+                    return;
+                }
+                var scoreScreenGame = new ScoreScreenGame(args);
                 scoreScreenGame.Closed += (o, e) => { LoadLevelMap(level.World); };
                 _gameWindow.Start(scoreScreenGame, new Transition(1));
             };

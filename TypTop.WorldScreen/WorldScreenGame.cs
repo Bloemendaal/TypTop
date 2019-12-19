@@ -21,25 +21,26 @@ namespace TypTop.WorldScreen
             _gameLoader = gameLoader;
             AddEntity(new Background("main_background.png",this));
 
-
+            var exitButton = new Button(new Rect(new Point(50,900), new Size(100,100)), this, "exit.png", "exit_hover.png");
+            exitButton.Clicked += ExitButtonOnClicked;
+            AddEntity(exitButton);
 
             for (var index = 0; index < worlds.Count; index++)
             {
                 World world = worlds[index];
-
                 var rect = Utils.GetRectangle(index, worlds.Count, 5, 150, 450, 350);
-
-                var gameButton = new Button(world.PreviewImage, rect, this);
+                var gameButton = new Button(rect, this, world.PreviewImage,  world.PreviewHoverImage);
                 gameButton.Data = world;
                 gameButton.Clicked += WorldButtonClicked;
                 AddEntity(gameButton);
             }
         }
 
-        private Rect GetButtonPositionRectangle(int index, int total)
+        private void ExitButtonOnClicked(object sender, EventArgs e)
         {
-            return default;
+            Environment.Exit(0);
         }
+
 
         private void WorldButtonClicked(object sender, EventArgs e)
         {

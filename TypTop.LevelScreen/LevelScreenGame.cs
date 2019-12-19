@@ -38,21 +38,19 @@ namespace TypTop.LevelScreen
             for (var index = 0; index < world.Levels.Count; index++)
             {
                 Level worldLevel = world.Levels[index];
-                var button = new Button("levelOpen.png",
-                    Utils.GetRectangle(index, world.Levels.Count, 5, 50f, 100f, 100f),
-                    this);
+                var button = new TextButton((index+1).ToString(),Utils.GetRectangle(index, world.Levels.Count, 5, 50f, 100f, 100f),
+                    this, "levelOpen.png", "levelOpen_hover.png");
                 button.Data = worldLevel;
                 button.Clicked += ButtonOnClicked;
                 AddEntity(button);
             }
 
-            var infoButton = new Button("vraagTeken.png",
-                new Rect(new Point(1800, 950), new Size(100f, 100f)),
-                this);
+            var infoButton = new Button(new Rect(new Point(1800, 950), new Size(100f, 100f)),
+                this, "vraagTeken.png", "vraagTeken_hover.png");
             infoButton.Clicked += InfoButtonOnClicked;
             AddEntity(infoButton);
 
-            var backButton = new Button("backButton.png", new Rect(new Point(50, 900), new Size(100, 100)), this);
+            var backButton = new Button(new Rect(new Point(50, 900), new Size(100, 100)), this, "backButton.png", "backButton_hover.png");
             backButton.Clicked += BackButtonOnClicked;
             AddEntity(backButton);
         }

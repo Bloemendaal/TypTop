@@ -14,6 +14,9 @@
     <None Update="Images\jumpButton.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\jumpButton_hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\jumpLevelBackground.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
