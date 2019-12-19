@@ -13,10 +13,4 @@
     <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Update="Sounds\hover.wav">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
 </Project>
