@@ -41,7 +41,6 @@ namespace TypTop.WorldScreen
             Environment.Exit(0);
         }
 
-
         private void WorldButtonClicked(object sender, EventArgs e)
         {
             var world = (World)((Button) sender).Data;
