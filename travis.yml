@@ -1,3 +1,4 @@
+# Auto build and test
 branches:
   only:
     - dev
