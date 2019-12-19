@@ -230,7 +230,12 @@ namespace TypTop.JumpMinigame
         /// <summary>
         /// Switch words when the word was typed correctly.
         /// </summary>
-        public bool SwitchWords = true;
+        public bool SwitchWords { get; private set; } = true;
+
+        /// <summary>
+        /// Save the players jump when their timing is not accurate. 
+        /// </summary>
+        public bool SaveJump { get; private set; } = false;
 
 
         public JumpGame(Level level) : base(level)
@@ -329,6 +334,12 @@ namespace TypTop.JumpMinigame
 
                     AddEntity(Lives);
                 }
+
+                // SaveJump
+                if (level.Properties.TryGetValue("SaveJump", out object saveJumpObject) && saveJumpObject is bool saveJump)
+                {
+                    SaveJump = saveJump;
+                }
             }
             else
             {
@@ -363,7 +374,15 @@ namespace TypTop.JumpMinigame
             TextInput += OnTextInput;
         }
 
-
+        /// <summary>
+        /// Generate platforms for the player to jump on
+        /// </summary>
+        /// <param name="init">
+        /// Indicates of a starting platform should be drawn.
+        /// </param>
+        /// <param name="diff">
+        /// The estimated distance that is gerenated. Due to random occurences, it is typically rendered lower than the set difference. Do not go lower than the jumpheight. 
+        /// </param>
         public void GeneratePlatforms(bool init = false, float diff = 10000)
         {
             diff = Math.Abs(diff);
@@ -397,6 +416,9 @@ namespace TypTop.JumpMinigame
             }
         }
 
+        /// <summary>
+        /// Checks if platforms should be generated.
+        /// </summary>
         public void CheckGeneratePlatforms()
         {
             float highest = _lanes.Select(e => e.HighestPlatform()?.Y ?? 0).OrderBy(e => e).First();

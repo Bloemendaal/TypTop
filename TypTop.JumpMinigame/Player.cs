@@ -79,6 +79,11 @@ namespace TypTop.JumpMinigame
         {
             if (!lane.Equals(Lane) && lane != null)
             {
+                if (!Game.SaveJump && _velocityComponent.Velocity.Y > 0)
+                {
+                    _minHeight = Y + (float)_imageComponent.Height;
+                }
+
                 Lane = lane;
                 X = Lane.X + Game.LaneWidth / 2;
             }
