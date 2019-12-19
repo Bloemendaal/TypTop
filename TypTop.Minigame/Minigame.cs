@@ -4,6 +4,7 @@ using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 using TypTop.Logic;
 using TypTop.MinigameEngine.WinConditions;
+using TypTop.Shared;
 
 namespace TypTop.MinigameEngine
 {

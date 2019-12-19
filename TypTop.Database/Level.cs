@@ -13,6 +13,8 @@ namespace TypTop.Database
         [Required]
         public int WorldId { get; set; }
 
+        public virtual World World { get; set; }
+
         [Required]
         public string Title { get; set; }
 
@@ -22,12 +24,17 @@ namespace TypTop.Database
         public int Index { get; set; }
 
         [Required]
-        public string Variables { get; set; }
+        public int WinCondition { get; set; }
+
+        public int ThresholdOneStar { get; set; }
+
+        public int ThresholdTwoStars { get; set; }
+
+        public int ThresholdThreeStars { get; set; }
 
         [Required]
-        public int RequiredLevelId { get; set; }
+        public string Variables { get; set; }
 
-        public virtual Level RequiredLevel { get; set; }
 
     }
 }

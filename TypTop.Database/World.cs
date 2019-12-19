@@ -23,5 +23,7 @@ namespace TypTop.Database
 
         public string Background { get; set; }
 
+        public List<Level> Levels { get; set; }
+
     }
 }

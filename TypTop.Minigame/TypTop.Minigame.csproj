@@ -9,6 +9,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
+    <ProjectReference Include="..\TypTop.Shared\TypTop.Shared.csproj" />
   </ItemGroup>
   
   <ItemGroup>

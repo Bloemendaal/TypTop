@@ -9,7 +9,7 @@ using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 using TypTop.MinigameEngine;
 using System.Windows.Media;
-using TypTop.MinigameEngine.WinConditions;
+using TypTop.Shared;
 
 namespace TypTop.TavernMinigame
 {

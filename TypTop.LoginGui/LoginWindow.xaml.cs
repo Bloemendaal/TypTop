@@ -85,8 +85,6 @@ namespace TypTop.Gui
             {
                 if (CreationPasswordBox.Password.Length >= 8)
                 {
-
-
                     if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
                     {
                         using (var unitOfWork = new UnitOfWork(new TypTop.GameGui.ContextFactory().CreateDbContext(null)))

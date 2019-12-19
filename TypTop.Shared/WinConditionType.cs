@@ -1,4 +1,4 @@
-﻿namespace TypTop.Logic
+﻿namespace TypTop.Shared
 {
     public enum WinConditionType
     {
