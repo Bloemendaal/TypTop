@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -93,7 +94,7 @@ namespace TypTop.GameWindow
 
         public GameWindow()
         {
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(16), IsEnabled = false };
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1), IsEnabled = false };
             previousFrame = DateTime.Now;
             _timer.Tick += TimerOnTick;
             
@@ -102,6 +103,11 @@ namespace TypTop.GameWindow
         public void OnTextInput(TextCompositionEventArgs e)
         {
             _game?.OnTextInput(e);
+        }
+
+        public void OnMouseHover(Point point)
+        {
+            _game?.OnMouseHover(point);
         }
 
         public void OnMouseDown(Point point)
@@ -137,11 +143,45 @@ namespace TypTop.GameWindow
 
         private readonly DispatcherTimer _timer;
 
+        private DateTime? previouseFpsSnapShot = null;
+        private int _framesSinceFpsSnapShot = 0;
+        private int fps;
+        private bool showFps = false;
+
         protected override void OnRender(DrawingContext drawingContext)
         {
-            drawingContext.DrawRectangle(Brushes.White, null, new Rect(0, 0, 1920, 1080));
+            _framesSinceFpsSnapShot++;
+            if (previouseFpsSnapShot == null)
+            {
+                previouseFpsSnapShot = DateTime.Now;
+            }
+
+            if (DateTime.Now - previouseFpsSnapShot > TimeSpan.FromSeconds(1))
+            {
+                previouseFpsSnapShot = DateTime.Now;
+                fps = _framesSinceFpsSnapShot;
+                _framesSinceFpsSnapShot = 0;
+            }
+
+
             _game?.Draw(drawingContext);
             _transition?.Draw(drawingContext);
+
+
+            if (showFps)
+            {
+                var formattedText = new FormattedText(
+#pragma warning restore 618
+                    fps.ToString(),
+                    CultureInfo.GetCultureInfo("en-us"),
+                    FlowDirection.LeftToRight,
+                    new Typeface("Veranda"),
+                    25,
+                    Brushes.Black);
+
+                drawingContext.DrawText(formattedText, new Point(50, 50));
+            }
+          
         }
 
         public void Stop()

@@ -22,6 +22,10 @@ namespace TypTop.Logic
             if (CheckWord(letter, Input))
             {
                 Input.Input.Push(letter);
+                if (Input.Correct != false)
+                {
+                    Input.Correct = true;
+                }
             }
             else
             {

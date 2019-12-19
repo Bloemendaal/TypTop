@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -22,9 +23,9 @@ namespace TypTop.SpaceMinigame
         //
         public Player Player { get; private set; }
         public Line Line { get; private set; }
-        public int EnemyAmount 
-        { 
-            get => _enemyAmount; 
+        public int EnemyAmount
+        {
+            get => _enemyAmount;
             private set
             {
                 if (value < 1)
@@ -99,14 +100,8 @@ namespace TypTop.SpaceMinigame
             if (level != null && level.Properties != null)
             {
                 // Words
-                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
-                {
-                    _words = new List<Word>(words);
-                }
-                else
-                {
-                    throw new ArgumentException("'Words' is missing or not valid");
-                }
+                _words = new List<Word>(WordProvider.Serve());
+                if (_words.Count <= 0) throw new ArgumentException("'WordProvider' does not serve any words.");
 
                 //Lives
                 if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
@@ -149,7 +144,7 @@ namespace TypTop.SpaceMinigame
 
             for (int i = 0; i < EnemyAmount; i++)
             {
-                _enemyList.Add(new Enemy(EnemyVelocity + (float)Rnd.Next((int)(-EnemyVelocityOffset * 1000000), (int)(EnemyVelocityOffset * 1000000)) / 1000000, _words[i % _words.Count], this));
+                _enemyList.Add(new Enemy(EnemyVelocity + Math.Max(-EnemyVelocity * 0.9f, Rnd.Next((int)(-EnemyVelocityOffset * 1000000), (int)(EnemyVelocityOffset * 1000000)) / 1000000f), _words[i % _words.Count], this));
             }
 
 
@@ -170,10 +165,10 @@ namespace TypTop.SpaceMinigame
 
             Player = new Player(this);
             Line = new Line(LineHeight, this);
-            
 
-            // 
-            // Adding entities 
+
+            //
+            // Adding entities
             //
 
             AddEntity(new Background("space.jpg", this));
@@ -186,6 +181,7 @@ namespace TypTop.SpaceMinigame
             AddEntity(Score);
             AddEntity(Lives);
 
+            
             //
             // Events
             //
@@ -200,17 +196,27 @@ namespace TypTop.SpaceMinigame
             return result;
         }
 
+        /// <summary>
+        /// This method will be executed with Text input.
+        /// For example, several things are done here, such as drawing a laser from killing an enemy.
+        /// Remove this Enemy from the correct list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputList.Input = _enemyList.Where(e => e.Y + 150 > 0).Select(e => e.Word).ToList();
-            _inputList.TextInput(e.Text);
-            RemoveEntity<Laser>();
+            if (_inputList.Input.Count > 0)
+            {
+                _inputList.TextInput(e.Text);
+                RemoveEntity<Laser>();
 
-            _enemyList.Where(e => e.Word.Finished).ToList().ForEach(e => {
-                AddEntity(new Laser(e, this));
-                RemoveEnemy(e);
-                Score.Amount += e.Score;
-            });
+                _enemyList.Where(e => e.Word.Finished).ToList().ForEach(e => {
+                    AddEntity(new Laser(e, this));
+                    RemoveEnemy(e);
+                    Score.Amount += e.Score;
+                });
+            }
         }
     }
 }

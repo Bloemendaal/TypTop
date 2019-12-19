@@ -23,13 +23,9 @@ namespace TypTop.MinigameEngine
             }
         }
 
-        
-
         protected virtual void OnClicked()
         {
             Clicked?.Invoke(this, EventArgs.Empty);
         }
-
-     
     }
 }

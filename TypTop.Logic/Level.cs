@@ -12,6 +12,7 @@ namespace TypTop.Logic
         public int ThresholdTwoStars { get; set; }
         public int ThresholdThreeStars { get; set; }
         public World World { get; set; }
+        public WordProvider WordProvider { get; set; }
         public Dictionary<string, object> Properties { get; set; }
     }
 }

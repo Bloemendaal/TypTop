@@ -19,7 +19,7 @@ namespace TypTop.Logic
         /// </summary>
         public abstract event EventHandler<WordUpdateArgs> WordUpdate;
 
- 
+
         /// <summary>
         /// What does the program do when the users inputs a wrong key.
         /// </summary>
@@ -145,8 +145,30 @@ namespace TypTop.Logic
         /// </returns>
         public bool CheckWord(char letter, Word word, int? input = null)
         {
+            int index = input ?? word.Index;
             if (CheckIgnoredChars(letter))
             {
+                if (input == null)
+                {
+                    bool ignoring = true;
+                    while (ignoring && word.ValidIndex(index))
+                    {
+                        if (CheckIgnoredChars(word.Letters[index]))
+                        {
+                            index++;
+                        }
+                        else
+                        {
+                            ignoring = false;
+                        }
+                    }
+
+                    if (ignoring)
+                    {
+                        word.Finished = true;
+                        word.Correct = true;
+                    }
+                }
                 return true;
             }
 
@@ -155,7 +177,6 @@ namespace TypTop.Logic
                 return false;
             }
 
-            int index = input ?? word.Index;
             char wordCharAtIndex = word.Letters[index];
 
             bool wrongChar = true;

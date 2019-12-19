@@ -14,7 +14,6 @@ namespace TypTop.Logic
             Input = input;
         }
 
-
         /// <summary>
         /// When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
         /// </summary>

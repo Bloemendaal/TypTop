@@ -75,7 +75,7 @@ namespace TypTop.TavernMinigame
         /// <summary>
         /// Lijst met Word’s die gebruikt kan worden door de Tiles.
         /// </summary>
-        private readonly Queue<Word> _words;
+        private Queue<Word> _words;
 
         /// <summary>
         /// InputList uit TypTop.Logic die gebruikt wordt om de input van de gebruiker te analyseren. FocusOnHighIndex staat op true. De woordenlijst wordt pas meegegeven wanneer de method UpdateWordlist() aangeroepen wordt.
@@ -267,19 +267,18 @@ namespace TypTop.TavernMinigame
             if (level != null && level.Properties != null)
             {
                 int countOffset = 360;
+                _customerQueue = new CustomerQueue(this);
 
                 // Words
-                if (level.Properties.TryGetValue("Words", out object wordsObject) && wordsObject is IEnumerable<Word> words)
-                {
-                    _words = new Queue<Word>(words);
-                }
-                else
-                {
-                    throw new ArgumentException("'Words' is missing or not valid");
-                }
+                _words = new Queue<Word>(WordProvider.Serve());
 
                 // TileAmount
                 TileAmount = level.Properties.TryGetValue("TileAmount", out object tileAmountObject) && tileAmountObject is int tileAmount ? tileAmount : 3;
+
+                if (_words.Count < TileAmount)
+                {
+                    throw new ArgumentException("'Words' amount is less than the amount of tiles");
+                }
 
                 // MaxCustomers
                 if (level.Properties.TryGetValue("MaxCustomers", out object maxCustomersObject) && maxCustomersObject is int maxCustomers)
@@ -372,7 +371,7 @@ namespace TypTop.TavernMinigame
 
                         Count = new Count(0, countOffset, (float)Height - 50, this);
 
-                        Finish = () => _customerQueue.Count <= 0;
+                        Finish = () => _customerQueue.Count <= 0 && _customers.Count <= 0;
                     }
                     else
                     {
@@ -404,7 +403,6 @@ namespace TypTop.TavernMinigame
 
             AddEntity(new Background("tavern.png", this));
 
-            _customerQueue = new CustomerQueue(this);
             AddEntity(_customerQueue);
 
             TextInput += OnTextInput;
@@ -569,6 +567,10 @@ namespace TypTop.TavernMinigame
             {
                 if (c.Word.Finished)
                 {
+                    if (_words.Count <= 0)
+                    {
+                        _words = new Queue<Word>(WordProvider.Serve());
+                    }
                     c.Word = _words.Dequeue();
                     foreach (Customer customer in _customers)
                     {

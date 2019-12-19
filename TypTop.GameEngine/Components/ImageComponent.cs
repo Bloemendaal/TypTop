@@ -11,6 +11,7 @@ namespace TypTop.GameEngine.Components
         private BitmapImage _bitmapImageOriginal;
         private PositionComponent _positionComponent;
 
+       
         public double? Width
         {
             get {
@@ -113,10 +114,16 @@ namespace TypTop.GameEngine.Components
 
         public void Draw(DrawingContext context)
         {
+            if (_positionComponent.Y + Height < 0 ||
+            _positionComponent.Y > Game.Height ||
+            _positionComponent.X + Width < 0 ||
+            _positionComponent.X > Game.Width
+            ) return;
+
             context.DrawImage(
                 _bitmapImage,
                 new Rect(
-                    new Point(_positionComponent.Position.X, _positionComponent.Position.Y),
+                    new Point(_positionComponent.X, _positionComponent.Y),
                     new Size((double)Width, (double)Height)
                 )
             );
