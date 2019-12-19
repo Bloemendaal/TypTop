@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NAudio" Version="1.9.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
   </ItemGroup>
 
