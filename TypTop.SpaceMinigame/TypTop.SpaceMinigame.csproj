@@ -23,6 +23,9 @@
     <None Update="Images\enemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\spaceButton_hover.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Images\spaceLevelBackground.jpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

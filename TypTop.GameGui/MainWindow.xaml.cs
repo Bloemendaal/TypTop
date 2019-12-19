@@ -34,6 +34,7 @@ namespace TypTop.GameGui
             //AllocConsole();
             PreviewTextInput += OnPreviewTextInput;
             MouseDown += OnMouseDown;
+            MouseMove += OnMouseMove;
 
             WordProvider wordProvider = new WordProvider()
             {
@@ -103,7 +104,8 @@ namespace TypTop.GameGui
                             }
                         }
                     }
-                }, WorldId.Tavern),
+                }, WorldId.Tavern,"tavernButton_hover.png"),
+                
                 new World("spaceButton.png", "spaceLevelBackground.jpeg", new List<Level>()
                 {
                     new Level()
@@ -122,7 +124,8 @@ namespace TypTop.GameGui
                             {"LineHeight", 800f}
                         }
                     }
-                }, WorldId.Space),
+                }, WorldId.Space,"spaceButton_hover.png"),
+                
                 new World("jumpButton.png", "jumpLevelBackground.png", new List<Level>()
                 {
                     new Level()
@@ -142,9 +145,14 @@ namespace TypTop.GameGui
                             { "PlatformSolidRatio", 0.5 }
                         }
                     }
-                }, WorldId.Jump)
+                }, WorldId.Jump, "jumpButton_hover.png")
             });
             gameLoader.LoadWorldMap();
+        }
+
+        private void OnMouseMove(object sender, MouseEventArgs e)
+        {
+            GameWindow.OnMouseHover(e.GetPosition(GameWindow));
         }
 
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
