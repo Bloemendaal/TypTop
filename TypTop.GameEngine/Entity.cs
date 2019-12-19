@@ -10,9 +10,9 @@ namespace TypTop.GameEngine
 
         public int ZIndex = 0;
 
-        protected Entity(Game game)
+        protected Entity(Game minigame)
         {
-            Game = game;
+            Game = minigame;
         }
 
         public Game Game { get; }

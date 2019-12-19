@@ -27,9 +27,9 @@ namespace TypTop.MinigameEngine.WinConditions
 
         public LifeCondition(int star3, int star2, int star1)
         {
-            _star1 = star3;
+            _star1 = star1;
             _star2 = star2;
-            _star3 = star1;
+            _star3 = star3;
         }
         public LifeCondition(int star) : this(star, star, star) { }
     }

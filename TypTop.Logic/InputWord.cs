@@ -22,10 +22,14 @@ namespace TypTop.Logic
             if (CheckWord(letter, Input))
             {
                 Input.Input.Push(letter);
+                if (Input.Correct != false)
+                {
+                    Input.Correct = true;
+                }
             }
             else
             {
-                if (OnKeyWrong == KeyWrong.reset)
+                if (OnKeyWrong == KeyWrong.Reset)
                 {
                     Input.Input.Clear();
                     Input.Index = 0;
@@ -33,19 +37,19 @@ namespace TypTop.Logic
                     Input.Correct = null;
                 }
 
-                if (OnKeyWrong == KeyWrong.remove)
+                if (OnKeyWrong == KeyWrong.Remove)
                 {
                     Input = null;
                 }
 
-                if (OnKeyWrong == KeyWrong.add)
+                if (OnKeyWrong == KeyWrong.Add)
                 {
                     Input.Input.Push(letter);
                     Input.Finished = false;
                     Input.Correct = false;
                 }
 
-                if (OnKeyWrong == KeyWrong.none)
+                if (OnKeyWrong == KeyWrong.None)
                 {
                     Input.Index = index;
                 }

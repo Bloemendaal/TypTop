@@ -38,6 +38,11 @@ namespace TypTop.GameEngine.Components
         {
             if (Text != null)
             {
+                if (Y + Text.Height < 0 ||
+                    Y > Game.Height ||
+                    X + Text.WidthIncludingTrailingWhitespace < 0 ||
+                    X > Game.Width
+                ) return;
                 context.DrawText(Text, new Point(X, Y));
             }
         }
