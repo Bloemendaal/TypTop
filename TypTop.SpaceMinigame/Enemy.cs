@@ -57,6 +57,12 @@ namespace TypTop.SpaceMinigame
             Score = 100 + Word.Letters.Length * (int)(Math.Round(Speed * 10));
         }
 
+        /// <summary>
+        /// This method is overridden from entity and is executed every "deltaTime".
+        /// The added functionality is checking whether the relevant Enemy is (already) under the line.
+        /// If this is the case, this Entity will be removed from the game and from the dependent lists.
+        /// </summary>
+        /// <param name="deltaTime"></param>
         public override void Update(float deltaTime)
         {
             base.Update(deltaTime);
