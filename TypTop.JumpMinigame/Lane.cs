@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Media;
 using TypTop.GameEngine;
 using TypTop.GameEngine.Components;
 using TypTop.Logic;
@@ -48,7 +49,8 @@ namespace TypTop.JumpMinigame
             {
                 Center = true,
                 TransformX = minigame.LaneWidth / 2,
-                TransformY = 20
+                TransformY = 20,
+                TypedColor = Brushes.Red
             };
 
             AddComponent(_positionComponent);
