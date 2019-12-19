@@ -35,10 +35,6 @@ namespace TypTop.Database
         [Required]
         public string Variables { get; set; }
 
-        [Required]
-        public int RequiredLevelId { get; set; }
-
-        public virtual Level RequiredLevel { get; set; }
 
     }
 }

@@ -14,6 +14,18 @@
     <Compile Remove="Migrations\20191127092221_Salt.Designer.cs" />
     <Compile Remove="Migrations\20191127092936_SaltString.cs" />
     <Compile Remove="Migrations\20191127092936_SaltString.Designer.cs" />
+    <Compile Remove="Migrations\20191219103838_Levels.cs" />
+    <Compile Remove="Migrations\20191219103838_Levels.Designer.cs" />
+    <Compile Remove="Migrations\20191219115207_Levels2.cs" />
+    <Compile Remove="Migrations\20191219115207_Levels2.Designer.cs" />
+    <Compile Remove="Migrations\20191219115853_Levels3.cs" />
+    <Compile Remove="Migrations\20191219115853_Levels3.Designer.cs" />
+    <Compile Remove="Migrations\20191219120648_Levels2.cs" />
+    <Compile Remove="Migrations\20191219120648_Levels2.Designer.cs" />
+    <Compile Remove="Migrations\20191219123613_Levels2.cs" />
+    <Compile Remove="Migrations\20191219123613_Levels2.Designer.cs" />
+    <Compile Remove="Migrations\20191219125825_Levels2.cs" />
+    <Compile Remove="Migrations\20191219125825_Levels2.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

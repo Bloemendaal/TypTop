@@ -10,19 +10,18 @@ namespace TypTop.Repository
     public interface ILevelRepository : IRepository<Level>
     {
 
-        public int GetId();
-        public int GetWorldId();
-        public World GetWorld();
-        public string GetTitle();
-        public string GetDescription();
-        public int GetIndex();
-        public WinConditionType GetWinCondition();
-        public int GetThreshholdOneStar();
-        public int GetThreshholdTwoStars();
-        public int GetThreshholdThreeStars();
-        public string GetVariables();
-        public int GetRequiredLevelId();
-        public Level GetRequiredLevel();
+        public int GetWorldId(int levelId);
+        public World GetWorld(int levelId);
+        public string GetTitle(int levelId);
+        public string GetDescription(int levelId);
+        public int GetIndex(int levelId);
+        public WinConditionType GetWinCondition(int levelId);
+        public int GetThreshholdOneStar(int levelId);
+        public int GetThreshholdTwoStars(int levelId);
+        public int GetThreshholdThreeStars(int levelId);
+        public string GetVariables(int levelId);
+        public int GetRequiredLevelId(int levelId);
+        public Level GetRequiredLevel(int levelId);
 
 
     }

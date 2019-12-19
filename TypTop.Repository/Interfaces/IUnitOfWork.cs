@@ -6,6 +6,8 @@ namespace TypTop.Repository
     {
 
         public IUserRepository Users { get;}
+        public IWordRepository Words { get; }
+        public ILevelRepository Levels { get; }
 
         int Complete();
     }

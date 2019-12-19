@@ -13,6 +13,64 @@ namespace TypTop.Repository
         {
         }
 
-       
+        public string GetDescription(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetIndex(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Level GetRequiredLevel(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetRequiredLevelId(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetThreshholdOneStar(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetThreshholdThreeStars(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetThreshholdTwoStars(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetTitle(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetVariables(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public WinConditionType GetWinCondition(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public World GetWorld(int levelId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetWorldId(int levelId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

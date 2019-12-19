@@ -16,21 +16,26 @@ namespace TypTop.Database
         public DbSet<World> World { get; set; }
         public DbSet<Word> Word { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //set WorldId as unique
-            builder.Entity<Level>()
-                .HasIndex(l => l.WorldId)
-                .IsUnique();
+            //set WorldId as foreign key
+            modelBuilder.Entity<Level>()
+                .HasOne(l => l.World)
+                .WithMany(w => w.Levels)
+                .HasForeignKey(l => l.WorldId)
+                .HasConstraintName("ForeignKey_Level_World");
 
             //set Index as unique
-            builder.Entity<Level>()
+            modelBuilder.Entity<Level>()
                 .HasIndex(l => l.Index)
                 .IsUnique();
 
             //set UserId and LevelId as composite primary key
-            builder.Entity<UserLevel>()
+            modelBuilder.Entity<UserLevel>()
                 .HasKey(l => new { l.UserId, l.LevelId });
+
+           
+            
 
         }
 

@@ -1,19 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
-using TypTop.GameEngine;
-using TypTop.GameEngine.Components;
-using Microsoft.EntityFrameworkCore;
-using TypTop.GameWindow;
 using TypTop.Logic;
-using TypTop.TavernMinigame;
-using TypTop.MinigameEngine.WinConditions;
 using TypTop.MinigameEngine;
-using TypTop.SpaceMinigame;
+using TypTop.Repository;
 using TypTop.Shared;
 
 namespace TypTop.GameGui
@@ -44,19 +37,11 @@ namespace TypTop.GameGui
             //tGame.OnFinished += OnFinishedGame;
             //sGame.OnFinished += OnFinishedGame;
 
-            var gameLoader = new GameLoader(GameWindow, new List<World>()
-            {
-                new World("tavernButton.png", "tavernLevelBackground.png" ,new List<Level>()
-                {
-                    new Level()
-                    {
-                        WinCondition = WinConditionType.LifeCondition,
-                        
-                        ThresholdOneStar = 1,
-                        ThresholdTwoStars = 2,
-                        ThresholdThreeStars = 3,
 
-                        Properties = new Dictionary<string, object>()
+            /*
+            using (var unitOfWork = new UnitOfWork(new TypTop.GameGui.ContextFactory().CreateDbContext(null)))
+            {
+                Dictionary<string, object> Properties = new Dictionary<string, object>()
                         {
                             {"Words", wordProvider.Serve()},
                             {"Lives", 6},
@@ -72,7 +57,44 @@ namespace TypTop.GameGui
                                     {5, 4000},
                                 }
                             }
-                        }
+                        };
+                unitOfWork.Levels.Add(new Database.Level
+                {
+                    WinCondition = (int)WinConditionType.LifeCondition,
+
+                    ThresholdOneStar = 1,
+                    ThresholdTwoStars = 2,
+                    ThresholdThreeStars = 3,
+
+
+                    WorldId = 1,
+                    Index = 1,
+                    Title = "TestTitle",
+
+                    Variables = JsonConvert.SerializeObject(Properties)
+
+                });
+                unitOfWork.Complete();
+            }
+            */
+
+            using var unitOfWork = new UnitOfWork(new TypTop.GameGui.ContextFactory().CreateDbContext(null));
+            var level = unitOfWork.Levels.GetWhere(l => l.Index == 1).Single();
+
+            var gameLoader = new GameLoader(GameWindow, new List<World>()
+            {
+                new World("tavernButton.png", "tavernLevelBackground.png" ,new List<Level>()
+                {
+                    new Level()
+                    {
+                        WinCondition = (WinConditionType)level.WinCondition,
+
+                        ThresholdOneStar = 1,
+                        ThresholdTwoStars = 2,
+                        ThresholdThreeStars = 3,
+
+                        Properties = JsonConvert.DeserializeObject<Dictionary<string, object>>(level.Variables)
+                        
                     }
                 }, WorldId.Tavern),
                 new World("spaceButton.png", "levelBackground.jpeg", new List<Level>()
@@ -83,7 +105,7 @@ namespace TypTop.GameGui
                         ThresholdOneStar = 100,
                         ThresholdTwoStars = 200,
                         ThresholdThreeStars = 300,
-                        
+
                         Properties = new Dictionary<string, object>()
                         {
                             {"Words", wordProvider.Serve()},
@@ -95,7 +117,6 @@ namespace TypTop.GameGui
                 }, WorldId.Space)
             });
             gameLoader.LoadWorldMap();
-
             //GameWindow.Start(sGame, new Transition(1d));
             //GameWindow.Start(new WorldScreenGame());
         }

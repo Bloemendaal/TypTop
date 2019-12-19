@@ -14,12 +14,14 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="3.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TypTop.Database\TypTop.Database.csproj" />
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
     <ProjectReference Include="..\TypTop.LevelScreen\TypTop.LevelScreen.csproj" />
+    <ProjectReference Include="..\TypTop.Repository\TypTop.Repository.csproj" />
     <ProjectReference Include="..\TypTop.Shared\TypTop.Shared.csproj" />
     <ProjectReference Include="..\TypTop.SpaceMinigame\TypTop.SpaceMinigame.csproj" />
     <ProjectReference Include="..\TypTop.TavernMinigame\TypTop.TavernMinigame.csproj" />
