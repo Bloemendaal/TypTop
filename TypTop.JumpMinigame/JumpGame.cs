@@ -10,8 +10,8 @@ namespace TypTop.JumpMinigame
     public class JumpGame : Minigame
     {
         private readonly Player _player;
+        private Queue<Word> _words = new Queue<Word>();
         private readonly List<Lane> _lanes = new List<Lane>();
-        private readonly Queue<Word> _words = new Queue<Word>();
         private readonly InputList _inputList = new InputList(null) 
         { 
             FocusOnHighIndex = true
@@ -397,15 +397,15 @@ namespace TypTop.JumpMinigame
             }
         }
 
-        public override void Update(float deltaTime)
+        public void CheckGeneratePlatforms()
         {
-            if (_player.AbsoluteMinimalY <  _highestPlatform + Height)
+            float highest = _lanes.Select(e => e.HighestPlatform()?.Y ?? 0).OrderBy(e => e).First();
+            if (highest > -Height)
             {
                 GeneratePlatforms();
             }
-
-            base.Update(deltaTime);
         }
+
 
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -418,6 +418,10 @@ namespace TypTop.JumpMinigame
                 {
                     if (SwitchWords)
                     {
+                        if (_words.Count <= 0)
+                        {
+                            _words = new Queue<Word>(WordProvider.Serve());
+                        }
                         lois.Word = _words.Dequeue();
                     }
                     else

@@ -59,7 +59,7 @@ namespace TypTop.JumpMinigame
             };
             _velocityComponent = new VelocityComponent();
 
-            _imageComponent = new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative)))
+            _imageComponent = new ImageComponent(new BitmapImage(new Uri(@"Images/jumpPlayer.png", UriKind.Relative)))
             {
                 Width = 100
             };
@@ -96,6 +96,7 @@ namespace TypTop.JumpMinigame
                         _velocityComponent.Velocity = new Vector2(0, -30f);
 
                         platform.Jump();
+                        Game.CheckGeneratePlatforms();
                         break;
                     }
                 }
