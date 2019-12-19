@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows;
 using System.Windows.Input;
@@ -11,6 +12,7 @@ namespace TypTop.VisualKeyboard
     public class KeyboardLayout
     {
         private readonly KeyFactory _keyFactory;
+        private readonly Vector2 _position;
         public KeyStyle Style { get; set; }
         
         protected const int KeySpacing = 5;
@@ -20,13 +22,12 @@ namespace TypTop.VisualKeyboard
         protected readonly HashSet<KeyboardKey> CustomStyledKeys = new HashSet<KeyboardKey>();
         protected readonly Dictionary<Key, KeyboardKey> Keys = new Dictionary<Key, KeyboardKey>();
 
-
         private static readonly Lazy<QwertyKeyboardLayout> LazyQwerty = new Lazy<QwertyKeyboardLayout>();
-        public static KeyboardLayout Qwerty => LazyQwerty.Value;
+    
 
-        private static readonly Lazy<ColemakKeyboardLayout> LazyAzerty = new Lazy<ColemakKeyboardLayout>();
+        //private static readonly Lazy<ColemakKeyboardLayout> LazyAzerty = new Lazy<ColemakKeyboardLayout>();
         private readonly RowBox _rowBox;
-        public static KeyboardLayout Azerty => LazyAzerty.Value;
+        //public static KeyboardLayout Azerty => LazyAzerty.Value;
 
         protected void NextRow()
         {
@@ -36,14 +37,18 @@ namespace TypTop.VisualKeyboard
         protected void AddKey(Key key)
         {
             var keyboardKey = _keyFactory.CreateKey(key, Style);
-            keyboardKey.Point = _rowBox.GetPosition(keyboardKey.Size);
+            Point keyboardKeyPoint = _rowBox.GetPosition(keyboardKey.Size);
+            keyboardKeyPoint.Y += _position.Y;
+            keyboardKeyPoint.X += _position.X;
+            keyboardKey.Point = keyboardKeyPoint;
 
             Keys.Add(key, keyboardKey);
         }
 
-        public KeyboardLayout(KeyFactory keyFactory)
+        public KeyboardLayout(KeyFactory keyFactory, Vector2 position)
         {
             _keyFactory = keyFactory;
+            _position = position;
             _rowBox = new RowBox();
             Style = KeyStyle.Default;
         }

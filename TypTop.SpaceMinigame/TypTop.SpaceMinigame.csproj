@@ -14,6 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\TypTop.Logic\TypTop.Logic.csproj" />
     <ProjectReference Include="..\TypTop.Minigame\TypTop.Minigame.csproj" />
+    <ProjectReference Include="..\TypTop.VisualKeyboard\TypTop.VisualKeyboard.csproj" />
   </ItemGroup>
 
   <ItemGroup>

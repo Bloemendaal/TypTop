@@ -1,12 +1,13 @@
 ﻿using System.Drawing;
 using System.Linq.Expressions;
+using System.Numerics;
 using System.Windows.Input;
 
 namespace TypTop.VisualKeyboard
 {
     public class QwertyKeyboardLayout : KeyboardLayout
     {
-        public QwertyKeyboardLayout() : base(new KeyFactory())
+        public QwertyKeyboardLayout(Vector2 position) : base(new KeyFactory(), position)
         {
             AddKey(Key.OemTilde);
 

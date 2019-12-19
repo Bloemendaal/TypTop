@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Numerics;
 using System.Windows;
 
 namespace TypTop.VisualKeyboard
@@ -23,7 +24,7 @@ namespace TypTop.VisualKeyboard
             _rowHeight = Math.Max(box.Height, _rowHeight);
             double x = _x;
             _x += box.Width + Spacing;
-            return new Point(x, _y);
+            return new Point(x , _y);
         }
     }
 }
