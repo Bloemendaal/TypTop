@@ -144,7 +144,7 @@ namespace TypTop.SpaceMinigame
 
             for (int i = 0; i < EnemyAmount; i++)
             {
-                _enemyList.Add(new Enemy(EnemyVelocity + (float)Rnd.Next((int)(-EnemyVelocityOffset * 1000000), (int)(EnemyVelocityOffset * 1000000)) / 1000000, _words[i % _words.Count], this));
+                _enemyList.Add(new Enemy(EnemyVelocity + Math.Max(-EnemyVelocity * 0.9f, Rnd.Next((int)(-EnemyVelocityOffset * 1000000), (int)(EnemyVelocityOffset * 1000000)) / 1000000f), _words[i % _words.Count], this));
             }
 
 
