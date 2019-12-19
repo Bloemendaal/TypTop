@@ -17,4 +17,3 @@ git:
 script:
   - dotnet restore
   - dotnet build
-  - dotnet test
