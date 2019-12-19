@@ -397,15 +397,15 @@ namespace TypTop.JumpMinigame
             }
         }
 
-        public override void Update(float deltaTime)
+        public void CheckGeneratePlatforms()
         {
-            if (_player.AbsoluteMinimalY < _highestPlatform + Height * 2)
+            float highest = _lanes.Select(e => e.HighestPlatform()?.Y ?? 0).OrderBy(e => e).First();
+            if (highest > -Height)
             {
                 GeneratePlatforms();
             }
-
-            base.Update(deltaTime);
         }
+
 
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {

@@ -96,6 +96,7 @@ namespace TypTop.JumpMinigame
                         _velocityComponent.Velocity = new Vector2(0, -30f);
 
                         platform.Jump();
+                        Game.CheckGeneratePlatforms();
                         break;
                     }
                 }

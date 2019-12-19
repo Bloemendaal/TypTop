@@ -68,5 +68,7 @@ namespace TypTop.JumpMinigame
             Game.AddEntity(platform);
         }
         public bool RemovePlatform(Platform platform) => _platforms.Remove(platform) && Game.RemoveEntity(platform);
+
+        public Platform HighestPlatform() => _platforms.Count > 0 ? _platforms.OrderBy(e => e.Y).First() : null;
     }
 }
