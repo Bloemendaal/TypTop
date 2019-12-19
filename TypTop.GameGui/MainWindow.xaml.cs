@@ -16,6 +16,7 @@ using TypTop.MinigameEngine;
 using TypTop.SpaceMinigame;
 using TypTop.WorldScreen;
 using TypTop.JumpMinigame;
+using TypTop.Shared;
 
 namespace TypTop.GameGui
 {
