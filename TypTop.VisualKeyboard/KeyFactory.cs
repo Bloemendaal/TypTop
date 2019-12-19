@@ -9,14 +9,14 @@ namespace TypTop.VisualKeyboard
     {
         public KeyboardKey CreateKey(Key key, KeyStyle style)
         {
-            var normalKeySize = new Size(50, 50);//A key
-            var ctrlKeySize = new Size(62.5D, 50);//A key
-            var tabSize = new Size(75, 50);//Caps key
-            var capsSize = new Size(90, 50); //Enter and shift key
-            var enterSize = new Size(115, 50); //Enter and shift key
-            var shiftSize = new Size(100, 50); // Left Shift
-            var rightShiftSize = new Size(160, 50); // Right Shift
-            var spaceSize = new Size(312.5D, 50);
+            var normalKeySize = new Size(50 * 2, 50 * 2);//A key
+            var ctrlKeySize = new Size(62.5D * 2, 50 * 2);//A key
+            var tabSize = new Size(75 * 2, 50 * 2);//Caps key
+            var capsSize = new Size(90 * 2, 50 * 2); //Enter and shift key
+            var enterSize = new Size(115 * 2, 50 * 2); //Enter and shift key
+            var shiftSize = new Size(100 * 2, 50 * 2); // Left Shift
+            var rightShiftSize = new Size(160 * 2, 50 * 2); // Right Shift
+            var spaceSize = new Size(312.5D * 2, 50 * 2);
             if (key >= Key.A && key <= Key.Z)
             {
                 return CreateSingleSymbolKey(key, normalKeySize, style);

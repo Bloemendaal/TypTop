@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
@@ -180,6 +181,7 @@ namespace TypTop.SpaceMinigame
             AddEntity(Score);
             AddEntity(Lives);
 
+            
             //
             // Events
             //

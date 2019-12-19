@@ -1,61 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Numerics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TypTop.GameEngine;
 
 namespace TypTop.VisualKeyboard
 {
-    public class VisualKeyboard : Control
+    public class VisualKeyboard : Entity
     {
-        private KeyboardLayout _layout = KeyboardLayout.Qwerty;
-
-        public KeyboardLayout Layout
-        {
-            get => _layout;
-            set
-            {
-                _layout = value;
-                InvalidateVisual();
-            }
-        }
+        private readonly KeyboardLayout Layout;
 
         public void SetKeyStyle(Key key, KeyStyle color)
         {
-            _layout.SetKeyStyle(key, color);
-            InvalidateVisual();
+            Layout.SetKeyStyle(key, color);
         }
 
-        static VisualKeyboard()
+        public override void Draw(DrawingContext drawingContext)
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(VisualKeyboard), new FrameworkPropertyMetadata(typeof(VisualKeyboard)));
-        }
-
-        public VisualKeyboard()
-        {
-          
-        }
-
-        protected override void OnRender(DrawingContext drawingContext)
-        {
+            base.Draw(drawingContext);
             Layout.Render(drawingContext);
-            base.OnRender(drawingContext);
         }
 
-        public void InvalidateKeyStyle()
+        public VisualKeyboard(Game minigame, Vector2 position) : base(minigame)
         {
-            _layout.InvalidateKeyStyle();
-            InvalidateVisual();
+            Layout = new QwertyKeyboardLayout(position);
         }
     }
 }

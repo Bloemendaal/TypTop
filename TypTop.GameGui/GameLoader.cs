@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Media;
 using TypTop.GameWindow;
 using TypTop.JumpMinigame;
 using TypTop.LevelScreen;
@@ -7,10 +8,13 @@ using TypTop.MinigameEngine;
 using TypTop.ScoreScreen;
 using TypTop.SpaceMinigame;
 using TypTop.TavernMinigame;
+using TypTop.Tutorial;
 using TypTop.WorldScreen;
 
 namespace TypTop.GameGui
 {
+    
+
     public class GameLoader : IGameLoader
     {
         private readonly GameWindow.GameWindow _gameWindow;
@@ -25,13 +29,13 @@ namespace TypTop.GameGui
         public void LoadWorldMap()
         {
             var worldScreenGame = new WorldScreenGame(_worlds, this);
-            _gameWindow.Start(worldScreenGame, new Transition(2));
+            _gameWindow.Start(worldScreenGame, new Transition(1));
         }
 
         public void LoadLevelMap(World world)
         {
             var levelScreen = new LevelScreenGame(world, this);
-            _gameWindow.Start(levelScreen, new Transition(2));
+            _gameWindow.Start(levelScreen, new Transition(1));
         }
 
         public void LoadMinigame(Level level)
@@ -69,7 +73,19 @@ namespace TypTop.GameGui
                 scoreScreenGame.Closed += (o, e) => { LoadLevelMap(level.World); };
                 _gameWindow.Start(scoreScreenGame, new Transition(1));
             };
-            _gameWindow.Start(game, new Transition(1));
+
+            //TODO laad woorden uit word provider ofzo
+            var tutorialGameScreen = new TutorialGameScreen("WOORDEN");
+            tutorialGameScreen.Back += (sender, args) =>
+            {
+                LoadLevelMap(level.World);
+            };
+            tutorialGameScreen.Play += (sender, args) =>
+            {
+                _gameWindow.Start(game, new Transition(1));
+            };
+
+            _gameWindow.Start(tutorialGameScreen, new Transition(1f));
         }
 
        

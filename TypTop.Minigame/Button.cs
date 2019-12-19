@@ -72,7 +72,7 @@ namespace TypTop.MinigameEngine
             AddComponent(_imageComponent);
         }
 
-        private void HoverComponentOnHover(object? sender, HoverState e)
+        private void HoverComponentOnHover(object sender, HoverState e)
         {
             if (e == HoverState.Enter)
             {

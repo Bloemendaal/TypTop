@@ -6,4 +6,8 @@
     <RootNamespace>TypTop</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
+  </ItemGroup>
+
 </Project>
