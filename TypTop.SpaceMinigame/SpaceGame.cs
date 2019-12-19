@@ -194,6 +194,13 @@ namespace TypTop.SpaceMinigame
             return result;
         }
 
+        /// <summary>
+        /// This method will be executed with Text input.
+        /// For example, several things are done here, such as drawing a laser from killing an enemy.
+        /// Remove this Enemy from the correct list.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnTextInput(object sender, TextCompositionEventArgs e)
         {
             _inputList.Input = _enemyList.Where(e => e.Y + 150 > 0).Select(e => e.Word).ToList();
