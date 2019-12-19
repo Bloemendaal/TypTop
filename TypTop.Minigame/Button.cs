@@ -35,6 +35,8 @@ namespace TypTop.MinigameEngine
 
         public event EventHandler Clicked;
 
+        public object Data { get; set; }
+
         public Button(string background, Rect bounds, Game game) : base(game)
         {
             ZIndex = -1;

@@ -1,43 +1,50 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using TypTop.GameEngine;
+using TypTop.GameGui;
+using TypTop.LevelScreen;
+using TypTop.Logic;
 using TypTop.MinigameEngine;
 
 namespace TypTop.WorldScreen
 {
     public class WorldScreenGame : Game
     {
-        public WorldScreenGame()
+        private readonly IList<World> _worlds;
+        private readonly IGameLoader _gameLoader;
+
+        public WorldScreenGame(IList<World> worlds, IGameLoader gameLoader)
         {
+            _worlds = worlds;
+            _gameLoader = gameLoader;
             AddEntity(new Background("main_background.png",this));
-            
-            var backButton = new Button("backButton.png", new Rect(new Point(50, 900), new Size(100,100)), this);
-            backButton.Clicked += BackButtonOnClicked;
-            AddEntity(backButton);
 
-            var spaceGameButton = new Button("spaceButton.png", new Rect(new Point(400, 400), new Size(600, 500)), this);
-            spaceGameButton.Clicked += SpaceGameButtonOnClicked;
-            AddEntity(spaceGameButton);
 
-            var tavernGameButton = new Button("tavernButton.png", new Rect(new Point(1100, 400), new Size(600, 500)), this);
-            tavernGameButton.Clicked += TavernGameButtonOnClicked;
-            AddEntity(tavernGameButton);
+
+            for (var index = 0; index < worlds.Count; index++)
+            {
+                World world = worlds[index];
+
+                var rect = Utils.GetRectangle(index, worlds.Count, 5, 150, 450, 350);
+
+                var gameButton = new Button(world.PreviewImage, rect, this);
+                gameButton.Data = world;
+                gameButton.Clicked += WorldButtonClicked;
+                AddEntity(gameButton);
+            }
         }
 
-        private void TavernGameButtonOnClicked(object sender, EventArgs e)
+        private Rect GetButtonPositionRectangle(int index, int total)
         {
-            MessageBox.Show("TavernButtonClicked");
+            return default;
         }
 
-        private void SpaceGameButtonOnClicked(object sender, EventArgs e)
+        private void WorldButtonClicked(object sender, EventArgs e)
         {
-            MessageBox.Show("SpaceButtonClicked");
-        }
-
-        private void BackButtonOnClicked(object sender, EventArgs e)
-        {
-            MessageBox.Show("BackButtonClicked");
+            var world = (World)((Button) sender).Data;
+            _gameLoader.LoadLevelMap(world);
         }
     }
 }

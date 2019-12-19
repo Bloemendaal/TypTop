@@ -7,7 +7,8 @@ namespace TypTop.GameEngine.Components
 {
     public class ImageComponent : Component, IDrawable
     {
-        private readonly BitmapImage _bitmapImage;
+        private BitmapSource _bitmapImage;
+        private BitmapImage _bitmapImageOriginal;
         private PositionComponent _positionComponent;
 
         public double? Width
@@ -79,7 +80,15 @@ namespace TypTop.GameEngine.Components
             get => _rotation;
             set
             {
-                _rotation = value % 360;
+                double newValue = value %= 360;
+                double oldValue = _rotation;
+
+                _rotation = newValue;
+
+                if (newValue != oldValue)
+                {
+                    RotateImage();
+                }
             }
         }
         private double _rotation = 0;
@@ -88,7 +97,13 @@ namespace TypTop.GameEngine.Components
 
         public ImageComponent(BitmapImage bitmapImage)
         {
-            _bitmapImage = bitmapImage;
+            UpdateImage(bitmapImage);
+        }
+
+        public void UpdateImage(BitmapImage bitmapImage)
+        {
+            _bitmapImageOriginal = bitmapImage;
+            RotateImage();
         }
 
         public override void AddedToEntity()
@@ -98,16 +113,27 @@ namespace TypTop.GameEngine.Components
 
         public void Draw(DrawingContext context)
         {
+            if (_positionComponent.Y + Height < 0 ||
+            _positionComponent.Y > Game.Height ||
+            _positionComponent.X + Width < 0 ||
+            _positionComponent.X > Game.Width
+            ) return;
+
             context.DrawImage(
-                Rotation == 0 ? _bitmapImage : ComposeImage(_bitmapImage, Rotation),
+                _bitmapImage,
                 new Rect(
-                    new Point(_positionComponent.Position.X, _positionComponent.Position.Y),
+                    new Point(_positionComponent.X, _positionComponent.Y),
                     new Size((double)Width, (double)Height)
                 )
             );
         }
 
-        private BitmapSource ComposeImage(BitmapSource image, double rotationAngle)
+        private void RotateImage()
+        {
+            _bitmapImage = Rotation == 0 ? _bitmapImageOriginal : ComposeImage(_bitmapImageOriginal, Rotation);
+        }
+
+        private static BitmapSource ComposeImage(BitmapSource image, double rotationAngle)
         {
             RotateTransform rotation = new RotateTransform(rotationAngle);
             Size size = new Size(image.PixelWidth, image.PixelHeight);

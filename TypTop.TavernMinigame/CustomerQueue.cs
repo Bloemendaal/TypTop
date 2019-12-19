@@ -12,6 +12,9 @@ namespace TypTop.TavernMinigame
 {
     public class CustomerQueue : Entity
     {
+        /// <summary>
+        /// Amount of customers in the queue.
+        /// </summary>
         public int Count => _customerQueue.Count;
         private readonly Queue<Customer> _customerQueue = new Queue<Customer>();
 
@@ -45,6 +48,9 @@ namespace TypTop.TavernMinigame
             return c;
         }
 
+        /// <summary>
+        /// Visually update the amount of customers in the queue.
+        /// </summary>
         private void UpdateCount()
         {
             bool hidden = Count < 1;

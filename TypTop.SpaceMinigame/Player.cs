@@ -22,6 +22,7 @@ namespace TypTop.SpaceMinigame
 
             AddComponent(new ImageComponent(new BitmapImage(new Uri(@"Images/spaceship.png", UriKind.Relative)))
             {
+                
                 Width = 100
             });
         }

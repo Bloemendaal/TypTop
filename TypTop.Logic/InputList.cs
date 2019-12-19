@@ -14,10 +14,9 @@ namespace TypTop.Logic
             Input = input;
         }
 
-
-        //
-        // Summary:
-        //     When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
+        /// <summary>
+        /// When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
+        /// </summary>
         public bool FocusOnHighIndex = false;
 
 
@@ -39,7 +38,7 @@ namespace TypTop.Logic
                         }
                         else
                         {
-                            if (OnKeyWrong == KeyWrong.reset)
+                            if (OnKeyWrong == KeyWrong.Reset)
                             {
                                 input.Input.Clear();
                                 input.Index = 0;
@@ -47,19 +46,19 @@ namespace TypTop.Logic
                                 input.Correct = null;
                             }
 
-                            if (OnKeyWrong == KeyWrong.remove)
+                            if (OnKeyWrong == KeyWrong.Remove)
                             {
                                 Input?.Remove(input);
                             }
 
-                            if (OnKeyWrong == KeyWrong.add)
+                            if (OnKeyWrong == KeyWrong.Add)
                             {
                                 input.Input.Push(letter);
                                 input.Finished = false;
                                 input.Correct = false;
                             }
 
-                            if (OnKeyWrong == KeyWrong.none)
+                            if (OnKeyWrong == KeyWrong.None)
                             {
                                 input.Index = index;
                             }
