@@ -45,7 +45,7 @@ namespace TypTop.LevelScreen
                 AddEntity(button);
             }
 
-            var infoButton = new Button(new Rect(new Point(1800, 950), new Size(100f, 100f)),
+            var infoButton = new Button(new Rect(new Point(1800, 900), new Size(100f, 100f)),
                 this, "vraagTeken.png", "vraagTeken_hover.png");
             infoButton.Clicked += InfoButtonOnClicked;
             AddEntity(infoButton);
