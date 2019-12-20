@@ -105,7 +105,7 @@ namespace TypTop.Logic.UnitTests
         }
 
         [TestCase()]
-        public void UsageOfCharacter_Z_MoreThenOneWord()
+        public void UsageOfCharacter_Z_MoreThanOneWord()
         {
             _wp = new WordProvider();
             _wp.LoadTestWords();

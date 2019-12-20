@@ -10,10 +10,14 @@ namespace TypTop.Logic
 {
     public class WordProvider
     {
-        // List of words to serve with conditions
+        /// <summary>
+        /// List of words to serve with conditions
+        /// </summary>
         private List<Word> _wordsToServe = new List<Word>();
 
-        // Amount of words to provide.
+        /// <summary>
+        /// Amount of words to provide.
+        /// </summary>
         public int? WordCount
         {
             get => _wordCount;
@@ -29,7 +33,9 @@ namespace TypTop.Logic
         }
         private int? _wordCount = null;
 
-        // Max length of word.
+        /// <summary>
+        /// Max length of word.
+        /// </summary>
         public int? MaxWordLength
         {
             get => _maxWordLength;
@@ -51,6 +57,10 @@ namespace TypTop.Logic
             }
         }
         private int? _maxWordLength = null;
+
+        /// <summary>
+        /// Min length of word.
+        /// </summary>
         public int? MinWordLength
         {
             get => _minWordLength;
@@ -73,12 +83,16 @@ namespace TypTop.Logic
         }
         private int? _minWordLength = null;
 
-        // #Optional: select only words with char in list.
+        /// <summary>
+        ///  Optional: select only words with char in list.
+        /// </summary>
         public List<char> UsageChars { get; set; }
         public List<char> LimitChars { get; set; }
 
 
-        // Randomizes the list
+        /// <summary>
+        /// Randomizes the list
+        /// </summary>
         public void Shuffle()
         {
             if (!AreWordsSet()) return;
@@ -101,7 +115,9 @@ namespace TypTop.Logic
         public bool AreWordsSet() => _wordsToServe != null && _wordsToServe.Any();
 
 
-        // Loading words from database
+        /// <summary>
+        /// Loading words from database.
+        /// </summary>
         public void LoadWords()
         {
              using var db = new Context("");
@@ -141,11 +157,21 @@ namespace TypTop.Logic
         }
 
 
-        // Reset words to initial
+        /// <summary>
+        /// Reset words to initial.
+        /// </summary>
         public void ResetToEmpty() => _wordsToServe.Clear();
 
 
-        // return filtered words
+        /// <summary>
+        /// Serve the words.
+        /// </summary>
+        /// <param name="shuffle">
+        /// Shuffle the words before serving. Default is true.
+        /// </param>
+        /// <returns>
+        /// Returns the words that apply to this condition.
+        /// </returns>
         public List<Word> Serve(bool shuffle = true) {
             if (shuffle) Shuffle();
 
