@@ -15,9 +15,6 @@ namespace TypTop.Database
 
         public virtual World World { get; set; }
 
-        [Required]
-        public string Title { get; set; }
-
         public string Description { get; set; }
 
         [Required]
@@ -25,6 +22,8 @@ namespace TypTop.Database
 
         [Required]
         public int WinCondition { get; set; }
+
+        public string WordProvider { get; set; }
 
         public int ThresholdOneStar { get; set; }
 

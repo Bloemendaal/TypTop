@@ -380,7 +380,7 @@ namespace TypTop.TavernMinigame
                 }
                 else
                 {
-                    if (level.Properties.TryGetValue("Seconds", out object secondsObject) && secondsObject is int seconds)
+                    if (level.Properties.TryGetValue("Seconds", out object secondsObject) && secondsObject is long seconds)
                     {
                         _timer = AddTimer(() =>
                         {
@@ -388,7 +388,7 @@ namespace TypTop.TavernMinigame
                             _timer.Interval = (int)(Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0), CustomerSpawnSpeed + CustomerSpawnSpeedOffset) * (1 + _customerQueue.Count * CustomerSpawnSpeedMultiplier));
                         }, Rnd.Next(Math.Max(CustomerSpawnSpeed - CustomerSpawnSpeedOffset, 0), CustomerSpawnSpeed + CustomerSpawnSpeedOffset));
 
-                        Count = new Count(seconds, countOffset, (float)Height - 50, this);
+                        Count = new Count((int)seconds, countOffset, (float)Height - 50, this);
                     }
                     else
                     {

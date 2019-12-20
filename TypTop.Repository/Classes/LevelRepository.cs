@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using TypTop.Database;
 using TypTop.Shared;
 
@@ -11,6 +12,32 @@ namespace TypTop.Repository
     {
         public LevelRepository(Context context) : base(context)
         {
+        }
+
+        /// <summary>
+        /// Adds level with given specification to the database
+        /// </summary>
+        /// <param name="worldId"></param>
+        /// <param name="index"></param>
+        /// <param name="winCondition"></param>
+        /// <param name="wordProvider"></param>
+        /// <param name="thresholdOneStar"></param>
+        /// <param name="thresholdTwoStars"></param>
+        /// <param name="thresholdThreeStars"></param>
+        /// <param name="variables"></param>
+        public void AddLevel(int worldId, int index, WinConditionType winCondition, string wordProvider, int thresholdOneStar, int thresholdTwoStars, int thresholdThreeStars, Dictionary<string, object> variables)
+        {
+            Add(new Level
+            {
+                WorldId = worldId,
+                Index = index,
+                WinCondition = (int)winCondition,
+                WordProvider = wordProvider,
+                ThresholdOneStar = thresholdOneStar,
+                ThresholdTwoStars = thresholdTwoStars,
+                ThresholdThreeStars = thresholdThreeStars,
+                Variables =  JsonConvert.SerializeObject(variables)
+            });
         }
 
         public string GetDescription(int levelId)

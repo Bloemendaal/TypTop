@@ -5,7 +5,9 @@ using TypTop.Database;
 
 namespace TypTop.Repository
 {
-    public interface IWordRepository : IRepository<Word>
+    public interface IWorldRepository : IRepository<World>
     {
+
+        
     }
 }
