@@ -347,7 +347,7 @@ namespace TypTop.JumpMinigame
             }
 
             // Background
-            AddEntity(new Background("jumpLevelBackground.png", this));
+            AddEntity(new Background("jumpInGameBackground.png", this));
             AddEntity(new Background("scoreline.png", this)
             {
                 ZIndex = 4,
