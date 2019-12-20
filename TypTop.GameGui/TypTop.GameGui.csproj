@@ -14,7 +14,6 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TypTop.Database\TypTop.Database.csproj" />
     <ProjectReference Include="..\TypTop.GameEngine\TypTop.GameEngine.csproj" />
     <ProjectReference Include="..\TypTop.GameWindow\TypTop.GameWindow.csproj" />
     <ProjectReference Include="..\TypTop.JumpMinigame\TypTop.JumpMinigame.csproj" />
