@@ -89,7 +89,7 @@ namespace TypTop.GameGui
                 _gameWindow.Start(scoreScreenGame, new Transition(1));
             };
 
-            var tutorialGameScreen = new TutorialGameScreen("WOORDEN");
+            var tutorialGameScreen = new TutorialGameScreen(level.WordProvider);
             tutorialGameScreen.Back += (sender, args) =>
             {
                 LoadLevelMap(level.World);
