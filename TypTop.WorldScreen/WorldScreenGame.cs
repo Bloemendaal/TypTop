@@ -15,6 +15,8 @@ namespace TypTop.WorldScreen
         private readonly IList<World> _worlds;
         private readonly IGameLoader _gameLoader;
 
+        public event EventHandler Exit;
+
         public WorldScreenGame(IList<World> worlds, IGameLoader gameLoader)
         {
             _worlds = worlds;
@@ -38,13 +40,18 @@ namespace TypTop.WorldScreen
 
         private void ExitButtonOnClicked(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            OnExit();
         }
 
         private void WorldButtonClicked(object sender, EventArgs e)
         {
             var world = (World)((Button) sender).Data;
             _gameLoader.LoadLevelMap(world);
+        }
+
+        protected virtual void OnExit()
+        {
+            Exit?.Invoke(this, EventArgs.Empty);
         }
     }
 }
