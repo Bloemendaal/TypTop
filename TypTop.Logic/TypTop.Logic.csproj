@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TypTop.Database\TypTop.Database.csproj" />
     <ProjectReference Include="..\TypTop.Repository\TypTop.Repository.csproj" />
     <ProjectReference Include="..\TypTop.Shared\TypTop.Shared.csproj" />
   </ItemGroup>

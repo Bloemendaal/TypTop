@@ -43,7 +43,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.JumpMinigame", "TypT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.ScoreScreen", "TypTop.ScoreScreen\TypTop.ScoreScreen.csproj", "{547F3C61-E606-4814-A650-1B23B0915A7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TypTop.Tutorial", "TypTop.Tutorial\TypTop.Tutorial.csproj", "{270752F1-3A26-495E-B689-CED6A099DF98}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TypTop.Tutorial", "TypTop.Tutorial\TypTop.Tutorial.csproj", "{270752F1-3A26-495E-B689-CED6A099DF98}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1A343C7-1903-4B62-A052-7DB28749D951}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
