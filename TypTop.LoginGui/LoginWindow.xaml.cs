@@ -29,7 +29,7 @@ namespace TypTop.Gui
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
 
-            using var unitOfWork = new UnitOfWork(new GameGui.ContextFactory().CreateDbContext(null));
+            using var unitOfWork = new UnitOfWork(new TypTop.Shared.ContextFactory().CreateDbContext(null));
 
             if (PasswordBox.Password != "" && unitOfWork.Users.GetWhere(u => u.Username.Equals(UsernameBox.Text)).Any())
             {
@@ -87,7 +87,7 @@ namespace TypTop.Gui
                 {
                     if (CreationPasswordBox.Password.Equals(CreationPasswordBoxConfirmation.Password))
                     {
-                        using (var unitOfWork = new UnitOfWork(new TypTop.GameGui.ContextFactory().CreateDbContext(null)))
+                        using (var unitOfWork = new UnitOfWork(new TypTop.Shared.ContextFactory().CreateDbContext(null)))
                         {
                             if (!unitOfWork.Users.GetWhere(u => u.Username.Equals(CreationUsernameBox.Text)).Any())
                             {

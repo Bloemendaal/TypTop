@@ -23,6 +23,7 @@ namespace TypTop.Repository
         public int GetRequiredLevelId(int levelId);
         public Level GetRequiredLevel(int levelId);
 
+        public void AddLevel(int worldId, int index, WinConditionType winCondition, string wordProvider, int thresholdOneStar, int thresholdTwoStars, int thresholdThreeStars, Dictionary<string, object> variables);
 
     }
 }

@@ -17,6 +17,10 @@ using TypTop.SpaceMinigame;
 using TypTop.WorldScreen;
 using TypTop.JumpMinigame;
 using TypTop.Shared;
+using TypTop.Repository;
+using Newtonsoft.Json;
+using System.Linq;
+
 
 namespace TypTop.GameGui
 {
@@ -44,25 +48,55 @@ namespace TypTop.GameGui
             };
             wordProvider.LoadTestWords();
 
-            var gameLoader = new GameLoader(GameWindow, new List<World>()
-            {
-                new World("tavernButton.png", "tavernLevelBackground.png" ,new List<Level>()
-                {
-                    new Level()
-                    {
-                        WinCondition = WinConditionType.ScoreCondition,
 
-                        ThresholdOneStar = 250,
-                        ThresholdTwoStars = 500,
-                        ThresholdThreeStars = 750,
 
-                        WordProvider = wordProvider,
 
-                        Properties = new Dictionary<string, object>()
+            using var unitOfWork = new UnitOfWork(new TypTop.Shared.ContextFactory().CreateDbContext(null));
+
+            var tavernWorld = unitOfWork.Worlds.GetWhere(w => w.Index == 0).Single();
+            /*
+            Dictionary<string, object> Properties = new Dictionary<string, object>()
                         {
                             {"Seconds", 120}
-                        }
+                        };
+            unitOfWork.Levels.Add(new Database.Level
+            {
+                WinCondition = (int)WinConditionType.ScoreCondition,
+
+                ThresholdOneStar = 250,
+                ThresholdTwoStars = 500,
+                ThresholdThreeStars = 750,
+
+                WorldId = tavernWorld.WorldId,
+                Index = 0,
+                WordProvider = JsonConvert.SerializeObject(wordProvider),
+
+                Variables = JsonConvert.SerializeObject(Properties)
+
+            });
+            unitOfWork.Complete();
+            */
+
+            var levelEen = unitOfWork.Levels.GetWhere(l => l.Index == 0).Single();
+
+            var gameLoader = new GameLoader(GameWindow, new List<World>()
+            {
+                new World(tavernWorld.Button, tavernWorld.Background ,new List<Level>()
+                {
+                    
+                    new Level()
+                    {
+                        WinCondition = (WinConditionType)levelEen.WinCondition,
+
+                        ThresholdOneStar = levelEen.ThresholdOneStar,
+                        ThresholdTwoStars = levelEen.ThresholdTwoStars,
+                        ThresholdThreeStars = levelEen.ThresholdThreeStars,
+
+                        WordProvider = JsonConvert.DeserializeObject<WordProvider>(levelEen.WordProvider),
+
+                        Properties = JsonConvert.DeserializeObject<Dictionary<string, object>>(levelEen.Variables)
                     },
+                    
                     new Level()
                     {
                         WinCondition = WinConditionType.TimeCondition,
@@ -105,7 +139,7 @@ namespace TypTop.GameGui
                             }
                         }
                     }
-                }, WorldId.Tavern,"tavernButton_hover.png"),
+                }, WorldId.Tavern, tavernWorld.HoverButton),
                 
                 new World("spaceButton.png", "spaceLevelBackground.jpeg", new List<Level>()
                 {

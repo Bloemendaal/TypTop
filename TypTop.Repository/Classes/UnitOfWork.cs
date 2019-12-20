@@ -12,6 +12,8 @@ namespace TypTop.Repository
         public IUserRepository Users { get; private set; }
         public IWordRepository Words { get; private set; }
         public ILevelRepository Levels { get; private set; }
+        public IWorldRepository Worlds { get; private set; }
+
 
         public UnitOfWork(Context context)
         {
@@ -19,6 +21,7 @@ namespace TypTop.Repository
             Users = new UserRepository(_context);
             Words = new WordRepository(_context);
             Levels = new LevelRepository(_context);
+            Worlds = new WorldRepository(_context);
         }
 
         public int Complete()

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TypTop.Database\TypTop.Database.csproj" />
+    <ProjectReference Include="..\TypTop.Repository\TypTop.Repository.csproj" />
     <ProjectReference Include="..\TypTop.Shared\TypTop.Shared.csproj" />
   </ItemGroup>
 
