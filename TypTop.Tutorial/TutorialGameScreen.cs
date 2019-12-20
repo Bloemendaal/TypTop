@@ -19,7 +19,7 @@ namespace TypTop.Tutorial
             backButton.Clicked += BackButtonOnClicked;
             AddEntity(backButton);
 
-            var playButton = new Button(new Rect(new Point(1800, 950), new Size(100f, 100f)),
+            var playButton = new Button(new Rect(new Point(1800, 900), new Size(100f, 100f)),
                 this, "play.png", "play_hover.png");
             playButton.Clicked += PlayButtonOnClicked;
             AddEntity(playButton);

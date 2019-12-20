@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Media;
+using TypTop.GameEngine;
 using TypTop.GameWindow;
 using TypTop.JumpMinigame;
 using TypTop.LevelScreen;
@@ -13,7 +15,12 @@ using TypTop.WorldScreen;
 
 namespace TypTop.GameGui
 {
-    
+    /// <summary>
+    /// Null object, only used for fade when game closes.
+    /// </summary>
+    public class ExitGame : Game
+    {
+    }
 
     public class GameLoader : IGameLoader
     {
@@ -30,6 +37,14 @@ namespace TypTop.GameGui
         {
             var worldScreenGame = new WorldScreenGame(_worlds, this);
             _gameWindow.Start(worldScreenGame, new Transition(1));
+            worldScreenGame.Exit += WorldScreenGameOnExit;
+        }
+
+        private void WorldScreenGameOnExit(object sender, EventArgs e)
+        {
+            var transition = new Transition(1f);
+            transition.FadeIn += (o, args) => Environment.Exit(0);
+            _gameWindow.Start(new ExitGame(), transition);
         }
 
         public void LoadLevelMap(World world)
@@ -74,7 +89,6 @@ namespace TypTop.GameGui
                 _gameWindow.Start(scoreScreenGame, new Transition(1));
             };
 
-            //TODO laad woorden uit word provider ofzo
             var tutorialGameScreen = new TutorialGameScreen("WOORDEN");
             tutorialGameScreen.Back += (sender, args) =>
             {
