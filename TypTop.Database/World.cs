@@ -10,9 +10,6 @@ namespace TypTop.Database
         [Key]
         public int WorldId { get; set; }
 
-        [Required]
-        public string Title { get; set; }
-
         public string Description { get; set; }
 
         [Required]
@@ -22,6 +19,10 @@ namespace TypTop.Database
         public int Stars { get; set; }
 
         public string Background { get; set; }
+
+        public string Button { get; set; }
+
+        public string HoverButton { get; set; }
 
         public List<Level> Levels { get; set; }
 

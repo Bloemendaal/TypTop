@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TypTop.Database;
 
 namespace TypTop.Database.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20191220091757_LvlWordProvider")]
+    partial class LvlWordProvider
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,6 +42,10 @@ namespace TypTop.Database.Migrations
 
                     b.Property<int>("ThresholdTwoStars")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Variables")
                         .IsRequired()
@@ -136,13 +142,7 @@ namespace TypTop.Database.Migrations
                     b.Property<string>("Background")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Button")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HoverButton")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Index")
@@ -150,6 +150,10 @@ namespace TypTop.Database.Migrations
 
                     b.Property<int>("Stars")
                         .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("WorldId");
 

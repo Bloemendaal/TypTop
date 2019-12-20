@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using TypTop.Database;
 
-namespace TypTop.GameGui
+namespace TypTop.Shared
 {
     /// <summary>
-    /// Wordt gebruikt voor ef migrations
+    /// Wordt gebruikt voor ef migrations en Databaseconnectie
     /// </summary>
     public class ContextFactory : IDesignTimeDbContextFactory<Context>
     {

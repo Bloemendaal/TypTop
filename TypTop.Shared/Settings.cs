@@ -2,7 +2,7 @@
 using System.IO;
 using Microsoft.Extensions.Configuration;
 
-namespace TypTop.GameGui
+namespace TypTop.Shared
 {
     public class Settings
     {
@@ -19,7 +19,7 @@ namespace TypTop.GameGui
                 .AddJsonFile("appsettings.json",
                     optional: false,
                     reloadOnChange: true)
-                .AddUserSecrets<MainWindow>();
+                .AddUserSecrets<Settings>();
             IConfigurationRoot configurationRoot = builder.Build();
             return new Settings(configurationRoot);
         });

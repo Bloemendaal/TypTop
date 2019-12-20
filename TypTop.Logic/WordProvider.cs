@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TypTop.Database;
+using TypTop.Repository;
 
 namespace TypTop.Logic
 {
@@ -104,8 +105,12 @@ namespace TypTop.Logic
         // Loading words from database
         public void LoadWords()
         {
-             using var db = new Context("");
-             var words = db.Word.OrderBy(w => w.Letters).ToList();
+            List<Database.Word> words;
+            using (var unitOfWork = new UnitOfWork(new TypTop.Shared.ContextFactory().CreateDbContext(null)))
+            {
+                words = unitOfWork.Words.GetAll().OrderBy(w => w.Letters).ToList();
+            }
+
              foreach (var w in words)
              {
                 _wordsToServe.Add(new Word(w.Letters));
@@ -147,6 +152,11 @@ namespace TypTop.Logic
 
         // return filtered words
         public List<Word> Serve(bool shuffle = true) {
+            if (_wordsToServe.Count == 0)
+            {
+                LoadWords();
+            }
+
             if (shuffle) Shuffle();
 
             IEnumerable<Word> serve = _wordsToServe;
