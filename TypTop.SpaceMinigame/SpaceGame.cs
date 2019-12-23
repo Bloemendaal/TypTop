@@ -104,11 +104,11 @@ namespace TypTop.SpaceMinigame
                 if (_words.Count <= 0) throw new ArgumentException("'WordProvider' does not serve any words.");
 
                 //Lives
-                if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
+                if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is long lives)
                 {
                     Lives = new Lives(250, 10, this)
                     {
-                        Amount = lives,
+                        Amount = (int)lives,
                         ZIndex = 5
                     };
                 }
@@ -118,7 +118,7 @@ namespace TypTop.SpaceMinigame
                 }
 
                 // EnemyAmount
-                EnemyAmount = level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is int enemyAmount ? enemyAmount : _words.Count;
+                EnemyAmount = level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is long enemyAmount ? (int)enemyAmount : _words.Count;
 
                 // EnemyVelocity
                 if (level.Properties.TryGetValue("EnemyVelocity", out object enemyVelocityObject) && enemyVelocityObject is float enemyVelocity)

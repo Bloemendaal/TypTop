@@ -41,6 +41,17 @@ namespace TypTop.GameGui
             List<Database.World> dbWorlds = unitOfWork.Worlds.GetAll().OrderBy(w => w.Index).ToList();
             List<World> worlds = new List<World>();
 
+            // Add Levels to Worlds
+            var dblevels = unitOfWork.Levels.GetAll();
+            foreach (var lvl in dblevels)
+            {
+                if (!unitOfWork.Worlds.Get(lvl.WorldId).Levels.Where(l => l.LevelId.Equals(lvl.LevelId)).Any())
+                {
+                    unitOfWork.Worlds.Get(lvl.WorldId).Levels.Add(lvl);
+                }
+
+            }
+
             foreach (var dbWorld in dbWorlds)
             {
                 List<Level> levels = new List<Level>();

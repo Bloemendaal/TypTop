@@ -246,7 +246,7 @@ namespace TypTop.JumpMinigame
                 _words = new Queue<Word>(WordProvider.Serve());
 
                 // LaneAmount
-                LaneAmount = level.Properties.TryGetValue("LaneAmount", out object laneAmountObject) && laneAmountObject is int laneAmount ? laneAmount : 5;
+                LaneAmount = level.Properties.TryGetValue("LaneAmount", out object laneAmountObject) && laneAmountObject is long laneAmount ? (int)laneAmount : 5;
 
                 if (_words.Count < LaneAmount)
                 {
@@ -260,9 +260,9 @@ namespace TypTop.JumpMinigame
                 }
 
                 // EnemyAmount
-                if (level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is int enemyAmount)
+                if (level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is long enemyAmount)
                 {
-                    EnemyAmount = enemyAmount;
+                    EnemyAmount = (int)enemyAmount;
                 }
 
                 // EnemyMovement
@@ -277,27 +277,27 @@ namespace TypTop.JumpMinigame
                 }
 
                 // MinimalDistance
-                if (level.Properties.TryGetValue("MinimalDistance", out object minimalDistanceObject) && minimalDistanceObject is int minimalDistance)
+                if (level.Properties.TryGetValue("MinimalDistance", out object minimalDistanceObject) && minimalDistanceObject is long minimalDistance)
                 {
-                    MinimalDistance = minimalDistance;
+                    MinimalDistance = (int)minimalDistance;
                 }
 
                 // MaximumDistance
-                if (level.Properties.TryGetValue("MaximumDistance", out object maximumDistanceObject) && maximumDistanceObject is int maximumDistance)
+                if (level.Properties.TryGetValue("MaximumDistance", out object maximumDistanceObject) && maximumDistanceObject is long maximumDistance)
                 {
-                    MaximumDistance = maximumDistance;
+                    MaximumDistance = (int)maximumDistance;
                 }
 
                 // PlatformBreakAmount
-                if (level.Properties.TryGetValue("PlatformBreakAmount", out object platformBreakAmountObject) && platformBreakAmountObject is int platformBreakAmount)
+                if (level.Properties.TryGetValue("PlatformBreakAmount", out object platformBreakAmountObject) && platformBreakAmountObject is long platformBreakAmount)
                 {
-                    PlatformBreakAmount = platformBreakAmount;
+                    PlatformBreakAmount = (int)platformBreakAmount;
                 }
 
                 // PlatformBreakOffset
-                if (level.Properties.TryGetValue("PlatformBreakOffset", out object platformBreakOffsetObject) && platformBreakOffsetObject is int platformBreakOffset)
+                if (level.Properties.TryGetValue("PlatformBreakOffset", out object platformBreakOffsetObject) && platformBreakOffsetObject is long platformBreakOffset)
                 {
-                    PlatformBreakOffset = platformBreakOffset;
+                    PlatformBreakOffset = (int)platformBreakOffset;
                 }
 
                 // PlatformSolidRatio
@@ -313,9 +313,9 @@ namespace TypTop.JumpMinigame
                 }
 
                 // Seconds
-                if (level.Properties.TryGetValue("Seconds", out object secondsObject) && secondsObject is int seconds)
+                if (level.Properties.TryGetValue("Seconds", out object secondsObject) && secondsObject is long seconds)
                 {
-                    Count = new Count(seconds, 0, 0, this);
+                    Count = new Count((int)seconds, 0, 0, this);
                     Finish = () => _player.Y > Height || Count.Seconds <= 0;
                 }
                 else
@@ -324,11 +324,11 @@ namespace TypTop.JumpMinigame
                 }
 
                 // Lives
-                if (EnemyAmount > 0 && level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
+                if (EnemyAmount > 0 && level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is long lives)
                 {
                     Lives = new Lives(0, 0, this)
                     {
-                        Amount = lives,
+                        Amount = (int)lives,
                         ZIndex = 10
                     };
 
