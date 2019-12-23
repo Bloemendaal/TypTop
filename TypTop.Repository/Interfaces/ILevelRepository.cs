@@ -23,7 +23,23 @@ namespace TypTop.Repository
         public int GetRequiredLevelId(int levelId);
         public Level GetRequiredLevel(int levelId);
 
+        /// <summary>
+        /// Adds level with given specification to the database.
+        /// WordProvider as JSON string ( JsonConvert.SerializeObject() ).
+        /// Variables as Dictionary.
+        /// WORLDID IS DATABASE ID, NOT INDEX.
+        /// Use UnitOfWork.Complete() to save in db.
+        /// </summary>
+        /// <param name="worldId"></param>
+        /// <param name="index"></param>
+        /// <param name="winCondition"></param>
+        /// <param name="wordProvider"></param>
+        /// <param name="thresholdOneStar"></param>
+        /// <param name="thresholdTwoStars"></param>
+        /// <param name="thresholdThreeStars"></param>
+        /// <param name="variables"></param>
         public void AddLevel(int worldId, int index, WinConditionType winCondition, string wordProvider, int thresholdOneStar, int thresholdTwoStars, int thresholdThreeStars, Dictionary<string, object> variables);
+
 
     }
 }

@@ -28,8 +28,8 @@ namespace TypTop.GameGui
 
     public enum WorldId
     {
-        Space = 1,
-        Tavern = 2,
-        Jump = 3
+        Space = 0,
+        Tavern = 1,
+        Jump = 2
     }
 }

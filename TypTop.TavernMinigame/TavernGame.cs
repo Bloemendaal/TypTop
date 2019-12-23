@@ -342,11 +342,11 @@ namespace TypTop.TavernMinigame
 
                 if (level.WinCondition == WinConditionType.LifeCondition)
                 {
-                    if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
+                    if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is long lives)
                     {
                         Lives = new Lives(550, (float)Height - 60, this)
                         {
-                            Amount = lives,
+                            Amount = (int)lives,
                             ZIndex = 6
                         };
 
@@ -362,7 +362,7 @@ namespace TypTop.TavernMinigame
 
                 if (level.WinCondition == WinConditionType.TimeCondition)
                 {
-                    if (level.Properties.TryGetValue("Queue", out object queueObject) && queueObject is int queue)
+                    if (level.Properties.TryGetValue("Queue", out object queueObject) && queueObject is long queue)
                     {
                         for (int i = 0; i < queue; i++)
                         {
