@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using TypTop.Repository;
 using System.Linq;
 
-namespace TypTop.Repository
+namespace TypTop.GameGui
 {
     public class LevelAdder
     {
@@ -11,8 +12,6 @@ namespace TypTop.Repository
         {
             
             using var unitOfWork = new UnitOfWork(new TypTop.Shared.ContextFactory().CreateDbContext(null));
-
-            // also make sure to uncomment leveladder in gamegui.mainwindow to run it.
 
             //unitOfWork.Worlds.AddWorld(); //see below for reference
 
