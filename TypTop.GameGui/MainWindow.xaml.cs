@@ -38,10 +38,12 @@ namespace TypTop.GameGui
 
             using var unitOfWork = new UnitOfWork(new TypTop.Shared.ContextFactory().CreateDbContext(null));
 
+            //LevelAdder newLevels = new LevelAdder();
+            //newLevels.AddNew();
+
             List<Database.World> dbWorlds = unitOfWork.Worlds.GetAll().OrderBy(w => w.Index).ToList();
             List<World> worlds = new List<World>();
 
-            // Add Levels to Worlds
             var dblevels = unitOfWork.Levels.GetAll();
             foreach (var lvl in dblevels)
             {
