@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TypTop.MinigameEngine.Background">
+    <Position X="18.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABAAABAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Background.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.Button">
+    <Position X="15" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAARAAABAAQAAAAAAAAAEAAAQAAATAACAEAABAAYAA=</HashCode>
+      <FileName>Button.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.Count">
+    <Position X="13.25" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAAQBQIAAAAAAAAAQAAgACAAAAAAQAgCABiAAAYAA=</HashCode>
+      <FileName>Count.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.FinishEventArgs">
+    <Position X="16.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAgAAAAAAAQAAAAAAAACAAAAAAAAAAQ=</HashCode>
+      <FileName>FinishEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.FloatingScore">
+    <Position X="16.75" Y="17" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAQAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>FloatingScore.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.Lives">
+    <Position X="11.5" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Lives.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.Minigame">
+    <Position X="15" Y="6.25" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="TypTop.MinigameEngine.Minigame.FinishCondition" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Minigame.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>gEQACAAAIAAAAAgAAAAAAAQEAAAACAACAAAAAAAAAAw=</HashCode>
+      <FileName>Minigame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.Score">
+    <Position X="16.75" Y="11.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="TypTop.MinigameEngine.Score.FloatDirection" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Score.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AIIAAQBAEAgAAAAAACAgAgCCAAAAAAAAACDAgACAgAA=</HashCode>
+      <FileName>Score.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.TextButton">
+    <Position X="15" Y="16.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAoAAAAAAAAAAAAAEAAAAAAAACAAAAAA=</HashCode>
+      <FileName>TextButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.Components.LivesComponent" BaseTypeListCollapsed="true">
+    <Position X="11.5" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAgAAAAAAAAAAAAAAAAEAAAAAAAAEAAA=</HashCode>
+      <FileName>Components\LivesComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Bottom" Position="0.179" Collapsed="true" />
+  </Class>
+  <Class Name="TypTop.MinigameEngine.WinConditions.LifeCondition">
+    <Position X="15" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAABAAAAAgAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WinConditions\LifeCondition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.WinConditions.ScoreCondition">
+    <Position X="16.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAABAAAAAgAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WinConditions\ScoreCondition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.WinConditions.TimeCondition">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAABAAAAAgAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WinConditions\TimeCondition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.MinigameEngine.WinConditions.WinCondition">
+    <Position X="15" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAABAAAAAQAAAAAAAAAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WinConditions\WinCondition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TypTop.JumpMinigame.Enemy">
+    <Position X="7.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.JumpMinigame.JumpGame">
+    <Position X="5" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="TypTop.JumpMinigame.JumpGame.EnemyType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>JumpGame.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AABASQEQAABADJEgAAAFCBCAAADQACCIACBAAAGAAAA=</HashCode>
+      <FileName>JumpGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.JumpMinigame.Lane">
+    <Position X="9" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAGAIAAAAQAAAAAAAAgAAAAAAAgAAAAAAAEABEAAYAA=</HashCode>
+      <FileName>Lane.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.JumpMinigame.Platform">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAEAAAFgAAAAAAAAAAAAAAAAgAAAAAAQAAAQAAYIA=</HashCode>
+      <FileName>Platform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.JumpMinigame.Player">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQADAAAAAAAEAAAAAABAIAAAAgAAAAAgQAAAgAAYAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.JumpMinigame.Components.RectangleComponent" BaseTypeListCollapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAABAAACgAAAAAAGEAAAAQACAEAAAAAAAAEAAA=</HashCode>
+      <FileName>Components\RectangleComponent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
