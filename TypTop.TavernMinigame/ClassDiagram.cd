@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TypTop.TavernMinigame.Customer" Collapsed="true">
+    <Position X="14" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAEAFAgCAAAAAgCAQAIAAAAAAAAQAAAAQAAAA=</HashCode>
+      <FileName>Customer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.TavernMinigame.CustomerQueue" Collapsed="true">
+    <Position X="15.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAAAAAAQAAAAABAAAAAAAIAAAAAA=</HashCode>
+      <FileName>CustomerQueue.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.TavernMinigame.Order" Collapsed="true">
+    <Position X="17.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.TavernMinigame.Satisfaction" Collapsed="true">
+    <Position X="14" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAACAgAIAAAAAAAACAAAAAADAAAABAAAAAAAQ=</HashCode>
+      <FileName>Satisfaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.TavernMinigame.SpeechBubble" Collapsed="true">
+    <Position X="15.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SpeechBubble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.TavernMinigame.TavernGame" Collapsed="true">
+    <Position X="17.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEQAQQKAAAJgCAAAcQRACBAACaBAAEAAAABAMAEABAA=</HashCode>
+      <FileName>TavernGame.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.TavernMinigame.Tile" Collapsed="true">
+    <Position X="14" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAgAAAAAAAAACAAAEAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Tile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
