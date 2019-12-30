@@ -30,22 +30,7 @@ namespace TypTop.Repository
         }
 
 
-        public string GetDescription(int levelId)
-        {
-            throw new NotImplementedException();
-        }
-
         public int GetIndex(int levelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Level GetRequiredLevel(int levelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetRequiredLevelId(int levelId)
         {
             throw new NotImplementedException();
         }

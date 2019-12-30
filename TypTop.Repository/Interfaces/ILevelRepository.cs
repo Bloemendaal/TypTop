@@ -13,18 +13,16 @@ namespace TypTop.Repository
         public int GetWorldId(int levelId);
         public World GetWorld(int levelId);
         public string GetTitle(int levelId);
-        public string GetDescription(int levelId);
         public int GetIndex(int levelId);
         public WinConditionType GetWinCondition(int levelId);
         public int GetThreshholdOneStar(int levelId);
         public int GetThreshholdTwoStars(int levelId);
         public int GetThreshholdThreeStars(int levelId);
         public string GetVariables(int levelId);
-        public int GetRequiredLevelId(int levelId);
-        public Level GetRequiredLevel(int levelId);
+
 
         /// <summary>
-        /// Adds level with given specification to the database.
+        /// Adds level with given values to the database.
         /// WordProvider as JSON string ( JsonConvert.SerializeObject() ).
         /// Variables as Dictionary.
         /// WORLDID IS DATABASE ID, NOT INDEX.

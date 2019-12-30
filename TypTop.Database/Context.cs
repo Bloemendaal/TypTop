@@ -40,7 +40,5 @@ namespace TypTop.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer(ConnectionString);
-
-
     }
 }
