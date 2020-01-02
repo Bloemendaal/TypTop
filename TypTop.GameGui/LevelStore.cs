@@ -46,7 +46,7 @@ namespace TypTop.GameGui
             {
                 new World(tavernWorld.Button, tavernWorld.Background ,new List<Level>()
                 {
-                    // level 1, with values from database
+                    // level 1 with values from database
                     new Level()
                     {
                         WinCondition = (WinConditionType)levelEen.WinCondition,
@@ -60,7 +60,7 @@ namespace TypTop.GameGui
                         Properties = JsonConvert.DeserializeObject<Dictionary<string, object>>(levelEen.Variables)
                     },
 
-                    //level 2, short queue
+                    //level 2 short queue
                     new Level()
                     {
                         WinCondition = WinConditionType.TimeCondition,
@@ -77,7 +77,7 @@ namespace TypTop.GameGui
                         }
                     },
 
-                    //level 3, 
+                    //level 3 easy satisfaction 
                     new Level()
                     {
                         WinCondition = WinConditionType.LifeCondition,
@@ -96,11 +96,11 @@ namespace TypTop.GameGui
                             {
                                 "SatisfactionTiming", new Dictionary<int, int>
                                 {
-                                    {1, 4000},
-                                    {2, 4000},
-                                    {3, 4000},
-                                    {4, 4000},
-                                    {5, 4000},
+                                    {1, 6000},
+                                    {2, 6000},
+                                    {3, 6000},
+                                    {4, 6000},
+                                    {5, 6000},
                                 }
                             }
                         }
@@ -123,8 +123,7 @@ namespace TypTop.GameGui
                         }
                     },
 
-
-
+                    //level 5 medium satisfaction
                     new Level()
                     {
                         WinCondition = WinConditionType.LifeCondition,
@@ -151,11 +150,87 @@ namespace TypTop.GameGui
                                 }
                             }
                         }
+                    },
+
+                    //level 6 long queue
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.TimeCondition,
+
+                        ThresholdOneStar = 450,
+                        ThresholdTwoStars = 270,
+                        ThresholdThreeStars = 180,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Queue", 45}
+                        }
+                    },
+
+                    //level 7 hard satisfaction
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.LifeCondition,
+
+                        ThresholdOneStar = 1,
+                        ThresholdTwoStars = 2,
+                        ThresholdThreeStars = 3,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 6},
+                            {"Seconds", 120},
+                            {"ShowSatisfaction", true},
+                            {
+                                "SatisfactionTiming", new Dictionary<int, int>
+                                {
+                                    {1, 3000},
+                                    {2, 3000},
+                                    {3, 3000},
+                                    {4, 3000},
+                                    {5, 3000},
+                                }
+                            }
+                        }
+                    },
+
+                    //level 8 very hard satisfaction
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.LifeCondition,
+
+                        ThresholdOneStar = 1,
+                        ThresholdTwoStars = 2,
+                        ThresholdThreeStars = 3,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 6},
+                            {"Seconds", 120},
+                            {"ShowSatisfaction", true},
+                            {
+                                "SatisfactionTiming", new Dictionary<int, int>
+                                {
+                                    {1, 2000},
+                                    {2, 2000},
+                                    {3, 2000},
+                                    {4, 2000},
+                                    {5, 2000},
+                                }
+                            }
+                        }
                     }
                 }, WorldId.Tavern, tavernWorld.HoverButton),
 
                 new World("spaceButton.png", "spaceLevelBackground.jpeg", new List<Level>()
                 {
+                    //level 1 many lives, low line
                     new Level()
                     {
                         WinCondition = WinConditionType.ScoreCondition,
@@ -171,11 +246,140 @@ namespace TypTop.GameGui
                             {"EnemyVelocityOffset", 3f},
                             {"LineHeight", 800f}
                         }
+                    },
+
+                    //level 2 many lives, medium line
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 6},
+                            {"EnemyVelocityOffset", 3f},
+                            {"LineHeight", 600f}
+                        }
+                    },
+
+                    //level 3 medium lives, low line
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 4},
+                            {"EnemyVelocityOffset", 3f},
+                            {"LineHeight", 800f}
+                        }
+                    },
+
+                    //level 4 medium enemies, medium line
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 6},
+                            {"EnemyVelocityOffset", 3f},
+                            {"LineHeight", 600f}
+                        }
+                    },
+
+                    //level 5 few lives, low line
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 2},
+                            {"EnemyVelocityOffset", 3f},
+                            {"LineHeight", 800f}
+                        }
+                    },
+
+                    //level 6 few lives, high line
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 2},
+                            {"EnemyVelocityOffset", 3f},
+                            {"LineHeight", 400f}
+                        }
+                    },
+
+                    //level 7 medium lives, high line
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 4},
+                            {"EnemyVelocityOffset", 3f},
+                            {"LineHeight", 400f}
+                        }
+                    },
+
+                    //level 8 few enemies, high line
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            {"Lives", 2},
+                            {"EnemyVelocityOffset", 3f},
+                            {"LineHeight", 400f}
+                        }
                     }
-                }, WorldId.Space,"spaceButton_hover.png"),
+                },
+                
+                WorldId.Space,"spaceButton_hover.png"),
 
                 new World("jumpButton.png", "jumpLevelBackground.png", new List<Level>()
                 {
+                    //level 1 only solid platforms
                     new Level()
                     {
                         WinCondition = WinConditionType.ScoreCondition,
@@ -190,7 +394,140 @@ namespace TypTop.GameGui
                             { "Lives", 6 },
                             { "PlatformBreakAmount", 3 },
                             { "PlatformBreakOffset", 1 },
-                            { "PlatformSolidRatio", 0.5 }
+                            { "PlatformSolidRatio", 1 }
+                        }
+                    },
+
+                    //level 2 six seventh solid
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.86 }
+                        }
+                    },
+
+                    //level 3 five seventh solid
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.71 }
+                        }
+                    },
+
+                    //level 4 four seventh solid
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.57 }
+                        }
+                    },
+
+                    //level 5 three seventh solid
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.43 }
+                        }
+                    },
+
+                    //level 6 two seventh solid
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.29 }
+                        }
+                    },
+
+                    //level 7 one seventh solid
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0.14 }
+                        }
+                    },
+
+                    //level 8 no solid platforms
+                    new Level()
+                    {
+                        WinCondition = WinConditionType.ScoreCondition,
+                        ThresholdOneStar = 100,
+                        ThresholdTwoStars = 200,
+                        ThresholdThreeStars = 300,
+
+                        WordProvider = wordProvider,
+
+                        Properties = new Dictionary<string, object>()
+                        {
+                            { "Lives", 6 },
+                            { "PlatformBreakAmount", 3 },
+                            { "PlatformBreakOffset", 1 },
+                            { "PlatformSolidRatio", 0 }
                         }
                     }
                 }, WorldId.Jump, "jumpButton_hover.png")
