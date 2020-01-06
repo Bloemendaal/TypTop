@@ -12,8 +12,8 @@ namespace TypTop.MinigameEngine
 {
     public class Count : Entity
     {
-        private readonly DateTime? _dateTime = null;
-        private readonly DateTime _startTime;
+        private DateTime? _dateTime = null;
+        private DateTime _startTime;
 
         private readonly LabelComponent _labelComponent = new LabelComponent();
         private readonly PositionComponent _positionComponent;
@@ -80,6 +80,7 @@ namespace TypTop.MinigameEngine
         /// Het aantal seconden dat de countdown nog moet voordat deze klaar is met aftellen. In het geval van een stopwatch gelijk aan SecondsSpent.
         /// </summary>
         public int Seconds => (int)(_dateTime == null ? DateTime.Now.Subtract(_startTime) : ((DateTime)_dateTime).Subtract(DateTime.Now)).TotalSeconds;
+        private readonly int _seconds;
      
         /// <summary>
         /// Het aantal seconden dat verstreken is sinds de timer ingesteld is.
@@ -88,10 +89,8 @@ namespace TypTop.MinigameEngine
 
         public Count(int seconds, Vector2 position, Game game) : base(game)
         {
-            _startTime = DateTime.Now;
-            if (seconds != 0) { 
-                _dateTime = _startTime.AddSeconds(seconds);
-            }
+            _seconds = seconds;
+            Reset();
 
             _positionComponent = new PositionComponent(position);
 
@@ -99,6 +98,14 @@ namespace TypTop.MinigameEngine
             AddComponent(_labelComponent);
         }
         public Count(int seconds, float x, float y, Game game) : this(seconds, new Vector2(x, y), game) { }
+
+        public void Reset()
+        {
+            _startTime = DateTime.Now;
+            if (_seconds != 0) { 
+                _dateTime = _startTime.AddSeconds(_seconds);
+            }
+        }
 
         /// <summary>
         /// Werkt de timer bij inclusief eventuele verandering in de style. Zet ook wanneer de countdown klaar is met aftellen.

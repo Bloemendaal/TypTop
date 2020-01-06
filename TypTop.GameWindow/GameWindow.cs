@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using TypTop.GameEngine;
+using TypTop.MinigameEngine;
 
 namespace TypTop.GameWindow
 {
@@ -133,6 +134,10 @@ namespace TypTop.GameWindow
             _transition.FadeIn += (sender, args) =>
             {
                 _game = game;
+                if (_game is Minigame minigame)
+                {
+                    minigame.Count?.Reset();
+                }
             };
             _transition.Completed += (o, e) =>
             {

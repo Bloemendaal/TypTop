@@ -121,20 +121,20 @@ namespace TypTop.SpaceMinigame
                 EnemyAmount = level.Properties.TryGetValue("EnemyAmount", out object enemyAmountObject) && enemyAmountObject is long enemyAmount ? (int)enemyAmount : _words.Count;
 
                 // EnemyVelocity
-                if (level.Properties.TryGetValue("EnemyVelocity", out object enemyVelocityObject) && enemyVelocityObject is float enemyVelocity)
+                if (level.Properties.TryGetValue("EnemyVelocity", out object enemyVelocityObject) && enemyVelocityObject is double enemyVelocity)
                 {
-                    EnemyVelocity = enemyVelocity;
+                    EnemyVelocity = (float)enemyVelocity;
                 }
                 // EnemyVelocityOffset
-                if (level.Properties.TryGetValue("EnemyVelocityOffset", out object enemyVelocityOffsetObject) && enemyVelocityOffsetObject is float enemyVelocityOffset)
+                if (level.Properties.TryGetValue("EnemyVelocityOffset", out object enemyVelocityOffsetObject) && enemyVelocityOffsetObject is double enemyVelocityOffset)
                 {
-                    EnemyVelocityOffset = enemyVelocityOffset;
+                    EnemyVelocityOffset = (float)enemyVelocityOffset;
                 }
 
                 // LineHeight
-                if (level.Properties.TryGetValue("LineHeight", out object lineHeightObject) && lineHeightObject is float lineHeight)
+                if (level.Properties.TryGetValue("LineHeight", out object lineHeightObject) && lineHeightObject is double lineHeight)
                 {
-                    LineHeight = lineHeight;
+                    LineHeight = (float)lineHeight;
                 }
             }
             else

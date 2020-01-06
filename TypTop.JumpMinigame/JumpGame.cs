@@ -301,9 +301,9 @@ namespace TypTop.JumpMinigame
                 }
 
                 // PlatformSolidRatio
-                if (level.Properties.TryGetValue("PlatformSolidRatio", out object platformSolidRatioObject) && platformSolidRatioObject is double platformSolidRatio)
+                if (level.Properties.TryGetValue("PlatformSolidRatio", out object platformSolidRatioObject) && platformSolidRatioObject is long platformSolidRatio)
                 {
-                    PlatformSolidRatio = platformSolidRatio;
+                    PlatformSolidRatio = platformSolidRatio/100.00;
                 }
 
                 // SwitchWords

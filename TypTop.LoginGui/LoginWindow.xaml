@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TypTop.Gui"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="512" Width="726" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+        Title="TypTop" Height="564" Width="959" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
 
     <Grid Background="Black">
         <Image  HorizontalAlignment="Left" VerticalAlignment="Top" Source="LoginBackground.png" />
-        <Canvas x:Name="AccountCreationCanvas" Visibility= "Hidden" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Height="337" Width="220">
-            <Rectangle HorizontalAlignment="Right"  Stroke="#FF968D87" VerticalAlignment="Top" Height="337" Width="220" Fill="#FFEBE7E4" RadiusX="20" RadiusY="20" StrokeThickness="5"/>
+        <Canvas x:Name="AccountCreationCanvas" Visibility= "Hidden" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Center" Height="337" Width="220">
+            <Rectangle HorizontalAlignment="Right"  Stroke="Black" VerticalAlignment="Top" Height="337" Width="220" Fill="#FFEBE7E4" RadiusX="20" RadiusY="20" StrokeThickness="5"/>
             <Label Content="Gebruikersnaam:" Canvas.Left="38" Canvas.Top="38"/>
             <TextBox x:Name="CreationUsernameBox"  Margin="0,0,0,0" Width="142"  Canvas.Left="38" Canvas.Top="64" FontFamily="Comic Sans MS" FontSize="14"/>
             <Label Content="Wachtwoord:" Canvas.Left="38" Canvas.Top="94"/>
@@ -21,8 +21,8 @@
             <Button x:Name="CreateAccountButton" Content="Registreren" Margin="0,0,0,0"  Width="142" Canvas.Left="38" Canvas.Top="249" Click="CreateAccountButton_Click"/>
             <Button x:Name="BackButton" Content="Terug" Canvas.Left="38" Canvas.Top="283" Click="BackButton_Click" Width="142" />
         </Canvas>
-        <Canvas x:Name="LoginCanvas" Visibility="Visible" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Height="337" Width="220">
-            <Rectangle HorizontalAlignment="Right"  Stroke="#FF968D87" VerticalAlignment="Top" Height="337" Width="220" Fill="#FFEBE7E4" RadiusX="20" RadiusY="20" StrokeThickness="5"/>
+        <Canvas x:Name="LoginCanvas" Visibility="Visible" HorizontalAlignment="Right" Margin="0,0,50,0"  VerticalAlignment="Center" Height="337" Width="220">
+            <Rectangle HorizontalAlignment="Right"  Stroke="Black" VerticalAlignment="Top" Height="337" Width="220" Fill="#FFEBE7E4" RadiusX="20" RadiusY="20" StrokeThickness="5"/>
             <TextBox x:Name="UsernameBox" Margin="0,0,0,0" Width="142"  Canvas.Left="38" Canvas.Top="64" FontFamily="Comic Sans MS" FontSize="14"/>
             <PasswordBox x:Name="PasswordBox" Margin="0,0,0,0" Width="142"  Canvas.Left="38" Canvas.Top="120" FontFamily="Comic Sans MS" FontSize="14"/>
             <Button x:Name="LoginButton" Content="Spelen!" Margin="0,0,0,0" Height="23" Width="142" Click="LoginButton_Click" Canvas.Left="38" Canvas.Top="183"/>
