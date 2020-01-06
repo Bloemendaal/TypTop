@@ -11,8 +11,9 @@ namespace TypTop.GameGui
         public string Background { get; }
         public IList<Level> Levels { get; }
         public WorldId Id { get; }
+        public string Description { get; }
 
-        public World(string previewImage, string background, IList<Level> levels, WorldId id, string previewHoverImage)
+        public World(string previewImage, string background, IList<Level> levels, WorldId id, string previewHoverImage, string description)
         {
             PreviewImage = previewImage;
             Background = background;
@@ -23,6 +24,7 @@ namespace TypTop.GameGui
             Levels = levels;
             Id = id;
             PreviewHoverImage = previewHoverImage;
+            Description = description;
         }
     }
 

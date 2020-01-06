@@ -71,7 +71,7 @@ namespace TypTop.GameGui
                         Properties = JsonConvert.DeserializeObject<Dictionary<string, object>>(dbLevel.Variables)
                     });
                 }
-                worlds.Add(new World(dbWorld.Button, dbWorld.Background, levels, (WorldId)dbWorld.Index, dbWorld.HoverButton));
+                worlds.Add(new World(dbWorld.Button, dbWorld.Background, levels, (WorldId)dbWorld.Index, dbWorld.HoverButton, dbWorld.Description));
             }
 
             var gameLoader = new GameLoader(GameWindow, worlds);
