@@ -273,7 +273,7 @@ namespace TypTop.TavernMinigame
                 _words = new Queue<Word>(WordProvider.Serve());
 
                 // TileAmount
-                TileAmount = level.Properties.TryGetValue("TileAmount", out object tileAmountObject) && tileAmountObject is int tileAmount ? tileAmount : 3;
+                TileAmount = level.Properties.TryGetValue("TileAmount", out object tileAmountObject) && tileAmountObject is long tileAmount ? (int)tileAmount : 3;
 
                 if (_words.Count < TileAmount)
                 {
@@ -281,9 +281,9 @@ namespace TypTop.TavernMinigame
                 }
 
                 // MaxCustomers
-                if (level.Properties.TryGetValue("MaxCustomers", out object maxCustomersObject) && maxCustomersObject is int maxCustomers)
+                if (level.Properties.TryGetValue("MaxCustomers", out object maxCustomersObject) && maxCustomersObject is long maxCustomers)
                 {
-                    MaxCustomers = maxCustomers;
+                    MaxCustomers = (int)maxCustomers;
                 }
 
                 // ShowSatisfaction
@@ -293,9 +293,9 @@ namespace TypTop.TavernMinigame
                 }
 
                 // StartSatisfaction
-                if (level.Properties.TryGetValue("StartSatisfaction", out object startSatisfactionObject) && startSatisfactionObject is int startSatisfaction)
+                if (level.Properties.TryGetValue("StartSatisfaction", out object startSatisfactionObject) && startSatisfactionObject is long startSatisfaction)
                 {
-                    StartSatisfaction = startSatisfaction;
+                    StartSatisfaction = (int)startSatisfaction;
                 }
 
                 // SatisfactionTiming
@@ -305,15 +305,15 @@ namespace TypTop.TavernMinigame
                 }
 
                 // CustomerSpawnSpeed
-                if (level.Properties.TryGetValue("CustomerSpawnSpeed", out object customerSpawnSpeedObject) && customerSpawnSpeedObject is int customerSpawnSpeed)
+                if (level.Properties.TryGetValue("CustomerSpawnSpeed", out object customerSpawnSpeedObject) && customerSpawnSpeedObject is long customerSpawnSpeed)
                 {
-                    CustomerSpawnSpeed = customerSpawnSpeed;
+                    CustomerSpawnSpeed = (int)customerSpawnSpeed;
                 }
 
                 // CustomerSpawnSpeedOffset
-                if (level.Properties.TryGetValue("CustomerSpawnSpeedOffset", out object customerSpawnSpeedOffsetObject) && customerSpawnSpeedOffsetObject is int customerSpawnSpeedOffset)
+                if (level.Properties.TryGetValue("CustomerSpawnSpeedOffset", out object customerSpawnSpeedOffsetObject) && customerSpawnSpeedOffsetObject is long customerSpawnSpeedOffset)
                 {
-                    CustomerSpawnSpeedOffset = customerSpawnSpeedOffset;
+                    CustomerSpawnSpeedOffset = (int)customerSpawnSpeedOffset;
                 }
 
                 // CustomerSpawnSpeedMultiplier
@@ -323,14 +323,14 @@ namespace TypTop.TavernMinigame
                 }
 
                 // CustomerMinOrderAmount
-                if (level.Properties.TryGetValue("CustomerMinOrderAmount", out object customerMinOrderAmountObject) && customerMinOrderAmountObject is int customerMinOrderAmount)
+                if (level.Properties.TryGetValue("CustomerMinOrderAmount", out object customerMinOrderAmountObject) && customerMinOrderAmountObject is long customerMinOrderAmount)
                 {
-                    CustomerMinOrderAmount = customerMinOrderAmount;
+                    CustomerMinOrderAmount = (int)customerMinOrderAmount;
                 }
                 // CustomerMaxOrderAmount
-                if (level.Properties.TryGetValue("CustomerMaxOrderAmount", out object customerMaxOrderAmountObject) && customerMaxOrderAmountObject is int customerMaxOrderAmount)
+                if (level.Properties.TryGetValue("CustomerMaxOrderAmount", out object customerMaxOrderAmountObject) && customerMaxOrderAmountObject is long customerMaxOrderAmount)
                 {
-                    CustomerMaxOrderAmount = customerMaxOrderAmount;
+                    CustomerMaxOrderAmount = (int)customerMaxOrderAmount;
                 }
 
 
@@ -342,11 +342,11 @@ namespace TypTop.TavernMinigame
 
                 if (level.WinCondition == WinConditionType.LifeCondition)
                 {
-                    if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is int lives)
+                    if (level.Properties.TryGetValue("Lives", out object livesObject) && livesObject is long lives)
                     {
                         Lives = new Lives(550, (float)Height - 60, this)
                         {
-                            Amount = lives,
+                            Amount = (int)lives,
                             ZIndex = 6
                         };
 
@@ -362,7 +362,7 @@ namespace TypTop.TavernMinigame
 
                 if (level.WinCondition == WinConditionType.TimeCondition)
                 {
-                    if (level.Properties.TryGetValue("Queue", out object queueObject) && queueObject is int queue)
+                    if (level.Properties.TryGetValue("Queue", out object queueObject) && queueObject is long queue)
                     {
                         for (int i = 0; i < queue; i++)
                         {

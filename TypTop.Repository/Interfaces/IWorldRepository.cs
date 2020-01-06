@@ -8,6 +8,7 @@ namespace TypTop.Repository
     public interface IWorldRepository : IRepository<World>
     {
 
-        
+        public void AddWorld(string description, int index, int stars, string background, string button, string hoverButton);
+
     }
 }

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TypTop.Database.Context">
+    <Position X="5" Y="1" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEBAAAAAxAAAAAAAAAAAAAAEAAAAAABACAAAAAAAAA=</HashCode>
+      <FileName>Context.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.Database.Level">
+    <Position X="5" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAIDAgAAAAAAAAAAAEABAIAAAAAAUAAAEAAAA=</HashCode>
+      <FileName>Level.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.Database.User">
+    <Position X="3.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFAAAAAAAACAAAAAQAACAgAAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.Database.UserLevel">
+    <Position X="7" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAgAAAAAAAgAABAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserLevel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.Database.Word">
+    <Position X="1.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Word.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TypTop.Database.World">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAgAAAAAAAAEAAAAAAAAAABAAEgAAEAAAA=</HashCode>
+      <FileName>World.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -32,7 +32,7 @@ namespace TypTop.LevelScreen
                     value,
                     CultureInfo.GetCultureInfo("en-us"),
                     FlowDirection.LeftToRight,
-                    new Typeface("Veranda"),
+                    new Typeface("MV Boli"),
                     25,
                     Brushes.Black);
                 _formattedText.MaxTextWidth = 700;

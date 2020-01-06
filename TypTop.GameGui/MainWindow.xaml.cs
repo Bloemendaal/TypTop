@@ -1,25 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Reflection;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Shapes;
-using TypTop.GameEngine;
-using TypTop.GameEngine.Components;
-using Microsoft.EntityFrameworkCore;
-using TypTop.GameWindow;
 using TypTop.Logic;
-using TypTop.TavernMinigame;
-using TypTop.MinigameEngine.WinConditions;
 using TypTop.MinigameEngine;
-using TypTop.SpaceMinigame;
-using TypTop.WorldScreen;
-using TypTop.JumpMinigame;
-using TypTop.Shared;
 using TypTop.Repository;
-using Newtonsoft.Json;
-using System.Linq;
+using TypTop.Shared;
 
 
 namespace TypTop.GameGui
@@ -48,140 +36,45 @@ namespace TypTop.GameGui
             };
             wordProvider.LoadTestWords();
 
-
-
-
             using var unitOfWork = new UnitOfWork(new TypTop.Shared.ContextFactory().CreateDbContext(null));
 
-            var tavernWorld = unitOfWork.Worlds.GetWhere(w => w.Index == 0).Single();
-            /*
-            Dictionary<string, object> Properties = new Dictionary<string, object>()
-                        {
-                            {"Seconds", 120}
-                        };
-            unitOfWork.Levels.Add(new Database.Level
+            //LevelAdder newLevels = new LevelAdder();
+            //newLevels.AddNew();
+
+            List<Database.World> dbWorlds = unitOfWork.Worlds.GetAll().OrderBy(w => w.Index).ToList();
+            List<World> worlds = new List<World>();
+
+            var dblevels = unitOfWork.Levels.GetAll();
+            foreach (var lvl in dblevels)
             {
-                WinCondition = (int)WinConditionType.ScoreCondition,
+                if (!unitOfWork.Worlds.Get(lvl.WorldId).Levels.Where(l => l.LevelId.Equals(lvl.LevelId)).Any())
+                {
+                    unitOfWork.Worlds.Get(lvl.WorldId).Levels.Add(lvl);
+                }
 
-                ThresholdOneStar = 250,
-                ThresholdTwoStars = 500,
-                ThresholdThreeStars = 750,
+            }
 
-                WorldId = tavernWorld.WorldId,
-                Index = 0,
-                WordProvider = JsonConvert.SerializeObject(wordProvider),
-
-                Variables = JsonConvert.SerializeObject(Properties)
-
-            });
-            unitOfWork.Complete();
-            */
-
-            var levelEen = unitOfWork.Levels.GetWhere(l => l.Index == 0).Single();
-
-            var gameLoader = new GameLoader(GameWindow, new List<World>()
+            foreach (var dbWorld in dbWorlds)
             {
-                new World(tavernWorld.Button, tavernWorld.Background ,new List<Level>()
+                List<Level> levels = new List<Level>();
+                foreach (var dbLevel in dbWorld.Levels)
                 {
-                    
-                    new Level()
+                    levels.Add(new Level()
                     {
-                        WinCondition = (WinConditionType)levelEen.WinCondition,
+                        WinCondition = (WinConditionType)dbLevel.WinCondition,
+                        ThresholdOneStar = dbLevel.ThresholdOneStar,
+                        ThresholdTwoStars = dbLevel.ThresholdTwoStars,
+                        ThresholdThreeStars = dbLevel.ThresholdThreeStars,
 
-                        ThresholdOneStar = levelEen.ThresholdOneStar,
-                        ThresholdTwoStars = levelEen.ThresholdTwoStars,
-                        ThresholdThreeStars = levelEen.ThresholdThreeStars,
+                        WordProvider = JsonConvert.DeserializeObject<WordProvider>(dbLevel.WordProvider),
 
-                        WordProvider = JsonConvert.DeserializeObject<WordProvider>(levelEen.WordProvider),
+                        Properties = JsonConvert.DeserializeObject<Dictionary<string, object>>(dbLevel.Variables)
+                    });
+                }
+                worlds.Add(new World(dbWorld.Button, dbWorld.Background, levels, (WorldId)dbWorld.Index, dbWorld.HoverButton, dbWorld.Description));
+            }
 
-                        Properties = JsonConvert.DeserializeObject<Dictionary<string, object>>(levelEen.Variables)
-                    },
-                    
-                    new Level()
-                    {
-                        WinCondition = WinConditionType.TimeCondition,
-
-                        ThresholdOneStar = 300,
-                        ThresholdTwoStars = 180,
-                        ThresholdThreeStars = 120,
-
-                        WordProvider = wordProvider,
-
-                        Properties = new Dictionary<string, object>()
-                        {
-                            {"Queue", 30}
-                        }
-                    },
-                    new Level()
-                    {
-                        WinCondition = WinConditionType.LifeCondition,
-
-                        ThresholdOneStar = 1,
-                        ThresholdTwoStars = 2,
-                        ThresholdThreeStars = 3,
-
-                        WordProvider = wordProvider,
-
-                        Properties = new Dictionary<string, object>()
-                        {
-                            {"Lives", 6},
-                            {"Seconds", 120},
-                            {"ShowSatisfaction", true},
-                            {
-                                "SatisfactionTiming", new Dictionary<int, int>
-                                {
-                                    {1, 4000},
-                                    {2, 4000},
-                                    {3, 4000},
-                                    {4, 4000},
-                                    {5, 4000},
-                                }
-                            }
-                        }
-                    }
-                }, WorldId.Tavern, tavernWorld.HoverButton),
-                
-                new World("spaceButton.png", "spaceLevelBackground.jpeg", new List<Level>()
-                {
-                    new Level()
-                    {
-                        WinCondition = WinConditionType.ScoreCondition,
-                        ThresholdOneStar = 100,
-                        ThresholdTwoStars = 200,
-                        ThresholdThreeStars = 300,
-
-                        WordProvider = wordProvider,
-
-                        Properties = new Dictionary<string, object>()
-                        {
-                            {"Lives", 6},
-                            {"EnemyVelocityOffset", 3f},
-                            {"LineHeight", 800f}
-                        }
-                    }
-                }, WorldId.Space,"spaceButton_hover.png"),
-                
-                new World("jumpButton.png", "jumpLevelBackground.png", new List<Level>()
-                {
-                    new Level()
-                    {
-                        WinCondition = WinConditionType.ScoreCondition,
-                        ThresholdOneStar = 100,
-                        ThresholdTwoStars = 200,
-                        ThresholdThreeStars = 300,
-
-                        WordProvider = wordProvider,
-
-                        Properties = new Dictionary<string, object>()
-                        {
-                            { "Lives", 6 },
-                            { "PlatformBreakAmount", 3 },
-                            { "PlatformBreakOffset", 1 },
-                            { "PlatformSolidRatio", 0.5 }
-                        }
-                    }
-                }, WorldId.Jump, "jumpButton_hover.png")
-            });
+            var gameLoader = new GameLoader(GameWindow, worlds);
             gameLoader.LoadWorldMap();
         }
 

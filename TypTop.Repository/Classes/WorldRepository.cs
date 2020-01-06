@@ -13,7 +13,18 @@ namespace TypTop.Repository
         {
         }
 
-        
 
+        public void AddWorld(string description, int index, int stars, string background, string button, string hoverButton)
+        {
+            Add(new World
+            {
+                Description = description,
+                Index = index,
+                Stars = stars,
+                Background = background,
+                Button = button,
+                HoverButton = hoverButton
+            });
+        }
     }
 }

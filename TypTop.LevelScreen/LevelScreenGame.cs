@@ -25,14 +25,7 @@ namespace TypTop.LevelScreen
 
             _infoPanel = new InfoPanel(this)
             {
-                Text = "Lorem Ipsum is slechts een proeftekst uit het drukkerij- en" +
-                                                    " zetterijwezen. Lorem Ipsum is de standaard proeftekst in deze b" +
-                                                    "edrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letter" +
-                                                    "s nam en ze door elkaar husselde om een font-catalogus te maken. Het heeft niet allee" +
-                                                    "n vijf eeuwen overleefd maar is ook, vrijwel onveranderd, overgenomen in elektronische" +
-                                                    " letterzetting. Het is in de jaren '60 populair geworden met de introductie van Letra" +
-                                                    "set vellen met Lorem Ipsum passages en meer recentelijk door desktop publishing softwa" +
-                                                    "re zoals Aldus PageMaker die versies van Lorem Ipsum bevatten."
+                Text = world.Description
             };
 
             AddEntity(_infoPanel);

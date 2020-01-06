@@ -14,17 +14,6 @@ namespace TypTop.Repository
         {
         }
 
-        /// <summary>
-        /// Adds level with given specification to the database
-        /// </summary>
-        /// <param name="worldId"></param>
-        /// <param name="index"></param>
-        /// <param name="winCondition"></param>
-        /// <param name="wordProvider"></param>
-        /// <param name="thresholdOneStar"></param>
-        /// <param name="thresholdTwoStars"></param>
-        /// <param name="thresholdThreeStars"></param>
-        /// <param name="variables"></param>
         public void AddLevel(int worldId, int index, WinConditionType winCondition, string wordProvider, int thresholdOneStar, int thresholdTwoStars, int thresholdThreeStars, Dictionary<string, object> variables)
         {
             Add(new Level
@@ -40,22 +29,8 @@ namespace TypTop.Repository
             });
         }
 
-        public string GetDescription(int levelId)
-        {
-            throw new NotImplementedException();
-        }
 
         public int GetIndex(int levelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Level GetRequiredLevel(int levelId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int GetRequiredLevelId(int levelId)
         {
             throw new NotImplementedException();
         }

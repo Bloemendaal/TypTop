@@ -28,10 +28,6 @@ namespace TypTop.Database
                 .HasForeignKey(l => l.WorldId)
                 .HasConstraintName("ForeignKey_Level_World");
 
-            //set Index as unique
-            modelBuilder.Entity<Level>()
-                .HasIndex(l => l.Index)
-                .IsUnique();
 
             //set UserId and LevelId as composite primary key
             modelBuilder.Entity<UserLevel>()
@@ -44,7 +40,5 @@ namespace TypTop.Database
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlServer(ConnectionString);
-
-
     }
 }
