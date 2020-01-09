@@ -10,6 +10,7 @@ using TypTop.GameEngine.Components;
 using TypTop.MinigameEngine;
 using System.Windows.Media;
 using TypTop.Shared;
+using Newtonsoft.Json.Linq;
 
 namespace TypTop.TavernMinigame
 {
@@ -298,10 +299,18 @@ namespace TypTop.TavernMinigame
                     StartSatisfaction = (int)startSatisfaction;
                 }
 
+                level.Properties.TryGetValue("SatisfactionTiming", out object satisfactionTimingObject2);
+                Console.Write(satisfactionTimingObject2);
+
+
                 // SatisfactionTiming
-                if (level.Properties.TryGetValue("SatisfactionTiming", out object satisfactionTimingObject) && satisfactionTimingObject is Dictionary<int, int> satisfactionTiming)
+                if (level.Properties.TryGetValue("SatisfactionTiming", out object satisfactionTimingObject) && satisfactionTimingObject is JObject satisfactionTiming)
                 {
-                    _satisfactionTiming = new Dictionary<int, int>(satisfactionTiming);
+                    Console.Write(satisfactionTiming);
+                    foreach (int key in _satisfactionTiming.Keys.ToList())
+                    {
+                        _satisfactionTiming[key] = (int)satisfactionTiming[$"{key}"];
+                    }
                 }
 
                 // CustomerSpawnSpeed
