@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.SpaceMinigame</name>
+    </assembly>
+    <members>
+        <member name="M:TypTop.SpaceMinigame.Components.LaserComponent.Draw(System.Windows.Media.DrawingContext)">
+            <summary>
+            The Draw function originally comes from the IDrawable interface.
+            This method ensures that the component is drawn.
+            This will be done every tick of the game.In this case, a dotted line will be drawn between the Player and the relevant Enemy.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:TypTop.SpaceMinigame.Components.LineComponent.Draw(System.Windows.Media.DrawingContext)">
+            <summary>
+            /// This method ensures that the Spring is drawn at the correct height.
+            The elevation is taken from _positionComponent. The line is then drawn on the screen.
+            </summary>
+            <param name="context"></param>
+        </member>
+        <member name="M:TypTop.SpaceMinigame.Components.LineComponent.AddedToEntity">
+            <summary>
+            Originally from Component.
+            This method ensures that the PositionComponent is retrieved from the parent entity.
+            </summary>
+        </member>
+        <member name="M:TypTop.SpaceMinigame.Enemy.Update(System.Single)">
+            <summary>
+            This method is overridden from entity and is executed every "deltaTime".
+            The added functionality is checking whether the relevant Enemy is (already) under the line.
+            If this is the case, this Entity will be removed from the game and from the dependent lists.
+            </summary>
+            <param name="deltaTime"></param>
+        </member>
+        <member name="M:TypTop.SpaceMinigame.SpaceGame.OnTextInput(System.Object,System.Windows.Input.TextCompositionEventArgs)">
+            <summary>
+            This method will be executed with Text input.
+            For example, several things are done here, such as drawing a laser from killing an enemy.
+            Remove this Enemy from the correct list.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+    </members>
+</doc>

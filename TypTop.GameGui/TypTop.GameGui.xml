@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.GameGui</name>
+    </assembly>
+    <members>
+        <member name="T:TypTop.GameGui.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:TypTop.GameGui.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:TypTop.GameGui.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="T:TypTop.GameGui.ExitGame">
+            <summary>
+            Null object, only used for fade when game closes.
+            </summary>
+        </member>
+        <member name="T:TypTop.GameGui.GameLoader">
+            <summary>Used for loading game screens</summary>
+            <seealso cref="T:TypTop.Logic.IGameLoader" />
+        </member>
+        <member name="M:TypTop.GameGui.GameLoader.#ctor(TypTop.GameWindow.GameWindow,System.Collections.Generic.IList{TypTop.GameGui.World})">
+            <summary>Initializes a new instance of the <see cref="T:TypTop.GameGui.GameLoader"/> class.</summary>
+            <param name="gameWindow">The game window.</param>
+            <param name="worlds">The worlds.</param>
+        </member>
+        <member name="M:TypTop.GameGui.GameLoader.LoadWorldMap">
+            <summary>Loads the world map.</summary>
+        </member>
+        <member name="M:TypTop.GameGui.GameLoader.LoadLevelMap(TypTop.GameGui.World)">
+            <summary>Loads the level map.</summary>
+            <param name="world">The world.</param>
+        </member>
+        <member name="M:TypTop.GameGui.GameLoader.LoadMinigame(TypTop.Logic.Level)">
+            <summary>Loads the specified minigame.</summary>
+            <param name="level">The level.</param>
+        </member>
+        <member name="T:TypTop.GameGui.MainWindow">
+            <summary>
+            Interaction logic for MainWindow.xaml
+            </summary>
+            <summary>
+            MainWindow
+            </summary>
+        </member>
+        <member name="M:TypTop.GameGui.MainWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

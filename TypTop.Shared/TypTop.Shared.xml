@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.Shared</name>
+    </assembly>
+    <members>
+        <member name="T:TypTop.Shared.ContextFactory">
+            <summary>
+            Wordt gebruikt voor ef migrations en Databaseconnectie
+            </summary>
+        </member>
+    </members>
+</doc>

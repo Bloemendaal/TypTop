@@ -10,6 +10,9 @@ namespace TypTop.GameEngine.Components
 {
     public static class RectangleExtension
     {
+        /// <summary>  Gets the center of a rectangle</summary>
+        /// <param name="rect">The rect.</param>
+        /// <returns></returns>
         public static Vector2 Center(this Rect rect)
         {
             return new Vector2((float) (rect.Left + rect.Width / 2),
@@ -17,6 +20,9 @@ namespace TypTop.GameEngine.Components
         }
     }
 
+    /// <summary>Used for making entities collectable</summary>
+    /// <seealso cref="TypTop.GameEngine.Component" />
+    /// <seealso cref="TypTop.GameEngine.IUpdateable" />
     public class CollisionComponent : Component, IUpdateable
     {
         private PositionComponent _positionComponent;
@@ -31,8 +37,11 @@ namespace TypTop.GameEngine.Components
             _positionComponent = Entity.GetComponent<PositionComponent>();
         }
 
+        /// <summary>The collision bounding</summary>
         public Rect Bounding;
 
+        /// <summary>Updates the component with the specified delta time.</summary>
+        /// <param name="deltaTime">The delta time.</param>
         public void Update(float deltaTime)
         {
             //Update bounding box location
@@ -77,9 +86,7 @@ namespace TypTop.GameEngine.Components
             }
         }
 
-        
-
-
+        /// <summary>Occurs on collision.</summary>
         public event EventHandler<CollisionEventArgs> Collision;
 
         protected virtual void OnCollision(CollisionEventArgs e)

@@ -3,6 +3,10 @@ using System.Threading;
 
 namespace TypTop.GameEngine
 {
+    /// <summary>
+    ///   <para>Used for executing delayed actions in the game</para>
+    /// </summary>
+    /// <seealso cref="TypTop.GameEngine.ITimed" />
     internal class DelayedAction : ITimed
     {
         private double _passedMilliseconds;

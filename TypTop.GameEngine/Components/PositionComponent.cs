@@ -2,10 +2,14 @@
 
 namespace TypTop.GameEngine.Components
 {
+    /// <summary>Used by other components to determine Entity position</summary>
+    /// <seealso cref="TypTop.GameEngine.Component" />
     public class PositionComponent : Component
     {
         private CameraComponent _camera;
 
+        /// <summary>  Render position</summary>
+        /// <value>The position.</value>
         public Vector2 Position
         {
             get => AbsolutePosition - (_camera?.Position ?? new Vector2(0, 0));
@@ -13,6 +17,8 @@ namespace TypTop.GameEngine.Components
         }
         private Vector2 _position;
 
+        /// <summary>  Horizontal position where the entity is rendered</summary>
+        /// <value>The x.</value>
         public float X
         {
             get => AbsoluteX + (_camera?.X ?? 0);
@@ -29,6 +35,8 @@ namespace TypTop.GameEngine.Components
                 
             }
         }
+        /// <summary> Vertical Position where the entity is rendered</summary>
+        /// <value>The y.</value>
         public float Y
         {
             get => AbsoluteY - (_camera?.Y ?? 0);
@@ -46,6 +54,8 @@ namespace TypTop.GameEngine.Components
             }
         }
 
+        /// <summary>Gets or sets the absolute position.</summary>
+        /// <value>The absolute position.</value>
         public Vector2 AbsolutePosition
         {
             get => _position;

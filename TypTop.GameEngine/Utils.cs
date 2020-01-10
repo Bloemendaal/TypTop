@@ -6,16 +6,30 @@ namespace TypTop.GameEngine
 {
     public static class Utils
     {
+        /// <summary>Converts to point.</summary>
+        /// <param name="vector2">The vector2.</param>
+        /// <returns></returns>
         public static Point ToPoint(this Vector2 vector2)
         {
             return new Point(vector2.X, vector2.Y);
         }
 
+        /// <summary>Converts to vector2.</summary>
+        /// <param name="point">The point.</param>
+        /// <returns></returns>
         public static Vector2 ToVector2(this Point point)
         {
             return new Vector2((float) point.X, (float) point.Y);
         }
 
+        /// <summary>Gets aligned rectangle.</summary>
+        /// <param name="index">The index.</param>
+        /// <param name="total">The total.</param>
+        /// <param name="columns">The columns.</param>
+        /// <param name="spacing">The spacing.</param>
+        /// <param name="columnWidth">Width of the column.</param>
+        /// <param name="columnHeight">Height of the column.</param>
+        /// <returns></returns>
         public static Rect GetRectangle(int index, int total, int columns, float spacing, float columnWidth, float columnHeight)
         {
             columns = Math.Min(columns, total);

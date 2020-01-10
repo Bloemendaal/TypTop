@@ -10,11 +10,15 @@ namespace TypTop.MinigameEngine
         Leave
     }
 
-
+    /// <summary>Used to capture mouse hover</summary>
+    /// <seealso cref="TypTop.GameEngine.Component" />
     public class HoverComponent : Component
     {
+        /// <summary>Hover capture bounds</summary>
+        /// <value>The bounds.</value>
         public Rect Bounds { get; }
 
+        /// <summary>Occurs when mouse hover over.</summary>
         public event EventHandler<HoverState> Hover;
 
         private bool _hover;
@@ -24,6 +28,8 @@ namespace TypTop.MinigameEngine
             Bounds = bounds;
         }
 
+        /// <summary>  Raised the hover event.</summary>
+        /// <param name="point">The point.</param>
         public void CaptureHover(Point point)
         {
             if (Bounds.Contains(point))

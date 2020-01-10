@@ -1,0 +1,306 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.TavernMinigame</name>
+    </assembly>
+    <members>
+        <member name="P:TypTop.TavernMinigame.Customer.Count">
+            <summary>
+            The amount of orders left to be served.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.Customer.OriginalCount">
+            <summary>
+            Original amount of orders the customer had.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.Customer._orders">
+            <summary>
+            Customer's orders
+            </summary>
+        </member>
+        <member name="T:TypTop.TavernMinigame.Customer.CustomerType">
+            <summary>
+            List of all available unique customers.
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.AddEntities">
+            <summary>
+            Voegt alle benodigde entities (Order’s, SpeechBubble, this) aan game toe.
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.RemoveEntities(System.Int32)">
+            <summary>
+            Verwijdert alle entities die verwant zijn aan de Customer.
+            </summary>
+            <param name="score">
+            Voegt deze score toe aan de huidige score.
+            </param>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.RemoveOrder(TypTop.TavernMinigame.Order)">
+            <summary>
+            Verwijdert een specifieke Order uit _orders. Roept UpdateOrderPosition() aan.
+            </summary>
+            <param name="order">
+            Order dat verwijdert moet worden.
+            </param>
+            <returns>
+            Geeft terug of het verwijderen succesvol was.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.UpdatePosition(System.Int32)">
+            <summary>
+            Werkt de posities van de Customer en de SpeechBubble bij. Roept daarna de UpdateOrderPosition() method aan.
+            </summary>
+            <param name="index">
+            Index van de rij waarin de Customer staat.
+            </param>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.UpdateOrderPosition">
+            <summary>
+            Werkt de posities van de Order’s in _orders bij.
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.HasOrder(TypTop.TavernMinigame.Order)">
+            <summary>
+            Geeft terug of de Customer de specifieke Order heeft.
+            </summary>
+            <param name="order">
+            Order dat gecontroleerd moet worden.
+            </param>
+            <returns>
+            Geeft terug of de Customer de specifieke Order heeft.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.HasOrder(TypTop.TavernMinigame.Order.OrderType)">
+            <summary>
+            Geeft terug of de Customer de specifieke Order heeft.
+            </summary>
+            <param name="order">
+            Order dat gecontroleerd moet worden.
+            </param>
+            <returns>
+            Geeft terug of de Customer de specifieke Order heeft.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Customer.GetOrder(TypTop.TavernMinigame.Order.OrderType)">
+            <summary>
+            Geeft een Order terug wanneer de OrderType overeenkomt. Pakt altijd de eerste van de lijst _orders als er meerdere zijn.
+            </summary>
+            <param name="orderType">
+            OrderType dat gecontroleerd moet worden.
+            </param>
+            <returns>
+            Geeft een Order terug wanneer de OrderType overeenkomt.
+            </returns>
+        </member>
+        <member name="P:TypTop.TavernMinigame.CustomerQueue.Count">
+            <summary>
+            Amount of customers in the queue.
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.CustomerQueue.UpdateCount">
+            <summary>
+            Visually update the amount of customers in the queue.
+            </summary>
+        </member>
+        <member name="T:TypTop.TavernMinigame.Order.OrderType">
+            <summary>
+            List of all available unique orders.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.Order.Type">
+            <summary>
+            Type of this order.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.Satisfaction.Amount">
+            <summary>
+            Amount of satisfaction the Customer has. Value from 0 - 5 where 0 will result in the customer leaving. 
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Satisfaction.SetInterval">
+            <summary>
+            Reset the interval to the current amount of satisfaction.
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Satisfaction.Dispose">
+            <summary>
+            Dispose the satisfactiontimer. Do not remove a Customer or Satisfaction class from the game without disposing.
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.Satisfaction.UpdateImage">
+            <summary>
+            Update the satisfactionimage to match the amount.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.TileAmount">
+            <summary>
+            Minimale waarde is 1, maximale waarde is de lengte van het aantal OrderType’s. Wanneer deze property geset wordt, worden de Tiles willekeurig gegenereerd tot een lijst _tiles.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.TavernGame._tiles">
+            <summary>
+            Lijst met alle Tile’s erin. Wordt gerenderd wanneer het TileAmount geset wordt.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.TavernGame._words">
+            <summary>
+            Lijst met Word’s die gebruikt kan worden door de Tiles.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.TavernGame._inputList">
+            <summary>
+            InputList uit TypTop.Logic die gebruikt wordt om de input van de gebruiker te analyseren. FocusOnHighIndex staat op true. De woordenlijst wordt pas meegegeven wanneer de method UpdateWordlist() aangeroepen wordt.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.MaxCustomers">
+            <summary>
+            Maximaal aantal Customer’s dat in de taverne getekend wordt voordat ze in de CustomerQueue gestopt worden. Minimaal aantal is 0, maximaal is aanbevolen 3 omdat de rest (deels) buiten het scherm gerenderd wordt.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.CustomerSpawnSpeed">
+            <summary>
+            Every amount of milliseconds a customer should spawn.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.CustomerSpawnSpeedOffset">
+            <summary>
+            Maximum offset that is used when generating random spawn speeds in both directions.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.CustomerSpawnSpeedMultiplier">
+            <summary>
+            Multiply the spawnspeed of the customers with 1 + (x * [amount of customers in the queue])
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.CustomerMinOrderAmount">
+            <summary>
+            Minimum amount of orders a customer has to take.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.CustomerMaxOrderAmount">
+            <summary>
+            Maximum amount of orders a customer has to take.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.TavernGame._customers">
+            <summary>
+            Lijst met Customer’s die zichtbaar zijn in de taverne.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "F:TypTop.TavernMinigame.TavernGame._customerQueue" -->
+        <member name="F:TypTop.TavernMinigame.TavernGame._timer">
+            <summary>
+            Timer die nodig is om Customer’s toe te voegen aan de rij.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.TavernGame.DefaultTypeface">
+            <summary>
+            Standaard font dat gebruikt moet worden in de hele Tavern minigame, MV Boli.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.ShowSatisfaction">
+            <summary>
+            Geef de satisfaction van een Customer weer. Standaardwaarde is false.
+            </summary>
+        </member>
+        <member name="P:TypTop.TavernMinigame.TavernGame.StartSatisfaction">
+            <summary>
+            Waarde tussen 1 en 5 waarop de Customer’s satisfaction standaard ingesteld staat. Standaardwaarde is 5. 
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.TavernGame._satisfactionTiming">
+            <summary>
+            Tijden in milliseconden waarin waarin de Customer’s bozer worden. Eerste int, TKey, is de satisfaction. Tweede int, TValue, is het aantal milliseconden. Standaardwaardes per satisfaction is 0 milliseconden (geen timer ingesteld, satisfaction kan dus niet verspringen).
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.GetSatisfaction(System.Int32)">
+            <summary>
+            Get the amount of milliseconds for a certain satisfaction.
+            </summary>
+            <param name="key">
+            Satisfaction (0 - 5)
+            </param>
+            <returns>
+            Time in milliseconds.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.AddCustomer(TypTop.TavernMinigame.Customer)">
+            <summary>
+            Add customer to _customers unless it exceeds MaxCustomers. In that case it is added to _customerQueue.
+            </summary>
+            <param name="customer">
+            Customer to be added.
+            </param>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.NextCustomer">
+            <summary>
+            Schuift de complete rij Customer’s een plekje door.
+            </summary>
+            <returns>
+            Geeft terug of dit gelukt is.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.RemoveCustomer(TypTop.TavernMinigame.Customer)">
+            <summary>
+            Verwijdert een Customer uit _customers en werkt de posities van alle Customer’s in _customers daarna bij. Daarna wordt de method UpdateWordlist() aangeroepen.
+            </summary>
+            <param name="customer">
+            Customer to be removed.
+            </param>
+            <returns>
+            Geeft terug of het verwijderen gelukt is.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.CustomerIndex(TypTop.TavernMinigame.Customer)">
+            <summary>
+            Geeft de index van de Customer in _customers.
+            </summary>
+            <param name="customer">
+            Customer to be checked.
+            </param>
+            <returns>
+            Geeft de index van de Customer in _customers.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.UpdateWordlist">
+            <summary>
+            Werkt de woordenlijst van _inputList bij zodat deze overeenkomt met de wensen van de Customer’s. Word’s op Tile’s die niet gevraagd worden door Customer’s, worden hierdoor niet geaccepteerd als input.
+            </summary>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.GetOrder(System.Int32)">
+            <summary>
+            Geeft een lijst met amount aantal willekeurige Order’s erin.
+            </summary>
+            <param name="amount">
+            Aantal willekeurige Order's.
+            </param>
+            <returns>
+            Geeft een lijst met amount aantal willekeurige Order’s erin.
+            </returns>
+        </member>
+        <member name="M:TypTop.TavernMinigame.TavernGame.OnTextInput(System.Object,System.Windows.Input.TextCompositionEventArgs)">
+            <summary>
+            Controleert de input van de leerling. Controleert voor elke Customer of een Order afgehandeld is door die input en ook of de Customer volledig geholpen is. Een Word wordt verwijdert uit _words en de method UpdateWordlist() wordt aangeroepen wanneer een Word volledig goed getypt is. 
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:TypTop.TavernMinigame.Tile.Width">
+            <summary>
+            Width of the tile.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.Tile.HeightOffset">
+            <summary>
+            Heigth offset of the Order that is drawn on top of the Tile.
+            </summary>
+        </member>
+        <member name="F:TypTop.TavernMinigame.Tile.WidthOffset">
+            <summary>
+            Width offset of the Order that is drawn on top of the Tile.
+            </summary>
+        </member>
+    </members>
+</doc>
