@@ -5,13 +5,18 @@ using System.Windows.Media.Imaging;
 
 namespace TypTop.GameEngine.Components
 {
+    /// <summary>Used to render image on entity</summary>
+    /// <seealso cref="TypTop.GameEngine.Component" />
+    /// <seealso cref="TypTop.GameEngine.IDrawable" />
     public class ImageComponent : Component, IDrawable
     {
         private BitmapSource _bitmapImage;
         private BitmapImage _bitmapImageOriginal;
         private PositionComponent _positionComponent;
 
-       
+
+        /// <summary>  Width of the image</summary>
+        /// <value>The width.</value>
         public double? Width
         {
             get {
@@ -43,6 +48,9 @@ namespace TypTop.GameEngine.Components
             }
         }
         private double? _width;
+
+        /// <summary>  Height of the image</summary>
+        /// <value>The height.</value>
         public double? Height
         {
             get
@@ -76,6 +84,9 @@ namespace TypTop.GameEngine.Components
         }
         private double? _height;
 
+
+        /// <summary>  Rotation of the image</summary>
+        /// <value>The rotation.</value>
         public double Rotation
         {
             get => _rotation;
@@ -94,6 +105,9 @@ namespace TypTop.GameEngine.Components
         }
         private double _rotation = 0;
 
+        /// <summary>  Indicating whether the image is hidden.</summary>
+        /// <value>
+        ///   <c>true</c> if hidden; otherwise, <c>false</c>.</value>
         public bool Hidden { get; set; }
 
         public ImageComponent(BitmapImage bitmapImage)
@@ -101,6 +115,8 @@ namespace TypTop.GameEngine.Components
             UpdateImage(bitmapImage);
         }
 
+        /// <summary>Updates the image with a new bitmap.</summary>
+        /// <param name="bitmapImage">The bitmap image.</param>
         public void UpdateImage(BitmapImage bitmapImage)
         {
             _bitmapImageOriginal = bitmapImage;
@@ -112,6 +128,8 @@ namespace TypTop.GameEngine.Components
             _positionComponent = Entity.GetComponent<PositionComponent>();
         }
 
+        /// <summary>Draws the component.</summary>
+        /// <param name="context">The context.</param>
         public void Draw(DrawingContext context)
         {
             if (_positionComponent.Y + Height < 0 ||

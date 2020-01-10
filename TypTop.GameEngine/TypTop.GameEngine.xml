@@ -1,0 +1,463 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.GameEngine</name>
+    </assembly>
+    <members>
+        <member name="T:TypTop.GameEngine.Component">
+            <summary>Components are added to give entities extra behaviour</summary>
+        </member>
+        <member name="P:TypTop.GameEngine.Component.Entity">
+            <summary>  The entity the components is added to</summary>
+            <value>The entity.</value>
+        </member>
+        <member name="M:TypTop.GameEngine.Component.AddedToEntity">
+            <summary>Callback when added to entity.</summary>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.AccelerationComponent">
+            <summary>Adds acceleration behaviour to target entity</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+            <seealso cref="T:TypTop.GameEngine.IUpdateable" />
+        </member>
+        <member name="P:TypTop.GameEngine.Components.AccelerationComponent.Acceleration">
+            <summary>  Acceleration direction</summary>
+            <value>The acceleration.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.AccelerationComponent.Speed">
+            <summary>  Acceleration speed</summary>
+            <value>The speed.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.CameraComponent.Position">
+            <summary>
+            Position of the camera.
+            </summary>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.CameraComponent.X">
+            <summary>
+            X coordinate of the camera.
+            </summary>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.CameraComponent.Y">
+            <summary>
+            Y coordinate of the camera.
+            </summary>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CameraComponent.GetX(TypTop.GameEngine.Game)">
+            <summary>
+            Get X by key.
+            </summary>
+            <param name="game">
+            TKey of the Dictionary.
+            </param>
+            <returns>
+            X coordinate.
+            </returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CameraComponent.GetY(TypTop.GameEngine.Game)">
+            <summary>
+            Get Y by key.
+            </summary>
+            <param name="game">
+            TKey of the Dictionary.
+            </param>
+            <returns>
+            Y coordinate.
+            </returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CameraComponent.GetPosition(TypTop.GameEngine.Game)">
+            <summary>
+            Get Position by key.
+            </summary>
+            <param name="game">
+            TKey of the Dictionary.
+            </param>
+            <returns>
+            Vector2 coordinates.
+            </returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CameraComponent.SetX(System.Single,TypTop.GameEngine.Game)">
+            <summary>
+            Set X by key.
+            </summary>
+            <param name="x">
+            X coordinate.
+            </param>
+            <param name="game">
+            TKey of the Dictionary.
+            </param>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CameraComponent.SetY(System.Single,TypTop.GameEngine.Game)">
+            <summary>
+            Set Y by key.
+            </summary>
+            <param name="y">
+            Y coordinate.
+            </param>
+            <param name="game">
+            TKey of the Dictionary.
+            </param>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CameraComponent.SetPosition(System.Numerics.Vector2,TypTop.GameEngine.Game)">
+            <summary>
+            Set Position by key.
+            </summary>
+            <param name="position">
+            Vector2 coordinates.
+            </param>
+            <param name="game">
+            TKey of the Dictionary.
+            </param>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CameraComponent.RemoveCamera(TypTop.GameEngine.Game)">
+            <summary>
+            Removes a camera from the Dictionary of running games. Do not use while running the game.
+            </summary>
+            <param name="game">
+            TKey of the Dictionary.
+            </param>
+            <returns>
+            If the removal was successfull.
+            </returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.RectangleExtension.Center(System.Windows.Rect)">
+            <summary>  Gets the center of a rectangle</summary>
+            <param name="rect">The rect.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.CollisionComponent">
+            <summary>Used for making entities collectable</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+            <seealso cref="T:TypTop.GameEngine.IUpdateable" />
+        </member>
+        <member name="F:TypTop.GameEngine.Components.CollisionComponent.Bounding">
+            <summary>The collision bounding</summary>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.CollisionComponent.Update(System.Single)">
+            <summary>Updates the component with the specified delta time.</summary>
+            <param name="deltaTime">The delta time.</param>
+        </member>
+        <member name="E:TypTop.GameEngine.Components.CollisionComponent.Collision">
+            <summary>Occurs on collision.</summary>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.CollisionEventArgs">
+            <summary>Collision information</summary>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.CollisionEventArgs.Entity">
+            <summary>  Entity collided with.</summary>
+            <value>The entity.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.CollisionEventArgs.PenetrationVector">
+            <summary>  Overlap of the collision</summary>
+            <value>The penetration vector.</value>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.ImageComponent">
+            <summary>Used to render image on entity</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+            <seealso cref="T:TypTop.GameEngine.IDrawable" />
+        </member>
+        <member name="P:TypTop.GameEngine.Components.ImageComponent.Width">
+            <summary>  Width of the image</summary>
+            <value>The width.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.ImageComponent.Height">
+            <summary>  Height of the image</summary>
+            <value>The height.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.ImageComponent.Rotation">
+            <summary>  Rotation of the image</summary>
+            <value>The rotation.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.ImageComponent.Hidden">
+            <summary>  Indicating whether the image is hidden.</summary>
+            <value>
+              <c>true</c> if hidden; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.ImageComponent.UpdateImage(System.Windows.Media.Imaging.BitmapImage)">
+            <summary>Updates the image with a new bitmap.</summary>
+            <param name="bitmapImage">The bitmap image.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Components.ImageComponent.Draw(System.Windows.Media.DrawingContext)">
+            <summary>Draws the component.</summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.LabelComponent">
+            <summary>Used to render text on entity</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+            <seealso cref="T:TypTop.GameEngine.IDrawable" />
+        </member>
+        <member name="F:TypTop.GameEngine.Components.LabelComponent.TransformX">
+            <summary>  horizontal offset</summary>
+        </member>
+        <member name="F:TypTop.GameEngine.Components.LabelComponent.TransformY">
+            <summary>  vertical offset</summary>
+        </member>
+        <member name="F:TypTop.GameEngine.Components.LabelComponent.Center">
+            <summary>Center rendering of the label</summary>
+        </member>
+        <member name="F:TypTop.GameEngine.Components.LabelComponent.Middle">
+            <summary>  Vertical centration</summary>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.LabelComponent.Width">
+            <summary>  With of te label</summary>
+            <value>The width.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.LabelComponent.Height">
+            <summary>  Height of the text</summary>
+            <value>The height.</value>
+        </member>
+        <member name="F:TypTop.GameEngine.Components.LabelComponent.Text">
+            <summary>The text
+            to render</summary>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.PositionComponent">
+            <summary>Used by other components to determine Entity position</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+        </member>
+        <member name="P:TypTop.GameEngine.Components.PositionComponent.Position">
+            <summary>  Render position</summary>
+            <value>The position.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.PositionComponent.X">
+            <summary>  Horizontal position where the entity is rendered</summary>
+            <value>The x.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.PositionComponent.Y">
+            <summary> Vertical Position where the entity is rendered</summary>
+            <value>The y.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.PositionComponent.AbsolutePosition">
+            <summary>Gets or sets the absolute position.</summary>
+            <value>The absolute position.</value>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.VelocityComponent">
+            <summary>Controls the speed of the component in the direction of the given vector.</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+            <seealso cref="T:TypTop.GameEngine.IUpdateable" />
+        </member>
+        <member name="P:TypTop.GameEngine.Components.VelocityComponent.Velocity">
+            <summary>  Velocity direction</summary>
+            <value>The velocity.</value>
+        </member>
+        <member name="P:TypTop.GameEngine.Components.VelocityComponent.Speed">
+            <summary>  Velocity speed multiplier</summary>
+            <value>The speed.</value>
+        </member>
+        <member name="T:TypTop.GameEngine.Components.WordComponent">
+            <summary>
+            Renders a word at the position of Position with optional transformation via TransformX and TransformY. With the options Center and Middle,
+            the anchor point of the label can be centered horizontally and vertically (relative to the original top left).
+            Colors can be set to visualize the progress of typing the words.
+            </summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+            <seealso cref="T:TypTop.GameEngine.IDrawable" />
+        </member>
+        <member name="T:TypTop.GameEngine.DelayedAction">
+            <summary>
+              <para>Used for executing delayed actions in the game</para>
+            </summary>
+            <seealso cref="T:TypTop.GameEngine.ITimed" />
+        </member>
+        <member name="T:TypTop.GameEngine.Entity">
+            <summary>
+              <para>Entities with components form the game objects.</para>
+            </summary>
+        </member>
+        <member name="F:TypTop.GameEngine.Entity.ZIndex">
+            <summary>
+              <para>
+             De draw depth</para>
+            </summary>
+        </member>
+        <member name="M:TypTop.GameEngine.Entity.#ctor(TypTop.GameEngine.Game)">
+            <summary>Initializes a new instance of the <see cref="T:TypTop.GameEngine.Entity"/> class.</summary>
+            <param name="minigame">The minigame.</param>
+        </member>
+        <member name="P:TypTop.GameEngine.Entity.Game">
+            <summary>
+              <para>
+             The game the component is in</para>
+            </summary>
+            <value>The game.</value>
+        </member>
+        <member name="M:TypTop.GameEngine.Entity.TryGetComponent``1(``0@)">
+            <summary>Tries to get the component.</summary>
+            <typeparam name="TComponent">The type of the component.</typeparam>
+            <param name="component">The component.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Entity.GetComponent``1">
+            <summary>Gets the component.</summary>
+            <typeparam name="TComponent">The type of the component.</typeparam>
+            <remarks>If the component is empty it throws an error</remarks>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Entity.AddComponent(TypTop.GameEngine.Component)">
+            <summary>Adds the component.</summary>
+            <param name="component">The component.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Entity.HasComponent``1">
+            <summary>Determines whether the entity has a component.</summary>
+            <typeparam name="TComponent">The type of the component.</typeparam>
+        </member>
+        <member name="M:TypTop.GameEngine.Entity.Update(System.Single)">
+            <summary>Updates the components with the specified delta time.</summary>
+            <param name="deltaTime">The delta time.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Entity.Draw(System.Windows.Media.DrawingContext)">
+            <summary>Draws the entity.</summary>
+            <param name="drawingContext">The drawing context.</param>
+        </member>
+        <member name="F:TypTop.GameEngine.Game.Width">
+            <summary>The width
+            of the resolution</summary>
+        </member>
+        <member name="F:TypTop.GameEngine.Game.Height">
+            <summary>
+              <para>
+             The height
+            of the resolution</para>
+            </summary>
+        </member>
+        <member name="F:TypTop.GameEngine.Game.Rnd">
+            <summary>  Helper for generating random values</summary>
+        </member>
+        <member name="E:TypTop.GameEngine.Game.TextInput">
+            <summary>Occurs when user presses a key.</summary>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.AddTimer(System.Action,System.Int32)">
+            <summary>Adds a callback timer.</summary>
+            <param name="callback">The callback.</param>
+            <param name="interval">The interval.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.AddDelayedAction(System.Action,System.Int32,System.Threading.CancellationToken)">
+            <summary>  Adds a delayed action.</summary>
+            <param name="callback">The callback.</param>
+            <param name="millisecondsDelay">The milliseconds delay.</param>
+            <param name="cancellationToken">The cancellation token.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.AddEntity(TypTop.GameEngine.Entity)">
+            <summary>Adds an entity.</summary>
+            <param name="entity">The entity.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.RemoveEntity(TypTop.GameEngine.Entity)">
+            <summary>Removes the entity.</summary>
+            <param name="entity">The entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.RemoveEntity``1">
+            <summary>Removes the entity by type.</summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.GetEntitiesWithComponent``1">
+            <summary>Gets the entities with the specified component.</summary>
+            <typeparam name="TComponent">The type of the component.</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.Update(System.Single)">
+            <summary>Updates the game with the specified delta time.</summary>
+            <param name="deltaTime">The delta time.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.Draw(System.Windows.Media.DrawingContext)">
+            <summary>Draws the game.</summary>
+            <param name="drawingContext">The drawing context.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.OnTextInput(System.Windows.Input.TextCompositionEventArgs)">
+            <summary>Raises the <see cref="E:TextInput"/> event.</summary>
+            <param name="e">The <see cref="T:System.Windows.Input.TextCompositionEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.OnMouseHover(System.Windows.Point)">
+            <summary>
+              <para>
+             Raises the hover event in all components</para>
+            </summary>
+            <param name="point">The point.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Game.OnMouseDown(System.Windows.Point)">
+            <summary>  Raises the click event in all components</summary>
+            <param name="point">The point.</param>
+        </member>
+        <member name="T:TypTop.GameEngine.GameTimer">
+            <summary>Used for executing timed actions</summary>
+            <seealso cref="T:TypTop.GameEngine.ITimed" />
+            <seealso cref="T:TypTop.GameEngine.ITimer" />
+        </member>
+        <member name="T:TypTop.GameEngine.IDrawable">
+            <summary>Inherited by components that are drawable</summary>
+        </member>
+        <member name="M:TypTop.GameEngine.IDrawable.Draw(System.Windows.Media.DrawingContext)">
+            <summary>Draws the component.</summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="T:TypTop.GameEngine.ITimer">
+            <summary>Returned by timed actions. The Dispose method is used for stopping the timer</summary>
+            <seealso cref="T:System.IDisposable" />
+        </member>
+        <member name="P:TypTop.GameEngine.ITimer.Interval">
+            <summary>
+              <para>
+             Controls the interval of the timer.
+            </para>
+            </summary>
+            <value>The interval.</value>
+        </member>
+        <member name="T:TypTop.GameEngine.IUpdateable">
+            <summary>Inherited by components that are updateable</summary>
+        </member>
+        <member name="M:TypTop.GameEngine.IUpdateable.Update(System.Single)">
+            <summary>Updates the component with the specified delta time.</summary>
+            <param name="deltaTime">The delta time.</param>
+        </member>
+        <member name="M:TypTop.GameEngine.Utils.ToPoint(System.Numerics.Vector2)">
+            <summary>Converts to point.</summary>
+            <param name="vector2">The vector2.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Utils.ToVector2(System.Windows.Point)">
+            <summary>Converts to vector2.</summary>
+            <param name="point">The point.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TypTop.GameEngine.Utils.GetRectangle(System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Single)">
+            <summary>Gets aligned rectangle.</summary>
+            <param name="index">The index.</param>
+            <param name="total">The total.</param>
+            <param name="columns">The columns.</param>
+            <param name="spacing">The spacing.</param>
+            <param name="columnWidth">Width of the column.</param>
+            <param name="columnHeight">Height of the column.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TypTop.MinigameEngine.ClickComponent">
+            <summary>Captures mouse clicks</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+        </member>
+        <member name="P:TypTop.MinigameEngine.ClickComponent.Bounds">
+            <summary>Click capture bounds</summary>
+            <value>The bounds.</value>
+        </member>
+        <member name="E:TypTop.MinigameEngine.ClickComponent.Clicked">
+            <summary>Occurs when [clicked].</summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.ClickComponent.CaptureClick(System.Windows.Point)">
+            <summary>  Raises the click event.</summary>
+            <param name="point">The point.</param>
+        </member>
+        <member name="T:TypTop.MinigameEngine.HoverComponent">
+            <summary>Used to capture mouse hover</summary>
+            <seealso cref="T:TypTop.GameEngine.Component" />
+        </member>
+        <member name="P:TypTop.MinigameEngine.HoverComponent.Bounds">
+            <summary>Hover capture bounds</summary>
+            <value>The bounds.</value>
+        </member>
+        <member name="E:TypTop.MinigameEngine.HoverComponent.Hover">
+            <summary>Occurs when mouse hover over.</summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.HoverComponent.CaptureHover(System.Windows.Point)">
+            <summary>  Raised the hover event.</summary>
+            <param name="point">The point.</param>
+        </member>
+    </members>
+</doc>

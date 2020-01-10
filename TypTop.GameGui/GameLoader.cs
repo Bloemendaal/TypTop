@@ -22,17 +22,23 @@ namespace TypTop.GameGui
     {
     }
 
+    /// <summary>Used for loading game screens</summary>
+    /// <seealso cref="TypTop.Logic.IGameLoader" />
     public class GameLoader : IGameLoader
     {
         private readonly GameWindow.GameWindow _gameWindow;
         private readonly IList<World> _worlds;
 
+        /// <summary>Initializes a new instance of the <see cref="GameLoader"/> class.</summary>
+        /// <param name="gameWindow">The game window.</param>
+        /// <param name="worlds">The worlds.</param>
         public GameLoader(GameWindow.GameWindow gameWindow, IList<World> worlds)
         {
             _gameWindow = gameWindow;
             _worlds = worlds;
         }
 
+        /// <summary>Loads the world map.</summary>
         public void LoadWorldMap()
         {
             var worldScreenGame = new WorldScreenGame(_worlds, this);
@@ -47,12 +53,16 @@ namespace TypTop.GameGui
             _gameWindow.Start(new ExitGame(), transition);
         }
 
+        /// <summary>Loads the level map.</summary>
+        /// <param name="world">The world.</param>
         public void LoadLevelMap(World world)
         {
             var levelScreen = new LevelScreenGame(world, this);
             _gameWindow.Start(levelScreen, new Transition(1));
         }
 
+        /// <summary>Loads the specified minigame.</summary>
+        /// <param name="level">The level.</param>
         public void LoadMinigame(Level level)
         {
             Minigame game;

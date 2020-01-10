@@ -2,7 +2,10 @@
 
 namespace TypTop.GameEngine
 {
-    class GameTimer : ITimed, ITimer
+    /// <summary>Used for executing timed actions</summary>
+    /// <seealso cref="TypTop.GameEngine.ITimed" />
+    /// <seealso cref="TypTop.GameEngine.ITimer" />
+    internal class GameTimer : ITimed, ITimer
     {
         public int Interval { get; set; }
         private readonly Action _callback;
@@ -15,11 +18,6 @@ namespace TypTop.GameEngine
             _callback = callback;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="deltaTime"></param>
-        /// <returns>True if timer is done</returns>
         public bool IncrementTime(double deltaTime)
         {
             if (_disposed)

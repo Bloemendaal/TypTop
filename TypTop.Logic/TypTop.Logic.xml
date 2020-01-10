@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.Logic</name>
+    </assembly>
+    <members>
+        <member name="P:TypTop.Logic.Input.PreviousChar">
+            <summary>
+            The previously inputted letter with the TextInput function.
+            </summary>
+        </member>
+        <member name="E:TypTop.Logic.Input.WordUpdate">
+            <summary>
+            Fires when words have been updated
+            </summary>
+        </member>
+        <member name="T:TypTop.Logic.Input.KeyWrong">
+            <summary>
+            What does the program do when the users inputs a wrong key.
+            </summary>
+            <param name="Reset">
+            Default. Resets the current typing progress of the word.
+            </param>
+            <param name="Remove">
+            Remove the current word, note that a list only removes a word when the key is wrong after typing has started.
+            </param>
+            <param name="Add">
+            Adds the wrong character to the stack. User needs to backspace it to remove the wrong letter.
+            </param>
+            <param name="None">
+            Ignores the mistake and keeps the current typing progress of the word.
+            </param>
+        </member>
+        <member name="F:TypTop.Logic.Input.CaseSensitive">
+            <summary>
+            Checks case-sensitivity of the input when comparing to the words. Default is true.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Input.IgnoreNumbers">
+            <summary>
+            Ignores numbers when true, does not count them as mistake when entered. Removes all numbers from words if they contain any.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Input.IgnorePunctuation">
+            <summary>
+            Ignores punctuation when true, does not count them as mistake when entered. Removes all interpunction from words if they contain any.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Input.IgnoreSpace">
+            <summary>
+            Ignores space when true, does not count as mistake when entered. Removes all whitespaces from words if they contain any.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Input.IgnoreSpecialChar">
+            <summary>
+            Ignores special characters marks when true, converts all special characters if possible to standard characters.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Input.AllowBackspace">
+            <summary>
+            Allow backspacing when typing a word has started. Note that backspacing will work for all the words in the list.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Input.RemoveOnSpace">
+            <summary>
+            Remove the current word when the spacebar is pressed. Only works when IgnoreSpace is false. Note that when a list is used, all words will be removed when none of the words match.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Input.RemoveOnFinished">
+            <summary>
+            Remove the a word when it is finished.
+            </summary>
+        </member>
+        <member name="M:TypTop.Logic.Input.TextInput(System.Char)">
+            <summary>
+            Updates all the requested words with the given char.
+            </summary>
+            <param name="letter">
+            The letter that has been entered by the users of needs to be checked.
+            </param>
+        </member>
+        <member name="M:TypTop.Logic.Input.TextInput(System.String)">
+            <summary>
+            Updates all the requested words with the given char.
+            </summary>
+            <param name="letters">
+            The characters that have been entered converted to char array and tested in that specific order.
+            </param>
+        </member>
+        <member name="M:TypTop.Logic.Input.Backspace">
+            <summary>
+            Abstract methods when backspace is pressed.
+            </summary>
+        </member>
+        <member name="M:TypTop.Logic.Input.CheckWord(System.Char,TypTop.Logic.Word,System.Nullable{System.Int32})">
+            <summary>
+            Checks the given word for the given letter.
+            </summary>
+            <param name="letter">
+            The letter that was inputted by the user.
+            </param>
+            <param name="word">
+            The word needs to be checked.
+            </param>
+            <param name="input">
+            If set, checks a specific letterindex of the word. If not, it takes the current index and when necessary adjusts it.
+            </param>
+            <returns>
+            If the letter matches the current typing index of the word.
+            </returns>
+        </member>
+        <member name="M:TypTop.Logic.Input.CheckIgnoredChars(System.Char)">
+            <summary>
+            Checks if the given char should be ignored according to the given settings.
+            </summary>
+            <param name="ch">
+            The chararacter that needs to be checked.
+            </param>
+            <returns>
+            If the char should be ignored.
+            </returns>
+        </member>
+        <member name="M:TypTop.Logic.Input.ConvertSpecialChar(System.Char)">
+            <summary>
+            Tries to convert a special character to a normal character.
+            </summary>
+            <param name="ch">
+            The character to convert to normal.
+            </param>
+            <returns>
+            If possible the converted char, otherwise it returns the given char.
+            </returns>
+        </member>
+        <member name="F:TypTop.Logic.InputList.FocusOnHighIndex">
+            <summary>
+            When the InputMethod is set to list. Only the word with the highest typing progress will be focussed on. Interpeted as false when there is an equal typing progress.
+            </summary>
+        </member>
+        <member name="P:TypTop.Logic.Word.Index">
+            <summary>
+            Index of the character that is currently being checked by the program.
+            </summary>
+        </member>
+        <member name="P:TypTop.Logic.Word.Letters">
+            <summary>
+            The word saved as a string.
+            </summary>
+        </member>
+        <member name="P:TypTop.Logic.Word.Input">
+            <summary>
+            Gives the input given by the user for this word.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Word.Correct">
+            <summary>
+            Gives if the word was correctly typed until the current index. Returns if the word was typed correctly unless the typing has not yet started.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.Word.Finished">
+            <summary>
+            Gives if the word was completely correctly typed. Returns if the word was correctly typed.
+            </summary>
+        </member>
+        <member name="M:TypTop.Logic.Word.ValidIndex(System.Int32)">
+            <summary>
+            Checks if the given index is valid for this word.
+            </summary>
+            <param name="index">
+            Index of the letter in this word.
+            </param>
+            <returns>
+            True if valid.
+            </returns>
+        </member>
+        <member name="M:TypTop.Logic.Word.Backspace">
+            <summary>
+            Removes the last character from the Input and lowers the input by one
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.WordProvider._wordsToServe">
+            <summary>
+            List of words to serve with conditions
+            </summary>
+        </member>
+        <member name="P:TypTop.Logic.WordProvider.WordCount">
+            <summary>
+            Amount of words to provide.
+            </summary>
+        </member>
+        <member name="P:TypTop.Logic.WordProvider.MaxWordLength">
+            <summary>
+            Max length of word.
+            </summary>
+        </member>
+        <member name="P:TypTop.Logic.WordProvider.MinWordLength">
+            <summary>
+            Min length of word.
+            </summary>
+        </member>
+        <member name="P:TypTop.Logic.WordProvider.UsageChars">
+            <summary>
+             Optional: select only words with char in list.
+            </summary>
+        </member>
+        <member name="M:TypTop.Logic.WordProvider.Shuffle">
+            <summary>
+            Randomizes the list
+            </summary>
+        </member>
+        <member name="M:TypTop.Logic.WordProvider.LoadWords">
+            <summary>
+            Loading words from database.
+            </summary>
+        </member>
+        <member name="M:TypTop.Logic.WordProvider.ResetToEmpty">
+            <summary>
+            Reset words to initial.
+            </summary>
+        </member>
+        <member name="M:TypTop.Logic.WordProvider.Serve(System.Boolean)">
+            <summary>
+            Serve the words.
+            </summary>
+            <param name="shuffle">
+            Shuffle the words before serving. Default is true.
+            </param>
+            <returns>
+            Returns the words that apply to this condition.
+            </returns>
+        </member>
+        <member name="F:TypTop.Logic.WordUpdateArgs.PreviousChar">
+            <summary>
+            The previously inputted letter with the TextInput function.
+            </summary>
+        </member>
+        <member name="F:TypTop.Logic.WordUpdateArgs.CurrentChar">
+            <summary>
+            The currently inputted letter with the TextInput function.
+            </summary>
+        </member>
+    </members>
+</doc>

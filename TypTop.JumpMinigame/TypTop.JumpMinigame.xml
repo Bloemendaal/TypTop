@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.JumpMinigame</name>
+    </assembly>
+    <members>
+        <member name="P:TypTop.JumpMinigame.JumpGame.MinimalDistance">
+            <summary>
+            Minimal distance between the platforms.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.MaximumDistance">
+            <summary>
+            Maximum distance between the platforms.
+            </summary>
+        </member>
+        <member name="F:TypTop.JumpMinigame.JumpGame.JumpHeight">
+            <summary>
+            Maximum height the player can jump.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.LaneAmount">
+            <summary>
+            Amount of lanes that should be used for this level. Minimum amount of unique words must be equal to this value.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.LaneWidth">
+            <summary>
+            Width that the lanes should have.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.EnemySpawnHeight">
+            <summary>
+            Minimal height of an enemy to spawn. Default is after one screen height.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.EnemyAmount">
+            <summary>
+            Amount of enemies to spawn per 100 platforms.
+            </summary>
+        </member>
+        <member name="T:TypTop.JumpMinigame.JumpGame.EnemyType">
+            <summary>
+            All possible ways an enemy can move.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.EnemyMovement">
+            <summary>
+            Set movement of the enemies.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.PlatformBreakAmount">
+            <summary>
+            Amount of jumps the player can make on a platform until it breaks. 0 will instantly break.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.PlatformBreakOffset">
+            <summary>
+            Offset when generating random Platform break amounts.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.PlatformSolidRatio">
+            <summary>
+            Percentage solid platforms. Default is solid platforms only.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.SwitchWords">
+            <summary>
+            Switch words when the word was typed correctly.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.JumpGame.SaveJump">
+            <summary>
+            Save the players jump when their timing is not accurate. 
+            </summary>
+        </member>
+        <member name="M:TypTop.JumpMinigame.JumpGame.GeneratePlatforms(System.Boolean,System.Single)">
+            <summary>
+            Generate platforms for the player to jump on
+            </summary>
+            <param name="init">
+            Indicates of a starting platform should be drawn.
+            </param>
+            <param name="diff">
+            The estimated distance that is gerenated. Due to random occurences, it is typically rendered lower than the set difference. Do not go lower than the jumpheight. 
+            </param>
+        </member>
+        <member name="M:TypTop.JumpMinigame.JumpGame.CheckGeneratePlatforms">
+            <summary>
+            Checks if platforms should be generated.
+            </summary>
+        </member>
+        <member name="P:TypTop.JumpMinigame.Player.Lane">
+            <summary>
+            Current lane the player is jumping in.
+            </summary>
+        </member>
+    </members>
+</doc>

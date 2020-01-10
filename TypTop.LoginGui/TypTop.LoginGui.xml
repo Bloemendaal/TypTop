@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.LoginGui</name>
+    </assembly>
+    <members>
+        <member name="T:TypTop.LoginGui.App">
+            <summary>
+            Interaction logic for App.xaml
+            </summary>
+            <summary>
+            App
+            </summary>
+        </member>
+        <member name="M:TypTop.LoginGui.App.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+        <member name="M:TypTop.LoginGui.App.Main">
+            <summary>
+            Application Entry Point.
+            </summary>
+        </member>
+        <member name="M:TypTop.LoginGui.PasswordHasher.CreateSalt">
+            <summary>
+            Creates a salt to be used in HashPassword and VerifyHash
+            </summary>
+        </member>
+        <member name="M:TypTop.LoginGui.PasswordHasher.HashPassword(System.String,System.Byte[])">
+            <summary>
+            Generate a hash using Argon2id based on the password
+            </summary>
+        </member>
+        <member name="M:TypTop.LoginGui.PasswordHasher.VerifyHash(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            Verify that an entered password matches the stored hash.
+            </summary>
+        </member>
+        <member name="T:TypTop.Gui.LoginWindow">
+            <summary>
+            Interaction logic for LoginWindow.xaml
+            </summary>
+            <summary>
+            LoginWindow
+            </summary>
+        </member>
+        <member name="M:TypTop.Gui.LoginWindow.LoginButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+             Attempt to log in with the given username and password.
+             If successful open a GameGUI.MainWindow,
+             else show an error message.
+             </summary>
+        </member>
+        <member name="M:TypTop.Gui.LoginWindow.NewAccountButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+             Changes view to window in which the user enters the username and password of a new account and adds it to the database if valid.
+             </summary>
+        </member>
+        <member name="M:TypTop.Gui.LoginWindow.CreateAccountButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Store a new account in the database if the given values are valid.
+            Valid being:
+            -non-empty string for username and password
+            -username not already in the database
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:TypTop.Gui.LoginWindow.BackButton_Click(System.Object,System.Windows.RoutedEventArgs)">
+            <summary>
+            Go back to the loginscreen from the account creation screen
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:TypTop.Gui.LoginWindow.BackToLogin">
+            <summary>
+            Go back to the loginscreen
+            </summary>
+        </member>
+        <member name="M:TypTop.Gui.LoginWindow.InitializeComponent">
+            <summary>
+            InitializeComponent
+            </summary>
+        </member>
+    </members>
+</doc>

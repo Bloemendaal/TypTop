@@ -1,0 +1,311 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TypTop.MinigameEngine</name>
+    </assembly>
+    <members>
+        <member name="P:TypTop.MinigameEngine.Background.Width">
+            <summary>
+            Geeft de breedte van de afbeelding, wanneer de waarde NULL wordt geset, wordt de get berekent aan de hand van de afbeelding proporties. De standaardwaarde is de breedte van het scherm.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Background.Height">
+            <summary>
+            Geeft de hoogte van de afbeelding, wanneer de waarde NULL wordt geset, wordt de get berekent aan de hand van de afbeelding proporties. De standaardwaarde is de hoogte van het scherm.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Background.X">
+            <summary>
+            De x-positie van de achtergrond. Standaardwaarde is 0.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Background.Y">
+            <summary>
+            De y-positie van de achtergrond. Standaardwaarde is 0.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Components.LivesComponent.Hidden">
+            <summary>
+            Geeft aan of de hartjes verborgen moeten zijn of niet.
+            </summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.Components.LivesComponent.Draw(System.Windows.Media.DrawingContext)">
+            <summary>
+            Tekent de hartjes.
+            </summary>
+            <param name="context">
+            DrawingContext.
+            </param>
+        </member>
+        <member name="M:TypTop.MinigameEngine.Components.LivesComponent.AddedToEntity">
+            <summary>
+            Stelt de _positionComponent voor het tekenen in.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Count.ShowHours">
+            <summary>
+            Geeft aan of in het visuele gedeelte uren weergegeven moeten worden. Standaardwaarde is false.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Count.Finished">
+            <summary>
+            Geeft aan of de countdown klaar is met aftellen. Standaardwaarde is false. Werkt niet wanneer de Count gebruikt wordt als stopwatch.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Count.X">
+            <summary>
+            Get en set de X waarde van de positioncomponent van Count.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Count.Y">
+            <summary>
+            Get en set de Y waarde van de positioncomponent van Count.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Count.Typeface">
+            <summary>
+            Het lettertype dat Count moet gebruiken. Standaardwaarde is Myriad.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Count.Color">
+            <summary>
+            De kleur die de cijfers van Count moet gebruiken. Standaardwaarde is zwart.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Count.FinishedColor">
+            <summary>
+            De kleur die de cijfers van Count moet gebruiken als de countdown klaar is met aftellen. Standaardwaarde is donkerrood.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Count.FontSize">
+            <summary>
+            De grootte van de cijfers van Count. Standaardwaarde is 30.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Count.Prefix">
+            <summary>
+            Een prefix die voor de timer gezet moet worden. Standaardwaarde is NULL.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Count.Suffix">
+            <summary>
+            Een suffix die voor de timer gezet moet worden. Standaardwaarde is NULL.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Count.Seconds">
+            <summary>
+            Het aantal seconden dat de countdown nog moet voordat deze klaar is met aftellen. In het geval van een stopwatch gelijk aan SecondsSpent.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Count.SecondsSpent">
+            <summary>
+            Het aantal seconden dat verstreken is sinds de timer ingesteld is.
+            </summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.Count.Update(System.Single)">
+            <summary>
+            Werkt de timer bij inclusief eventuele verandering in de style. Zet ook wanneer de countdown klaar is met aftellen.
+            </summary>
+            <param name="deltaTime">
+            Verschil in tijd.
+            </param>
+        </member>
+        <member name="F:TypTop.MinigameEngine.FinishEventArgs.Lives">
+            <summary>
+            Het aantal levens dat nog over is. Standaardwaarde is NULL.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.FinishEventArgs.Score">
+            <summary>
+            De behaalde score. Standaardwaarde is NULL.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.FinishEventArgs.Count">
+            <summary>
+            De tijd gespendeerd in het level in seconden. Standaardwaarde is NULL.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.FinishEventArgs.Stars">
+            <summary>
+            Het aantal behaalde sterren in het level. Standaardwaarde is 0.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.FinishEventArgs.ESCPressed">
+            <summary>
+            Checks if ESC was pressed when finished.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.FloatingScore.LabelTransformX">
+            <summary>
+            Het aantal dat moet toegevoegd worden aan de x van de label. Standaardwaarde is de TransformX van de LabelComponent.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.FloatingScore.LabelTransformY">
+            <summary>
+            Het aantal dat moet toegevoegd worden aan de y van de label. Standaardwaarde is de TransformY van de LabelComponent.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.FloatingScore.ShowOperator">
+            <summary>
+            Geeft aan of de FloatingScore de + / - voor het verschil moet weergeven. Standaardwaarde is true.
+            </summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.FloatingScore.Update(System.Single)">
+            <summary>
+            Voegt een vermindering van de Opacity toe per update en verwijdert zichzelf wanneer de Opacity 0 is.
+            </summary>
+            <param name="deltaTime"></param>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Lives.Amount">
+            <summary>
+            Wanneer het aantal levens kleiner is dan 0, wordt deze op 0 gezet.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Minigame.Score">
+            <summary>
+            Een instantie van Score. Wordt alleen geset indien het level score bij moet houden. Voor meer informatie, zie Class Score.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Minigame.Lives">
+            <summary>
+            Een instantie van Lives. Wordt alleen geset indien het level levens bij moet houden. Voor meer informatie, zie Class Lives.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Minigame.Count">
+            <summary>
+            Een instantie van Count. Wordt alleen geset indien het level tijd bij moet houden of een countdown gebruikt. Voor meer informatie, zie Class Count.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Minigame.Stars">
+            <summary>
+            Geeft het aantal sterren dat op dat moment door de speler behaald is. Wordt berekend aan de hand van de WinCondition.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Minigame.WinCondition">
+            <summary>
+            Een instantie van een WinCondition, gezien WinCondition abstract is. WinCondition kan niet NULL zijn.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Minigame.Finish">
+            <summary>
+            Een instantie van delegate FinishCondition, wordt elke update uitgevoerd om te controleren of het spel afgesloten moet worden. Als deze NULL is, zal de minigame nooit uit zichzelf stoppen en moet dan altijd van buitenaf gestopt worden.
+            </summary>
+        </member>
+        <member name="E:TypTop.MinigameEngine.Minigame.OnFinished">
+            <summary>
+            Wordt afgevuurd wanneer het spel beëindigd is door de minigame zelf via de Finish. Geeft FinishEventArgs mee, hierover meer onder FinishEventArgs.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Minigame.ESCPressed">
+            <summary>
+            Checks if ESC was pressed when finished.
+            </summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.Minigame.Update(System.Single)">
+            <summary>
+            Deze method is hetzelfde als die van Game uit project GameEngine, het voegt alleen de controle toe of het spel beëindigd moet worden.
+            </summary>
+            <param name="deltaTime">
+            Verschil in tijd.
+            </param>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Score.Amount">
+            <summary>
+            Roept de method DisplayDifference met het verschil zodra de score bijgewerkt wordt.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.LabelTransformX">
+            <summary>
+            Het aantal dat moet toegevoegd worden aan de x van een FloatingScore. Standaardwaarde is 0.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.LabelTransformY">
+            <summary>
+            Het aantal dat moet toegevoegd worden aan de y van een FloatingScore. Standaardwaarde is 0.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Score.LabelX">
+            <summary>
+            Geeft de X van het label dat gebruikt wordt om de score weer te geven.
+            </summary>
+        </member>
+        <member name="P:TypTop.MinigameEngine.Score.LabelY">
+            <summary>
+            Geeft de Y van het label dat gebruikt wordt om de score weer te geven.
+            </summary>
+        </member>
+        <member name="T:TypTop.MinigameEngine.Score.FloatDirection">
+            <summary>
+            De mogelijke richtingen waarop een FloatingScore kan zweven zodra er een verandering in de score optreedt.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Direction">
+            <summary>
+            De richting waarop een FloatingScore zal zweven zodra er een verandering in de score optreedt. Standaardwaarde is None, er zal geen FloatingScore weergegeven worden.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Typeface">
+            <summary>
+            Het lettertype dat Score moet gebruiken. Standaardwaarde is Myriad.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Color">
+            <summary>
+            De kleur die de cijfers van Score moet gebruiken. Standaardwaarde is zwart.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Negative">
+            <summary>
+            De kleur die de FloatingScore moet gebruiken als er een negatieve verandering in de score optreedt. Standaardwaarde is donkerrood.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Positive">
+            <summary>
+            De kleur die de FloatingScore moet gebruiken als er een positieve verandering in de score optreedt. Standaardwaarde is donkergroen.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.FontSize">
+            <summary>
+            De grootte van de cijfers van Score en FloatingScore. Standaardwaarde is 30.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Prefix">
+            <summary>
+            Een prefix die voor de score gezet moet worden. Standaardwaarde is NULL.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Suffix">
+            <summary>
+            Een suffix die voor de score gezet moet worden. Standaardwaarde is NULL.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.Right">
+            <summary>
+            Match de positie van de FloatingScore met de beide rechter uiteindes van de Score en FloatingScore. Standaardwaarde is false.
+            </summary>
+        </member>
+        <member name="F:TypTop.MinigameEngine.Score.ShowOperator">
+            <summary>
+            Geeft aan of de FloatingScore de + / - voor het verschil moet weergeven. Standaardwaarde is true.
+            </summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.Score.UpdateText">
+            <summary>
+            Werkt de score bij inclusief de styling.
+            </summary>
+        </member>
+        <member name="M:TypTop.MinigameEngine.Score.DisplayDifference(System.Int32)">
+            <summary>
+            Roept eerst UpdateText() aan en maakt vervolgens een nieuwe instantie aan van FloatingScore wanneer het verschil niet 0 is en er een Direction ingesteld is. Kan alleen opgeroepen worden door de score bij te werken via Amount.
+            </summary>
+            <param name="diff">
+            Verschil dat weergegeven moet worden.
+            </param>
+        </member>
+        <member name="P:TypTop.MinigameEngine.WinConditions.WinCondition.Minigame">
+            <summary>
+            Wordt automatisch geset door Minigame en gebruikt door de methods om te kunnen berekenen wanneer er een ster behaald is.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -9,6 +9,13 @@ using TypTop.Logic;
 
 namespace TypTop.GameEngine.Components
 {
+    /// <summary>
+    /// Renders a word at the position of Position with optional transformation via TransformX and TransformY. With the options Center and Middle,
+    /// the anchor point of the label can be centered horizontally and vertically (relative to the original top left).
+    /// Colors can be set to visualize the progress of typing the words.
+    /// </summary>
+    /// <seealso cref="TypTop.GameEngine.Component" />
+    /// <seealso cref="TypTop.GameEngine.IDrawable" />
     public class WordComponent : Component, IDrawable
     {
         private PositionComponent _positionComponent;
