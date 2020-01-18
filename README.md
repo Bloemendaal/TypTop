@@ -33,11 +33,7 @@ Elke leerling heeft een eigen account <span style="color:darkgray"> waarvan de v
 
 ### TypTop Applicatie
 ![Imgur](https://i.imgur.com/5T9Xsbu.png)
-
-<details>
-  <summary>Dependencies Graph full size</summary>
-  ![Imgur](https://i.imgur.com/aUyUhei.png)
-</details>
+[Dependencies Graph full size](https://i.imgur.com/aUyUhei.png)
 
 Bovenstaand diagram is het overzicht van de verschillende componenten van TypTop, dit zijn de ook verschillende projecten van de C# solution. Een pijl betekent dat een bepaald project afhankelijk is van een ander project. Er is een eigen [GameEngine](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.GameEngine#game) ontwikkelt. Deze engine werkt met het Entity-Component System (ECS). Elke [minigame](https://github.com/Bloemendaal/TypTop#minigames) maakt hier gebruik van. In TypTop.Minigame worden specifiekere onderdelen van de minigames bepaald, zoals levens en score. Om de weergave van het [WorldScreen](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.WorldScreen#world-screen) en [LevelScreen](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.LevelScreen#level-screen) te vergemakkelijken worden ook deze als minigame geïmplementeerd en behandeld. 
 
