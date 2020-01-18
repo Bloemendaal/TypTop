@@ -2,21 +2,6 @@
 ![Imgur](https://i.imgur.com/LvYQlKZ.jpg)
 In dit document zijn de technische ontwerp keuzes de ontwikkelaars van TypTop vastgelegd. Om een duidelijk beeld te geven, wordt gebruik gemaakt van het [C4 model](https://c4model.com/). Aangezien TypTop een losstaande applicatie is, wordt niveau 1, de [systeem context](https://c4model.com/#SystemContextDiagram), overgeslagen.
 
-## Inhoudsopgave
-- [Inleiding](#TypTop)
-   - [Wat is TypTop?](#Wat-is-TypTop)
-   - [Leeswijzer](#Leeswijzer)
-- [Containers](#Containers)
-   - [TypTop Applicatie](#TypTop-Applicatie)
-      - [GameGui](#GameGui)
-      - [GameWindow](#GameWindow)
-      - [Game](#GameEngine)
-      - [Minigames](#Minigames)
-      - [Login GUI](#GUI)
-      - [Logic](#Logic)
-      - [Database-interactie](#Database)
-   - [Shared](#Shared)
-
 ## Wat is TypTop?
 In het kort, TypTop is een applicatie om kinderen te voorzien van een typecursus waarbij de focus ligt op de plezier ervaring. Daarom zal deze cursus bestaan uit verschillende onderdelen, het voornaamste deel bestaat uit minigames. De minigames zijn opgedeeld in werelden, binnen één wereld kan alleen één soort minigame voorkomen. Deze specifieke minigame wordt vervolgens aangeboden in verschillende levels met daarin variaties in moeilijkheidsgraad.
 
