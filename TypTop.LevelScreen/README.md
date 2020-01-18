@@ -2,7 +2,7 @@
 
 ![Imgur](https://i.imgur.com/90uiOOX.png)
 
-Het level screen is vanwege dezelfde reden als World screen een minigame. LevelScreen maakt veel gebruik van de MinigameEngine en GameGui. Deze class zorgt er voor dat er een overview is van het aantal levels binnen een wereld. 
+Het level screen is vanwege dezelfde reden als [WorldScreen](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.WorldScreen#world-screen) een minigame. LevelScreen maakt veel gebruik van de [MinigameEngine](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.Minigame#minigame-engine) en [GameGui]([GameGui](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.GameGui#gamegui). Deze class zorgt er voor dat er een overview is van het aantal levels binnen een wereld. 
 
 ###### Code
 

@@ -4,7 +4,7 @@ De minigame engine wordt gebruikt door alle minigames en heeft daarmee als grote
 
 De minigame engine controleert elke update loop of de eindconditie al voltooid is. Wanneer dit het geval is wordt het OnFinished event aangeroepen met de FinishEventArgs om zo de behaalde levelinformatie door te geven.
 
-Belangrijkste toevoegingen ten opzichte van GameEngine:
+Belangrijkste toevoegingen ten opzichte van [GameEngine](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.GameEngine#game):
 - Lives wordt gebruikt om het aantal levens bij te houden en weer te geven. Lives heeft een visueel element en krijgt daardoor coördinaten mee om deze te kunnen plaatsen.
 - Count kan dienen als countdown of als stopwatch. Wanneer het aantal meegegeven seconden 0 is, wordt er een stopwatch aangemaakt. Anders wordt er afgeteld totdat het verschil in seconden bereikt is. Count heeft een visueel element en krijgt daardoor coördinaten mee om deze te kunnen plaatsen.
 - Score wordt gebruikt om het aantal levens bij te houden en weer te geven. Score heeft een visueel element en krijgt daardoor coördinaten mee om deze te kunnen plaatsen.

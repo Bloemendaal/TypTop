@@ -4,7 +4,7 @@
 
 Het project Logic zal gezien kunnen worden als een ‘helper’. In Logic staat namelijk logica zoals de naam zelf zegt. Deze logica wordt gebruikt op verschillende punten in de gehele solution van TypTop. 
 
-De belangrijkste functionaliteit van Logic is het checken van input / woorden. Dit zal plaatsvinden door de woorden van een minigame in te laden in een lijst. Uitleg over de verschillende lijsten is te vinden in de volgende paragraaf. 
+De belangrijkste functionaliteit van Logic is het checken van input / woorden. Dit zal plaatsvinden door de woorden van een [minigame](https://github.com/Bloemendaal/TypTop#minigames) in te laden in een lijst. Uitleg over de verschillende lijsten is te vinden in de [volgende paragraaf](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.Logic#code). 
 
 Alle karakters van een woord uit een lijst zijn traceerbaar. Door de traceerbaarheid van de individuele letters zijn de volgende functies mogelijk:
 - Het vorige getypte character te vinden.
@@ -18,7 +18,7 @@ Alle karakters van een woord uit een lijst zijn traceerbaar. Door de traceerbaar
 - Het verwijderen van een woord uit de lijst bij een spatie.
 - Het woord verwijderen uit een lijst als hij klaar is. 
 
-Los hiervan biedt Logic ook de functionaliteit om op een gegeven lijst filters toe te passen. Deze zal vervolgens teruggegeven worden voor het gebruik bij een minigame. Bij deze filters zal er gedacht moeten worden aan het stellen van eisen waar een woord aan zal moeten voldoen. De volgende filters zijn beschikbaar:
+Los hiervan biedt Logic ook de functionaliteit om op een gegeven lijst filters toe te passen. Deze zal vervolgens teruggegeven worden voor het gebruik bij een [minigame](https://github.com/Bloemendaal/TypTop#minigames). Bij deze filters zal er gedacht moeten worden aan het stellen van eisen waar een woord aan zal moeten voldoen. De volgende filters zijn beschikbaar:
 - Minimale lengte van een woord.
 - Maximale lengte van een woord.
 - Maximaal aantal woorden in de lijst.

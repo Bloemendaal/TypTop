@@ -1,9 +1,9 @@
 #### Game
 ![Imgur](https://i.imgur.com/uUN9i8J.png)
 
-TypTop.Game is een basis engine die werkt met het Entity-Component System (ECS). Elke minigame maakt hier gebruik van. Een project in de Minigame folder hoeft niet perse een game te zijn. De menu’s zijn namelijk ook geïmplementeerd als minigame. Dit is bewust gedaan om compatibiliteit te houden met de GameWindow. Hierdoor kan een menu op dezelfde manier geladen worden als een Minigame.
+TypTop.Game is een basis engine die werkt met het Entity-Component System (ECS). Elke [minigame]([minigame](https://github.com/Bloemendaal/TypTop#minigames)) maakt hier gebruik van. Een project in de Minigame folder hoeft niet perse een game te zijn. De menu’s zijn namelijk ook geïmplementeerd als minigame. Dit is bewust gedaan om compatibiliteit te houden met de GameWindow. Hierdoor kan een menu op dezelfde manier geladen worden als een Minigame.
 
-Entity–component–system (ECS) is een architectuur die vooral wordt gebruikt bij de ontwikkeling van games. ECS volgt het principe van ‘compositie over overerving’. Dit houdt in dat componenten gebruikt worden door door deze te initialiseren in de constructor van entities. Dit maakt het eenvoudig om componenten te hergebruiken in verschillende entities. Elke entity bestaat uit een of meer components die gedrag of functionaliteit toevoegen. Deze manier van entities opbouwen voorkomt diepe en complexe overerving van classes.
+[Entity–component–system (ECS)](https://en.wikipedia.org/wiki/Entity_component_system) is een architectuur die vooral wordt gebruikt bij de ontwikkeling van games. ECS volgt het principe van ‘compositie over overerving’. Dit houdt in dat componenten gebruikt worden door door deze te initialiseren in de constructor van entities. Dit maakt het eenvoudig om componenten te hergebruiken in verschillende entities. Elke entity bestaat uit een of meer components die gedrag of functionaliteit toevoegen. Deze manier van entities opbouwen voorkomt diepe en complexe overerving van classes.
 
 De Game class is de context waarbinnen de entities functioneren. De kernfunctionaliteiten zijn de Update en Draw functies. Deze itereren over de entities en roepen de Render en Update functie van de betreffende entities aan.
 
