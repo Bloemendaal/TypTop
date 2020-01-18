@@ -33,6 +33,12 @@ Elke leerling heeft een eigen account <span style="color:darkgray"> waarvan de v
 
 ### TypTop Applicatie
 ![Imgur](https://i.imgur.com/5T9Xsbu.png)
+
+<details>
+  <summary>Dependencies Graph full size</summary>
+  ![Imgur](https://i.imgur.com/aUyUhei.png)
+</details>
+
 Bovenstaand diagram is het overzicht van de verschillende componenten van TypTop, dit zijn de ook verschillende projecten van de C# solution. Een pijl betekent dat een bepaald project afhankelijk is van een ander project. Er is een eigen [GameEngine](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.GameEngine#game) ontwikkelt. Deze engine werkt met het Entity-Component System (ECS). Elke [minigame](https://github.com/Bloemendaal/TypTop#minigames) maakt hier gebruik van. In TypTop.Minigame worden specifiekere onderdelen van de minigames bepaald, zoals levens en score. Om de weergave van het [WorldScreen](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.WorldScreen#world-screen) en [LevelScreen](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.LevelScreen#level-screen) te vergemakkelijken worden ook deze als minigame geïmplementeerd en behandeld. 
 
 [LoginGui](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.LoginGui#login-gui) is de launcher waarin de gebruiker een account aanmaakt en inlogt. [GameGui](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.GameGui#gamegui) is het venster waar de GameWindow in draait, een WPF control die verantwoordelijk is voor de Update en Draw loops van de Games. [TypTop.Database](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.LoginGui#login-gui) bevat alles wat te maken heeft met Entity Framework en wordt alleen aangeroepen vanuit [Repository](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.LoginGui#login-gui), het project dat voor de koppeling tussen Entity Framework en de rest van het programma zorgt. [Logic](https://github.com/Bloemendaal/TypTop/tree/dev/TypTop.Logic#logic) bevat logica die op verschillende punten in de solution wordt gebruikt.
