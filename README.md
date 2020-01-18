@@ -1,4 +1,5 @@
 # TypTop
+![Imgur](https://i.imgur.com/LvYQlKZ.jpg)
 In dit document zijn de technische ontwerp keuzes de ontwikkelaars van TypTop vastgelegd. Om een duidelijk beeld te geven, wordt gebruik gemaakt van het [C4 model](https://c4model.com/). Aangezien TypTop een losstaande applicatie is, wordt niveau 1, de [systeem context](https://c4model.com/#SystemContextDiagram), overgeslagen.
 
 ## Inhoudsopgave
